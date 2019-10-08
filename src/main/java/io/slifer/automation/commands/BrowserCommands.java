@@ -1,4 +1,4 @@
-package io.slifer.automation.core;
+package io.slifer.automation.commands;
 
 import org.openqa.selenium.WebDriver;
 
