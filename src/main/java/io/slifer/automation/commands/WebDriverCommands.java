@@ -38,7 +38,7 @@ public abstract class WebDriverCommands extends Commands {
             webElement.clear();
         }
         catch (Exception e) {
-            LOG.error("Error clearing contents.");
+            LOG.error("Error clearing contents.", e);
             throw e;
         }
     }
@@ -55,7 +55,7 @@ public abstract class WebDriverCommands extends Commands {
             webElement.click();
         }
         catch (Exception e) {
-            LOG.error("Error clicking element.");
+            LOG.error("Error clicking element.", e);
             throw e;
         }
     }
@@ -73,7 +73,7 @@ public abstract class WebDriverCommands extends Commands {
             actions.doubleClick(webElement).perform();
         }
         catch (Exception e) {
-            LOG.error("Error double-clicking element.");
+            LOG.error("Error double-clicking element.", e);
             throw e;
         }
     }
@@ -91,7 +91,7 @@ public abstract class WebDriverCommands extends Commands {
             webElement.sendKeys(input);
         }
         catch (Exception e) {
-            LOG.error("Error entering text.");
+            LOG.error("Error entering text.", e);
             throw e;
         }
     }
@@ -102,14 +102,14 @@ public abstract class WebDriverCommands extends Commands {
      * @param locator The mapped UI element.
      */
     public void hover(Locator locator) {
-        LOG.info("Hovering on element [}}].", locator.getName());
+        LOG.info("Hovering on element [{}].", locator.getName());
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
             Actions actions = new Actions(webDriver);
             actions.moveToElement(webElement);
         }
         catch (Exception e) {
-            LOG.error("Error hovering on element.");
+            LOG.error("Error hovering on element.", e);
             throw e;
         }
     }
@@ -128,7 +128,7 @@ public abstract class WebDriverCommands extends Commands {
             select.deselectByVisibleText(option);
         }
         catch (Exception e) {
-            LOG.error("Error selecting option.");
+            LOG.error("Error selecting option.", e);
             throw e;
         }
     }
