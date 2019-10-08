@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -18,6 +20,8 @@ import java.util.List;
  */
 public class ElementFinder {
     
+    private static final Logger LOG = LoggerFactory.getLogger(ElementFinder.class);
+    
     private WebDriver webDriver;
     
     public ElementFinder(WebDriver webDriver) {
@@ -27,67 +31,118 @@ public class ElementFinder {
     /**
      * Initializes the first matching instance of the given locator, using no waits or synchronization.
      *
-     * @param locator - The mapped UI element.
+     * @param locator The mapped UI element.
      *
      * @return A WebElement.
      */
     public WebElement find(Locator locator) {
+        LOG.debug("Finding element [{}].", locator.getName());
         WebElement parent = null;
-        if (locator.getParent() != null) {
-            parent = webDriver.findElement(bySizzle(locator.getParent()));
+        
+        try {
+            if (locator.getParent() != null) {
+                LOG.debug("Parent element detected, initializing [{}].", locator.getParent().getName());
+                parent = webDriver.findElement(bySizzle(locator.getParent()));
+            }
+        }
+        catch (Exception e) {
+            LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            throw e;
         }
         
-        if (parent == null) {
-            return webDriver.findElement(bySizzle(locator));
+        try {
+            if (parent == null) {
+                LOG.debug("Initializing element [{}].", locator.getName());
+                return webDriver.findElement(bySizzle(locator));
+            }
+            else {
+                LOG.debug("Initializing nested element [{}].", locator.getName());
+                return parent.findElement(bySizzle(locator));
+            }
         }
-        else {
-            return parent.findElement(bySizzle(locator));
+        catch (Exception e) {
+            LOG.error("Could not initialize element [{}].", locator.getName());
+            throw e;
         }
     }
     
     /**
      * Initializes all matching instances of the given locator, using no waits or synchronization.
      *
-     * @param locator - The mapped UI element.
+     * @param locator The mapped UI element.
      *
      * @return A List of WebElements.
      */
     public List<WebElement> findAll(Locator locator) {
+        LOG.debug("Finding elements [{}].", locator.getName());
         WebElement parent = null;
-        if (locator.getParent() != null) {
-            parent = webDriver.findElement(bySizzle(locator.getParent()));
+        
+        try {
+            if (locator.getParent() != null) {
+                LOG.debug("Parent element detected, initializing [{}].", locator.getParent().getName());
+                parent = webDriver.findElement(bySizzle(locator.getParent()));
+            }
+        }
+        catch (Exception e) {
+            LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            throw e;
         }
         
-        if (parent == null) {
-            return webDriver.findElements(bySizzle(locator));
+        try {
+            if (parent == null) {
+                LOG.debug("Initializing elements [{}].", locator.getName());
+                return webDriver.findElements(bySizzle(locator));
+            }
+            else {
+                LOG.debug("Initializing nested elements [{}].", locator.getName());
+                return parent.findElements(bySizzle(locator));
+            }
         }
-        else {
-            return parent.findElements(bySizzle(locator));
+        catch (Exception e) {
+            LOG.error("Could not initialize elements [{}].", locator.getName());
+            throw e;
         }
     }
     
     /**
      * Initializes the first matching instance of the given locator, once visible on the UI.
      *
-     * @param locator - The mapped UI element.
+     * @param locator The mapped UI element.
      *
      * @return A WebElement.
      */
     public WebElement findWhenVisible(Locator locator) {
+        LOG.debug("Finding element [{}] when visible.", locator.getName());
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 60);
-        
         WebElement parent = null;
-        if (locator.getParent() != null) {
-            parent = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator.getParent())));
+        
+        try {
+            if (locator.getParent() != null) {
+                LOG.debug("Parent element detected, initializing [{}] when visible.", locator.getParent().getName());
+                parent = webDriverWait.until(
+                        ExpectedConditions.visibilityOfElementLocated(bySizzle(locator.getParent())));
+            }
+        }
+        catch (Exception e) {
+            LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            throw e;
         }
         
-        if (parent == null) {
-            return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
+        try {
+            if (parent == null) {
+                LOG.debug("Initializing element [{}] when visible.", locator.getName());
+                return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
+            }
+            else {
+                LOG.debug("Initializing nested element [{}] when visible.", locator.getName());
+                WebElementWait webElementWait = new WebElementWait(parent, 60);
+                
+                return webElementWait.until(WebElementExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
+            }
         }
-        else {
-            WebElementWait webElementWait = new WebElementWait(parent, 60);
-            
-            return webElementWait.until(WebElementExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
+        catch (Exception e) {
+            LOG.error("Could not initialize element [{}].", locator.getName());
+            throw e;
         }
     }
     
@@ -99,21 +154,38 @@ public class ElementFinder {
      * @return A List of WebElements.
      */
     public List<WebElement> findAllWhenVisible(Locator locator) {
+        LOG.debug("Finding elements [{}] when visible.", locator.getName());
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 60);
-        
         WebElement parent = null;
-        if (locator.getParent() != null) {
-            parent = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator.getParent())));
+        
+        try {
+            if (locator.getParent() != null) {
+                LOG.debug("Parent element detected, initializing [{}] when visible.", locator.getParent().getName());
+                parent = webDriverWait.until(
+                        ExpectedConditions.visibilityOfElementLocated(bySizzle(locator.getParent())));
+            }
+        }
+        catch (Exception e) {
+            LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            throw e;
         }
         
-        if (parent == null) {
-            return webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(bySizzle(locator)));
+        try {
+            if (parent == null) {
+                LOG.debug("Initializing elements [{}] when visible.", locator.getName());
+                return webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(bySizzle(locator)));
+            }
+            else {
+                LOG.debug("Initializing nested elements [{}] when visible.", locator.getName());
+                WebElementWait webElementWait = new WebElementWait(parent, 60);
+                
+                return webElementWait.until(
+                        WebElementExpectedConditions.visibilityOfAllElementsLocatedBy(bySizzle(locator)));
+            }
         }
-        else {
-            WebElementWait webElementWait = new WebElementWait(parent, 60);
-            
-            return webElementWait.until(
-                    WebElementExpectedConditions.visibilityOfAllElementsLocatedBy(bySizzle(locator)));
+        catch (Exception e) {
+            LOG.error("Could not initialize elements [{}].", locator.getName());
+            throw e;
         }
     }
     
@@ -125,20 +197,36 @@ public class ElementFinder {
      * @return A WebElement.
      */
     public WebElement findWhenClickable(Locator locator) {
+        LOG.debug("Finding element [{}] when clickable.", locator.getName());
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 60);
-        
         WebElement parent = null;
-        if (locator.getParent() != null) {
-            parent = webDriverWait.until(ExpectedConditions.elementToBeClickable(bySizzle(locator.getParent())));
+        
+        try {
+            if (locator.getParent() != null) {
+                LOG.debug("Parent element detected, initializing [{}] when clickable.", locator.getParent().getName());
+                parent = webDriverWait.until(ExpectedConditions.elementToBeClickable(bySizzle(locator.getParent())));
+            }
+        }
+        catch (Exception e) {
+            LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            throw e;
         }
         
-        if (parent == null) {
-            return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
+        try {
+            if (parent == null) {
+                LOG.debug("Initializing element [{}] when clickable.", locator.getName());
+                return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
+            }
+            else {
+                LOG.debug("Initializing nested element [{}] when clickable.", locator.getName());
+                WebElementWait webElementWait = new WebElementWait(parent, 60);
+                
+                return webElementWait.until(WebElementExpectedConditions.elementToBeClickable(bySizzle(locator)));
+            }
         }
-        else {
-            WebElementWait webElementWait = new WebElementWait(parent, 60);
-            
-            return webElementWait.until(WebElementExpectedConditions.elementToBeClickable(bySizzle(locator)));
+        catch (Exception e) {
+            LOG.error("Could not initialize element [{}].", locator.getName());
+            throw e;
         }
     }
     
