@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Common commands related to the WebDriver layer, agnostic of the implementation.
@@ -13,6 +15,8 @@ import org.openqa.selenium.support.ui.Select;
  * @author Tim Slifer
  */
 public abstract class WebDriverCommands extends Commands {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(WebDriverCommands.class);
     
     protected WebDriver webDriver;
     private ElementFinder elementFinder;
@@ -28,8 +32,15 @@ public abstract class WebDriverCommands extends Commands {
      * @param locator The mapped UI element.
      */
     public void clear(Locator locator) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        webElement.clear();
+        LOG.info("Clearing the contents of element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            webElement.clear();
+        }
+        catch (Exception e) {
+            LOG.error("Error clearing contents.");
+            throw e;
+        }
     }
     
     /**
@@ -38,8 +49,15 @@ public abstract class WebDriverCommands extends Commands {
      * @param locator The mapped UI element.
      */
     public void click(Locator locator) {
-        WebElement webElement = elementFinder.findWhenClickable(locator);
-        webElement.click();
+        LOG.info("Clicking element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenClickable(locator);
+            webElement.click();
+        }
+        catch (Exception e) {
+            LOG.error("Error clicking element.");
+            throw e;
+        }
     }
     
     /**
@@ -48,9 +66,16 @@ public abstract class WebDriverCommands extends Commands {
      * @param locator The mapped UI element.
      */
     public void doubleClick(Locator locator) {
-        WebElement webElement = elementFinder.findWhenClickable(locator);
-        Actions actions = new Actions(webDriver);
-        actions.doubleClick(webElement).perform();
+        LOG.info("Double-clicking element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenClickable(locator);
+            Actions actions = new Actions(webDriver);
+            actions.doubleClick(webElement).perform();
+        }
+        catch (Exception e) {
+            LOG.error("Error double-clicking element.");
+            throw e;
+        }
     }
     
     /**
@@ -60,8 +85,15 @@ public abstract class WebDriverCommands extends Commands {
      * @param input The text input.
      */
     public void enterText(Locator locator, String input) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        webElement.sendKeys(input);
+        LOG.info("Entering text into element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            webElement.sendKeys(input);
+        }
+        catch (Exception e) {
+            LOG.error("Error entering text.");
+            throw e;
+        }
     }
     
     /**
@@ -70,9 +102,16 @@ public abstract class WebDriverCommands extends Commands {
      * @param locator The mapped UI element.
      */
     public void hover(Locator locator) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        Actions actions = new Actions(webDriver);
-        actions.moveToElement(webElement);
+        LOG.info("Hovering on element [}}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            Actions actions = new Actions(webDriver);
+            actions.moveToElement(webElement);
+        }
+        catch (Exception e) {
+            LOG.error("Error hovering on element.");
+            throw e;
+        }
     }
     
     /**
@@ -82,9 +121,16 @@ public abstract class WebDriverCommands extends Commands {
      * @param option The option to be selected.
      */
     public void select(Locator locator, String option) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        Select select = new Select(webElement);
-        select.deselectByVisibleText(option);
+        LOG.info("Selecting option from element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            select.deselectByVisibleText(option);
+        }
+        catch (Exception e) {
+            LOG.error("Error selecting option.");
+            throw e;
+        }
     }
     
     /**
