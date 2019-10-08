@@ -1,4 +1,4 @@
-package io.slifer.automation.core;
+package io.slifer.automation.commands;
 
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.Locator;

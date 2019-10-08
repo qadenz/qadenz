@@ -1,4 +1,4 @@
-package io.slifer.automation.core;
+package io.slifer.automation.commands;
 
 /**
  * Common commands to all test types, agnostic of application under test.
