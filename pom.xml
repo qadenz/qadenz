@@ -16,11 +16,18 @@
     <properties>
         <java.version>11</java.version>
         
+        <logback.version>1.2.3</logback.version>
         <selenium.version>3.141.59</selenium.version>
         <sizzle.version>3.141.59-R1</sizzle.version>
     </properties>
     
     <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        
         <dependency>
             <groupId>io.slifer</groupId>
             <artifactId>webdriver-sizzle-injector</artifactId>
