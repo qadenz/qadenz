@@ -16,6 +16,7 @@
     <properties>
         <java.version>11</java.version>
         
+        <hamcrest.version>2.1</hamcrest.version>
         <logback.version>1.2.3</logback.version>
         <selenium.version>3.141.59</selenium.version>
         <sizzle.version>3.141.59-R1</sizzle.version>
@@ -32,6 +33,12 @@
             <groupId>io.slifer</groupId>
             <artifactId>webdriver-sizzle-injector</artifactId>
             <version>${sizzle.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
         </dependency>
         
         <dependency>
