@@ -89,6 +89,14 @@ public class ElementInspector {
         return getTextValuesFromElements(options);
     }
     
+    /**
+     * Retrieves the visibility state of the given element. An element is determined to be visible if it is present on
+     * the DOM, has a height and width greater than zero, and is not styled to be hidden.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return True if the element is found to be visible, false otherwise.
+     */
     public boolean getVisibilityOfElement(Locator locator) {
         boolean visible = (getCountOfElement(locator) > 0);
         
