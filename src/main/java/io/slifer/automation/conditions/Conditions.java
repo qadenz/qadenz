@@ -1,5 +1,6 @@
 package io.slifer.automation.conditions;
 
+import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.LocatorGroup;
@@ -87,6 +88,92 @@ public class Conditions {
             @Override
             public String output() {
                 return "Found [" + elementCount + "].";
+            }
+        };
+    }
+    
+    /**
+     * A Condition for evaluating whether or not an element is present on the DOM, regardless of if the element is
+     * visible on the page.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation of whether or not the element is to be present.
+     *
+     * @return The Condition.
+     */
+    public static Condition presenceOfElement(final Locator locator, final Matcher<Boolean> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            boolean present;
+            
+            @Override
+            public String description() {
+                return "Presence of element [" + locator.getName() + "] " + expectation + ".";
+            }
+            
+            @Override
+            public Boolean result(WebDriver webDriver) {
+                ElementFinder elementFinder = new ElementFinder(webDriver);
+                present = elementFinder.findAll(locator).size() > 0;
+                
+                match = expectation.matches(present);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + present + "].";
+            }
+        };
+    }
+    
+    /**
+     * A Condition for evaluating whether or not a group of elements is present on the DOM, regardless of if the
+     * elements are visible on the page.
+     *
+     * @param locatorGroup The mapped UI elements.
+     * @param expectation The expectation of whether or not each element is to be present.
+     *
+     * @return The Condition.
+     */
+    public static Condition presenceOfElements(final LocatorGroup locatorGroup, final Matcher<Boolean> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            StringBuilder failures = new StringBuilder();
+            
+            @Override
+            public String description() {
+                return "Presence of elements [" + locatorGroup.getName() + "] " + expectation + ".";
+            }
+            
+            @Override
+            public Boolean result(WebDriver webDriver) {
+                ElementFinder elementFinder = new ElementFinder(webDriver);
+                
+                for (Locator locator : locatorGroup) {
+                    boolean present = elementFinder.findAll(locator).size() > 0;
+                    Boolean instanceMatch = expectation.matches(present);
+                    
+                    if (!instanceMatch) {
+                        failures.append("--> Element [" + locator.getName() + "] was [" + present + "].<br>");
+                    }
+                    
+                    if (match == null || match) {
+                        match = instanceMatch;
+                    }
+                }
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Discrepancies: <br>" + failures;
             }
         };
     }
