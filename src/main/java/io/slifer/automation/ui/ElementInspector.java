@@ -49,6 +49,20 @@ public class ElementInspector {
     }
     
     /**
+     * Retrieves the enabled state of an element. Generally useful for determining whether or not input elements are
+     * enabled.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return True if the element is enabled, false otherwise.
+     */
+    public boolean getEnabledStateOfElement(Locator locator) {
+        WebElement webElement = elementFinder.find(locator);
+        
+        return webElement.isEnabled();
+    }
+    
+    /**
      * Retrieves the selected state of an element. This applies only elements such as checkboxes, radio options, and
      * {@code <option>} child of a {@code <select>} elements.
      *
