@@ -93,6 +93,43 @@ public class Conditions {
     }
     
     /**
+     * A Condition for evaluating element to be enabled.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation of whether or not the element is to be enabled.
+     *
+     * @return The Condition.
+     */
+    public static Condition enabledStateOfElement(final Locator locator, final Matcher<Boolean> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            boolean enabled;
+            
+            @Override
+            public String description() {
+                return "Enabled state of element [" + locator.getName() + "] " + expectation + ".";
+            }
+            
+            @Override
+            public Boolean result(WebDriver webDriver) {
+                ElementInspector elementInspector = new ElementInspector(webDriver);
+                enabled = elementInspector.getEnabledStateOfElement(locator);
+                
+                match = expectation.matches(enabled);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + enabled + "].";
+            }
+        };
+    }
+    
+    /**
      * A Condition for evaluating whether or not an element is present on the DOM, regardless of if the element is
      * visible on the page.
      *
