@@ -15,6 +15,45 @@ import java.util.List;
 public class Conditions {
     
     /**
+     * A Condition to evaluate the value of an attribute on an element.
+     *
+     * @param locator The mapped UI element.
+     * @param attributeName The name of the attribute to be evaluated.
+     * @param expectation The expectation for the attribute value.
+     *
+     * @return The Condition.
+     */
+    public static Condition attributeOfElement(final Locator locator, final String attributeName,
+            final Matcher<String> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            String attributeValue;
+            
+            @Override
+            public String description() {
+                return "Attribute [" + attributeName + "] of element [" + locator.getName() + "] " + expectation + ".";
+            }
+            
+            @Override
+            public Boolean result(WebDriver webDriver) {
+                ElementInspector elementInspector = new ElementInspector(webDriver);
+                attributeValue = elementInspector.getAttributeOfElement(locator, attributeName);
+                
+                match = expectation.matches(attributeValue);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + attributeValue + "].";
+            }
+        };
+    }
+    
+    /**
      * A Condition to evaluate the number of times an element appears on a page.
      *
      * @param locator The mapped UI element.
