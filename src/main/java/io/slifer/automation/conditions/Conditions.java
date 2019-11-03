@@ -92,6 +92,44 @@ public class Conditions {
     }
     
     /**
+     * A Condition for evaluating an element to be selected. This applies only elements such as checkboxes, radio
+     * options, and {@code <option>} child of a {@code <select>} elements.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation of whether or not the element is to be selected.
+     *
+     * @return The Condition.
+     */
+    public static Condition selectedStateOfElement(final Locator locator, final Matcher<Boolean> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            boolean selected;
+            
+            @Override
+            public String description() {
+                return "Selected state of element [" + locator.getName() + "] " + expectation + ".";
+            }
+            
+            @Override
+            public Boolean result(WebDriver webDriver) {
+                ElementInspector elementInspector = new ElementInspector(webDriver);
+                selected = elementInspector.getSelectedStateOfElement(locator);
+                
+                match = expectation.matches(selected);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + selected + "].";
+            }
+        };
+    }
+    
+    /**
      * A Condition to evaluate the visible inner text of an element.
      *
      * @param locator The mapped UI element.
@@ -99,7 +137,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElement(Locator locator, Matcher<String> expectation) {
+    public static Condition textOfElement(final Locator locator, final Matcher<String> expectation) {
         
         return new Condition() {
             
@@ -231,7 +269,7 @@ public class Conditions {
      * DOM, has a height and width greater than zero, and is not styled to be hidden.
      *
      * @param locator The mapped UI element.
-     * @param expectation The expectation for the visibility of the element.
+     * @param expectation The expectation of whether or not the element is to be visible.
      *
      * @return The Condition.
      */
@@ -269,11 +307,11 @@ public class Conditions {
      * the DOM, has a height and width greater than zero, and is not styled to be hidden.
      *
      * @param locatorGroup The mapped UI elements.
-     * @param expectation The expectation for the visibility of each element.
+     * @param expectation The expectation of whether or not each element is to be visible.
      *
      * @return The Condition.
      */
-    public static Condition visibilityOfElements(final LocatorGroup locatorGroup, Matcher<Boolean> expectation) {
+    public static Condition visibilityOfElements(final LocatorGroup locatorGroup, final Matcher<Boolean> expectation) {
         
         return new Condition() {
             
