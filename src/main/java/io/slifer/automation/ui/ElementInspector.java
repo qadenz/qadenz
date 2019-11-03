@@ -1,5 +1,6 @@
 package io.slifer.automation.ui;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -86,6 +87,29 @@ public class ElementInspector {
         List<WebElement> options = select.getOptions();
         
         return getTextValuesFromElements(options);
+    }
+    
+    public boolean getVisibilityOfElement(Locator locator) {
+        boolean visible = (getCountOfElement(locator) > 0);
+        
+        if (visible) {
+            Dimension dimension = elementFinder.find(locator).getSize();
+            visible = (dimension.getHeight() > 0 && dimension.getWidth() > 0);
+        }
+        
+        if (visible) {
+            visible = (!getAttributeOfElement(locator, "style").contains("display: none;"));
+        }
+        
+        if (visible) {
+            visible = (!getAttributeOfElement(locator, "style").contains("visibility: hidden;"));
+        }
+        
+        if (visible) {
+            visible = (!getAttributeOfElement(locator, "class").contains("ng-hide"));
+        }
+        
+        return visible;
     }
     
     private List<String> getTextValuesFromElements(List<WebElement> webElements) {
