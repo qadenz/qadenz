@@ -49,6 +49,20 @@ public class ElementInspector {
     }
     
     /**
+     * Retrieves the selected state of an element. This applies only elements such as checkboxes, radio options, and
+     * {@code <option>} child of a {@code <select>} elements.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return True if the element is selected, false otherwise.
+     */
+    public boolean getSelectedStateOfElement(Locator locator) {
+        WebElement webElement = elementFinder.find(locator);
+        
+        return webElement.isSelected();
+    }
+    
+    /**
      * Retrieves the visible inner text of an element and any descendants on the DOM.
      *
      * @param locator The mapped UI element.
@@ -90,8 +104,8 @@ public class ElementInspector {
     }
     
     /**
-     * Retrieves the visibility state of the given element. An element is determined to be visible if it is present on
-     * the DOM, has a height and width greater than zero, and is not styled to be hidden.
+     * Retrieves the visibility state of an element. An element is determined to be visible if it is present on the DOM,
+     * has a height and width greater than zero, and is not styled to be hidden.
      *
      * @param locator The mapped UI element.
      *
