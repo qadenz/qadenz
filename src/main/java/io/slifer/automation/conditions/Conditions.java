@@ -159,7 +159,7 @@ public class Conditions {
                     Boolean instanceMatch = expectation.matches(enabled);
                     
                     if (!instanceMatch) {
-                        failures.append("--> Element [" + locator.getName() + "] was [" + enabled + "].<br>");
+                        failures.append("--> Element [" + locator.getName() + "] was [" + enabled + "].\n");
                     }
                     
                     if (match == null || match) {
@@ -172,7 +172,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return null;
+                return "Discrepancies: \n" + failures;
             }
         };
     }
@@ -245,7 +245,7 @@ public class Conditions {
                     Boolean instanceMatch = expectation.matches(present);
                     
                     if (!instanceMatch) {
-                        failures.append("--> Element [" + locator.getName() + "] was [" + present + "].<br>");
+                        failures.append("--> Element [" + locator.getName() + "] was [" + present + "].\n");
                     }
                     
                     if (match == null || match) {
@@ -258,7 +258,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: <br>" + failures;
+                return "Discrepancies: \n" + failures;
             }
         };
     }
@@ -333,7 +333,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "";
+                return "Found [" + elementText + "].";
             }
         };
     }
@@ -369,7 +369,7 @@ public class Conditions {
                     Boolean instanceMatch = expectation.matches(instanceValue);
                     
                     if (!instanceMatch) {
-                        failures.append("--> at index [" + i + "], found [" + instanceValue + "].<br>");
+                        failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
                     }
                     
                     if (match == null || match) {
@@ -382,7 +382,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: <br>" + failures;
+                return "Discrepancies: \n" + failures;
             }
         };
     }
@@ -418,7 +418,7 @@ public class Conditions {
                     Boolean instanceMatch = expectation.matches(instanceValue);
                     
                     if (!instanceMatch) {
-                        failures.append("--> at index [" + i + "], found [" + instanceValue + "].<br>");
+                        failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
                     }
                     
                     if (match == null || match) {
@@ -431,7 +431,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: <br>" + failures;
+                return "Discrepancies: \n" + failures;
             }
         };
     }
@@ -492,7 +492,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation + ">";
+                return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation + ".";
             }
             
             @Override
@@ -504,7 +504,7 @@ public class Conditions {
                     Boolean instanceMatch = expectation.matches(visible);
                     
                     if (!instanceMatch) {
-                        failures.append("--> Element [" + locator.getName() + "] was [" + visible + "].<br>");
+                        failures.append("--> Element [" + locator.getName() + "] was [" + visible + "].\n");
                     }
                     
                     if (match == null || match) {
@@ -517,7 +517,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: <br>" + failures;
+                return "Discrepancies: \n" + failures;
             }
         };
     }
