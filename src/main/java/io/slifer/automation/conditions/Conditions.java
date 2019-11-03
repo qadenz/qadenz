@@ -2,6 +2,7 @@ package io.slifer.automation.conditions;
 
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
+import io.slifer.automation.ui.LocatorGroup;
 import org.hamcrest.Matcher;
 import org.openqa.selenium.WebDriver;
 
@@ -208,6 +209,92 @@ public class Conditions {
                     
                     if (!instanceMatch) {
                         failures.append("--> at index [" + i + "], found [" + instanceValue + "].<br>");
+                    }
+                    
+                    if (match == null || match) {
+                        match = instanceMatch;
+                    }
+                }
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Discrepancies: <br>" + failures;
+            }
+        };
+    }
+    
+    /**
+     * A Condition for evaluating the visibility of an element. An element determined to be visible is present on the
+     * DOM, has a height and width greater than zero, and is not styled to be hidden.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the visibility of the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition visibilityOfElement(final Locator locator, final Matcher<Boolean> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            boolean visible;
+            
+            @Override
+            public String description() {
+                return "Visibility of element [" + locator.getName() + "] " + expectation + ".";
+            }
+            
+            @Override
+            public Boolean result(WebDriver webDriver) {
+                ElementInspector elementInspector = new ElementInspector(webDriver);
+                visible = elementInspector.getVisibilityOfElement(locator);
+                
+                match = expectation.matches(visible);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + visible + "].";
+            }
+        };
+    }
+    
+    /**
+     * A Condition to evaluate the visibility of a group of elements. An element determined to be visible is present on
+     * the DOM, has a height and width greater than zero, and is not styled to be hidden.
+     *
+     * @param locatorGroup The mapped UI elements.
+     * @param expectation The expectation for the visibility of each element.
+     *
+     * @return The Condition.
+     */
+    public static Condition visibilityOfElements(final LocatorGroup locatorGroup, Matcher<Boolean> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            StringBuilder failures = new StringBuilder();
+            
+            @Override
+            public String description() {
+                return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation + ">";
+            }
+            
+            @Override
+            public Boolean result(WebDriver webDriver) {
+                ElementInspector elementInspector = new ElementInspector(webDriver);
+                
+                for (Locator locator : locatorGroup) {
+                    boolean visible = elementInspector.getVisibilityOfElement(locator);
+                    Boolean instanceMatch = expectation.matches(visible);
+                    
+                    if (!instanceMatch) {
+                        failures.append("--> Element [" + locator.getName() + "] was [" + visible + "].<br>");
                     }
                     
                     if (match == null || match) {
