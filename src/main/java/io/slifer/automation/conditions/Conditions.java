@@ -130,6 +130,54 @@ public class Conditions {
     }
     
     /**
+     * A Condition for evaluating whether or not a group of elements is enabled.
+     *
+     * @param locatorGroup The mapped UI elements.
+     * @param expectation The expectation of whether or not each element is to be enabled.
+     *
+     * @return The Condition.
+     */
+    public static Condition enabledStateOfElements(final LocatorGroup locatorGroup,
+            final Matcher<Boolean> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            StringBuilder failures = new StringBuilder();
+            
+            @Override
+            public String description() {
+                return "Enabled state of elements [" + locatorGroup.getName() + "] " + expectation + ".";
+            }
+            
+            @Override
+            public Boolean result(WebDriver webDriver) {
+                ElementInspector elementInspector = new ElementInspector(webDriver);
+                
+                for (Locator locator : locatorGroup) {
+                    boolean enabled = elementInspector.getEnabledStateOfElement(locator);
+                    Boolean instanceMatch = expectation.matches(enabled);
+                    
+                    if (!instanceMatch) {
+                        failures.append("--> Element [" + locator.getName() + "] was [" + enabled + "].<br>");
+                    }
+                    
+                    if (match == null || match) {
+                        match = instanceMatch;
+                    }
+                }
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return null;
+            }
+        };
+    }
+    
+    /**
      * A Condition for evaluating whether or not an element is present on the DOM, regardless of if the element is
      * visible on the page.
      *
