@@ -21,6 +21,20 @@ public class ElementInspector {
     }
     
     /**
+     * Retrieves the value of the given attribute on an element.
+     *
+     * @param locator The mapped UI element.
+     * @param attributeName The name of the attribute to inspect.
+     *
+     * @return The attribute value.
+     */
+    public String getAttributeOfElement(Locator locator, String attributeName) {
+        WebElement webElement = elementFinder.find(locator);
+        
+        return webElement.getAttribute(attributeName);
+    }
+    
+    /**
      * Retrieves the total number of instance of an element on the page.
      *
      * @param locator The mapped UI element.
@@ -29,6 +43,7 @@ public class ElementInspector {
      */
     public int getCountOfElement(Locator locator) {
         List<WebElement> webElements = elementFinder.findAll(locator);
+        
         return webElements.size();
     }
     
@@ -41,6 +56,7 @@ public class ElementInspector {
      */
     public String getTextOfElement(Locator locator) {
         WebElement webElement = elementFinder.find(locator);
+        
         return webElement.getText();
     }
     
