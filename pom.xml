@@ -20,6 +20,7 @@
         <logback.version>1.2.3</logback.version>
         <selenium.version>3.141.59</selenium.version>
         <sizzle.version>3.141.59-R1</sizzle.version>
+        <testng.version>7.0.0</testng.version>
     </properties>
     
     <dependencies>
@@ -45,6 +46,12 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
         </dependency>
     </dependencies>
     
