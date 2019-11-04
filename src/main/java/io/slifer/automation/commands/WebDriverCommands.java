@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-
 /**
  * Common commands related to the WebDriver layer, agnostic of the implementation.
  *
@@ -147,77 +145,5 @@ public abstract class WebDriverCommands extends Commands {
     public void clearAndEnterText(Locator locator, String input) {
         clear(locator);
         enterText(locator, input);
-    }
-    
-    /**
-     * Retrieves the total number of instance of an element on the page.
-     *
-     * @param locator The mapped UI element.
-     *
-     * @return The instance count.
-     */
-    public int getCountOfElement(Locator locator) {
-        LOG.info("Retrieving count of element [{}].", locator.getName());
-        try {
-            return elementInspector.getCountOfElement(locator);
-        }
-        catch (Exception e) {
-            LOG.error("Error retrieving count.", e);
-            throw e;
-        }
-    }
-    
-    /**
-     * Retrieves the visible inner text of an element and any descendants on the DOM.
-     *
-     * @param locator The mapped UI element.
-     *
-     * @return The text value.
-     */
-    public String getTextOfElement(Locator locator) {
-        LOG.info("Retrieving text of element [{}].", locator.getName());
-        try {
-            return elementInspector.getTextOfElement(locator);
-        }
-        catch (Exception e) {
-            LOG.error("Error retrieving text.", e);
-            throw e;
-        }
-    }
-    
-    /**
-     * Retrieves the visible inner text from each instance of an element (any any descendants) on the DOM.
-     *
-     * @param locator The mapped UI element.
-     *
-     * @return The list of values.
-     */
-    public List<String> getTextOfElements(Locator locator) {
-        LOG.info("Retrieving text of elements [{}].", locator.getName());
-        try {
-            return elementInspector.getTextOfElements(locator);
-        }
-        catch (Exception e) {
-            LOG.error("Error retrieving text.", e);
-            throw e;
-        }
-    }
-    
-    /**
-     * Retrieves the values of each {@code <option>} child of a {@code <select>} element.
-     *
-     * @param locator The mapped UI element.
-     *
-     * @return The list of values.
-     */
-    public List<String> getTextOfOptions(Locator locator) {
-        LOG.info("Retrieving text of options from [{}].", locator.getName());
-        try {
-            return elementInspector.getTextOfOptions(locator);
-        }
-        catch (Exception e) {
-            LOG.error("Error retrieving options.", e);
-            throw e;
-        }
     }
 }
