@@ -2,7 +2,6 @@ package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.ui.ElementFinder;
-import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,12 +22,10 @@ public abstract class WebDriverCommands extends Commands {
     
     protected WebDriver webDriver;
     private ElementFinder elementFinder;
-    private ElementInspector elementInspector;
     
     public WebDriverCommands(WebDriver webDriver) {
         this.webDriver = webDriver;
         this.elementFinder = new ElementFinder(webDriver);
-        this.elementInspector = new ElementInspector(webDriver);
     }
     
     /**
