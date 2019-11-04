@@ -16,4 +16,8 @@ public class LocatorGroup extends ArrayList<Locator> {
         this.name = name;
         this.addAll(Arrays.asList(locators));
     }
+    
+    public String getName() {
+        return name;
+    }
 }
