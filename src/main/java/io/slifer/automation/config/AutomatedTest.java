@@ -52,7 +52,7 @@ public class AutomatedTest {
                     new RemoteWebDriver(new URL("http://" + RunContext.gridHost + ":4444/wd/hub"), capabilities));
         }
         catch (MalformedURLException exception) {
-            log.error("Application URL is invalid.");
+            log.error("Grid URL is invalid.");
             throw exception;
         }
         
