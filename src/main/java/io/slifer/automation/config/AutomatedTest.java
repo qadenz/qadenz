@@ -24,6 +24,12 @@ public class AutomatedTest {
     
     private static final Logger log = LoggerFactory.getLogger(AutomatedTest.class);
     
+    /**
+     * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
+     * assigning values on the RunContext.
+     *
+     * @param testContext The injected ITestContext.
+     */
     @BeforeSuite
     public void processXmlParameters(ITestContext testContext) {
         log.info("Reading XML Parameters.");
@@ -37,11 +43,21 @@ public class AutomatedTest {
         RunContext.appUrl = parameterValidator.validateAppUrl();
     }
     
+    /**
+     * Reads and assigns on the RunContext the name of the test method about to be executed.
+     *
+     * @param method The injected Method object.
+     */
     @BeforeMethod
     public void readTestName(Method method) {
         RunContext.setTestCaseName(method.getName());
     }
     
+    /**
+     * Begins execution of a test by launching a RemoteWebDriver on a Selenium Grid, and opening the application URL.
+     *
+     * @throws Exception
+     */
     @BeforeMethod
     public void startWebDriver() throws Exception {
         log.info("Launching RemoteWebDriver.");
@@ -60,6 +76,9 @@ public class AutomatedTest {
         RunContext.getWebDriver().get(RunContext.appUrl);
     }
     
+    /**
+     * Concludes the test by stopping the WebDriver instance.
+     */
     @AfterMethod
     public void stopWebDriver() {
         log.info("Stopping the WebDriver.");
