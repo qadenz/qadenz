@@ -1,7 +1,6 @@
 package io.slifer.automation.ui;
 
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -17,8 +16,8 @@ public class ElementInspector {
     
     private ElementFinder elementFinder;
     
-    public ElementInspector(WebDriver webDriver) {
-        this.elementFinder = new ElementFinder(webDriver);
+    public ElementInspector() {
+        this.elementFinder = new ElementFinder();
     }
     
     /**
