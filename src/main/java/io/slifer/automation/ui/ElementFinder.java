@@ -1,5 +1,6 @@
 package io.slifer.automation.ui;
 
+import io.slifer.automation.config.RunContext;
 import io.slifer.selenium.support.ui.WebElementExpectedConditions;
 import io.slifer.selenium.support.ui.WebElementWait;
 import io.slifer.sizzlecss.BySizzle;
@@ -24,8 +25,8 @@ public class ElementFinder {
     
     private WebDriver webDriver;
     
-    public ElementFinder(WebDriver webDriver) {
-        this.webDriver = webDriver;
+    public ElementFinder() {
+        this.webDriver = RunContext.getWebDriver();
     }
     
     /**

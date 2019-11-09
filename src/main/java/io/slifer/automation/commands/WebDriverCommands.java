@@ -1,6 +1,7 @@
 package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
+import io.slifer.automation.config.RunContext;
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.WebDriver;
@@ -23,9 +24,9 @@ public abstract class WebDriverCommands extends Commands {
     protected WebDriver webDriver;
     private ElementFinder elementFinder;
     
-    public WebDriverCommands(WebDriver webDriver) {
-        this.webDriver = webDriver;
-        this.elementFinder = new ElementFinder(webDriver);
+    public WebDriverCommands() {
+        this.webDriver = RunContext.getWebDriver();
+        this.elementFinder = new ElementFinder();
     }
     
     /**
