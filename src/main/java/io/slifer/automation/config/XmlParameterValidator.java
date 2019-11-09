@@ -17,9 +17,14 @@ public class XmlParameterValidator {
         this.xmlParameters = xmlParameters;
     }
     
+    /**
+     * Ensures the `grid-host` parameter has been provided.
+     *
+     * @return The validated Grid Host.
+     */
     public String validateGridHost() {
-        if (xmlParameters.containsKey("Grid Host")) {
-            String gridHost = xmlParameters.get("Grid Host");
+        if (xmlParameters.containsKey("grid-host")) {
+            String gridHost = xmlParameters.get("grid-host");
             LOG.info("Using Selenium Grid at Host [" + gridHost + "].");
             
             return gridHost;
@@ -32,6 +37,11 @@ public class XmlParameterValidator {
         }
     }
     
+    /**
+     * Ensures the 'browser' parameter has been provided and is a valid option.
+     *
+     * @return The enumerated Browser name.
+     */
     public Browser validateBrowser() {
         if (xmlParameters.containsKey("Browser")) {
             String xmlBrowser = xmlParameters.get("Browser");
@@ -56,9 +66,14 @@ public class XmlParameterValidator {
         }
     }
     
+    /**
+     * Reads and returns the value of the 'browser-version' parameter, if one is provided.
+     *
+     * @return The Browser Version value.
+     */
     public String validateBrowserVersion() {
-        if (xmlParameters.containsKey("Browser Version")) {
-            String xmlBrowserVersion = xmlParameters.get("Browser Version");
+        if (xmlParameters.containsKey("browser-version")) {
+            String xmlBrowserVersion = xmlParameters.get("browser-version");
             LOG.info("Using Browser Version [" + xmlBrowserVersion + "].");
             
             return xmlBrowserVersion;
@@ -70,6 +85,11 @@ public class XmlParameterValidator {
         }
     }
     
+    /**
+     * Reads and returns the value of the 'platform' parameter, if one is provide and is a valid Platform option.
+     *
+     * @return The enumerated Platform value.
+     */
     public Platform validatePlatform() {
         if (xmlParameters.containsKey("Platform")) {
             String xmlPlatform = xmlParameters.get("Platform");
@@ -93,9 +113,14 @@ public class XmlParameterValidator {
         }
     }
     
+    /**
+     * Ensures the `app-url` parameter has been provided.
+     *
+     * @return The application URL.
+     */
     public String validateAppUrl() {
-        if (xmlParameters.containsKey("App URL")) {
-            String url = xmlParameters.get("App URL");
+        if (xmlParameters.containsKey("app-url")) {
+            String url = xmlParameters.get("app-url");
             LOG.info("Using Application URL [" + url + "].");
             
             return url;
