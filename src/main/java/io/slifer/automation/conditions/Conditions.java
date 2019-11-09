@@ -5,7 +5,6 @@ import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.LocatorGroup;
 import org.hamcrest.Matcher;
-import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
@@ -39,8 +38,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 attributeValue = elementInspector.getAttributeOfElement(locator, attributeName);
                 
                 match = expectation.matches(attributeValue);
@@ -76,8 +75,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 elementCount = elementInspector.getCountOfElement(locator);
                 
                 match = expectation.matches(elementCount);
@@ -113,8 +112,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 enabled = elementInspector.getEnabledStateOfElement(locator);
                 
                 match = expectation.matches(enabled);
@@ -151,8 +150,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 
                 for (Locator locator : locatorGroup) {
                     boolean enabled = elementInspector.getEnabledStateOfElement(locator);
@@ -199,8 +198,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementFinder elementFinder = new ElementFinder(webDriver);
+            public Boolean result() {
+                ElementFinder elementFinder = new ElementFinder();
                 present = elementFinder.findAll(locator).size() > 0;
                 
                 match = expectation.matches(present);
@@ -237,8 +236,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementFinder elementFinder = new ElementFinder(webDriver);
+            public Boolean result() {
+                ElementFinder elementFinder = new ElementFinder();
                 
                 for (Locator locator : locatorGroup) {
                     boolean present = elementFinder.findAll(locator).size() > 0;
@@ -285,8 +284,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 selected = elementInspector.getSelectedStateOfElement(locator);
                 
                 match = expectation.matches(selected);
@@ -322,8 +321,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 elementText = elementInspector.getTextOfElement(locator);
                 
                 match = expectation.matches(elementText);
@@ -360,8 +359,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 elementValues = elementInspector.getTextOfElements(locator);
                 
                 for (int i = 0; i < elementValues.size(); i++) {
@@ -409,8 +408,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 elementValues = elementInspector.getTextOfOptions(locator);
                 
                 for (int i = 0; i < elementValues.size(); i++) {
@@ -458,8 +457,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 visible = elementInspector.getVisibilityOfElement(locator);
                 
                 match = expectation.matches(visible);
@@ -496,8 +495,8 @@ public class Conditions {
             }
             
             @Override
-            public Boolean result(WebDriver webDriver) {
-                ElementInspector elementInspector = new ElementInspector(webDriver);
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
                 
                 for (Locator locator : locatorGroup) {
                     boolean visible = elementInspector.getVisibilityOfElement(locator);

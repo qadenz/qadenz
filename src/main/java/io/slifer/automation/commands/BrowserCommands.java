@@ -1,6 +1,5 @@
 package io.slifer.automation.commands;
 
-import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +12,8 @@ public class BrowserCommands extends WebDriverCommands {
     
     private static final Logger LOG = LoggerFactory.getLogger(BrowserCommands.class);
     
-    public BrowserCommands(WebDriver webDriver) {
-        super(webDriver);
+    public BrowserCommands() {
+        super();
     }
     
     /**

@@ -1,7 +1,5 @@
 package io.slifer.automation.conditions;
 
-import org.openqa.selenium.WebDriver;
-
 /**
  * Interface modeling a condition to be evaluated as part of a validation or synchronization.
  *
@@ -19,11 +17,9 @@ public interface Condition {
     /**
      * Evaluates the condition and returns a result based on the expected and actual values.
      *
-     * @param webDriver
-     *
      * @return
      */
-    Boolean result(WebDriver webDriver);
+    Boolean result();
     
     /**
      * Returns a statement describing the actual value being evaluated by the Condition.
