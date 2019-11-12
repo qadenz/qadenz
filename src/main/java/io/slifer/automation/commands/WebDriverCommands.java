@@ -171,10 +171,10 @@ public abstract class WebDriverCommands extends Commands {
                 hasFailures = true;
                 LOG.error("Error making assertion.", exception);
             }
-            
-            if (hasFailures) {
-                throw new AssertionError();
-            }
+        }
+        
+        if (hasFailures) {
+            throw new AssertionError();
         }
     }
 }
