@@ -159,7 +159,7 @@ public abstract class WebDriverCommands extends Commands {
         for (Condition condition : conditions) {
             LOG.info("Asserting Condition -> " + condition.description());
             try {
-                boolean result = condition.result(webDriver);
+                boolean result = condition.result();
                 Assert.assertTrue(result);
                 LOG.warn("Assertion Passed: " + condition.output());
             }
