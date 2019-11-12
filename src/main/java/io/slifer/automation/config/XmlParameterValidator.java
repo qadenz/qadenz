@@ -25,7 +25,7 @@ public class XmlParameterValidator {
     public String validateGridHost() {
         if (xmlParameters.containsKey("grid-host")) {
             String gridHost = xmlParameters.get("grid-host");
-            LOG.info("Using Selenium Grid at Host [" + gridHost + "].");
+            LOG.info("Using Selenium Grid at Host [{}].", gridHost);
             
             return gridHost;
         }
@@ -47,7 +47,7 @@ public class XmlParameterValidator {
             String xmlBrowser = xmlParameters.get("Browser");
             try {
                 Browser browser = Browser.fromString(xmlBrowser);
-                LOG.info("Using Browser [" + browser.toString() + "].");
+                LOG.info("Using Browser [{}].", browser.toString());
                 
                 return browser;
             }
@@ -74,7 +74,7 @@ public class XmlParameterValidator {
     public String validateBrowserVersion() {
         if (xmlParameters.containsKey("browser-version")) {
             String xmlBrowserVersion = xmlParameters.get("browser-version");
-            LOG.info("Using Browser Version [" + xmlBrowserVersion + "].");
+            LOG.info("Using Browser Version [{}].", xmlBrowserVersion);
             
             return xmlBrowserVersion;
         }
@@ -95,7 +95,7 @@ public class XmlParameterValidator {
             String xmlPlatform = xmlParameters.get("Platform");
             try {
                 Platform platform = Platform.fromString(xmlPlatform);
-                LOG.info("Using Platform [" + platform.toString() + "].");
+                LOG.info("Using Platform [" + platform.toString() + "].", platform.toString());
                 
                 return platform;
             }
