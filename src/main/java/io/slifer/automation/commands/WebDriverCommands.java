@@ -1,6 +1,5 @@
 package io.slifer.automation.commands;
 
-import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.Locator;
@@ -10,7 +9,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.Assert;
 
 /**
  * Common commands related to the WebDriver layer, agnostic of the implementation.
@@ -145,36 +143,5 @@ public abstract class WebDriverCommands extends Commands {
     public void clearAndEnterText(Locator locator, String input) {
         clear(locator);
         enterText(locator, input);
-    }
-    
-    /**
-     * Evaluates each of the given conditions as a group. If one or more Conditions results in a failure, execution will
-     * be aborted after the final Condition is evaluated.
-     *
-     * @param conditions The Conditions to be evaluated.
-     */
-    public void verify(Condition... conditions) {
-        boolean hasFailures = false;
-        
-        for (Condition condition : conditions) {
-            LOG.info("Asserting Condition -> " + condition.description());
-            try {
-                boolean result = condition.result(webDriver);
-                Assert.assertTrue(result);
-                LOG.warn("Assertion Passed: " + condition.output());
-            }
-            catch (AssertionError error) {
-                hasFailures = true;
-                LOG.warn("Assertion Failed: " + condition.output());
-            }
-            catch (Exception exception) {
-                hasFailures = true;
-                LOG.error("Error making assertion.", exception);
-            }
-            
-            if (hasFailures) {
-                throw new AssertionError();
-            }
-        }
     }
 }
