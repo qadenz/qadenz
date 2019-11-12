@@ -24,15 +24,15 @@ public abstract class Commands {
         boolean hasFailures = false;
         
         for (Condition condition : conditions) {
-            LOG.info("Asserting Condition -> " + condition.description());
+            LOG.info("Asserting Condition -> {}", condition.description());
             try {
                 boolean result = condition.result();
                 Assert.assertTrue(result);
-                LOG.warn("Assertion Passed: " + condition.output());
+                LOG.warn("Assertion Passed: {}", condition.output());
             }
             catch (AssertionError error) {
                 hasFailures = true;
-                LOG.warn("Assertion Failed: " + condition.output());
+                LOG.warn("Assertion Failed: {}", condition.output());
             }
             catch (Exception exception) {
                 hasFailures = true;
