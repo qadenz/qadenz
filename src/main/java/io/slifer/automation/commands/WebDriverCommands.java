@@ -1,12 +1,15 @@
 package io.slifer.automation.commands;
 
+import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -173,6 +176,24 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error switching focus.", e);
+        }
+    }
+    
+    /**
+     * Pauses execution until the given condition is met, or a timeout occurs.
+     *
+     * @param condition The Condition to be satisfied during the wait.
+     */
+    public void pause(Condition condition) {
+        LOG.info("Wait for condition -> {}", condition.description());
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver, RunContext.timeout);
+        
+        try {
+            webDriverWait.until((ExpectedCondition<Boolean>) webDriver -> condition.result());
+        }
+        catch (Exception e) {
+            LOG.error("Error while waiting.", e);
+            throw e;
         }
     }
 }
