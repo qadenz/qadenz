@@ -62,6 +62,20 @@ public class ElementInspector {
     }
     
     /**
+     * Retrieves the value of the currently selected option on a a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The text of the selected option.
+     */
+    public String getSelectedMenuOption(Locator locator) {
+        WebElement webElement = elementFinder.find(locator);
+        Select select = new Select(webElement);
+        
+        return select.getFirstSelectedOption().getText();
+    }
+    
+    /**
      * Retrieves the selected state of an element. This applies only elements such as checkboxes, radio options, and
      * {@code <option>} child of a {@code <select>} elements.
      *
