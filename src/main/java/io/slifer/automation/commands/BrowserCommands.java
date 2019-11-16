@@ -3,6 +3,9 @@ package io.slifer.automation.commands;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Commands used to interact with a web browser.
  *
@@ -128,5 +131,56 @@ public class BrowserCommands extends WebDriverCommands {
             LOG.error("Error opening URL.", e);
             throw e;
         }
+    }
+    
+    /**
+     * Moves focus to the new browser window, relative to the current window.
+     */
+    public void focusOnNextWindow() {
+        LOG.info("Switch focus to next window.");
+        try {
+            switchWindowFocus(Window.NEXT);
+        }
+        catch (Exception e) {
+            LOG.error("Error switching focus.", e);
+            throw e;
+        }
+    }
+    
+    /**
+     * Moves focus to the previous browser window, relative to the current window.
+     */
+    public void focusOnPreviousWindow() {
+        LOG.info("Switch focus to previous window.");
+        try {
+            switchWindowFocus(Window.PREVIOUS);
+        }
+        catch (Exception e) {
+            LOG.error("Error switching focus.");
+            throw e;
+        }
+    }
+    
+    private void switchWindowFocus(Window window) {
+        int currentWindowIndex;
+        List<String> windowHandles = new ArrayList<>(webDriver.getWindowHandles());
+        try {
+            currentWindowIndex = windowHandles.indexOf(webDriver.getWindowHandle());
+        }
+        catch (Exception exception) {
+            currentWindowIndex = windowHandles.size();
+        }
+        
+        if (window == Window.NEXT && webDriver.getWindowHandles().size() - 1 > currentWindowIndex) {
+            webDriver.switchTo().window(windowHandles.get(currentWindowIndex + 1));
+        }
+        else if (window == Window.PREVIOUS && webDriver.getWindowHandles().size() >= 1) {
+            webDriver.switchTo().window(windowHandles.get(currentWindowIndex - 1));
+        }
+    }
+    
+    private enum Window {
+        NEXT,
+        PREVIOUS;
     }
 }
