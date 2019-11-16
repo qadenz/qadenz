@@ -144,4 +144,35 @@ public abstract class WebDriverCommands extends Commands {
         clear(locator);
         enterText(locator, input);
     }
+    
+    /**
+     * Moves focus to the default or main frame.
+     */
+    public void focusOnDefaultContent() {
+        LOG.info("Switch focus to default frame.");
+        try {
+            webDriver.switchTo().defaultContent();
+        }
+        catch (Exception e) {
+            LOG.error("Error switching focus.", e);
+            throw e;
+        }
+    }
+    
+    /**
+     * Moves focus to a frame.
+     *
+     * @param locator The UI mapping of the frame.
+     */
+    public void focusOnFrame(Locator locator) {
+        LOG.info("Switch focus to frame [{}]", locator.getName());
+        try {
+            webDriver.switchTo().defaultContent();
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            webDriver.switchTo().frame(webElement);
+        }
+        catch (Exception e) {
+            LOG.error("Error switching focus.", e);
+        }
+    }
 }
