@@ -1,10 +1,13 @@
 package io.slifer.automation.conditions;
 
+import io.slifer.automation.config.RunContext;
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.LocatorGroup;
 import org.hamcrest.Matcher;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
@@ -177,6 +180,43 @@ public class Conditions {
     }
     
     /**
+     * A Condition for evaluating whether or not a JavaScript Alert is present.
+     *
+     * @param expectation The expectation of whether or not the alert is to be present.
+     *
+     * @return The Condition.
+     */
+    public Condition presenceOfAlert(final Matcher<Boolean> expectation) {
+        return new Condition() {
+            
+            Boolean match;
+            boolean present;
+            
+            public String description() {
+                return "Presence of Alert " + expectation + ".";
+            }
+            
+            public Boolean result() {
+                try {
+                    WebDriver webDriver = RunContext.getWebDriver();
+                    webDriver.switchTo().alert();
+                    present = true;
+                }
+                catch (NoAlertPresentException exception) {
+                    present = false;
+                }
+                
+                match = expectation.matches(present);
+                return match;
+            }
+            
+            public String output() {
+                return "Found [" + present + "].";
+            }
+        };
+    }
+    
+    /**
      * A Condition for evaluating whether or not an element is present on the DOM, regardless of if the element is
      * visible on the page.
      *
@@ -263,6 +303,40 @@ public class Conditions {
     }
     
     /**
+     * A Condition for evaluating the currently selected option of a Select menu element.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the option to be selected.
+     *
+     * @return The Condition.
+     */
+    public Condition selectedMenuOption(final Locator locator, final Matcher<String> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            String selectedOption;
+            
+            public String description() {
+                return "Selected option of menu element [" + locator.getName() + "] " + expectation + ".";
+            }
+            
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
+                selectedOption = elementInspector.getSelectedMenuOption(locator);
+                
+                match = expectation.matches(selectedOption);
+                
+                return match;
+            }
+            
+            public String output() {
+                return "Found [" + selectedOption + "].";
+            }
+        };
+    }
+    
+    /**
      * A Condition for evaluating an element to be selected. This applies only elements such as checkboxes, radio
      * options, and {@code <option>} child of a {@code <select>} elements.
      *
@@ -296,6 +370,39 @@ public class Conditions {
             @Override
             public String output() {
                 return "Found [" + selected + "].";
+            }
+        };
+    }
+    
+    /**
+     * A Condition for evaluating the text shown on a JavaScript Alert.
+     *
+     * @param expectation The expectation for the text to be shown in the alert.
+     *
+     * @return The Condition.
+     */
+    public Condition textOfAlert(final Matcher<String> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            String alertText;
+            
+            public String description() {
+                return "Text of Alert " + expectation + ".";
+            }
+            
+            public Boolean result() {
+                WebDriver webDriver = RunContext.getWebDriver();
+                alertText = webDriver.switchTo().alert().getText();
+                
+                match = expectation.matches(alertText);
+                
+                return match;
+            }
+            
+            public String output() {
+                return "Found [" + alertText + "].";
             }
         };
     }
