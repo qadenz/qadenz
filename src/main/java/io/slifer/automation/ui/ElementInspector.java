@@ -1,6 +1,7 @@
 package io.slifer.automation.ui;
 
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -141,21 +142,26 @@ public class ElementInspector {
     public boolean getVisibilityOfElement(Locator locator) {
         boolean visible = (getCountOfElement(locator) > 0);
         
-        if (visible) {
-            Dimension dimension = elementFinder.find(locator).getSize();
-            visible = (dimension.getHeight() > 0 && dimension.getWidth() > 0);
+        try {
+            if (visible) {
+                Dimension dimension = elementFinder.find(locator).getSize();
+                visible = (dimension.getHeight() > 0 && dimension.getWidth() > 0);
+            }
+            
+            if (visible) {
+                visible = (!getAttributeOfElement(locator, "style").contains("display: none;"));
+            }
+            
+            if (visible) {
+                visible = (!getAttributeOfElement(locator, "style").contains("visibility: hidden;"));
+            }
+            
+            if (visible) {
+                visible = (!getAttributeOfElement(locator, "class").contains("ng-hide"));
+            }
         }
-        
-        if (visible) {
-            visible = (!getAttributeOfElement(locator, "style").contains("display: none;"));
-        }
-        
-        if (visible) {
-            visible = (!getAttributeOfElement(locator, "style").contains("visibility: hidden;"));
-        }
-        
-        if (visible) {
-            visible = (!getAttributeOfElement(locator, "class").contains("ng-hide"));
+        catch (StaleElementReferenceException e) {
+            visible = false;
         }
         
         return visible;
