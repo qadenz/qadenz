@@ -30,7 +30,7 @@ public class ElementInspector {
      * @return The attribute value.
      */
     public String getAttributeOfElement(Locator locator, String attributeName) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         
         return webElement.getAttribute(attributeName);
     }
@@ -57,7 +57,7 @@ public class ElementInspector {
      * @return True if the element is enabled, false otherwise.
      */
     public boolean getEnabledStateOfElement(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         
         return webElement.isEnabled();
     }
@@ -70,7 +70,7 @@ public class ElementInspector {
      * @return The text of the selected option.
      */
     public String getSelectedMenuOption(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         Select select = new Select(webElement);
         
         return select.getFirstSelectedOption().getText();
@@ -85,7 +85,7 @@ public class ElementInspector {
      * @return True if the element is selected, false otherwise.
      */
     public boolean getSelectedStateOfElement(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         
         return webElement.isSelected();
     }
@@ -98,7 +98,7 @@ public class ElementInspector {
      * @return The text value.
      */
     public String getTextOfElement(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         
         return webElement.getText();
     }
@@ -111,7 +111,7 @@ public class ElementInspector {
      * @return The list of values.
      */
     public List<String> getTextOfElements(Locator locator) {
-        List<WebElement> webElements = elementFinder.findAll(locator);
+        List<WebElement> webElements = elementFinder.findAllWhenVisible(locator);
         
         return getTextValuesFromElements(webElements);
     }
@@ -124,7 +124,7 @@ public class ElementInspector {
      * @return The list of values.
      */
     public List<String> getTextOfOptions(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         Select select = new Select(webElement);
         List<WebElement> options = select.getOptions();
         
