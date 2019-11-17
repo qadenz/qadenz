@@ -43,8 +43,8 @@ public class XmlParameterValidator {
      * @return The enumerated Browser name.
      */
     public Browser validateBrowser() {
-        if (xmlParameters.containsKey("Browser")) {
-            String xmlBrowser = xmlParameters.get("Browser");
+        if (xmlParameters.containsKey("browser")) {
+            String xmlBrowser = xmlParameters.get("browser");
             try {
                 Browser browser = Browser.fromString(xmlBrowser);
                 LOG.info("Using Browser [{}].", browser.toString());
