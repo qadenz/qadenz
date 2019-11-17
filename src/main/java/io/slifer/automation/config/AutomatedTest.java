@@ -40,6 +40,7 @@ public class AutomatedTest {
         RunContext.browser = parameterValidator.validateBrowser();
         RunContext.browserVersion = parameterValidator.validateBrowserVersion();
         RunContext.platform = parameterValidator.validatePlatform();
+        RunContext.timeout = parameterValidator.validateTimeout();
         RunContext.appUrl = parameterValidator.validateAppUrl();
     }
     
