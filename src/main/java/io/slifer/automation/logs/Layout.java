@@ -3,6 +3,7 @@ package io.slifer.automation.logs;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.CoreConstants;
 import ch.qos.logback.core.LayoutBase;
+import io.slifer.automation.config.RunContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +19,9 @@ public class Layout extends LayoutBase<ILoggingEvent> {
     public String doLayout(ILoggingEvent event) {
         StringBuffer buffer = new StringBuffer();
         buffer.append(new SimpleDateFormat("HH:mm:ss:SSS").format(new Date()));
-        // buffer.append("|" + AutomatedTest.testName() + "|"); TODO uncomment when test configuration is in place
+        buffer.append("|");
+        buffer.append(RunContext.getTestCaseName());
+        buffer.append("|");
         buffer.append(event.getLoggerName());
         buffer.append("|");
         buffer.append(event.getLevel());
