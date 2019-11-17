@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Examines elements and retrieves values and information.
@@ -140,27 +141,28 @@ public class ElementInspector {
      * @return True if the element is found to be visible, false otherwise.
      */
     public boolean getVisibilityOfElement(Locator locator) {
-        boolean visible = (getCountOfElement(locator) > 0);
+        List<WebElement> webElements = elementFinder.findAll(locator);
+        boolean visible = (webElements.size() > 0);
         
         try {
             if (visible) {
-                Dimension dimension = elementFinder.find(locator).getSize();
+                Dimension dimension = webElements.get(0).getSize();
                 visible = (dimension.getHeight() > 0 && dimension.getWidth() > 0);
             }
             
             if (visible) {
-                visible = (!getAttributeOfElement(locator, "style").contains("display: none;"));
+                visible = (!webElements.get(0).getAttribute("style").contains("display: none;"));
             }
             
             if (visible) {
-                visible = (!getAttributeOfElement(locator, "style").contains("visibility: hidden;"));
+                visible = (!webElements.get(0).getAttribute("style").contains("visibility: hidden;"));
             }
             
             if (visible) {
-                visible = (!getAttributeOfElement(locator, "class").contains("ng-hide"));
+                visible = (!webElements.get(0).getAttribute("class").contains("ng-hide"));
             }
         }
-        catch (StaleElementReferenceException e) {
+        catch (StaleElementReferenceException | NoSuchElementException e) {
             visible = false;
         }
         
