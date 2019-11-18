@@ -86,21 +86,25 @@ public class ElementFinder {
         }
         catch (Exception e) {
             LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            
             throw e;
         }
         
         try {
             if (parent == null) {
                 LOG.debug("Initializing elements [{}].", locator.getName());
+                
                 return webDriver.findElements(bySizzle(locator));
             }
             else {
                 LOG.debug("Initializing nested elements [{}].", locator.getName());
+                
                 return parent.findElements(bySizzle(locator));
             }
         }
         catch (Exception e) {
             LOG.error("Could not initialize elements [{}].", locator.getName());
+            
             throw e;
         }
     }
@@ -126,12 +130,14 @@ public class ElementFinder {
         }
         catch (Exception e) {
             LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            
             throw e;
         }
         
         try {
             if (parent == null) {
                 LOG.debug("Initializing element [{}] when visible.", locator.getName());
+                
                 return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
             }
             else {
@@ -143,6 +149,7 @@ public class ElementFinder {
         }
         catch (Exception e) {
             LOG.error("Could not initialize element [{}].", locator.getName());
+            
             throw e;
         }
     }
@@ -168,12 +175,14 @@ public class ElementFinder {
         }
         catch (Exception e) {
             LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            
             throw e;
         }
         
         try {
             if (parent == null) {
                 LOG.debug("Initializing elements [{}] when visible.", locator.getName());
+                
                 return webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(bySizzle(locator)));
             }
             else {
@@ -186,6 +195,7 @@ public class ElementFinder {
         }
         catch (Exception e) {
             LOG.error("Could not initialize elements [{}].", locator.getName());
+            
             throw e;
         }
     }
@@ -210,12 +220,14 @@ public class ElementFinder {
         }
         catch (Exception e) {
             LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            
             throw e;
         }
         
         try {
             if (parent == null) {
                 LOG.debug("Initializing element [{}] when clickable.", locator.getName());
+                
                 return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
             }
             else {
@@ -227,6 +239,7 @@ public class ElementFinder {
         }
         catch (Exception e) {
             LOG.error("Could not initialize element [{}].", locator.getName());
+            
             throw e;
         }
     }

@@ -43,8 +43,8 @@ public class XmlParameterValidator {
      * @return The enumerated Browser name.
      */
     public Browser validateBrowser() {
-        if (xmlParameters.containsKey("Browser")) {
-            String xmlBrowser = xmlParameters.get("Browser");
+        if (xmlParameters.containsKey("browser")) {
+            String xmlBrowser = xmlParameters.get("browser");
             try {
                 Browser browser = Browser.fromString(xmlBrowser);
                 LOG.info("Using Browser [{}].", browser.toString());
@@ -86,7 +86,7 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Reads and returns the value of the 'platform' parameter, if one is provide and is a valid Platform option.
+     * Reads and returns the value of the 'platform' parameter, if one is provided and is a valid Platform option.
      *
      * @return The enumerated Platform value.
      */
@@ -110,6 +110,25 @@ public class XmlParameterValidator {
             LOG.info("No Platform given, using any available.");
             
             return null;
+        }
+    }
+    
+    /**
+     * Reads and returns the Timeout limit, if one is provided, otherwise a default value is set.
+     *
+     * @return The Timeout limit.
+     */
+    public int validateTimeout() {
+        if (xmlParameters.containsKey("timeout")) {
+            int timeout = Integer.parseInt(xmlParameters.get("timeout"));
+            LOG.info("Timeout limit declared [{}] seconds.", timeout);
+            
+            return timeout;
+        }
+        else {
+            LOG.info("No timeout limit declared, using [{}] seconds.", 30);
+            
+            return 30;
         }
     }
     

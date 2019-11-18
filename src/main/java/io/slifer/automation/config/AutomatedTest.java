@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class AutomatedTest {
     
-    private static final Logger log = LoggerFactory.getLogger(AutomatedTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AutomatedTest.class);
     
     /**
      * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
@@ -32,7 +32,7 @@ public class AutomatedTest {
      */
     @BeforeSuite
     public void processXmlParameters(ITestContext testContext) {
-        log.info("Reading XML Parameters.");
+        LOG.info("Reading XML Parameters.");
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
         XmlParameterValidator parameterValidator = new XmlParameterValidator(xmlParameters);
         
@@ -40,6 +40,7 @@ public class AutomatedTest {
         RunContext.browser = parameterValidator.validateBrowser();
         RunContext.browserVersion = parameterValidator.validateBrowserVersion();
         RunContext.platform = parameterValidator.validatePlatform();
+        RunContext.timeout = parameterValidator.validateTimeout();
         RunContext.appUrl = parameterValidator.validateAppUrl();
     }
     
@@ -58,9 +59,9 @@ public class AutomatedTest {
      *
      * @throws Exception
      */
-    @BeforeMethod
+    @BeforeMethod (dependsOnMethods = {"readTestName"})
     public void startWebDriver() throws Exception {
-        log.info("Launching RemoteWebDriver.");
+        LOG.info("Launching RemoteWebDriver for test [{}].", RunContext.getTestCaseName());
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
         
         try {
@@ -68,7 +69,7 @@ public class AutomatedTest {
                     new RemoteWebDriver(new URL("http://" + RunContext.gridHost + ":4444/wd/hub"), capabilities));
         }
         catch (MalformedURLException exception) {
-            log.error("Grid URL is invalid.");
+            LOG.error("Grid URL is invalid.");
             throw exception;
         }
         
@@ -81,7 +82,7 @@ public class AutomatedTest {
      */
     @AfterMethod
     public void stopWebDriver() {
-        log.info("Stopping the WebDriver.");
+        LOG.info("Stopping the WebDriver.");
         RunContext.getWebDriver().quit();
     }
 }

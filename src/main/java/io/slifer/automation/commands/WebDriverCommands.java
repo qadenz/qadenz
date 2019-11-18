@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Common commands related to the WebDriver layer, agnostic of the implementation.
+ * Common commands related to the WebDriver layer.
  *
  * @author Tim Slifer
  */
@@ -43,6 +43,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error clearing contents.", e);
+            
             throw e;
         }
     }
@@ -60,6 +61,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error clicking element.", e);
+            
             throw e;
         }
     }
@@ -78,6 +80,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error double-clicking element.", e);
+            
             throw e;
         }
     }
@@ -96,6 +99,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error entering text.", e);
+            
             throw e;
         }
     }
@@ -114,6 +118,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error hovering on element.", e);
+            
             throw e;
         }
     }
@@ -133,6 +138,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error selecting option.", e);
+            
             throw e;
         }
     }
@@ -158,6 +164,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error switching focus.", e);
+            
             throw e;
         }
     }
@@ -176,6 +183,8 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error switching focus.", e);
+            
+            throw e;
         }
     }
     
@@ -193,6 +202,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error while waiting.", e);
+            
             throw e;
         }
     }
