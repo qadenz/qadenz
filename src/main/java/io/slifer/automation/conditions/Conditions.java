@@ -186,7 +186,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public Condition presenceOfAlert(final Matcher<Boolean> expectation) {
+    public static Condition presenceOfAlert(final Matcher<Boolean> expectation) {
         return new Condition() {
             
             Boolean match;
@@ -310,7 +310,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public Condition selectedMenuOption(final Locator locator, final Matcher<String> expectation) {
+    public static Condition selectedMenuOption(final Locator locator, final Matcher<String> expectation) {
         
         return new Condition() {
             
@@ -381,7 +381,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public Condition textOfAlert(final Matcher<String> expectation) {
+    public static Condition textOfAlert(final Matcher<String> expectation) {
         
         return new Condition() {
             
@@ -469,55 +469,6 @@ public class Conditions {
             public Boolean result() {
                 ElementInspector elementInspector = new ElementInspector();
                 elementValues = elementInspector.getTextOfElements(locator);
-                
-                for (int i = 0; i < elementValues.size(); i++) {
-                    String instanceValue = elementValues.get(i);
-                    Boolean instanceMatch = expectation.matches(instanceValue);
-                    
-                    if (!instanceMatch) {
-                        failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
-                    }
-                    
-                    if (match == null || match) {
-                        match = instanceMatch;
-                    }
-                }
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Discrepancies: \n" + failures;
-            }
-        };
-    }
-    
-    /**
-     * A Condition to evaluate the text of each {@code <option>} child of a {@code <select>} element.
-     *
-     * @param locator The mapped UI element.
-     * @param expectation The expectation for the text to be shown for each {@code <option>}.
-     *
-     * @return The Condition.
-     */
-    public static Condition textOfOptions(final Locator locator, final Matcher<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            List<String> elementValues;
-            StringBuilder failures = new StringBuilder();
-            
-            @Override
-            public String description() {
-                return "Text of the options of element [" + locator.getName() + "] " + expectation + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                ElementInspector elementInspector = new ElementInspector();
-                elementValues = elementInspector.getTextOfOptions(locator);
                 
                 for (int i = 0; i < elementValues.size(); i++) {
                     String instanceValue = elementValues.get(i);
