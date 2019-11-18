@@ -2,6 +2,11 @@ package io.slifer.automation.config;
 
 import org.openqa.selenium.WebDriverException;
 
+/**
+ * Enumerated browser names for configuring execution sessions.
+ *
+ * @author Tim Slifer
+ */
 public enum Browser {
     CHROME("Chrome"),
     EDGE("Edge"),
