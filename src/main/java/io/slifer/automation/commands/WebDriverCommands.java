@@ -134,7 +134,7 @@ public abstract class WebDriverCommands extends Commands {
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
             Select select = new Select(webElement);
-            select.deselectByVisibleText(option);
+            select.selectByVisibleText(option);
         }
         catch (Exception e) {
             LOG.error("Error selecting option.", e);
