@@ -310,7 +310,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public Condition selectedMenuOption(final Locator locator, final Matcher<String> expectation) {
+    public static Condition selectedMenuOption(final Locator locator, final Matcher<String> expectation) {
         
         return new Condition() {
             
