@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 /**
- * Common commands to all test types, agnostic of application under test.
+ * Common commands for all test types.
  *
  * @author Tim Slifer
  */
