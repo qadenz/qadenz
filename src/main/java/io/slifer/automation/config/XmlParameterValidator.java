@@ -127,6 +127,7 @@ public class XmlParameterValidator {
         }
         else {
             LOG.info("No timeout limit declared, using [{}] seconds.", 30);
+            
             return 30;
         }
     }
