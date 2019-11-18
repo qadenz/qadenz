@@ -91,8 +91,8 @@ public class XmlParameterValidator {
      * @return The enumerated Platform value.
      */
     public Platform validatePlatform() {
-        if (xmlParameters.containsKey("Platform")) {
-            String xmlPlatform = xmlParameters.get("Platform");
+        if (xmlParameters.containsKey("platform")) {
+            String xmlPlatform = xmlParameters.get("platform");
             try {
                 Platform platform = Platform.fromString(xmlPlatform);
                 LOG.info("Using Platform [" + platform.toString() + "].", platform.toString());
