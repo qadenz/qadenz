@@ -381,7 +381,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public Condition textOfAlert(final Matcher<String> expectation) {
+    public static Condition textOfAlert(final Matcher<String> expectation) {
         
         return new Condition() {
             
