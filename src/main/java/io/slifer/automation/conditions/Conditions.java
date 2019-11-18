@@ -186,7 +186,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public Condition presenceOfAlert(final Matcher<Boolean> expectation) {
+    public static Condition presenceOfAlert(final Matcher<Boolean> expectation) {
         return new Condition() {
             
             Boolean match;
