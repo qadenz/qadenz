@@ -1,5 +1,6 @@
 package io.slifer.automation.commands;
 
+import io.slifer.automation.config.RunContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +26,7 @@ public class BrowserCommands extends WebDriverCommands {
     public void acceptAlert() {
         LOG.info("Accepting alert.");
         try {
-            webDriver.switchTo().alert().accept();
+            RunContext.getWebDriver().switchTo().alert().accept();
         }
         catch (Exception e) {
             LOG.error("Error accepting alert.", e);
@@ -39,7 +40,7 @@ public class BrowserCommands extends WebDriverCommands {
     public void dismissAlert() {
         LOG.info("Dismissing alert.");
         try {
-            webDriver.switchTo().alert().dismiss();
+            RunContext.getWebDriver().switchTo().alert().dismiss();
         }
         catch (Exception e) {
             LOG.error("Error dismissing alert.", e);
@@ -53,7 +54,7 @@ public class BrowserCommands extends WebDriverCommands {
     public void closeBrowser() {
         LOG.info("Closing browser.");
         try {
-            webDriver.close();
+            RunContext.getWebDriver().close();
         }
         catch (Exception e) {
             LOG.error("Error closing browser.", e);
@@ -67,7 +68,7 @@ public class BrowserCommands extends WebDriverCommands {
     public void goBack() {
         LOG.info("Navigating back.");
         try {
-            webDriver.navigate().back();
+            RunContext.getWebDriver().navigate().back();
         }
         catch (Exception e) {
             LOG.error("Error navigating back.", e);
@@ -81,7 +82,7 @@ public class BrowserCommands extends WebDriverCommands {
     public void goForward() {
         LOG.info("Navigating forward.");
         try {
-            webDriver.navigate().forward();
+            RunContext.getWebDriver().navigate().forward();
         }
         catch (Exception e) {
             LOG.error("Error navigating back.", e);
@@ -95,7 +96,7 @@ public class BrowserCommands extends WebDriverCommands {
     public void refreshPage() {
         LOG.info("Refreshing page.");
         try {
-            webDriver.navigate().refresh();
+            RunContext.getWebDriver().navigate().refresh();
         }
         catch (Exception e) {
             LOG.error("Error refreshing page.", e);
@@ -109,7 +110,7 @@ public class BrowserCommands extends WebDriverCommands {
     public void deleteCookies() {
         LOG.info("Deleting all cookies.");
         try {
-            webDriver.manage().deleteAllCookies();
+            RunContext.getWebDriver().manage().deleteAllCookies();
         }
         catch (Exception e) {
             LOG.error("Error deleting cookies.", e);
@@ -125,7 +126,7 @@ public class BrowserCommands extends WebDriverCommands {
     public void openUrl(String url) {
         LOG.info("Opening URL [{}].", url);
         try {
-            webDriver.get(url);
+            RunContext.getWebDriver().get(url);
         }
         catch (Exception e) {
             LOG.error("Error opening URL.", e);
@@ -163,19 +164,19 @@ public class BrowserCommands extends WebDriverCommands {
     
     private void switchWindowFocus(Window window) {
         int currentWindowIndex;
-        List<String> windowHandles = new ArrayList<>(webDriver.getWindowHandles());
+        List<String> windowHandles = new ArrayList<>(RunContext.getWebDriver().getWindowHandles());
         try {
-            currentWindowIndex = windowHandles.indexOf(webDriver.getWindowHandle());
+            currentWindowIndex = windowHandles.indexOf(RunContext.getWebDriver().getWindowHandle());
         }
         catch (Exception exception) {
             currentWindowIndex = windowHandles.size();
         }
         
-        if (window == Window.NEXT && webDriver.getWindowHandles().size() - 1 > currentWindowIndex) {
-            webDriver.switchTo().window(windowHandles.get(currentWindowIndex + 1));
+        if (window == Window.NEXT && RunContext.getWebDriver().getWindowHandles().size() - 1 > currentWindowIndex) {
+            RunContext.getWebDriver().switchTo().window(windowHandles.get(currentWindowIndex + 1));
         }
-        else if (window == Window.PREVIOUS && webDriver.getWindowHandles().size() >= 1) {
-            webDriver.switchTo().window(windowHandles.get(currentWindowIndex - 1));
+        else if (window == Window.PREVIOUS && RunContext.getWebDriver().getWindowHandles().size() >= 1) {
+            RunContext.getWebDriver().switchTo().window(windowHandles.get(currentWindowIndex - 1));
         }
     }
     
