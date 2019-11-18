@@ -1,11 +1,13 @@
 package io.slifer.automation.ui;
 
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Examines elements and retrieves values and information.
@@ -29,7 +31,7 @@ public class ElementInspector {
      * @return The attribute value.
      */
     public String getAttributeOfElement(Locator locator, String attributeName) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         
         return webElement.getAttribute(attributeName);
     }
@@ -56,7 +58,7 @@ public class ElementInspector {
      * @return True if the element is enabled, false otherwise.
      */
     public boolean getEnabledStateOfElement(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         
         return webElement.isEnabled();
     }
@@ -69,7 +71,7 @@ public class ElementInspector {
      * @return The text of the selected option.
      */
     public String getSelectedMenuOption(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         Select select = new Select(webElement);
         
         return select.getFirstSelectedOption().getText();
@@ -84,7 +86,7 @@ public class ElementInspector {
      * @return True if the element is selected, false otherwise.
      */
     public boolean getSelectedStateOfElement(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         
         return webElement.isSelected();
     }
@@ -97,7 +99,7 @@ public class ElementInspector {
      * @return The text value.
      */
     public String getTextOfElement(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         
         return webElement.getText();
     }
@@ -110,7 +112,7 @@ public class ElementInspector {
      * @return The list of values.
      */
     public List<String> getTextOfElements(Locator locator) {
-        List<WebElement> webElements = elementFinder.findAll(locator);
+        List<WebElement> webElements = elementFinder.findAllWhenVisible(locator);
         
         return getTextValuesFromElements(webElements);
     }
@@ -123,7 +125,7 @@ public class ElementInspector {
      * @return The list of values.
      */
     public List<String> getTextOfOptions(Locator locator) {
-        WebElement webElement = elementFinder.find(locator);
+        WebElement webElement = elementFinder.findWhenVisible(locator);
         Select select = new Select(webElement);
         List<WebElement> options = select.getOptions();
         
@@ -139,23 +141,29 @@ public class ElementInspector {
      * @return True if the element is found to be visible, false otherwise.
      */
     public boolean getVisibilityOfElement(Locator locator) {
-        boolean visible = (getCountOfElement(locator) > 0);
+        List<WebElement> webElements = elementFinder.findAll(locator);
+        boolean visible = (webElements.size() > 0);
         
-        if (visible) {
-            Dimension dimension = elementFinder.find(locator).getSize();
-            visible = (dimension.getHeight() > 0 && dimension.getWidth() > 0);
+        try {
+            if (visible) {
+                Dimension dimension = webElements.get(0).getSize();
+                visible = (dimension.getHeight() > 0 && dimension.getWidth() > 0);
+            }
+            
+            if (visible) {
+                visible = (!webElements.get(0).getAttribute("style").contains("display: none;"));
+            }
+            
+            if (visible) {
+                visible = (!webElements.get(0).getAttribute("style").contains("visibility: hidden;"));
+            }
+            
+            if (visible) {
+                visible = (!webElements.get(0).getAttribute("class").contains("ng-hide"));
+            }
         }
-        
-        if (visible) {
-            visible = (!getAttributeOfElement(locator, "style").contains("display: none;"));
-        }
-        
-        if (visible) {
-            visible = (!getAttributeOfElement(locator, "style").contains("visibility: hidden;"));
-        }
-        
-        if (visible) {
-            visible = (!getAttributeOfElement(locator, "class").contains("ng-hide"));
+        catch (StaleElementReferenceException | NoSuchElementException e) {
+            visible = false;
         }
         
         return visible;
