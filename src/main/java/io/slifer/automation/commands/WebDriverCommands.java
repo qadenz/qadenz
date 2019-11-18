@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Common commands related to the WebDriver layer, agnostic of the implementation.
+ * Common commands related to the WebDriver layer.
  *
  * @author Tim Slifer
  */
@@ -176,6 +176,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error switching focus.", e);
+            throw e;
         }
     }
     
