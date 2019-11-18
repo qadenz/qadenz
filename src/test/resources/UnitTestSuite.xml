@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Framework Unit Tests" parallel="methods" thread-count="5">
+    
+    <parameter name="grid-host" value="10.0.0.10"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="platform" value="WINDOWS"/>
+    <parameter name="app-url" value="http://the-internet.herokuapp.com"/>
+    
+    <test name="Conditions Unit Tests">
+        <classes>
+            <class name="io.slifer.automation.conditions.test.ConditionsTest"/>
+        </classes>
+    </test>
+
+</suite>
