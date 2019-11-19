@@ -27,7 +27,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition attributeOfElement(final Locator locator, final String attributeName,
-            final Expectation expectation) {
+            final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -65,7 +65,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition countOfElement(final Locator locator, final Expectation expectation) {
+    public static Condition countOfElement(final Locator locator, final Expectation<Integer> expectation) {
         
         return new Condition() {
             
@@ -102,7 +102,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition enabledStateOfElement(final Locator locator, final Expectation expectation) {
+    public static Condition enabledStateOfElement(final Locator locator, final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -139,7 +139,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition enabledStateOfElements(final LocatorGroup locatorGroup, final Expectation expectation) {
+    public static Condition enabledStateOfElements(final LocatorGroup locatorGroup,
+            final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -186,7 +187,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfAlert(final Expectation expectation) {
+    public static Condition presenceOfAlert(final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -226,7 +227,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfElement(final Locator locator, final Expectation expectation) {
+    public static Condition presenceOfElement(final Locator locator, final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -264,7 +265,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfElements(final LocatorGroup locatorGroup, final Expectation expectation) {
+    public static Condition presenceOfElements(final LocatorGroup locatorGroup,
+            final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -311,7 +313,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition selectedMenuOption(final Locator locator, final Expectation expectation) {
+    public static Condition selectedMenuOption(final Locator locator, final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -346,7 +348,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition selectedStateOfElement(final Locator locator, final Expectation expectation) {
+    public static Condition selectedStateOfElement(final Locator locator, final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -382,7 +384,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfAlert(final Expectation expectation) {
+    public static Condition textOfAlert(final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -416,7 +418,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElement(final Locator locator, final Expectation expectation) {
+    public static Condition textOfElement(final Locator locator, final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -453,7 +455,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElements(final Locator locator, final Expectation expectation) {
+    public static Condition textOfElements(final Locator locator, final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -504,7 +506,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition visibilityOfElement(final Locator locator, final Expectation expectation) {
+    public static Condition visibilityOfElement(final Locator locator, final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -542,7 +544,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition visibilityOfElements(final LocatorGroup locatorGroup, final Expectation expectation) {
+    public static Condition visibilityOfElements(final LocatorGroup locatorGroup,
+            final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
