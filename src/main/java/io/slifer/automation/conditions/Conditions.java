@@ -5,7 +5,6 @@ import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.LocatorGroup;
-import org.hamcrest.Matcher;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
@@ -28,7 +27,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition attributeOfElement(final Locator locator, final String attributeName,
-            final Matcher<String> expectation) {
+            final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -37,7 +36,8 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Attribute [" + attributeName + "] of element [" + locator.getName() + "] " + expectation + ".";
+                return "Attribute [" + attributeName + "] of element [" + locator.getName() + "] " +
+                        expectation.description() + ".";
             }
             
             @Override
@@ -45,7 +45,7 @@ public class Conditions {
                 ElementInspector elementInspector = new ElementInspector();
                 attributeValue = elementInspector.getAttributeOfElement(locator, attributeName);
                 
-                match = expectation.matches(attributeValue);
+                match = expectation.matcher().matches(attributeValue);
                 
                 return match;
             }
@@ -65,7 +65,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition countOfElement(final Locator locator, final Matcher<Integer> expectation) {
+    public static Condition countOfElement(final Locator locator, final Expectation<Integer> expectation) {
         
         return new Condition() {
             
@@ -74,7 +74,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Count of element [" + locator.getName() + " ] " + expectation + ".";
+                return "Count of element [" + locator.getName() + " ] " + expectation.description() + ".";
             }
             
             @Override
@@ -82,7 +82,7 @@ public class Conditions {
                 ElementInspector elementInspector = new ElementInspector();
                 elementCount = elementInspector.getCountOfElement(locator);
                 
-                match = expectation.matches(elementCount);
+                match = expectation.matcher().matches(elementCount);
                 
                 return match;
             }
@@ -102,7 +102,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition enabledStateOfElement(final Locator locator, final Matcher<Boolean> expectation) {
+    public static Condition enabledStateOfElement(final Locator locator, final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -111,7 +111,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Enabled state of element [" + locator.getName() + "] " + expectation + ".";
+                return "Enabled state of element [" + locator.getName() + "] " + expectation.description() + ".";
             }
             
             @Override
@@ -119,7 +119,7 @@ public class Conditions {
                 ElementInspector elementInspector = new ElementInspector();
                 enabled = elementInspector.getEnabledStateOfElement(locator);
                 
-                match = expectation.matches(enabled);
+                match = expectation.matcher().matches(enabled);
                 
                 return match;
             }
@@ -140,7 +140,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition enabledStateOfElements(final LocatorGroup locatorGroup,
-            final Matcher<Boolean> expectation) {
+            final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -149,7 +149,8 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Enabled state of elements [" + locatorGroup.getName() + "] " + expectation + ".";
+                return "Enabled state of elements [" + locatorGroup.getName() + "] " +
+                        expectation.description() + ".";
             }
             
             @Override
@@ -158,7 +159,7 @@ public class Conditions {
                 
                 for (Locator locator : locatorGroup) {
                     boolean enabled = elementInspector.getEnabledStateOfElement(locator);
-                    Boolean instanceMatch = expectation.matches(enabled);
+                    Boolean instanceMatch = expectation.matcher().matches(enabled);
                     
                     if (!instanceMatch) {
                         failures.append("--> Element [" + locator.getName() + "] was [" + enabled + "].\n");
@@ -186,14 +187,15 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfAlert(final Matcher<Boolean> expectation) {
+    public static Condition presenceOfAlert(final Expectation<Boolean> expectation) {
+        
         return new Condition() {
             
             Boolean match;
             boolean present;
             
             public String description() {
-                return "Presence of Alert " + expectation + ".";
+                return "Presence of Alert " + expectation.description() + ".";
             }
             
             public Boolean result() {
@@ -206,7 +208,7 @@ public class Conditions {
                     present = false;
                 }
                 
-                match = expectation.matches(present);
+                match = expectation.matcher().matches(present);
                 return match;
             }
             
@@ -225,7 +227,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfElement(final Locator locator, final Matcher<Boolean> expectation) {
+    public static Condition presenceOfElement(final Locator locator, final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -234,7 +236,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Presence of element [" + locator.getName() + "] " + expectation + ".";
+                return "Presence of element [" + locator.getName() + "] " + expectation.description() + ".";
             }
             
             @Override
@@ -242,7 +244,7 @@ public class Conditions {
                 ElementFinder elementFinder = new ElementFinder();
                 present = elementFinder.findAll(locator).size() > 0;
                 
-                match = expectation.matches(present);
+                match = expectation.matcher().matches(present);
                 
                 return match;
             }
@@ -263,7 +265,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfElements(final LocatorGroup locatorGroup, final Matcher<Boolean> expectation) {
+    public static Condition presenceOfElements(final LocatorGroup locatorGroup,
+            final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -272,7 +275,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Presence of elements [" + locatorGroup.getName() + "] " + expectation + ".";
+                return "Presence of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
             }
             
             @Override
@@ -281,7 +284,7 @@ public class Conditions {
                 
                 for (Locator locator : locatorGroup) {
                     boolean present = elementFinder.findAll(locator).size() > 0;
-                    Boolean instanceMatch = expectation.matches(present);
+                    Boolean instanceMatch = expectation.matcher().matches(present);
                     
                     if (!instanceMatch) {
                         failures.append("--> Element [" + locator.getName() + "] was [" + present + "].\n");
@@ -310,7 +313,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition selectedMenuOption(final Locator locator, final Matcher<String> expectation) {
+    public static Condition selectedMenuOption(final Locator locator, final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -318,14 +321,14 @@ public class Conditions {
             String selectedOption;
             
             public String description() {
-                return "Selected option of menu element [" + locator.getName() + "] " + expectation + ".";
+                return "Selected option of menu element [" + locator.getName() + "] " + expectation.description() + ".";
             }
             
             public Boolean result() {
                 ElementInspector elementInspector = new ElementInspector();
                 selectedOption = elementInspector.getSelectedMenuOption(locator);
                 
-                match = expectation.matches(selectedOption);
+                match = expectation.matcher().matches(selectedOption);
                 
                 return match;
             }
@@ -345,7 +348,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition selectedStateOfElement(final Locator locator, final Matcher<Boolean> expectation) {
+    public static Condition selectedStateOfElement(final Locator locator, final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -354,7 +357,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Selected state of element [" + locator.getName() + "] " + expectation + ".";
+                return "Selected state of element [" + locator.getName() + "] " + expectation.description() + ".";
             }
             
             @Override
@@ -362,7 +365,7 @@ public class Conditions {
                 ElementInspector elementInspector = new ElementInspector();
                 selected = elementInspector.getSelectedStateOfElement(locator);
                 
-                match = expectation.matches(selected);
+                match = expectation.matcher().matches(selected);
                 
                 return match;
             }
@@ -381,7 +384,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfAlert(final Matcher<String> expectation) {
+    public static Condition textOfAlert(final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -389,14 +392,14 @@ public class Conditions {
             String alertText;
             
             public String description() {
-                return "Text of Alert " + expectation + ".";
+                return "Text of Alert " + expectation.description() + ".";
             }
             
             public Boolean result() {
                 WebDriver webDriver = RunContext.getWebDriver();
                 alertText = webDriver.switchTo().alert().getText();
                 
-                match = expectation.matches(alertText);
+                match = expectation.matcher().matches(alertText);
                 
                 return match;
             }
@@ -415,7 +418,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElement(final Locator locator, final Matcher<String> expectation) {
+    public static Condition textOfElement(final Locator locator, final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -424,7 +427,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Text of element [" + locator.getName() + "] " + expectation + ".";
+                return "Text of element [" + locator.getName() + "] " + expectation.description() + ".";
             }
             
             @Override
@@ -432,7 +435,7 @@ public class Conditions {
                 ElementInspector elementInspector = new ElementInspector();
                 elementText = elementInspector.getTextOfElement(locator);
                 
-                match = expectation.matches(elementText);
+                match = expectation.matcher().matches(elementText);
                 
                 return match;
             }
@@ -452,7 +455,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElements(final Locator locator, final Matcher<String> expectation) {
+    public static Condition textOfElements(final Locator locator, final Expectation<String> expectation) {
         
         return new Condition() {
             
@@ -462,7 +465,8 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Text of each instance of element [" + locator.getName() + "] " + expectation + ".";
+                return "Text of each instance of element [" + locator.getName() + "] " +
+                        expectation.description() + ".";
             }
             
             @Override
@@ -472,7 +476,7 @@ public class Conditions {
                 
                 for (int i = 0; i < elementValues.size(); i++) {
                     String instanceValue = elementValues.get(i);
-                    Boolean instanceMatch = expectation.matches(instanceValue);
+                    Boolean instanceMatch = expectation.matcher().matches(instanceValue);
                     
                     if (!instanceMatch) {
                         failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
@@ -502,7 +506,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition visibilityOfElement(final Locator locator, final Matcher<Boolean> expectation) {
+    public static Condition visibilityOfElement(final Locator locator, final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -511,7 +515,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Visibility of element [" + locator.getName() + "] " + expectation + ".";
+                return "Visibility of element [" + locator.getName() + "] " + expectation.description() + ".";
             }
             
             @Override
@@ -519,7 +523,7 @@ public class Conditions {
                 ElementInspector elementInspector = new ElementInspector();
                 visible = elementInspector.getVisibilityOfElement(locator);
                 
-                match = expectation.matches(visible);
+                match = expectation.matcher().matches(visible);
                 
                 return match;
             }
@@ -540,7 +544,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition visibilityOfElements(final LocatorGroup locatorGroup, final Matcher<Boolean> expectation) {
+    public static Condition visibilityOfElements(final LocatorGroup locatorGroup,
+            final Expectation<Boolean> expectation) {
         
         return new Condition() {
             
@@ -549,7 +554,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation + ".";
+                return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
             }
             
             @Override
@@ -558,7 +563,7 @@ public class Conditions {
                 
                 for (Locator locator : locatorGroup) {
                     boolean visible = elementInspector.getVisibilityOfElement(locator);
-                    Boolean instanceMatch = expectation.matches(visible);
+                    Boolean instanceMatch = expectation.matcher().matches(visible);
                     
                     if (!instanceMatch) {
                         failures.append("--> Element [" + locator.getName() + "] was [" + visible + "].\n");
