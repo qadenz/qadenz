@@ -7,19 +7,20 @@ import org.hamcrest.Matcher;
  *
  * @author Tim Slifer
  */
-public interface Expectation {
+public interface Expectation<T> {
     
     /**
      * Returns a Matcher that defines the expectation.
      *
      * @return
      */
-    Matcher matcher();
+    Matcher<T> matcher();
     
     /**
      * Returns a statement describing the expectation.
      *
      * @return
      */
+    
     String description();
 }
