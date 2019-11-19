@@ -22,9 +22,9 @@ public class Layout extends LayoutBase<ILoggingEvent> {
         buffer.append("|");
         buffer.append(RunContext.getTestCaseName());
         buffer.append("|");
-        buffer.append(event.getLoggerName());
-        buffer.append("|");
         buffer.append(event.getLevel());
+        buffer.append("|");
+        buffer.append(event.getLoggerName().substring(event.getLoggerName().lastIndexOf(".") + 1));
         buffer.append("|");
         buffer.append(event.getFormattedMessage());
         buffer.append(CoreConstants.LINE_SEPARATOR);
