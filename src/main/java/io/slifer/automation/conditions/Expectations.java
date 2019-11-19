@@ -4,6 +4,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.Matchers.not;
 
 public class Expectations {
     
@@ -12,12 +13,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isTrue() {
+    public static Expectation<Boolean> isTrue() {
         
-        return new Expectation() {
+        return new Expectation<Boolean>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<Boolean> matcher() {
                 return Matchers.is(true);
             }
             
@@ -33,12 +34,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isFalse() {
+    public static Expectation<Boolean> isFalse() {
         
-        return new Expectation() {
+        return new Expectation<Boolean>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<Boolean> matcher() {
                 return Matchers.is(false);
             }
             
@@ -54,12 +55,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isGreaterThan(final int value) {
+    public static Expectation<Integer> isGreaterThan(final int value) {
         
-        return new Expectation() {
+        return new Expectation<Integer>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<Integer> matcher() {
                 return Matchers.greaterThan(value);
             }
             
@@ -75,12 +76,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isGreaterThanOrEqualTo(final int value) {
+    public static Expectation<Integer> isGreaterThanOrEqualTo(final int value) {
         
-        return new Expectation() {
+        return new Expectation<Integer>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<Integer> matcher() {
                 return Matchers.greaterThanOrEqualTo(value);
             }
             
@@ -96,12 +97,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isEqualTo(final int value) {
+    public static Expectation<Integer> isEqualTo(final int value) {
         
-        return new Expectation() {
+        return new Expectation<Integer>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<Integer> matcher() {
                 return Matchers.equalTo(value);
             }
             
@@ -117,12 +118,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isNotEqualTo(final int value) {
+    public static Expectation<Integer> isNotEqualTo(final int value) {
         
-        return new Expectation() {
+        return new Expectation<Integer>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<Integer> matcher() {
                 return not(Matchers.equalTo(value));
             }
             
@@ -138,12 +139,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isLessThanOrEqualTo(final int value) {
+    public static Expectation<Integer> isLessThanOrEqualTo(final int value) {
         
-        return new Expectation() {
+        return new Expectation<Integer>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<Integer> matcher() {
                 return Matchers.lessThanOrEqualTo(value);
             }
             
@@ -159,12 +160,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isLessThan(final int value) {
+    public static Expectation<Integer> isLessThan(final int value) {
         
-        return new Expectation() {
+        return new Expectation<Integer>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<Integer> matcher() {
                 return Matchers.lessThan(value);
             }
             
@@ -180,12 +181,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isEqualTo(final String text) {
+    public static Expectation<String> isEqualTo(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return Matchers.is(text);
             }
             
@@ -201,12 +202,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation equalsIgnoreCase(final String text) {
+    public static Expectation<String> equalsIgnoreCase(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return Matchers.equalToIgnoringCase(text);
             }
             
@@ -222,12 +223,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isNotEqualTo(final String text) {
+    public static Expectation<String> isNotEqualTo(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return Matchers.not(text);
             }
             
@@ -243,12 +244,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation contains(final String text) {
+    public static Expectation<String> contains(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return Matchers.containsString(text);
             }
             
@@ -264,12 +265,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation containsIgnoreCase(final String text) {
+    public static Expectation<String> containsIgnoreCase(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return Matchers.containsStringIgnoringCase(text);
             }
             
@@ -285,12 +286,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation doesNotContain(final String text) {
+    public static Expectation<String> doesNotContain(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return not(Matchers.containsString(text));
             }
             
@@ -306,12 +307,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation startsWith(final String text) {
+    public static Expectation<String> startsWith(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return Matchers.startsWith(text);
             }
             
@@ -327,12 +328,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation doesNotStartWith(final String text) {
+    public static Expectation<String> doesNotStartWith(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return not(Matchers.startsWith(text));
             }
             
@@ -348,12 +349,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation endsWith(final String text) {
+    public static Expectation<String> endsWith(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return Matchers.endsWith(text);
             }
             
@@ -369,12 +370,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation doesNotEndWith(final String text) {
+    public static Expectation<String> doesNotEndWith(final String text) {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return not(Matchers.endsWith(text));
             }
             
@@ -390,12 +391,12 @@ public class Expectations {
      *
      * @return The Expectation
      */
-    public static Expectation isEmptyOrNull() {
+    public static Expectation<String> isEmptyOrNull() {
         
-        return new Expectation() {
+        return new Expectation<String>() {
             
             @Override
-            public Matcher matcher() {
+            public Matcher<String> matcher() {
                 return Matchers.is(emptyOrNullString());
             }
             
@@ -406,7 +407,7 @@ public class Expectations {
         };
     }
     
-    private static Matcher not(Matcher matcher) {
-        return Matchers.not(matcher);
-    }
+    // private static Matcher<T> not(Matcher<T> matcher) {
+    //     return Matchers.not(matcher);
+    // }
 }
