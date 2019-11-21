@@ -3,6 +3,7 @@ package io.slifer.automation.commands;
 import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.ui.ElementFinder;
+import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -199,6 +200,25 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error while waiting.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element and any descendants on the DOM.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The text value.
+     */
+    public String getTextOfElement(Locator locator) {
+        LOG.info("Retrieving text of element [{}]", locator.getName());
+        try {
+            return new ElementInspector().getTextOfElement(locator);
+        }
+        catch (Exception e) {
+            LOG.error("Error retrieving text.", e);
             
             throw e;
         }
