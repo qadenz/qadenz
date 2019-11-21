@@ -15,7 +15,7 @@ public class Expectations {
      */
     public static Expectation<Boolean> isTrue() {
         
-        return new Expectation<Boolean>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<Boolean> matcher() {
@@ -24,7 +24,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is TRUE.";
+                return "is TRUE";
             }
         };
     }
@@ -36,7 +36,7 @@ public class Expectations {
      */
     public static Expectation<Boolean> isFalse() {
         
-        return new Expectation<Boolean>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<Boolean> matcher() {
@@ -45,7 +45,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is FALSE.";
+                return "is FALSE";
             }
         };
     }
@@ -57,7 +57,7 @@ public class Expectations {
      */
     public static Expectation<Integer> isGreaterThan(final int value) {
         
-        return new Expectation<Integer>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<Integer> matcher() {
@@ -66,7 +66,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is greater than [" + value + "].";
+                return "is greater than [" + value + "]";
             }
         };
     }
@@ -78,7 +78,7 @@ public class Expectations {
      */
     public static Expectation<Integer> isGreaterThanOrEqualTo(final int value) {
         
-        return new Expectation<Integer>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<Integer> matcher() {
@@ -87,7 +87,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is greater than or equal to [" + value + "].";
+                return "is greater than or equal to [" + value + "]";
             }
         };
     }
@@ -99,7 +99,7 @@ public class Expectations {
      */
     public static Expectation<Integer> isEqualTo(final int value) {
         
-        return new Expectation<Integer>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<Integer> matcher() {
@@ -108,7 +108,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is equal to [" + value + "].";
+                return "is equal to [" + value + "]";
             }
         };
     }
@@ -120,7 +120,7 @@ public class Expectations {
      */
     public static Expectation<Integer> isNotEqualTo(final int value) {
         
-        return new Expectation<Integer>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<Integer> matcher() {
@@ -129,7 +129,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is not equal to [" + value + "].";
+                return "is not equal to [" + value + "]";
             }
         };
     }
@@ -141,7 +141,7 @@ public class Expectations {
      */
     public static Expectation<Integer> isLessThanOrEqualTo(final int value) {
         
-        return new Expectation<Integer>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<Integer> matcher() {
@@ -150,7 +150,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is less than or equal to [" + value + "].";
+                return "is less than or equal to [" + value + "]";
             }
         };
     }
@@ -162,7 +162,7 @@ public class Expectations {
      */
     public static Expectation<Integer> isLessThan(final int value) {
         
-        return new Expectation<Integer>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<Integer> matcher() {
@@ -171,7 +171,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is less than [" + value + "].";
+                return "is less than [" + value + "]";
             }
         };
     }
@@ -183,7 +183,7 @@ public class Expectations {
      */
     public static Expectation<String> isEqualTo(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -192,7 +192,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is equal to [" + text + "].";
+                return "is equal to [" + text + "]";
             }
         };
     }
@@ -204,7 +204,7 @@ public class Expectations {
      */
     public static Expectation<String> equalsIgnoreCase(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -213,7 +213,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is, ignoring case, equal to [" + text + "].";
+                return "is, ignoring case, equal to [" + text + "]";
             }
         };
     }
@@ -225,7 +225,7 @@ public class Expectations {
      */
     public static Expectation<String> isNotEqualTo(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -234,7 +234,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is not equal to [" + text + "].";
+                return "is not equal to [" + text + "]";
             }
         };
     }
@@ -246,7 +246,7 @@ public class Expectations {
      */
     public static Expectation<String> contains(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -255,7 +255,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "contains [" + text + "].";
+                return "contains [" + text + "]";
             }
         };
     }
@@ -267,7 +267,7 @@ public class Expectations {
      */
     public static Expectation<String> containsIgnoreCase(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -276,7 +276,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "ignoring case, contains [" + text + "].";
+                return "ignoring case, contains [" + text + "]";
             }
         };
     }
@@ -288,7 +288,7 @@ public class Expectations {
      */
     public static Expectation<String> doesNotContain(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -297,7 +297,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "does not contain [" + text + "].";
+                return "does not contain [" + text + "]";
             }
         };
     }
@@ -309,7 +309,7 @@ public class Expectations {
      */
     public static Expectation<String> startsWith(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -318,7 +318,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "starts with [" + text + "].";
+                return "starts with [" + text + "]";
             }
         };
     }
@@ -330,7 +330,7 @@ public class Expectations {
      */
     public static Expectation<String> doesNotStartWith(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -339,7 +339,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "does not start with [" + text + "].";
+                return "does not start with [" + text + "]";
             }
         };
     }
@@ -351,7 +351,7 @@ public class Expectations {
      */
     public static Expectation<String> endsWith(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -360,7 +360,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "ends with [" + text + "].";
+                return "ends with [" + text + "]";
             }
         };
     }
@@ -372,7 +372,7 @@ public class Expectations {
      */
     public static Expectation<String> doesNotEndWith(final String text) {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -381,7 +381,7 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "does not end with [" + text + "].";
+                return "does not end with [" + text + "]";
             }
         };
     }
@@ -393,7 +393,7 @@ public class Expectations {
      */
     public static Expectation<String> isEmptyOrNull() {
         
-        return new Expectation<String>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<String> matcher() {
@@ -402,12 +402,8 @@ public class Expectations {
             
             @Override
             public String description() {
-                return "is null or empty.";
+                return "is null or empty";
             }
         };
     }
-    
-    // private static Matcher<T> not(Matcher<T> matcher) {
-    //     return Matchers.not(matcher);
-    // }
 }
