@@ -28,15 +28,15 @@ public abstract class Commands {
             try {
                 boolean result = condition.result();
                 Assert.assertTrue(result);
-                LOG.warn("Assertion Passed: {}", condition.output());
+                LOG.warn("Result: PASS");
             }
             catch (AssertionError error) {
                 hasFailures = true;
-                LOG.warn("Assertion Failed: {}", condition.output());
+                LOG.warn("Result: FAIL: {}", condition.output());
             }
             catch (Exception exception) {
                 hasFailures = true;
-                LOG.error("Error making assertion.", exception);
+                LOG.error("Result: ERROR", exception);
             }
         }
         
@@ -58,7 +58,7 @@ public abstract class Commands {
         catch (Exception e) {
             LOG.error("Error during pause.");
             
-            // throw new RuntimeException("Thread.sleep failed.");
+            throw new RuntimeException("Thread.sleep failed.");
             // Not ideal, but prevents us from having to add a throws declaration to our upstream methods.
         }
     }
