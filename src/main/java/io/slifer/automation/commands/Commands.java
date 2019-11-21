@@ -44,4 +44,22 @@ public abstract class Commands {
             throw new AssertionError();
         }
     }
+    
+    /**
+     * Pauses execution for the given amount of time, expressed in seconds.
+     *
+     * @param seconds The amount of time to wait.
+     */
+    public void pause(int seconds) {
+        try {
+            LOG.info("Pausing for [{}] seconds.", seconds);
+            Thread.sleep(seconds * 1000);
+        }
+        catch (Exception e) {
+            LOG.error("Error during pause.");
+            
+            // throw new RuntimeException("Thread.sleep failed.");
+            // Not ideal, but prevents us from having to add a throws declaration to our upstream methods.
+        }
+    }
 }

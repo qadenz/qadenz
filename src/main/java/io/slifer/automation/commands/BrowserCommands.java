@@ -49,6 +49,22 @@ public class BrowserCommands extends WebDriverCommands {
     }
     
     /**
+     * Enters text into a field on a JavaScript Alert.
+     *
+     * @param input The text input.
+     */
+    public void enterTextOnAlert(String input) {
+        LOG.info("Entering text [{}] into Alert.", input);
+        try {
+            RunContext.getWebDriver().switchTo().alert().sendKeys(input);
+        }
+        catch (Exception e) {
+            LOG.error("Error entering text.", e);
+            throw e;
+        }
+    }
+    
+    /**
      * Closes the current browser window.
      */
     public void closeBrowser() {
