@@ -58,7 +58,7 @@ public abstract class Commands {
         catch (Exception e) {
             LOG.error("Error during pause.");
             
-            // throw new RuntimeException("Thread.sleep failed.");
+            throw new RuntimeException("Thread.sleep failed.");
             // Not ideal, but prevents us from having to add a throws declaration to our upstream methods.
         }
     }
