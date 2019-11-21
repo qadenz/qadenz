@@ -28,15 +28,15 @@ public abstract class Commands {
             try {
                 boolean result = condition.result();
                 Assert.assertTrue(result);
-                LOG.warn("Assertion Passed: {}", condition.output());
+                LOG.warn("Result: PASS");
             }
             catch (AssertionError error) {
                 hasFailures = true;
-                LOG.warn("Assertion Failed: {}", condition.output());
+                LOG.warn("Result: FAIL: {}", condition.output());
             }
             catch (Exception exception) {
                 hasFailures = true;
-                LOG.error("Error making assertion.", exception);
+                LOG.error("Result: ERROR", exception);
             }
         }
         
