@@ -90,7 +90,7 @@ public abstract class WebDriverCommands extends Commands {
      * @param input The text input.
      */
     public void enterText(Locator locator, String input) {
-        LOG.info("Entering text into element [{}].", locator.getName());
+        LOG.info("Entering text [{}] into element [{}].", input, locator.getName());
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
             webElement.sendKeys(input);
@@ -128,7 +128,7 @@ public abstract class WebDriverCommands extends Commands {
      * @param option The option to be selected.
      */
     public void select(Locator locator, String option) {
-        LOG.info("Selecting option from element [{}].", locator.getName());
+        LOG.info("Selecting option [{}] from element [{}].", option, locator.getName());
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
             Select select = new Select(webElement);
@@ -192,7 +192,7 @@ public abstract class WebDriverCommands extends Commands {
      * @param condition The Condition to be satisfied during the wait.
      */
     public void pause(Condition condition) {
-        LOG.info("Wait for condition -> {}", condition.description());
+        LOG.info("Wait for condition :: {}", condition.description());
         WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
         
         try {
