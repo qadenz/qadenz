@@ -128,7 +128,7 @@ public abstract class WebDriverCommands extends Commands {
      * @param option The option to be selected.
      */
     public void select(Locator locator, String option) {
-        LOG.info("Selecting option from element [{}].", locator.getName());
+        LOG.info("Selecting option [{}] from element [{}].", option, locator.getName());
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
             Select select = new Select(webElement);
