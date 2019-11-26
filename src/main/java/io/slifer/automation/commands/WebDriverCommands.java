@@ -90,7 +90,7 @@ public abstract class WebDriverCommands extends Commands {
      * @param input The text input.
      */
     public void enterText(Locator locator, String input) {
-        LOG.info("Entering text into element [{}].", locator.getName());
+        LOG.info("Entering text [{}] into element [{}].", input, locator.getName());
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
             webElement.sendKeys(input);
