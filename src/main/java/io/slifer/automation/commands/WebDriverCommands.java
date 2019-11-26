@@ -192,7 +192,7 @@ public abstract class WebDriverCommands extends Commands {
      * @param condition The Condition to be satisfied during the wait.
      */
     public void pause(Condition condition) {
-        LOG.info("Wait for condition -> {}", condition.description());
+        LOG.info("Wait for condition :: {}", condition.description());
         WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
         
         try {
