@@ -18,6 +18,7 @@
         
         <hamcrest.version>2.1</hamcrest.version>
         <logback.version>1.2.3</logback.version>
+        <logback-testng.version>1.2.0</logback-testng.version>
         <selenium.version>3.141.59</selenium.version>
         <sizzle.version>3.141.59-R1</sizzle.version>
         <testng.version>7.0.0</testng.version>
@@ -28,6 +29,18 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.github.sbabcoc</groupId>
+            <artifactId>logback-testng</artifactId>
+            <version>${logback-testng.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         <dependency>
@@ -47,7 +60,7 @@
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-    
+        
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
