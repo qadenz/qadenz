@@ -5,6 +5,7 @@ import io.slifer.automation.config.RunContext;
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -53,9 +54,17 @@ public abstract class WebDriverCommands extends Commands {
      */
     public void click(Locator locator) {
         LOG.info("Clicking element [{}].", locator.getName());
+        WebElement webElement;
         try {
-            WebElement webElement = elementFinder.findWhenClickable(locator);
+            webElement = elementFinder.findWhenClickable(locator);
             webElement.click();
+        }
+        catch (ElementClickInterceptedException e) {
+            LOG.debug("Click intercepted, trying with Actions", e);
+            webElement = elementFinder.findWhenClickable(locator);
+            
+            Actions actions = new Actions(RunContext.getWebDriver());
+            actions.moveToElement(webElement).click().perform();
         }
         catch (Exception e) {
             LOG.error("Error clicking element.", e);
