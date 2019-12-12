@@ -4,10 +4,11 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Examines elements and retrieves values and information.
@@ -15,6 +16,8 @@ import java.util.NoSuchElementException;
  * @author Tim Slifer
  */
 public class ElementInspector {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(ElementInspector.class);
     
     private ElementFinder elementFinder;
     
@@ -143,27 +146,33 @@ public class ElementInspector {
     public boolean getVisibilityOfElement(Locator locator) {
         List<WebElement> webElements = elementFinder.findAll(locator);
         boolean visible = (webElements.size() > 0);
+        LOG.debug("Found [{}] instances. Visibility is [{}].", webElements.size(), visible);
         
         try {
             if (visible) {
                 Dimension dimension = webElements.get(0).getSize();
                 visible = (dimension.getHeight() > 0 && dimension.getWidth() > 0);
+                LOG.debug("Checked dimensions - Visibility is [{}].", visible);
             }
             
             if (visible) {
                 visible = (!webElements.get(0).getAttribute("style").contains("display: none;"));
+                LOG.debug("Checked style for 'display: none;' - Visibility is [{}].", visible);
             }
             
             if (visible) {
                 visible = (!webElements.get(0).getAttribute("style").contains("visibility: hidden;"));
+                LOG.debug("Checked style for 'visibility: hidden;' - Visibility is [{}].", visible);
             }
             
             if (visible) {
                 visible = (!webElements.get(0).getAttribute("class").contains("ng-hide"));
+                LOG.debug("Checked class 'ng-hide' - Visibility is [{}].", visible);
             }
         }
-        catch (StaleElementReferenceException | NoSuchElementException e) {
+        catch (StaleElementReferenceException e) {
             visible = false;
+            LOG.debug("Element has gone stale - Visibility is [{}].", visible);
         }
         
         return visible;
