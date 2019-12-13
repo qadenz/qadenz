@@ -2,6 +2,7 @@ package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.RunContext;
+import io.slifer.automation.config.WebDriverHolder;
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
@@ -73,7 +74,7 @@ public abstract class WebDriverCommands extends Commands {
         LOG.info("Double-clicking element [{}].", locator.getName());
         try {
             WebElement webElement = elementFinder.findWhenClickable(locator);
-            Actions actions = new Actions(RunContext.getWebDriver());
+            Actions actions = new Actions(WebDriverHolder.getWebDriver());
             actions.doubleClick(webElement).perform();
         }
         catch (Exception e) {
@@ -111,7 +112,7 @@ public abstract class WebDriverCommands extends Commands {
         LOG.info("Hovering on element [{}].", locator.getName());
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
-            Actions actions = new Actions(RunContext.getWebDriver());
+            Actions actions = new Actions(WebDriverHolder.getWebDriver());
             actions.moveToElement(webElement);
         }
         catch (Exception e) {
@@ -158,7 +159,7 @@ public abstract class WebDriverCommands extends Commands {
     public void focusOnDefaultContent() {
         LOG.info("Switch focus to default frame.");
         try {
-            RunContext.getWebDriver().switchTo().defaultContent();
+            WebDriverHolder.getWebDriver().switchTo().defaultContent();
         }
         catch (Exception e) {
             LOG.error("Error switching focus.", e);
@@ -175,9 +176,9 @@ public abstract class WebDriverCommands extends Commands {
     public void focusOnFrame(Locator locator) {
         LOG.info("Switch focus to frame [{}]", locator.getName());
         try {
-            RunContext.getWebDriver().switchTo().defaultContent();
+            WebDriverHolder.getWebDriver().switchTo().defaultContent();
             WebElement webElement = elementFinder.findWhenVisible(locator);
-            RunContext.getWebDriver().switchTo().frame(webElement);
+            WebDriverHolder.getWebDriver().switchTo().frame(webElement);
         }
         catch (Exception e) {
             LOG.error("Error switching focus.", e);
@@ -193,7 +194,7 @@ public abstract class WebDriverCommands extends Commands {
      */
     public void pause(Condition condition) {
         LOG.info("Wait for condition :: {}", condition.description());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverHolder.getWebDriver(), RunContext.timeout);
         
         try {
             webDriverWait.until((ExpectedCondition<Boolean>) webDriver -> condition.result());

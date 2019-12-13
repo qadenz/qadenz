@@ -4,7 +4,6 @@ import io.slifer.automation.commands.BrowserCommands;
 import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.conditions.Conditions;
 import io.slifer.automation.conditions.Expectations;
-import io.slifer.automation.config.AutomatedTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,7 +12,7 @@ import org.testng.annotations.Test;
  *
  * @author Tim Slifer
  */
-public class ConditionsTest extends AutomatedTest {
+public class ConditionsTest {
     
     @Test
     public void test_AttributeOfElement_InvalidChars() {

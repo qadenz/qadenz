@@ -1,6 +1,6 @@
 package io.slifer.automation.ui;
 
-import io.slifer.automation.config.RunContext;
+import io.slifer.automation.config.WebDriverHolder;
 import io.slifer.selenium.support.ui.WebElementExpectedConditions;
 import io.slifer.selenium.support.ui.WebElementWait;
 import io.slifer.sizzlecss.BySizzle;
@@ -36,7 +36,7 @@ public class ElementFinder {
         try {
             if (locator.getParent() != null) {
                 LOG.debug("Parent element detected, initializing [{}].", locator.getParent().getName());
-                parent = RunContext.getWebDriver().findElement(bySizzle(locator.getParent()));
+                parent = WebDriverHolder.getWebDriver().findElement(bySizzle(locator.getParent()));
             }
         }
         catch (Exception e) {
@@ -47,7 +47,7 @@ public class ElementFinder {
         try {
             if (parent == null) {
                 LOG.debug("Initializing element [{}].", locator.getName());
-                return RunContext.getWebDriver().findElement(bySizzle(locator));
+                return WebDriverHolder.getWebDriver().findElement(bySizzle(locator));
             }
             else {
                 LOG.debug("Initializing nested element [{}].", locator.getName());
@@ -74,7 +74,7 @@ public class ElementFinder {
         try {
             if (locator.getParent() != null) {
                 LOG.debug("Parent element detected, initializing [{}].", locator.getParent().getName());
-                parent = RunContext.getWebDriver().findElement(bySizzle(locator.getParent()));
+                parent = WebDriverHolder.getWebDriver().findElement(bySizzle(locator.getParent()));
             }
         }
         catch (Exception e) {
@@ -87,7 +87,7 @@ public class ElementFinder {
             if (parent == null) {
                 LOG.debug("Initializing elements [{}].", locator.getName());
                 
-                return RunContext.getWebDriver().findElements(bySizzle(locator));
+                return WebDriverHolder.getWebDriver().findElements(bySizzle(locator));
             }
             else {
                 LOG.debug("Initializing nested elements [{}].", locator.getName());
@@ -111,7 +111,7 @@ public class ElementFinder {
      */
     public WebElement findWhenVisible(Locator locator) {
         LOG.debug("Finding element [{}] when visible.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), 60);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverHolder.getWebDriver(), 60);
         WebElement parent = null;
         
         try {
@@ -156,7 +156,7 @@ public class ElementFinder {
      */
     public List<WebElement> findAllWhenVisible(Locator locator) {
         LOG.debug("Finding elements [{}] when visible.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), 60);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverHolder.getWebDriver(), 60);
         WebElement parent = null;
         
         try {
@@ -202,7 +202,7 @@ public class ElementFinder {
      */
     public WebElement findWhenClickable(Locator locator) {
         LOG.debug("Finding element [{}] when clickable.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), 60);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverHolder.getWebDriver(), 60);
         WebElement parent = null;
         
         try {

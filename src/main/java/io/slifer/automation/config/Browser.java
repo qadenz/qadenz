@@ -19,10 +19,6 @@ public enum Browser {
         this.browser = browser;
     }
     
-    public String toString() {
-        return browser;
-    }
-    
     public static Browser fromString(String name) {
         for (Browser browser : values()) {
             if (browser.toString().equalsIgnoreCase(name)) {
@@ -31,5 +27,9 @@ public enum Browser {
         }
         
         throw new WebDriverException("Unrecognized browser: " + name);
+    }
+    
+    public String toString() {
+        return browser;
     }
 }

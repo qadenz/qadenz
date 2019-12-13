@@ -1,6 +1,6 @@
 package io.slifer.automation.conditions;
 
-import io.slifer.automation.config.RunContext;
+import io.slifer.automation.config.WebDriverHolder;
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
@@ -200,7 +200,7 @@ public class Conditions {
             
             public Boolean result() {
                 try {
-                    WebDriver webDriver = RunContext.getWebDriver();
+                    WebDriver webDriver = WebDriverHolder.getWebDriver();
                     webDriver.switchTo().alert();
                     present = true;
                 }
@@ -396,7 +396,7 @@ public class Conditions {
             }
             
             public Boolean result() {
-                WebDriver webDriver = RunContext.getWebDriver();
+                WebDriver webDriver = WebDriverHolder.getWebDriver();
                 alertText = webDriver.switchTo().alert().getText();
                 
                 match = expectation.matcher().matches(alertText);
