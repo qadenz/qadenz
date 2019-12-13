@@ -1,1 +1,2 @@
 io.slifer.automation.config.AutomatedTestListener
+io.slifer.automation.config.AutomatedTestInvokedMethodListener
