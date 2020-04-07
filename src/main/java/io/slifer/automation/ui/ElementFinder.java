@@ -237,6 +237,51 @@ public class ElementFinder {
         }
     }
     
+    /**
+     * Initializes the first matching instance of the given locator, once present on the DOM.
+     *
+     * @param locator - The mapped UI element.
+     *
+     * @return A WebElement.
+     */
+    public WebElement findWhenPresent(Locator locator) {
+        LOG.debug("Finding element [{}] when present.", locator.getName());
+        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), 60);
+        WebElement parent = null;
+        
+        try {
+            if (locator.getParent() != null) {
+                LOG.debug("Parent element detected, initializing [{}] when present.", locator.getParent().getName());
+                parent =
+                        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(bySizzle(locator.getParent())));
+            }
+        }
+        catch (Exception e) {
+            LOG.error("Could not initialize parent element [{}].", locator.getParent().getName());
+            
+            throw e;
+        }
+        
+        try {
+            if (parent == null) {
+                LOG.debug("Initializing element [{}] when present.", locator.getName());
+                
+                return webDriverWait.until(ExpectedConditions.presenceOfElementLocated(bySizzle(locator)));
+            }
+            else {
+                LOG.debug("Initializing nested element [{}] when clickable.", locator.getName());
+                WebElementWait webElementWait = new WebElementWait(parent, 60);
+                
+                return webElementWait.until(WebElementExpectedConditions.presenceOfElementLocated(bySizzle(locator)));
+            }
+        }
+        catch (Exception e) {
+            LOG.error("Could not initialize element [{}].", locator.getName());
+            
+            throw e;
+        }
+    }
+    
     private By bySizzle(Locator locator) {
         return BySizzle.css(locator.getSelector());
     }
