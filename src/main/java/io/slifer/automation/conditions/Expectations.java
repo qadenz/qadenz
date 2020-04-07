@@ -3,6 +3,10 @@ package io.slifer.automation.conditions;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
@@ -382,6 +386,32 @@ public class Expectations {
             @Override
             public String description() {
                 return "does not end with [" + text + "]";
+            }
+        };
+    }
+    
+    /**
+     * An Expectation for a String value to be equal to one of several possible options.
+     *
+     * @return The Expectation
+     */
+    public static Expectation<String> isEqualToOneOf(final String... options) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<String> matcher() {
+                List<Matcher<String>> matchers = new ArrayList<>();
+                for (String option : options) {
+                    matchers.add(Matchers.is(option));
+                }
+                
+                return Matchers.anyOf(matchers.toArray(new Matcher[matchers.size()]));
+            }
+            
+            @Override
+            public String description() {
+                return "is equal to one of [" + Arrays.toString(options) + "]";
             }
         };
     }
