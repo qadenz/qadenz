@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 /**
  * Common commands related to the WebDriver layer.
  *
@@ -222,7 +224,7 @@ public abstract class WebDriverCommands extends Commands {
      * @return The text value.
      */
     public String getTextOfElement(Locator locator) {
-        LOG.info("Retrieving text of element [{}]", locator.getName());
+        LOG.info("Retrieving text of element [{}].", locator.getName());
         try {
             return new ElementInspector().getTextOfElement(locator);
         }
@@ -231,5 +233,48 @@ public abstract class WebDriverCommands extends Commands {
             
             throw e;
         }
+    }
+    
+    /**
+     * Retrieves the visible inner text of each instance of an element, and any descendants, on the DOM.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The text value.
+     */
+    public List<String> getTextOfElements(Locator locator) {
+        LOG.info("Retrieving text of each instance of element [{}].", locator.getName());
+        try {
+            return new ElementInspector().getTextOfElements(locator);
+        }
+        catch (Exception e) {
+            LOG.error("Error retrieving text.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
+     * Retrieves the instance of an element that contains the expected value.
+     *
+     * @param locator The mapped UI element.
+     * @param expectedText The value to be identified.
+     *
+     * @return The element instance.
+     */
+    public int getInstanceOfElementText(Locator locator, String expectedText) {
+        LOG.info("Finding instance of element [{}] with value [{}].", locator.getName(), expectedText);
+        
+        List<String> elementValues = new ElementInspector().getTextOfElements(locator);
+        for (int i = 0; i < elementValues.size(); i++) {
+            if (elementValues.get(i).equals(expectedText)) {
+                LOG.debug("Found value at index [{}].", i);
+                
+                return i;
+            }
+        }
+        
+        LOG.error("Could not find instance with expected value.");
+        throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
     }
 }
