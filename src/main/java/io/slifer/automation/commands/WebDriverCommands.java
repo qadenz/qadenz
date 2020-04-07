@@ -8,12 +8,17 @@ import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -149,6 +154,32 @@ public abstract class WebDriverCommands extends Commands {
             LOG.error("Error selecting option.", e);
             
             throw e;
+        }
+    }
+    
+    /**
+     * Uploads a file.
+     *
+     * @param fileInput The mapped DOM element upload target.
+     * @param fileName The path to and name of the file to be uploaded.
+     */
+    public void uploadFile(Locator fileInput, String fileName) {
+        LOG.info("Uploading file [{}].", fileName);
+        try {
+            RemoteWebDriver remoteWebDriver = (RemoteWebDriver) RunContext.getWebDriver();
+            remoteWebDriver.setFileDetector(new LocalFileDetector());
+            
+            URL url = WebDriverCommands.class.getClassLoader().getResource(fileName);
+            File file = Paths.get(url.toURI()).toFile();
+            String filePath = file.getAbsolutePath();
+            
+            WebElement webElement = elementFinder.findWhenPresent(fileInput);
+            webElement.sendKeys(filePath);
+        }
+        catch (Exception e) {
+            LOG.error("Error uploading file.", e);
+            
+            throw new RuntimeException("File could not be uploaded.");
         }
     }
     
