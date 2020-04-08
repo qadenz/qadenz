@@ -67,7 +67,7 @@ public abstract class WebDriverCommands extends Commands {
             webElement.click();
         }
         catch (ElementClickInterceptedException e) {
-            LOG.debug("Click intercepted, trying with Actions", e);
+            LOG.debug("Click intercepted, trying with Actions.");
             webElement = elementFinder.findWhenClickable(locator);
             
             Actions actions = new Actions(RunContext.getWebDriver());
@@ -306,6 +306,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         
         LOG.error("Could not find instance with expected value.");
+        
         throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
     }
 }
