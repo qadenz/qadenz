@@ -74,7 +74,7 @@ public class Conditions {
             
             @Override
             public String description() {
-                return "Count of element [" + locator.getName() + " ] " + expectation.description() + ".";
+                return "Count of element [" + locator.getName() + "] " + expectation.description() + ".";
             }
             
             @Override
@@ -582,5 +582,16 @@ public class Conditions {
                 return "Discrepancies: \n" + failures;
             }
         };
+    }
+    
+    /**
+     * Cleanly converts a List of Conditions into an Array, for passing to a verification.
+     *
+     * @param conditions The List of Conditions.
+     *
+     * @return The converted Array.
+     */
+    public Condition[] toArray(List<Condition> conditions) {
+        return new Condition[conditions.size()];
     }
 }

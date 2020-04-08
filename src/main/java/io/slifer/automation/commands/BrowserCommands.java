@@ -30,6 +30,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error accepting alert.", e);
+            
             throw e;
         }
     }
@@ -44,6 +45,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error dismissing alert.", e);
+            
             throw e;
         }
     }
@@ -60,6 +62,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error entering text.", e);
+            
             throw e;
         }
     }
@@ -74,6 +77,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error closing browser.", e);
+            
             throw e;
         }
     }
@@ -88,6 +92,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error navigating back.", e);
+            
             throw e;
         }
     }
@@ -102,6 +107,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error navigating back.", e);
+            
             throw e;
         }
     }
@@ -116,6 +122,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error refreshing page.", e);
+            
             throw e;
         }
     }
@@ -130,6 +137,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error deleting cookies.", e);
+            
             throw e;
         }
     }
@@ -146,6 +154,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error opening URL.", e);
+            
             throw e;
         }
     }
@@ -160,6 +169,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error switching focus.", e);
+            
             throw e;
         }
     }
@@ -174,6 +184,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception e) {
             LOG.error("Error switching focus.");
+            
             throw e;
         }
     }
