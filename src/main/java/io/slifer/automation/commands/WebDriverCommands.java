@@ -309,4 +309,31 @@ public abstract class WebDriverCommands extends Commands {
         
         throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
     }
+    
+    /**
+     * Retrieves the instance of an element with an attribute that contains the expected value.
+     *
+     * @param locator The mapped UI element.
+     * @param attribute The attribute to be examined.
+     * @param expectedValue The value to be identified.
+     *
+     * @return The element instance.
+     */
+    public int getInstanceOfElementAttribute(Locator locator, String attribute, String expectedValue) {
+        LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].", locator.getName(),
+                attribute, expectedValue);
+        
+        List<String> attributeValues = new ElementInspector().getAttributeOfElements(locator, attribute);
+        for (int i = 0; i < attributeValues.size(); i++) {
+            if (attributeValues.get(i).equals(expectedValue)) {
+                LOG.debug("Found value at index [{}].", i);
+                
+                return i;
+            }
+        }
+        
+        LOG.error("Could not find instance with expected value.");
+        
+        throw new IllegalArgumentException("Attribute value [" + expectedValue + "] was not found.");
+    }
 }
