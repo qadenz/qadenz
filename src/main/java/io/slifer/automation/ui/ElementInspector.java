@@ -40,6 +40,25 @@ public class ElementInspector {
     }
     
     /**
+     * Retrieves the the value of an attribute from each instance of an element on the DOM.
+     *
+     * @param locator The mapped UI element.
+     * @param attributeName The name of the attribute to inspect.
+     *
+     * @return The list of values.
+     */
+    public List<String> getAttributeOfElements(Locator locator, String attributeName) {
+        List<WebElement> webElements = elementFinder.findAll(locator);
+        List<String> attributeValues = new ArrayList<>();
+        
+        for (WebElement webElement : webElements) {
+            attributeValues.add(webElement.getAttribute(attributeName));
+        }
+        
+        return attributeValues;
+    }
+    
+    /**
      * Retrieves the total number of instance of an element on the page.
      *
      * @param locator The mapped UI element.
