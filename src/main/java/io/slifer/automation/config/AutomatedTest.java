@@ -57,7 +57,7 @@ public class AutomatedTest {
     /**
      * Begins execution of a test by launching a RemoteWebDriver on a Selenium Grid, and opening the application URL.
      *
-     * @throws Exception
+     * @throws Exception on invalid Grid URL.
      */
     @BeforeMethod (dependsOnMethods = {"readTestName"}, alwaysRun = true)
     public void startWebDriver() throws Exception {
