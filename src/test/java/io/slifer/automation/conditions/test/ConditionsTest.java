@@ -41,7 +41,7 @@ public class ConditionsTest extends AutomatedTest {
     
     @Test
     public void test_CountOfElement_ValidNumber() {
-        Condition condition = Conditions.countOfElement(HerokuPage.exampleLinks(), Expectations.isEqualTo(43));
+        Condition condition = Conditions.countOfElement(HerokuPage.exampleLinks(), Expectations.isEqualTo(44));
         Assert.assertTrue(condition.result(), condition.description() + condition.output());
     }
     
