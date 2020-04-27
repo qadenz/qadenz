@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriverException;
  * @author Tim Slifer
  */
 public enum Browser {
+    
     CHROME("Chrome"),
     EDGE("Edge"),
     FIREFOX("Firefox"),

@@ -8,11 +8,18 @@ import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Common commands related to the WebDriver layer.
@@ -60,7 +67,7 @@ public abstract class WebDriverCommands extends Commands {
             webElement.click();
         }
         catch (ElementClickInterceptedException e) {
-            LOG.debug("Click intercepted, trying with Actions", e);
+            LOG.debug("Click intercepted, trying with Actions.");
             webElement = elementFinder.findWhenClickable(locator);
             
             Actions actions = new Actions(RunContext.getWebDriver());
@@ -151,6 +158,32 @@ public abstract class WebDriverCommands extends Commands {
     }
     
     /**
+     * Uploads a file.
+     *
+     * @param fileInput The mapped DOM element upload target.
+     * @param fileName The path to and name of the file to be uploaded.
+     */
+    public void uploadFile(Locator fileInput, String fileName) {
+        LOG.info("Uploading file [{}].", fileName);
+        try {
+            RemoteWebDriver remoteWebDriver = (RemoteWebDriver) RunContext.getWebDriver();
+            remoteWebDriver.setFileDetector(new LocalFileDetector());
+            
+            URL url = WebDriverCommands.class.getClassLoader().getResource(fileName);
+            File file = Paths.get(url.toURI()).toFile();
+            String filePath = file.getAbsolutePath();
+            
+            WebElement webElement = elementFinder.findWhenPresent(fileInput);
+            webElement.sendKeys(filePath);
+        }
+        catch (Exception e) {
+            LOG.error("Error uploading file.", e);
+            
+            throw new RuntimeException("File could not be uploaded.");
+        }
+    }
+    
+    /**
      * Clears the contents of an input field and enters the given text.
      *
      * @param locator The mapped UI element.
@@ -222,7 +255,7 @@ public abstract class WebDriverCommands extends Commands {
      * @return The text value.
      */
     public String getTextOfElement(Locator locator) {
-        LOG.info("Retrieving text of element [{}]", locator.getName());
+        LOG.info("Retrieving text of element [{}].", locator.getName());
         try {
             return new ElementInspector().getTextOfElement(locator);
         }
@@ -231,5 +264,76 @@ public abstract class WebDriverCommands extends Commands {
             
             throw e;
         }
+    }
+    
+    /**
+     * Retrieves the visible inner text of each instance of an element, and any descendants, on the DOM.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The text value.
+     */
+    public List<String> getTextOfElements(Locator locator) {
+        LOG.info("Retrieving text of each instance of element [{}].", locator.getName());
+        try {
+            return new ElementInspector().getTextOfElements(locator);
+        }
+        catch (Exception e) {
+            LOG.error("Error retrieving text.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
+     * Retrieves the instance of an element that contains the expected value.
+     *
+     * @param locator The mapped UI element.
+     * @param expectedText The value to be identified.
+     *
+     * @return The element instance.
+     */
+    public int getInstanceOfElementText(Locator locator, String expectedText) {
+        LOG.info("Finding instance of element [{}] with value [{}].", locator.getName(), expectedText);
+        
+        List<String> elementValues = new ElementInspector().getTextOfElements(locator);
+        for (int i = 0; i < elementValues.size(); i++) {
+            if (elementValues.get(i).equals(expectedText)) {
+                LOG.debug("Found value at index [{}].", i);
+                
+                return i;
+            }
+        }
+        
+        LOG.error("Could not find instance with expected value.");
+        
+        throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
+    }
+    
+    /**
+     * Retrieves the instance of an element with an attribute that contains the expected value.
+     *
+     * @param locator The mapped UI element.
+     * @param attribute The attribute to be examined.
+     * @param expectedValue The value to be identified.
+     *
+     * @return The element instance.
+     */
+    public int getInstanceOfElementAttribute(Locator locator, String attribute, String expectedValue) {
+        LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].", locator.getName(),
+                attribute, expectedValue);
+        
+        List<String> attributeValues = new ElementInspector().getAttributeOfElements(locator, attribute);
+        for (int i = 0; i < attributeValues.size(); i++) {
+            if (attributeValues.get(i).equals(expectedValue)) {
+                LOG.debug("Found value at index [{}].", i);
+                
+                return i;
+            }
+        }
+        
+        LOG.error("Could not find instance with expected value.");
+        
+        throw new IllegalArgumentException("Attribute value [" + expectedValue + "] was not found.");
     }
 }

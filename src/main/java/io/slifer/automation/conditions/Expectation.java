@@ -10,17 +10,12 @@ import org.hamcrest.Matcher;
 public interface Expectation<T> {
     
     /**
-     * Returns a Matcher that defines the expectation.
-     *
-     * @return
+     * @return A Matcher that defines the expectation.
      */
     Matcher<T> matcher();
     
     /**
-     * Returns a statement describing the expectation.
-     *
-     * @return
+     * @return A statement describing the expectation.
      */
-    
     String description();
 }

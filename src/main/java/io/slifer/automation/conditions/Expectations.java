@@ -3,6 +3,10 @@ package io.slifer.automation.conditions;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
@@ -11,7 +15,7 @@ public class Expectations {
     /**
      * An Expectation for a boolean outcome to be true.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<Boolean> isTrue() {
         
@@ -32,7 +36,7 @@ public class Expectations {
     /**
      * An Expectation for a boolean outcome to be false.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<Boolean> isFalse() {
         
@@ -53,7 +57,7 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be greater than the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<Integer> isGreaterThan(final int value) {
         
@@ -74,7 +78,7 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be greater than or equal to the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<Integer> isGreaterThanOrEqualTo(final int value) {
         
@@ -95,7 +99,7 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be equal to the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<Integer> isEqualTo(final int value) {
         
@@ -116,7 +120,7 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be not equal to the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<Integer> isNotEqualTo(final int value) {
         
@@ -137,7 +141,7 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be less than or equal to the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<Integer> isLessThanOrEqualTo(final int value) {
         
@@ -158,7 +162,7 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be less than the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<Integer> isLessThan(final int value) {
         
@@ -179,7 +183,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to be equal to the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> isEqualTo(final String text) {
         
@@ -200,7 +204,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to be equal to the expected value, ignoring case.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> equalsIgnoreCase(final String text) {
         
@@ -221,7 +225,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to be not equal to the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> isNotEqualTo(final String text) {
         
@@ -242,7 +246,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to contain the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> contains(final String text) {
         
@@ -263,7 +267,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to contain the expected value, ignoring case.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> containsIgnoreCase(final String text) {
         
@@ -284,7 +288,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to not contain the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> doesNotContain(final String text) {
         
@@ -305,7 +309,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to start with the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> startsWith(final String text) {
         
@@ -326,7 +330,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to not start with the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> doesNotStartWith(final String text) {
         
@@ -347,7 +351,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to end with the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> endsWith(final String text) {
         
@@ -368,7 +372,7 @@ public class Expectations {
     /**
      * An Expectation for a String value to not end with the expected value.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> doesNotEndWith(final String text) {
         
@@ -387,9 +391,35 @@ public class Expectations {
     }
     
     /**
+     * An Expectation for a String value to be equal to one of several possible options.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<String> isEqualToOneOf(final String... options) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<String> matcher() {
+                List<Matcher<String>> matchers = new ArrayList<>();
+                for (String option : options) {
+                    matchers.add(Matchers.is(option));
+                }
+                
+                return Matchers.anyOf(matchers.toArray(new Matcher[matchers.size()]));
+            }
+            
+            @Override
+            public String description() {
+                return "is equal to one of [" + Arrays.toString(options) + "]";
+            }
+        };
+    }
+    
+    /**
      * An Expectation for a String value to either empty or null.
      *
-     * @return The Expectation
+     * @return The Expectation.
      */
     public static Expectation<String> isEmptyOrNull() {
         
