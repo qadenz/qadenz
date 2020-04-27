@@ -8,23 +8,17 @@ package io.slifer.automation.conditions;
 public interface Condition {
     
     /**
-     * Returns a statement describing the condition and criteria being evaluated.
-     *
-     * @return
+     * @return A statement describing the condition and criteria being evaluated.
      */
     String description();
     
     /**
-     * Evaluates the condition and returns a result based on the expected and actual values.
-     *
-     * @return
+     * @return A result based on the expected and actual values of the Condition.
      */
     Boolean result();
     
     /**
-     * Returns a statement describing the actual value being evaluated by the Condition.
-     *
-     * @return
+     * @return A statement describing the actual value being evaluated by the Condition.
      */
     String output();
 }

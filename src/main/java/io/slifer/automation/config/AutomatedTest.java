@@ -30,7 +30,7 @@ public class AutomatedTest {
      *
      * @param testContext The injected ITestContext.
      */
-    @BeforeSuite
+    @BeforeSuite (alwaysRun = true)
     public void processXmlParameters(ITestContext testContext) {
         LOG.info("Reading XML Parameters.");
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
@@ -49,7 +49,7 @@ public class AutomatedTest {
      *
      * @param method The injected Method object.
      */
-    @BeforeMethod
+    @BeforeMethod (alwaysRun = true)
     public void readTestName(Method method) {
         RunContext.setTestCaseName(method.getName());
     }
@@ -57,9 +57,9 @@ public class AutomatedTest {
     /**
      * Begins execution of a test by launching a RemoteWebDriver on a Selenium Grid, and opening the application URL.
      *
-     * @throws Exception
+     * @throws Exception on invalid Grid URL.
      */
-    @BeforeMethod (dependsOnMethods = {"readTestName"})
+    @BeforeMethod (dependsOnMethods = {"readTestName"}, alwaysRun = true)
     public void startWebDriver() throws Exception {
         LOG.info("Launching RemoteWebDriver for test [{}].", RunContext.getTestCaseName());
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
@@ -80,7 +80,7 @@ public class AutomatedTest {
     /**
      * Concludes the test by stopping the WebDriver instance.
      */
-    @AfterMethod
+    @AfterMethod (alwaysRun = true)
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
         RunContext.getWebDriver().quit();
