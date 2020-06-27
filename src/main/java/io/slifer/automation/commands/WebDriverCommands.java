@@ -6,6 +6,7 @@ import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
@@ -113,6 +114,25 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error entering text.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
+     * Sends keystrokes into an input field.
+     *
+     * @param locator The mapped UI element.
+     * @param keys The keystrokes to send.
+     */
+    public void enterKeystrokes(Locator locator, Keys... keys) {
+        LOG.info("Entering keystrokes [{}] into element [{}].", keys, locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            webElement.sendKeys(keys);
+        }
+        catch (Exception e) {
+            LOG.error("Error entering keystrokes.", e);
             
             throw e;
         }
