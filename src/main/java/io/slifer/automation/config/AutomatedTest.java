@@ -43,6 +43,7 @@ public class AutomatedTest {
         RunContext.applicationName = parameterValidator.validateApplicationName();
         RunContext.timeout = parameterValidator.validateTimeout();
         RunContext.appUrl = parameterValidator.validateAppUrl();
+        RunContext.retryInterceptedClicks = parameterValidator.validateRetryInterceptedClicks();
     }
     
     /**

@@ -70,11 +70,18 @@ public abstract class WebDriverCommands extends Commands {
             webElement.click();
         }
         catch (ElementClickInterceptedException e) {
-            LOG.debug("Click intercepted, trying with Actions.");
-            webElement = elementFinder.findWhenClickable(locator);
-            
-            Actions actions = new Actions(RunContext.getWebDriver());
-            actions.moveToElement(webElement).click().perform();
+            if (RunContext.retryInterceptedClicks) {
+                LOG.debug("Click intercepted, trying with Actions.");
+                webElement = elementFinder.findWhenClickable(locator);
+                
+                Actions actions = new Actions(RunContext.getWebDriver());
+                actions.moveToElement(webElement).click().perform();
+            }
+            else {
+                LOG.error("Click intercepted.", e);
+                
+                throw e;
+            }
         }
         catch (Exception e) {
             LOG.error("Error clicking element.", e);

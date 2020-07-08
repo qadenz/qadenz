@@ -170,4 +170,20 @@ public class XmlParameterValidator {
             throw new IllegalArgumentException(message);
         }
     }
+    
+    /**
+     * Reads and returns the value of the 'retryInterceptedClicks' parameter, if one is provided, otherwise a default
+     * value is set.
+     *
+     * @return The retryInterceptedClicks value.
+     */
+    public boolean validateRetryInterceptedClicks() {
+        boolean xmlRetryInterceptedClicks = true;
+        if (xmlParameters.containsKey("retryInterceptedClicks")) {
+            xmlRetryInterceptedClicks = Boolean.parseBoolean(xmlParameters.get("retryInterceptedClicks"));
+        }
+        LOG.info("Retrying Intercepted Clicks [{}].", xmlRetryInterceptedClicks);
+        
+        return xmlRetryInterceptedClicks;
+    }
 }
