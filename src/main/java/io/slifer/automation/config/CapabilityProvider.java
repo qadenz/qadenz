@@ -45,6 +45,10 @@ public class CapabilityProvider {
             capabilities.setCapability("platform", RunContext.platform);
         }
         
+        if (RunContext.applicationName != null) {
+            capabilities.setCapability("applicationName", RunContext.applicationName);
+        }
+        
         return capabilities;
     }
 }
