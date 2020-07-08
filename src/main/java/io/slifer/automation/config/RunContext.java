@@ -14,6 +14,7 @@ public class RunContext {
     public static Browser browser;
     public static String browserVersion;
     public static Platform platform;
+    public static String applicationName;
     public static String appUrl;
     public static int timeout;
     
