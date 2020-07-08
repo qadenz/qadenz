@@ -114,6 +114,25 @@ public class XmlParameterValidator {
     }
     
     /**
+     * Reads and returns the value of the 'application-name' parameter, if one is provided.
+     *
+     * @return The Application Name value.
+     */
+    public String validateApplicationName() {
+        if (xmlParameters.containsKey("applicationName")) {
+            String xmlApplicationName = xmlParameters.get("applicationName");
+            LOG.info("Using Application Name [{}].", xmlApplicationName);
+            
+            return xmlApplicationName;
+        }
+        else {
+            LOG.info("No Application Name given.");
+            
+            return null;
+        }
+    }
+    
+    /**
      * Reads and returns the Timeout limit, if one is provided, otherwise a default value is set.
      *
      * @return The Timeout limit.
