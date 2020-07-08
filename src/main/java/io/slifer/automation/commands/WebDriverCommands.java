@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -76,6 +78,32 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error clicking element.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
+     * Clicks each of the given elements while holding the CTRL key.
+     *
+     * @param locators The mapped UI elements.
+     */
+    public void controlClick(Locator... locators) {
+        List<String> names = new ArrayList<>();
+        Arrays.stream(locators).forEachOrdered(locator -> names.add(locator.getName()));
+        LOG.info("Control-Clicking elements [{}]", names);
+        
+        try {
+            Actions actions = new Actions(RunContext.getWebDriver());
+            actions.keyDown(Keys.CONTROL);
+            for (Locator locator : locators) {
+                WebElement element = elementFinder.findWhenClickable(locator);
+                actions.click(element);
+            }
+            actions.keyUp(Keys.CONTROL);
+        }
+        catch (Exception e) {
+            LOG.error("Error clicking elements.", e);
             
             throw e;
         }
