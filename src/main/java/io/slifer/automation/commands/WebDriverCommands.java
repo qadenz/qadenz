@@ -6,6 +6,7 @@ import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
@@ -19,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -67,14 +70,89 @@ public abstract class WebDriverCommands extends Commands {
             webElement.click();
         }
         catch (ElementClickInterceptedException e) {
-            LOG.debug("Click intercepted, trying with Actions.");
-            webElement = elementFinder.findWhenClickable(locator);
-            
-            Actions actions = new Actions(RunContext.getWebDriver());
-            actions.moveToElement(webElement).click().perform();
+            if (RunContext.retryInterceptedClicks) {
+                LOG.debug("Click intercepted, trying with Actions.");
+                webElement = elementFinder.findWhenClickable(locator);
+                
+                Actions actions = new Actions(RunContext.getWebDriver());
+                actions.moveToElement(webElement).click().perform();
+            }
+            else {
+                LOG.error("Click intercepted.", e);
+                
+                throw e;
+            }
         }
         catch (Exception e) {
             LOG.error("Error clicking element.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
+     * Clicks on an element at a specific point.
+     *
+     * @param locator The mapped UI element.
+     * @param xOffset Horizontal offset from top-left corner. A negative value means coordinates left from the element.
+     * @param yOffset Vertical offset from top-left corner. A negative value means coordinates above the element.
+     */
+    public void click(Locator locator, int xOffset, int yOffset) {
+        LOG.info("Clicking element [{}] at point [{}, {}].", locator.getName(), xOffset, yOffset);
+        try {
+            WebElement webElement = elementFinder.findWhenClickable(locator);
+            
+            Actions actions = new Actions(RunContext.getWebDriver());
+            actions.moveToElement(webElement, xOffset, yOffset).click().perform();
+        }
+        catch (Exception e) {
+            LOG.error("Error clicking element.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
+     * Clicks each of the given elements while holding the CTRL key.
+     *
+     * @param locators The mapped UI elements.
+     */
+    public void controlClick(Locator... locators) {
+        List<String> names = new ArrayList<>();
+        Arrays.stream(locators).forEachOrdered(locator -> names.add(locator.getName()));
+        LOG.info("Control-Clicking elements [{}]", names);
+        
+        try {
+            Actions actions = new Actions(RunContext.getWebDriver());
+            actions.keyDown(Keys.CONTROL);
+            for (Locator locator : locators) {
+                WebElement element = elementFinder.findWhenClickable(locator);
+                actions.click(element);
+            }
+            actions.keyUp(Keys.CONTROL);
+        }
+        catch (Exception e) {
+            LOG.error("Error clicking elements.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
+     * Deselects an option from a dropdown menu implemented as a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     * @param option The option to be deselected.
+     */
+    public void deselect(Locator locator, String option) {
+        LOG.info("Deselecting option [{}] from element [{}].", option, locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            select.deselectByVisibleText(option);
+        }
+        catch (Exception e) {
+            LOG.error("Error deselecting option.", e);
             
             throw e;
         }
@@ -105,7 +183,7 @@ public abstract class WebDriverCommands extends Commands {
      * @param locator The mapped UI element.
      * @param input The text input.
      */
-    public void enterText(Locator locator, String input) {
+    public void enterText(Locator locator, CharSequence... input) {
         LOG.info("Entering text [{}] into element [{}].", input, locator.getName());
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
