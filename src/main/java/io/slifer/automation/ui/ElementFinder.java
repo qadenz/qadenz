@@ -122,7 +122,7 @@ public class ElementFinder {
         try {
             LOG.debug("Initializing element [{}] when clickable.", locator.getName());
             
-            return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
+            return webDriverWait.until(ExpectedConditions.elementToBeClickable(bySizzle(locator)));
         }
         catch (Exception e) {
             LOG.error("Could not initialize element [{}].", locator.getName());
