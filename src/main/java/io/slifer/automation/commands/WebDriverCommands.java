@@ -91,6 +91,28 @@ public abstract class WebDriverCommands extends Commands {
     }
     
     /**
+     * Clicks on an element at a specific point.
+     *
+     * @param locator The mapped UI element.
+     * @param xOffset Horizontal offset from top-left corner. A negative value means coordinates left from the element.
+     * @param yOffset Vertical offset from top-left corner. A negative value means coordinates above the element.
+     */
+    public void click(Locator locator, int xOffset, int yOffset) {
+        LOG.info("Clicking element [{}] at point [{}, {}].", locator.getName(), xOffset, yOffset);
+        try {
+            WebElement element = elementFinder.findWhenClickable(locator);
+            
+            Actions actions = new Actions(RunContext.getWebDriver());
+            actions.moveToElement(element, xOffset, yOffset).click().perform();
+        }
+        catch (Exception e) {
+            LOG.error("Error clicking element.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
      * Clicks each of the given elements while holding the CTRL key.
      *
      * @param locators The mapped UI elements.
