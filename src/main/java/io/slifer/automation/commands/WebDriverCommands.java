@@ -139,6 +139,26 @@ public abstract class WebDriverCommands extends Commands {
     }
     
     /**
+     * Deselects an option from a dropdown menu implemented as a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     * @param option The option to be deselected.
+     */
+    public void deselect(Locator locator, String option) {
+        LOG.info("Deselecting option [{}] from element [{}].", option, locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            select.deselectByVisibleText(option);
+        }
+        catch (Exception e) {
+            LOG.error("Error deselecting option.", e);
+            
+            throw e;
+        }
+    }
+    
+    /**
      * Double-clicks on the given element.
      *
      * @param locator The mapped UI element.
