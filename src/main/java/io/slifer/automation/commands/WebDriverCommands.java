@@ -141,7 +141,7 @@ public abstract class WebDriverCommands extends Commands {
      * @param locator The mapped UI element.
      * @param input The text input.
      */
-    public void enterText(Locator locator, String input) {
+    public void enterText(Locator locator, CharSequence... input) {
         LOG.info("Entering text [{}] into element [{}].", input, locator.getName());
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
@@ -149,25 +149,6 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception e) {
             LOG.error("Error entering text.", e);
-            
-            throw e;
-        }
-    }
-    
-    /**
-     * Sends keystrokes into an input field.
-     *
-     * @param locator The mapped UI element.
-     * @param keys The keystrokes to send.
-     */
-    public void enterKeystrokes(Locator locator, Keys... keys) {
-        LOG.info("Entering keystrokes [{}] into element [{}].", keys, locator.getName());
-        try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
-            webElement.sendKeys(keys);
-        }
-        catch (Exception e) {
-            LOG.error("Error entering keystrokes.", e);
             
             throw e;
         }
