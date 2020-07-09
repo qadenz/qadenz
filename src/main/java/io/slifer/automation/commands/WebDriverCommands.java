@@ -206,7 +206,7 @@ public abstract class WebDriverCommands extends Commands {
         try {
             WebElement webElement = elementFinder.findWhenVisible(locator);
             Actions actions = new Actions(RunContext.getWebDriver());
-            actions.moveToElement(webElement);
+            actions.moveToElement(webElement).perform();
         }
         catch (Exception e) {
             LOG.error("Error hovering on element.", e);
