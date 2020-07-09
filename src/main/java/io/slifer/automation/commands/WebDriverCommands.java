@@ -100,10 +100,10 @@ public abstract class WebDriverCommands extends Commands {
     public void click(Locator locator, int xOffset, int yOffset) {
         LOG.info("Clicking element [{}] at point [{}, {}].", locator.getName(), xOffset, yOffset);
         try {
-            WebElement element = elementFinder.findWhenClickable(locator);
+            WebElement webElement = elementFinder.findWhenClickable(locator);
             
             Actions actions = new Actions(RunContext.getWebDriver());
-            actions.moveToElement(element, xOffset, yOffset).click().perform();
+            actions.moveToElement(webElement, xOffset, yOffset).click().perform();
         }
         catch (Exception e) {
             LOG.error("Error clicking element.", e);
