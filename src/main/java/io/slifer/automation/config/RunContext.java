@@ -17,6 +17,7 @@ public class RunContext {
     public static String applicationName;
     public static String appUrl;
     public static int timeout;
+    public static boolean retryInterceptedClicks;
     
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static ThreadLocal<String> testCaseName = new ThreadLocal<>();
