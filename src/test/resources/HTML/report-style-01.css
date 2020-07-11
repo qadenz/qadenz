@@ -5,7 +5,7 @@ html * {
 .test-summary {
     /*background-color: lightsalmon;*/
     height: 134px;
-    width: 710px;
+    width: 832px;
     border: 1px solid black;
     margin: auto;
 }
@@ -34,7 +34,7 @@ html * {
     padding-top: 5px;
     height: 25px;
     text-align: center;
-    background-color: lightgray;
+    background-color: #d3d3d3;
 }
 
 .summary-item-value {
@@ -52,8 +52,12 @@ html * {
     color: #ff3333;
 }
 
+.stopped {
+    color: #ffa500;
+}
+
 .skipped {
-    color: orange;
+    color: #a9a9a9;
 }
 
 .test-results-section {
