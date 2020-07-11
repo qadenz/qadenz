@@ -70,8 +70,23 @@ html * {
     height: 30px;
     font-size: 1.5em;
     text-align: center;
-    background-color: #ff3333;
     border: 1px solid black;
+}
+
+.bg-passed {
+    background-color: #32cd32;
+}
+
+.bg-failed {
+    background-color: #ff3333;
+}
+
+.bg-stopped {
+    background-color: #ffa500;
+}
+
+.bg-skipped {
+    background-color: #a9a9a9;
 }
 
 .test-class-results {
