@@ -74,14 +74,18 @@ html * {
     border: 1px solid black;
 }
 
+.test-class-results {
+    border: 1px solid black;
+}
+
 .test-results-row {
     padding-top: 5px;
     height: 25px;
-    border: 1px solid black;
 }
 
 .test-class-name {
     padding-left: 10px;
+    border-bottom: 1px solid black;
 }
 
 .test-method-name {
