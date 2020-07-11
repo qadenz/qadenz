@@ -44,19 +44,19 @@ html * {
     font-size: 2em;
 }
 
-.passed {
+.txt-passed {
     color: #32cd32;
 }
 
-.failed {
+.txt-failed {
     color: #ff3333;
 }
 
-.stopped {
+.txt-stopped {
     color: #ffa500;
 }
 
-.skipped {
+.txt-skipped {
     color: #a9a9a9;
 }
 
