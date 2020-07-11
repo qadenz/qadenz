@@ -85,7 +85,10 @@ html * {
 
 .test-class-name {
     padding-left: 10px;
-    border-bottom: 1px solid black;
+}
+
+.test-method-list {
+    border-top: 1px solid black;
 }
 
 .test-method-name {
@@ -98,4 +101,8 @@ html * {
 
 .dark {
     background-color: #c0c0c0;
+}
+
+.hide {
+    display: none;
 }
