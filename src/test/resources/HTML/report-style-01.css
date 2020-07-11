@@ -1,0 +1,57 @@
+html * {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+.test-summary {
+    /*background-color: lightsalmon;*/
+    height: 134px;
+    width: 710px;
+    border: 1px solid black;
+    
+}
+
+.test-suite {
+    padding-top: 2px;
+    height: 48px;
+    font-size: 2em;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.summary-item {
+    height: 80px;
+    width: 120px;
+    border: 1px solid black;
+    /*background-color: powderblue;*/
+    float: left
+}
+
+.wide {
+    width: 220px;
+}
+
+.summary-item-label {
+    padding-top: 5px;
+    height: 25px;
+    text-align: center;
+    background-color: lightgray;
+}
+
+.summary-item-value {
+    padding-top: 2px;
+    height: 48px;
+    text-align: center;
+    font-size: 2em;
+}
+
+.passed {
+    color: limegreen;
+}
+
+.failed {
+    color: orangered;
+}
+
+.skipped {
+    color: orange;
+}
