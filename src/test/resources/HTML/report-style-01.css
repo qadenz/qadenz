@@ -45,13 +45,49 @@ html * {
 }
 
 .passed {
-    color: limegreen;
+    color: #32cd32;
 }
 
 .failed {
-    color: orangered;
+    color: #ff3333;
 }
 
 .skipped {
     color: orange;
+}
+
+.test-results-section {
+    width: 1202px;
+    margin: auto;
+    border: 1px solid black;
+}
+
+.test-results-section-label {
+    height: 30px;
+    font-size: 1.5em;
+    text-align: center;
+    background-color: #ff3333;
+    border: 1px solid black;
+}
+
+.test-results-row {
+    padding-top: 5px;
+    height: 25px;
+    border: 1px solid black;
+}
+
+.test-class-name {
+    padding-left: 10px;
+}
+
+.test-method-name {
+    padding-left: 20px;
+}
+
+.light {
+    background-color: #d3d3d3;
+}
+
+.dark {
+    background-color: #c0c0c0;
 }
