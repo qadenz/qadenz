@@ -7,7 +7,7 @@ html * {
     height: 134px;
     width: 710px;
     border: 1px solid black;
-    
+    margin: auto;
 }
 
 .test-suite {
