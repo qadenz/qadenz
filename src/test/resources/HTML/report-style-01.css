@@ -5,7 +5,7 @@ html * {
 
 .suite-summary {
     height: 134px;
-    width: 832px;
+    width: 830px;
     border: 1px solid black;
     margin: auto;
 }
@@ -20,7 +20,7 @@ html * {
 
 .suite-summary-item {
     height: 80px;
-    width: 120px;
+    width: 150px;
     border: 1px solid black;
     float: left;
 }
