@@ -38,11 +38,11 @@
 <div class="test-results-section">
     <div class="test-results-section-label bg-failed">Failed Tests</div>
     <div class="test-class-results">
-        <div class="test-results-row test-class-name">io.slifer.test.cases.SampleTest</div>
-        <div class="test-method-list">
+        <div class="test-results-row test-class-name accordion">io.slifer.test.cases.SampleTest</div>
+        <div class="test-method-list panel">
             <div class="test-results-row dark">
-                <div class="test-method-name">verifySomethingHappensWhenActionIsCompleted</div>
-                <div class="test-method-details">
+                <div class="test-method-name accordion">verifySomethingHappensWhenActionIsCompleted</div>
+                <div class="test-method-details panel">
                     <div class="test-method-details-header">
                         <span class="test-method-details-header-item">
                             <span class="method-detail-label">Start Time:</span>
@@ -69,8 +69,8 @@
                 </div>
             </div>
             <div class="test-results-row light">
-                <div class="test-method-name">verifySomethingHappensWhenActionIsCompleted</div>
-                <div class="test-method-details">
+                <div class="test-method-name accordion">verifySomethingHappensWhenActionIsCompleted</div>
+                <div class="test-method-details panel">
                     <div class="test-method-details-header">
                         <span class="test-method-details-header-item">
                             <span class="method-detail-label">Start Time:</span>
@@ -97,8 +97,8 @@
                 </div>
             </div>
             <div class="test-results-row dark">
-                <div class="test-method-name">verifySomethingHappensWhenActionIsCompleted</div>
-                <div class="test-method-details">
+                <div class="test-method-name accordion">verifySomethingHappensWhenActionIsCompleted</div>
+                <div class="test-method-details panel">
                     <div class="test-method-details-header">
                         <span class="test-method-details-header-item">
                             <span class="method-detail-label">Start Time:</span>
@@ -125,8 +125,8 @@
                 </div>
             </div>
             <div class="test-results-row light">
-                <div class="test-method-name">verifySomethingHappensWhenActionIsCompleted</div>
-                <div class="test-method-details">
+                <div class="test-method-name accordion">verifySomethingHappensWhenActionIsCompleted</div>
+                <div class="test-method-details panel">
                     <div class="test-method-details-header">
                         <span class="test-method-details-header-item">
                             <span class="method-detail-label">Start Time:</span>
@@ -155,6 +155,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            }
+            else {
+                panel.style.display = "block";
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
