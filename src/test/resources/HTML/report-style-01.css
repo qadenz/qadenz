@@ -125,6 +125,7 @@ html * {
     padding-left: 5px;
     width: 1175px;
     margin-left: 20px;
+    display: none;
 }
 
 .test-method-details-header-item {
