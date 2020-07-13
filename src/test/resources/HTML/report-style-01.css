@@ -65,6 +65,11 @@ html * {
     border-top: 1px solid gray;
 }
 
+.class-name {
+    padding-top: 5px;
+    min-height: 25px;
+}
+
 .test-methods {
     border-top: 1px solid black;
 }
@@ -80,14 +85,9 @@ html * {
 .method-name {
     padding-left: 15px;
     background-color: inherit;
-}
-
-
-.row {
     padding-top: 5px;
     min-height: 25px;
 }
-
 
 .test-method-details {
     border-top: 1px solid black;
