@@ -103,12 +103,12 @@ html * {
     display: inline-block;
 }
 
-.test-method-logs {
+.method-logs {
     margin-top: 10px;
 }
 
 .log-entry {
-    width: 1175px;
+    width: 1155px;
 }
 
 .accordion:after {
