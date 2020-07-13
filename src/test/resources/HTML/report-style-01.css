@@ -65,7 +65,7 @@ html * {
     border: 1px solid black;
 }
 
-.section-label {
+.section-name {
     height: 30px;
     font-size: 1.5em;
     text-align: center;
@@ -97,7 +97,7 @@ html * {
     min-height: 25px;
 }
 
-.test-class-name {
+.class-name {
     padding-left: 10px;
 }
 
