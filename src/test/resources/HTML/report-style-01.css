@@ -6,7 +6,7 @@ html * {
 .suite-summary {
     height: 134px;
     width: 830px;
-    border: 1px solid black;
+    border: 1px solid #000000;
     margin: auto;
 }
 
@@ -14,14 +14,14 @@ html * {
     padding-top: 2px;
     height: 48px;
     font-size: 2em;
-    border: 1px solid black;
+    border: 1px solid #000000;
     text-align: center;
 }
 
 .summary-item {
     height: 80px;
     width: 150px;
-    border: 1px solid black;
+    border: 1px solid #000000;
     float: left;
 }
 
@@ -46,23 +46,23 @@ html * {
 .results-section {
     width: 1202px;
     margin: auto;
-    border: 1px solid black;
+    border: 1px solid #000000;
 }
 
 .section-name {
     height: 30px;
     font-size: 1.5em;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #000000;
 }
 
 .test-classes {
-    border: 1px solid black;
+    border: 1px solid #000000;
     padding-left: 15px;
 }
 
 .test-class:not(:first-child) {
-    border-top: 1px solid gray;
+    border-top: 1px solid #808080;
 }
 
 .class-name {
@@ -71,7 +71,7 @@ html * {
 }
 
 .test-methods {
-    border-top: 1px solid black;
+    border-top: 1px solid #000000;
 }
 
 .test-method:nth-child(odd) {
@@ -90,8 +90,8 @@ html * {
 }
 
 .method-details {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
     padding-left: 10px;
     width: 1155px;
     margin-left: 20px;
@@ -113,7 +113,7 @@ html * {
 }
 
 .screenshot {
-    border-top: 1px solid gray;
+    border-top: 1px solid #808080;
 }
 
 .screenshot > img {
