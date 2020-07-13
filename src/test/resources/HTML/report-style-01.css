@@ -112,6 +112,10 @@ html * {
     width: 1155px;
 }
 
+.screenshot {
+    border-top: 1px solid gray;
+}
+
 .screenshot > img {
     display: block;
     margin-left: auto;
