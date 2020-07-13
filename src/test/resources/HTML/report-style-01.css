@@ -61,7 +61,7 @@ html * {
     padding-left: 15px;
 }
 
-.test-class {
+.test-class:not(:first-child) {
     border-top: 1px solid gray;
 }
 
