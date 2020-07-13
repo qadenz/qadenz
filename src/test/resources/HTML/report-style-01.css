@@ -89,17 +89,18 @@ html * {
     min-height: 25px;
 }
 
-.test-method-details {
+.method-details {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    padding-left: 5px;
-    width: 1175px;
+    padding-left: 10px;
+    width: 1155px;
     margin-left: 20px;
     display: none;
 }
 
-.test-method-details-header-item {
+.method-detail {
     margin-right: 50px;
+    display: inline-block;
 }
 
 .test-method-logs {
@@ -108,10 +109,6 @@ html * {
 
 .log-entry {
     width: 1175px;
-}
-
-.hide {
-    display: none;
 }
 
 .accordion:after {
@@ -127,6 +124,9 @@ html * {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
+.hide {
+    display: none;
+}
 
 .txt-passed {
     color: #32cd32;
