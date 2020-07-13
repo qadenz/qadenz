@@ -43,23 +43,7 @@ html * {
     font-size: 2em;
 }
 
-.txt-passed {
-    color: #32cd32;
-}
-
-.txt-failed {
-    color: #ff3333;
-}
-
-.txt-stopped {
-    color: #ffa500;
-}
-
-.txt-skipped {
-    color: #a9a9a9;
-}
-
-.test-results-section {
+.results-section {
     width: 1202px;
     margin: auto;
     border: 1px solid black;
@@ -72,43 +56,24 @@ html * {
     border: 1px solid black;
 }
 
-.bg-passed {
-    background-color: #32cd32;
-}
-
-.bg-failed {
-    background-color: #ff3333;
-}
-
-.bg-stopped {
-    background-color: #ffa500;
-}
-
-.bg-skipped {
-    background-color: #a9a9a9;
-}
-
 .test-classes {
     border: 1px solid black;
+    padding-left: 15px;
 }
 
-.test-results-row {
-    padding-top: 5px;
-    min-height: 25px;
-}
-
-.class-name {
-    padding-left: 10px;
-}
-
-.test-method-list {
+.test-methods {
     border-top: 1px solid black;
 }
 
-.test-method-name {
-    padding-left: 25px;
-    height: 25px;
+.method-name {
+    padding-left: 15px;
     background-color: inherit;
+}
+
+
+.row {
+    padding-top: 5px;
+    min-height: 25px;
 }
 
 .light {
@@ -155,4 +120,37 @@ html * {
 .active:after {
     padding-top: 3px;
     content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+
+.txt-passed {
+    color: #32cd32;
+}
+
+.txt-failed {
+    color: #ff3333;
+}
+
+.txt-stopped {
+    color: #ffa500;
+}
+
+.txt-skipped {
+    color: #a9a9a9;
+}
+
+.bg-passed {
+    background-color: #32cd32;
+}
+
+.bg-failed {
+    background-color: #ff3333;
+}
+
+.bg-stopped {
+    background-color: #ffa500;
+}
+
+.bg-skipped {
+    background-color: #a9a9a9;
 }
