@@ -111,6 +111,14 @@ html * {
     width: 1155px;
 }
 
+.screenshot > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
 .accordion:after {
     content: '\02795'; /* Unicode character for "plus" sign (+) */
     font-size: .75em;
