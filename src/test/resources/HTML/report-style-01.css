@@ -6,7 +6,6 @@ html * {
 .suite-summary {
     height: 134px;
     width: 1012px;
-    border: 1px solid #000000;
     margin: auto;
 }
 
@@ -14,14 +13,12 @@ html * {
     padding-top: 2px;
     height: 48px;
     font-size: 2em;
-    border: 1px solid #000000;
     text-align: center;
 }
 
 .summary-item {
     height: 80px;
     width: 150px;
-    border: 1px solid #000000;
     float: left;
 }
 
@@ -169,4 +166,8 @@ html * {
 
 .bg-skipped {
     background-color: #a9a9a9;
+}
+
+.bordered {
+    border: 1px solid #000000;
 }
