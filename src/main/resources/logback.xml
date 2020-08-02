@@ -14,7 +14,7 @@
         </encoder>
     </appender>
     
-    <root level="debug">
+    <root level="${logLevel:-INFO}">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="TestNG"/>
     </root>
