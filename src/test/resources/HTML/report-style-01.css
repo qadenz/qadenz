@@ -117,7 +117,7 @@ html {
 }
 
 .accordion:after {
-    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    content: '\02795' /* Unicode character for "plus" sign (+) */;
     font-size: .75em;
     float: left;
     padding-top: 3px;
@@ -126,7 +126,7 @@ html {
 
 .active:after {
     padding-top: 3px;
-    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    content: "\2796" /* Unicode character for "minus" sign (-) */;
 }
 
 .hide {
