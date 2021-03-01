@@ -1,0 +1,170 @@
+html {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    background-color: #ffffff;
+}
+
+.suite-summary {
+    height: 134px;
+    width: 1012px;
+    margin: auto;
+}
+
+.suite-name {
+    padding-top: 2px;
+    height: 48px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.summary-item {
+    height: 80px;
+    width: 150px;
+    float: left;
+}
+
+.wide {
+    width: 250px;
+}
+
+.summary-item-label {
+    padding-top: 5px;
+    height: 25px;
+    text-align: center;
+    background-color: #d3d3d3;
+}
+
+.summary-item-value {
+    padding-top: 2px;
+    height: 48px;
+    text-align: center;
+    font-size: 2em;
+}
+
+.results-section {
+    width: 1202px;
+    margin: auto;
+}
+
+.section-name {
+    height: 30px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.test-classes {
+    padding-left: 15px;
+}
+
+.test-class:not(:first-child) {
+    border-top: 1px solid #808080;
+}
+
+.class-name {
+    padding-top: 5px;
+    min-height: 25px;
+}
+
+.test-methods {
+    border-top: 1px solid #000000;
+}
+
+.test-method:nth-child(odd) {
+    background-color: #dcdcdc;
+}
+
+.test-method:nth-child(even) {
+    background-color: #ededed;
+}
+
+.method-name {
+    padding: 5px 0 0 15px;
+    background-color: inherit;
+    min-height: 25px;
+}
+
+.method-details {
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    border-color: #000000;
+    padding-left: 10px;
+    width: 1155px;
+    margin-left: 20px;
+    display: none;
+}
+
+.method-detail {
+    margin-right: 50px;
+    display: inline-block;
+}
+
+.method-logs {
+    margin: 10px 0 5px 0;
+}
+
+.log-entry {
+    width: 1155px;
+}
+
+.screenshot {
+    border-top: 1px solid #808080;
+}
+
+.screenshot > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 0 10px 0;
+}
+
+.accordion:after {
+    content: '\02795' /* Unicode character for "plus" sign (+) */;
+    font-size: .75em;
+    float: left;
+    padding-top: 3px;
+    margin-right: 5px;
+}
+
+.active:after {
+    padding-top: 3px;
+    content: "\2796" /* Unicode character for "minus" sign (-) */;
+}
+
+.hide {
+    display: none;
+}
+
+.txt-passed {
+    color: #32cd32;
+}
+
+.txt-failed {
+    color: #ff3333;
+}
+
+.txt-stopped {
+    color: #ffa500;
+}
+
+.txt-skipped {
+    color: #a9a9a9;
+}
+
+.bg-passed {
+    background-color: #32cd32;
+}
+
+.bg-failed {
+    background-color: #ff3333;
+}
+
+.bg-stopped {
+    background-color: #ffa500;
+}
+
+.bg-skipped {
+    background-color: #a9a9a9;
+}
+
+.bordered {
+    border: 1px solid #000000;
+}
