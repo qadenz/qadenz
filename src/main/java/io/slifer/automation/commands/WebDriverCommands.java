@@ -130,6 +130,7 @@ public abstract class WebDriverCommands extends Commands {
                 actions.click(element);
             }
             actions.keyUp(Keys.CONTROL);
+            actions.perform();
         }
         catch (Exception e) {
             LOG.error("Error clicking elements.", e);
