@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class BrowserCommands extends WebDriverCommands {
     
-    // private static final Logger LOG = LoggerFactory.getLogger(BrowserCommands.class);
     private static final LoggerProxy LOG = new LoggerProxy(BrowserCommands.class);
     
     public BrowserCommands() {

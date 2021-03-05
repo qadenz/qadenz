@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class ElementFinder {
     
-    // private static final Logger LOG = LoggerFactory.getLogger(ElementFinder.class);
     private static final LoggerProxy LOG = new LoggerProxy(ElementFinder.class);
     
     /**

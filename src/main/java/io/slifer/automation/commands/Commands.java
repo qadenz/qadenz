@@ -11,7 +11,6 @@ import org.testng.Assert;
  */
 public abstract class Commands {
     
-    // private static final Logger LOG = LoggerFactory.getLogger(Commands.class);
     private static final LoggerProxy LOG = new LoggerProxy(Commands.class);
     
     /**
