@@ -30,7 +30,6 @@ import java.util.List;
  */
 public abstract class WebDriverCommands extends Commands {
     
-    // private static final Logger LOG = LoggerFactory.getLogger(WebDriverCommands.class);
     private static final LoggerProxy LOG = new LoggerProxy(WebDriverCommands.class);
     
     private ElementFinder elementFinder;

@@ -21,7 +21,6 @@ import java.util.Map;
  */
 public class AutomatedTest {
     
-    // private static final Logger LOG = LoggerFactory.getLogger(AutomatedTest.class);
     private static final LoggerProxy LOG = new LoggerProxy(AutomatedTest.class);
     
     /**

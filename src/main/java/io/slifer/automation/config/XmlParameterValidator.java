@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class XmlParameterValidator {
     
-    // private static final Logger LOG = LoggerFactory.getLogger(XmlParameterValidator.class);
     private static final LoggerProxy LOG = new LoggerProxy(XmlParameterValidator.class);
     
     private Map<String, String> xmlParameters;
