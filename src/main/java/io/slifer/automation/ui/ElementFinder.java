@@ -1,13 +1,12 @@
 package io.slifer.automation.ui;
 
 import io.slifer.automation.config.RunContext;
+import io.slifer.automation.logs.LoggerProxy;
 import io.slifer.sizzlecss.BySizzle;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -18,7 +17,8 @@ import java.util.List;
  */
 public class ElementFinder {
     
-    private static final Logger LOG = LoggerFactory.getLogger(ElementFinder.class);
+    // private static final Logger LOG = LoggerFactory.getLogger(ElementFinder.class);
+    private static final LoggerProxy LOG = new LoggerProxy(ElementFinder.class);
     
     /**
      * Initializes the first matching instance of the given locator, using no waits or synchronization.
