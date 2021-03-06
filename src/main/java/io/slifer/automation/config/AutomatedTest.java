@@ -1,8 +1,9 @@
 package io.slifer.automation.config;
 
-import io.slifer.automation.logs.LoggerProxy;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +22,7 @@ import java.util.Map;
  */
 public class AutomatedTest {
     
-    private static final LoggerProxy LOG = new LoggerProxy(AutomatedTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AutomatedTest.class);
     
     /**
      * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
