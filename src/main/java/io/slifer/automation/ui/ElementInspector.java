@@ -1,10 +1,11 @@
 package io.slifer.automation.ui;
 
-import io.slifer.automation.logs.LoggerProxy;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class ElementInspector {
     
-    private static final LoggerProxy LOG = new LoggerProxy(ElementInspector.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ElementInspector.class);
     
     private ElementFinder elementFinder;
     

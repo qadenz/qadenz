@@ -1,7 +1,8 @@
 package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
-import io.slifer.automation.logs.LoggerProxy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 /**
@@ -11,7 +12,7 @@ import org.testng.Assert;
  */
 public abstract class Commands {
     
-    private static final LoggerProxy LOG = new LoggerProxy(Commands.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Commands.class);
     
     /**
      * Evaluates each of the given conditions as a group. If one or more Conditions results in a failure, execution will

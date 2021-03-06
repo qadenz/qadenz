@@ -2,7 +2,6 @@ package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.RunContext;
-import io.slifer.automation.logs.LoggerProxy;
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
@@ -15,6 +14,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
@@ -30,7 +31,7 @@ import java.util.List;
  */
 public abstract class WebDriverCommands extends Commands {
     
-    private static final LoggerProxy LOG = new LoggerProxy(WebDriverCommands.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WebDriverCommands.class);
     
     private ElementFinder elementFinder;
     

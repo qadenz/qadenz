@@ -1,14 +1,15 @@
 package io.slifer.automation.config;
 
-import io.slifer.automation.logs.LoggerProxy;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriverException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 public class XmlParameterValidator {
     
-    private static final LoggerProxy LOG = new LoggerProxy(XmlParameterValidator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(XmlParameterValidator.class);
     
     private Map<String, String> xmlParameters;
     
