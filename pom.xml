@@ -17,7 +17,9 @@
         <java.version>11</java.version>
         
         <hamcrest.version>2.1</hamcrest.version>
+        <jackson.version>2.12.2</jackson.version>
         <logback.version>1.2.3</logback.version>
+        <logback-contrib.version>0.1.5</logback-contrib.version>
         <logback-testng.version>1.2.0</logback-testng.version>
         <selenium.version>3.141.59</selenium.version>
         <sizzle.version>3.141.59-R1</sizzle.version>
@@ -29,6 +31,24 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback.contrib</groupId>
+            <artifactId>logback-json-classic</artifactId>
+            <version>${logback-contrib.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback.contrib</groupId>
+            <artifactId>logback-jackson</artifactId>
+            <version>${logback-contrib.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         
         <dependency>
