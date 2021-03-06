@@ -14,7 +14,8 @@
         </encoder>
     </appender>
     
-    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="JSON" class="ch.qos.logback.core.FileAppender">
+        <file>log.json</file>
         <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
             <jsonFormatter
                     class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
