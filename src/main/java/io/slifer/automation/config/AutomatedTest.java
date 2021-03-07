@@ -1,8 +1,10 @@
 package io.slifer.automation.config;
 
+import io.slifer.automation.util.UniqueValue;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
+import org.slf4j.MDC;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -51,8 +53,13 @@ public class AutomatedTest {
      * @param method The injected Method object.
      */
     @BeforeMethod (alwaysRun = true)
-    public void readTestName(Method method) {
+    public void prepareTestInfo(Method method) {
         RunContext.setTestCaseName(method.getName());
+        
+        String testId = UniqueValue.generate();
+        MDC.put("testId", testId);
+        
+        RunContext.testId = testId;
     }
     
     /**
