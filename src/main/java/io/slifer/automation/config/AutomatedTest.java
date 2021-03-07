@@ -1,5 +1,7 @@
 package io.slifer.automation.config;
 
+import io.slifer.automation.reporter.HtmlReporter;
+import io.slifer.automation.reporter.ResultsMap;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -7,13 +9,13 @@ import org.slf4j.MDC;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -27,7 +29,7 @@ public class AutomatedTest {
     
     private static final Logger LOG = RunContext.SUITE_LOG;
     
-    private HashMap<String, ITestResult> testResults = new HashMap<>();
+    private ResultsMap resultsMap = new ResultsMap();
     
     /**
      * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
@@ -105,6 +107,15 @@ public class AutomatedTest {
     @AfterMethod (alwaysRun = true)
     public void saveTestNgResult(ITestResult testResult) {
         LOG.info("Capturing Test Results.");
-        testResults.put(RunContext.getTestId(), testResult);
+        resultsMap.put(RunContext.getTestId(), testResult);
+    }
+    
+    /**
+     * Triggers the generation of the HTML Report output and supporting JSON files.
+     */
+    @AfterSuite (alwaysRun = true)
+    public void generateHtmlReports() {
+        HtmlReporter htmlReporter = new HtmlReporter(resultsMap);
+        htmlReporter.generateReport();
     }
 }
