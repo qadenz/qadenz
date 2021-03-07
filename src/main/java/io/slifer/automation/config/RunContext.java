@@ -2,6 +2,8 @@ package io.slifer.automation.config;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Stores information about the test run, and holds the major thread-safe components.
@@ -21,6 +23,8 @@ public class RunContext {
     
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static ThreadLocal<String> testCaseName = new ThreadLocal<>();
+    
+    public static final Logger SUITE_LOG = LoggerFactory.getLogger("SUITE");
     
     public static void setWebDriver(WebDriver webDriver) {
         driver.set(webDriver);
