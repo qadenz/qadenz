@@ -1,6 +1,5 @@
 package io.slifer.automation.config;
 
-import io.slifer.automation.reporter.HtmlReporter;
 import io.slifer.automation.reporter.ResultsMap;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -117,8 +116,7 @@ public class AutomatedTest {
      * Triggers the generation of the HTML Report output and supporting JSON files.
      */
     @AfterSuite (alwaysRun = true)
-    public void generateHtmlReports() {
-        HtmlReporter htmlReporter = new HtmlReporter(resultsMap);
-        htmlReporter.generateReport();
+    public void generateReports() {
+        
     }
 }
