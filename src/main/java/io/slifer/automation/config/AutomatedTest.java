@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeSuite;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,6 +26,8 @@ import java.util.UUID;
 public class AutomatedTest {
     
     private static final Logger LOG = RunContext.SUITE_LOG;
+    
+    private HashMap<String, ITestResult> testResults = new HashMap<>();
     
     /**
      * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
@@ -102,6 +105,6 @@ public class AutomatedTest {
     @AfterMethod (alwaysRun = true)
     public void saveTestNgResult(ITestResult testResult) {
         LOG.info("Capturing Test Results.");
-        RunContext.captureResults(RunContext.getTestId(), testResult);
+        testResults.put(RunContext.getTestId(), testResult);
     }
 }
