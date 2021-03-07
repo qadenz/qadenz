@@ -4,6 +4,9 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.ITestResult;
+
+import java.util.HashMap;
 
 /**
  * Stores information about the test run, and holds the major thread-safe components.
@@ -28,6 +31,8 @@ public class RunContext {
     public static final Logger SUITE_LOG = LoggerFactory.getLogger("SUITE");
     public static final Logger TEST_LOG = LoggerFactory.getLogger("TEST");
     
+    private static HashMap<String, ITestResult> resultsMap = new HashMap<>();
+    
     public static void setWebDriver(WebDriver webDriver) {
         driver.set(webDriver);
     }
@@ -50,5 +55,13 @@ public class RunContext {
     
     public static String getTestId() {
         return testId.get();
+    }
+    
+    public static void captureResults(String testId, ITestResult testResult) {
+        resultsMap.put(testId, testResult);
+    }
+    
+    public static HashMap<String, ITestResult> getResultsMap() {
+        return resultsMap;
     }
 }
