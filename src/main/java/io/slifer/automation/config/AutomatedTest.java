@@ -57,13 +57,16 @@ public class AutomatedTest {
      * Captures the test method name, and assigns a UUID in preparation for logging and reporting activities.
      *
      * @param method The injected Method object.
+     * @param testContext The injected ITestContext.
      */
     @BeforeMethod (alwaysRun = true)
-    public void prepareTestInfo(Method method) {
+    public void prepareTestInfo(Method method, ITestContext testContext) {
         RunContext.setTestCaseName(method.getName());
         
         RunContext.setTestId(UUID.randomUUID().toString());
         MDC.put("testId", RunContext.getTestId());
+        
+        resultsMap.setSuiteName(testContext.getSuite().getName());
     }
     
     /**
