@@ -48,7 +48,7 @@ public class AutomatedTest {
     }
     
     /**
-     * Reads and assigns on the RunContext the name of the test method about to be executed.
+     * Captures the test method name, and assigns a UUID in preparation for logging and reporting activities.
      *
      * @param method The injected Method object.
      */
