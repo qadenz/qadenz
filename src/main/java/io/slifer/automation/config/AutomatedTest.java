@@ -1,6 +1,5 @@
 package io.slifer.automation.config;
 
-import io.slifer.automation.util.UniqueValue;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * The top-level class for all test classes. The AutomatedTest manages configuration and launch of the WebDriver and
@@ -56,10 +56,8 @@ public class AutomatedTest {
     public void prepareTestInfo(Method method) {
         RunContext.setTestCaseName(method.getName());
         
-        String testId = UniqueValue.generate();
-        MDC.put("testId", testId);
-        
-        RunContext.testId = testId;
+        RunContext.setTestId(UUID.randomUUID().toString());
+        MDC.put("testId", RunContext.getTestId());
     }
     
     /**
@@ -67,7 +65,7 @@ public class AutomatedTest {
      *
      * @throws Exception on invalid Grid URL.
      */
-    @BeforeMethod (dependsOnMethods = {"readTestName"}, alwaysRun = true)
+    @BeforeMethod (dependsOnMethods = {"prepareTestInfo"}, alwaysRun = true)
     public void startWebDriver() throws Exception {
         LOG.info("Launching RemoteWebDriver for test [{}].", RunContext.getTestCaseName());
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
