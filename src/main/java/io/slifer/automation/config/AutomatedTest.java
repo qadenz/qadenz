@@ -5,6 +5,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.MDC;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -90,5 +91,17 @@ public class AutomatedTest {
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
         RunContext.getWebDriver().quit();
+    }
+    
+    /**
+     * Captures the ITestResult instance for the test and links to the generated Test ID for processing by the HTML
+     * Reporter.
+     *
+     * @param testResult The injected ITestResult.
+     */
+    @AfterMethod (alwaysRun = true)
+    public void saveTestNgResult(ITestResult testResult) {
+        LOG.info("Capturing Test Results.");
+        RunContext.captureResults(RunContext.getTestId(), testResult);
     }
 }
