@@ -25,15 +25,24 @@
         </layout>
     </appender>
     
-    <appender name="JSON-TEST" class="ch.qos.logback.core.FileAppender">
-        <file>test-log.json</file>
-        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
-            <jsonFormatter
-                    class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
-                <prettyPrint>true</prettyPrint>
-            </jsonFormatter>
-            <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
-        </layout>
+    <appender name="JSON-TEST" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>testId</key>
+            <defaultValue>unknown</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE-${testId}" class="ch.qos.logback.core.FileAppender">
+                <file>test-logs/test-${testId}.json</file>
+                <append>false</append>
+                <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                    <jsonFormatter
+                            class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                        <prettyPrint>true</prettyPrint>
+                    </jsonFormatter>
+                    <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+                </layout>
+            </appender>
+        </sift>
     </appender>
     
     <logger name="SUITE" level="DEBUG" additivity="false">
