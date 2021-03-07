@@ -27,6 +27,8 @@ public class RunContext {
     public static final Logger SUITE_LOG = LoggerFactory.getLogger("SUITE");
     public static final Logger TEST_LOG = LoggerFactory.getLogger("TEST");
     
+    public static String testId;
+    
     public static void setWebDriver(WebDriver webDriver) {
         driver.set(webDriver);
     }
