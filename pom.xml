@@ -16,6 +16,7 @@
     <properties>
         <java.version>11</java.version>
         
+        <commons-io.version>2.8.0</commons-io.version>
         <hamcrest.version>2.1</hamcrest.version>
         <jackson.version>2.12.2</jackson.version>
         <json.version>20201115</json.version>
@@ -62,6 +63,12 @@
                     <artifactId>guava</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
         
         <dependency>
