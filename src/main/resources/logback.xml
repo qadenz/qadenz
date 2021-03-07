@@ -14,8 +14,8 @@
         </encoder>
     </appender>
     
-    <appender name="JSON" class="ch.qos.logback.core.FileAppender">
-        <file>log.json</file>
+    <appender name="JSON-SUITE" class="ch.qos.logback.core.FileAppender">
+        <file>suite-log.json</file>
         <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
             <jsonFormatter
                     class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
@@ -25,10 +25,30 @@
         </layout>
     </appender>
     
+    <appender name="JSON-TEST" class="ch.qos.logback.core.FileAppender">
+        <file>test-log.json</file>
+        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+            <jsonFormatter
+                    class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                <prettyPrint>true</prettyPrint>
+            </jsonFormatter>
+            <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+        </layout>
+    </appender>
+    
+    <logger name="SUITE" level="DEBUG" additivity="false">
+        <appender-ref ref="JSON-SUITE"/>
+    </logger>
+    
+    <logger name="TEST" level="DEBUG" additivity="false">
+        <appender-ref ref="JSON-TEST"/>
+    </logger>
+    
     <root level="debug">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="TestNG"/>
-        <appender-ref ref="JSON"/>
+        <appender-ref ref="JSON-SUITE"/>
+        <appender-ref ref="JSON-TEST"/>
     </root>
 
 </configuration>
