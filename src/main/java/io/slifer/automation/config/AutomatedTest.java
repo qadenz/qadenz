@@ -114,7 +114,7 @@ public class AutomatedTest {
     public void saveTestNgResult(ITestResult testResult) {
         LOG.info("Capturing Test Results.");
         resultsMap.put(RunContext.getTestId(), testResult);
-        stopTestLogging("TEST-" + RunContext.getTestId());
+        stopTestLogging("FILE-" + RunContext.getTestId());
     }
     
     /**
