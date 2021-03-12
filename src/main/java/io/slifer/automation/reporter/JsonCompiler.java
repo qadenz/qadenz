@@ -44,6 +44,8 @@ public class JsonCompiler {
     private void processTestLogs() {
         SUITE_LOG.info("Processing Test Logs.");
         
+        List<TestLog> testLogs = new ArrayList<>();
+        
         for (String key : resultsMap.keySet()) {
             SUITE_LOG.info("Starting Log Processing for Test [{}]", key);
             ITestResult testResult = resultsMap.get(key);
@@ -68,7 +70,11 @@ public class JsonCompiler {
                 stepLogs.add(stepLog);
             }
             testLog.setStepLogs(stepLogs);
+            
+            testLogs.add(testLog);
         }
+        
+        sortTestLogsByResult(testLogs);
     }
     
     private List<JSONObject> readJsonFile(String fileName) {
@@ -103,5 +109,33 @@ public class JsonCompiler {
         }
         
         return null;
+    }
+    
+    private void sortTestLogsByResult(List<TestLog> testLogs) {
+        List<TestLog> passed = new ArrayList<>();
+        List<TestLog> failed = new ArrayList<>();
+        List<TestLog> stopped = new ArrayList<>();
+        List<TestLog> skipped = new ArrayList<>();
+        
+        for (TestLog log : testLogs) {
+            switch (log.getResult()) {
+                case PASSED:
+                    passed.add(log);
+                    break;
+                case FAILED:
+                    failed.add(log);
+                    break;
+                case STOPPED:
+                    stopped.add(log);
+                    break;
+                case SKIPPED:
+                    skipped.add(log);
+            }
+        }
+        
+        jsonReport.setPassedTests(passed);
+        jsonReport.setFailedTests(failed);
+        jsonReport.setStoppedTests(stopped);
+        jsonReport.setSkippedTests(skipped);
     }
 }
