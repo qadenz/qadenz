@@ -1,17 +1,17 @@
 package io.slifer.automation.reporter;
 
 import io.slifer.automation.config.RunContext;
-import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.testng.ITestResult;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class JsonCompiler {
     
@@ -37,7 +37,7 @@ public class JsonCompiler {
         jsonReport.setSuiteName(resultsMap.getSuiteName());
         jsonReport.setBrowser(RunContext.browser.name());
         jsonReport.setBrowserVersion(RunContext.browserVersion);
-        jsonReport.setPlatform(RunContext.platform.name());
+        // jsonReport.setPlatform(RunContext.platform.name());
         jsonReport.setAppUrl(RunContext.appUrl);
     }
     
@@ -45,6 +45,7 @@ public class JsonCompiler {
         SUITE_LOG.info("Processing Test Logs.");
         
         for (String key : resultsMap.keySet()) {
+            SUITE_LOG.info("Starting Log Processing for Test [{}]", key);
             ITestResult testResult = resultsMap.get(key);
             
             TestLog testLog = new TestLog();
@@ -55,7 +56,7 @@ public class JsonCompiler {
             testLog.setStartMillis(testResult.getStartMillis());
             testLog.setEndMillis(testResult.getEndMillis());
             
-            String fileName = "test-" + key + ".json";
+            String fileName = "test-logs/test-" + key + ".json";
             List<JSONObject> jsonStepLogs = readJsonFile(fileName);
             List<StepLog> stepLogs = new ArrayList<>();
             for (JSONObject log : jsonStepLogs) {
@@ -71,18 +72,14 @@ public class JsonCompiler {
     }
     
     private List<JSONObject> readJsonFile(String fileName) {
+        SUITE_LOG.info("Opening logs for test [{}].", fileName);
         List<JSONObject> jsonLogs = new ArrayList<>();
-        InputStream inputStream = JsonCompiler.class.getClassLoader().getResourceAsStream(fileName);
-        String[] jsonEntries = new String[0];
-        try {
-            String rawJson = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-            jsonEntries = rawJson.split("\n");
+        
+        try (Stream<String> stream = Files.lines(Paths.get(fileName), StandardCharsets.UTF_8)) {
+            stream.forEach(s -> jsonLogs.add(new JSONObject(s)));
         }
-        catch (IOException e) {
+        catch (Exception e) {
             e.printStackTrace();
-        }
-        for (String jsonEntry : jsonEntries) {
-            jsonLogs.add(new JSONObject(jsonEntry));
         }
         
         return jsonLogs;
