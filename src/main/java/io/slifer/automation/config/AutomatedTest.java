@@ -91,7 +91,7 @@ public class AutomatedTest {
             throw exception;
         }
         
-        // RunContext.getWebDriver().manage().window().maximize();
+        RunContext.getWebDriver().manage().window().maximize();
         RunContext.getWebDriver().get(RunContext.appUrl);
     }
     
@@ -110,7 +110,7 @@ public class AutomatedTest {
      *
      * @param testResult The injected ITestResult.
      */
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod (alwaysRun = true, dependsOnMethods = "stopWebDriver")
     public void saveTestNgResult(ITestResult testResult) {
         LOG.info("Capturing Test Results.");
         resultsMap.put(RunContext.getTestId(), testResult);
