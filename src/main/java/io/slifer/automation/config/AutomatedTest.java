@@ -1,9 +1,5 @@
 package io.slifer.automation.config;
 
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.core.Appender;
-import io.slifer.automation.reporter.JsonCompiler;
-import io.slifer.automation.reporter.JsonReport;
 import io.slifer.automation.reporter.ResultsMap;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -114,7 +110,6 @@ public class AutomatedTest {
     public void saveTestNgResult(ITestResult testResult) {
         LOG.info("Capturing Test Results.");
         resultsMap.put(RunContext.getTestId(), testResult);
-        stopTestLogging("FILE-" + RunContext.getTestId());
     }
     
     /**
@@ -122,19 +117,6 @@ public class AutomatedTest {
      */
     @AfterSuite (alwaysRun = true)
     public void generateReports(ITestContext testContext) throws Exception {
-        stopTestLogging("JSON-TEST");
-        Thread.sleep(5000);
-        JsonReport report = new JsonCompiler(resultsMap).compileJsonReport();
-        System.out.println(report);
-    }
-    
-    private void stopTestLogging(String appenderName) {
-        ch.qos.logback.classic.Logger root =
-                (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-        Appender<ILoggingEvent> appender = root.getAppender(appenderName);
-        if (appender != null) {
-            appender.stop();
-            root.detachAppender(appender);
-        }
+        // stub for now
     }
 }
