@@ -51,15 +51,14 @@
         <appender-ref ref="STDOUT"/>
     </logger>
     
-    <logger name="TEST" level="DEBUG" additivity="false">
-        <appender-ref ref="JSON-TEST"/>
-        <appender-ref ref="STDOUT"/>
-    </logger>
+    <!--<logger name="TEST" level="DEBUG" additivity="false">-->
+    <!--    <appender-ref ref="JSON-TEST"/>-->
+    <!--    <appender-ref ref="STDOUT"/>-->
+    <!--</logger>-->
     
     <root level="debug">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="TestNG"/>
-        <appender-ref ref="JSON-SUITE"/>
         <appender-ref ref="JSON-TEST"/>
     </root>
 
