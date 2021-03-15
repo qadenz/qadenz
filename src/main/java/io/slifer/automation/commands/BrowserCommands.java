@@ -2,6 +2,7 @@ package io.slifer.automation.commands;
 
 import io.slifer.automation.config.RunContext;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,8 @@ import java.util.List;
  */
 public class BrowserCommands extends WebDriverCommands {
     
-    private static final Logger LOG = RunContext.TEST_LOG;
-    // private static final Logger LOG = LoggerFactory.getLogger(BrowserCommands.class);
+    // private static final Logger LOG = RunContext.TEST_LOG;
+    private static final Logger LOG = LoggerFactory.getLogger(BrowserCommands.class);
     
     public BrowserCommands() {
         super();
