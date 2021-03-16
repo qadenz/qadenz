@@ -3,6 +3,7 @@ package io.slifer.automation.reporter;
 public class StepLog {
     
     public String timestamp;
+    public String logger;
     public String level;
     public String message;
     
@@ -12,6 +13,14 @@ public class StepLog {
     
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+    
+    public String getLogger() {
+        return logger;
+    }
+    
+    public void setLogger(String logger) {
+        this.logger = logger;
     }
     
     public String getLevel() {

@@ -64,6 +64,7 @@ public class JsonCompiler {
             for (JSONObject log : jsonStepLogs) {
                 StepLog stepLog = new StepLog();
                 stepLog.setTimestamp(log.getString("timestamp"));
+                stepLog.setLogger(log.getString("logger"));
                 stepLog.setLevel(log.getString("level"));
                 stepLog.setMessage(log.getString("message"));
                 
