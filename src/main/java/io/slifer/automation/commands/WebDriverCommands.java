@@ -32,12 +32,20 @@ import java.util.List;
 public abstract class WebDriverCommands extends Commands {
     
     // private static final Logger LOG = RunContext.TEST_LOG;
-    private static final Logger LOG = LoggerFactory.getLogger(WebDriverCommands.class);
+    private static Logger LOG;
     
     private ElementFinder elementFinder;
     
     public WebDriverCommands() {
+        super();
         this.elementFinder = new ElementFinder();
+        LOG = LoggerFactory.getLogger(BrowserCommands.class);
+    }
+    
+    public WebDriverCommands(Class<?> proxyLogger) {
+        super(proxyLogger);
+        this.elementFinder = new ElementFinder();
+        LOG = LoggerFactory.getLogger(proxyLogger);
     }
     
     /**
