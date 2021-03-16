@@ -15,7 +15,7 @@ import java.util.List;
 public class BrowserCommands extends WebDriverCommands {
     
     // private static final Logger LOG = RunContext.TEST_LOG;
-    private static Logger LOG;
+    private Logger LOG;
     
     public BrowserCommands() {
         super();

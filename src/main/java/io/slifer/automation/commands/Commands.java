@@ -13,7 +13,7 @@ import org.testng.Assert;
 public abstract class Commands {
     
     // private static final Logger LOG = RunContext.TEST_LOG;
-    private static Logger LOG;
+    private Logger LOG;
     
     public Commands() {
         LOG = LoggerFactory.getLogger(BrowserCommands.class);
