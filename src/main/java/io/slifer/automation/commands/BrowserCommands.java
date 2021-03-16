@@ -15,10 +15,16 @@ import java.util.List;
 public class BrowserCommands extends WebDriverCommands {
     
     // private static final Logger LOG = RunContext.TEST_LOG;
-    private static final Logger LOG = LoggerFactory.getLogger(BrowserCommands.class);
+    private static Logger LOG;
     
     public BrowserCommands() {
         super();
+        LOG = LoggerFactory.getLogger(BrowserCommands.class);
+    }
+    
+    public BrowserCommands(Class<?> proxyLogger) {
+        super(proxyLogger);
+        LOG = LoggerFactory.getLogger(proxyLogger);
     }
     
     /**

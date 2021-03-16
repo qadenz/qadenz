@@ -13,7 +13,15 @@ import org.testng.Assert;
 public abstract class Commands {
     
     // private static final Logger LOG = RunContext.TEST_LOG;
-    private static final Logger LOG = LoggerFactory.getLogger(Commands.class);
+    private static Logger LOG;
+    
+    public Commands() {
+        LOG = LoggerFactory.getLogger(BrowserCommands.class);
+    }
+    
+    public Commands(Class<?> proxyLogger) {
+        LOG = LoggerFactory.getLogger(proxyLogger);
+    }
     
     /**
      * Evaluates each of the given conditions as a group. If one or more Conditions results in a failure, execution will
