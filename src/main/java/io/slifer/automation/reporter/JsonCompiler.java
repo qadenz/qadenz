@@ -1,6 +1,7 @@
 package io.slifer.automation.reporter;
 
 import io.slifer.automation.config.RunContext;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.testng.ITestResult;
@@ -57,6 +58,13 @@ public class JsonCompiler {
             testLog.setResult(computeTestResult(testResult));
             testLog.setStartMillis(testResult.getStartMillis());
             testLog.setEndMillis(testResult.getEndMillis());
+            
+            Throwable throwable = testResult.getThrowable();
+            testLog.setThrowable(throwable);
+            if (throwable != null) {
+                testLog.setThrowableName(throwable.getClass().getName());
+                testLog.setStackTrace(ExceptionUtils.getStackTrace(throwable));
+            }
             
             String fileName = "test-logs/test-" + key + ".json";
             List<JSONObject> jsonStepLogs = readJsonFile(fileName);
