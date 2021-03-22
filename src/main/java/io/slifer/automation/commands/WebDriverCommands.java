@@ -34,17 +34,16 @@ public abstract class WebDriverCommands extends Commands {
     // private static final Logger LOG = RunContext.TEST_LOG;
     private Logger LOG;
     
-    private ElementFinder elementFinder;
+    private ElementFinder elementFinder = new ElementFinder();
+    private ElementInspector elementInspector = new ElementInspector();
     
     public WebDriverCommands() {
         super();
-        this.elementFinder = new ElementFinder();
         LOG = LoggerFactory.getLogger(BrowserCommands.class);
     }
     
     public WebDriverCommands(Class<?> proxyLogger) {
         super(proxyLogger);
-        this.elementFinder = new ElementFinder();
         LOG = LoggerFactory.getLogger(proxyLogger);
     }
     
@@ -344,7 +343,7 @@ public abstract class WebDriverCommands extends Commands {
     public String getTextOfElement(Locator locator) {
         LOG.info("Retrieving text of element [{}].", locator.getName());
         try {
-            return new ElementInspector().getTextOfElement(locator);
+            return elementInspector.getTextOfElement(locator);
         }
         catch (Exception e) {
             LOG.error("Error retrieving text.", e);
@@ -363,7 +362,7 @@ public abstract class WebDriverCommands extends Commands {
     public List<String> getTextOfElements(Locator locator) {
         LOG.info("Retrieving text of each instance of element [{}].", locator.getName());
         try {
-            return new ElementInspector().getTextOfElements(locator);
+            return elementInspector.getTextOfElements(locator);
         }
         catch (Exception e) {
             LOG.error("Error retrieving text.", e);
@@ -383,7 +382,7 @@ public abstract class WebDriverCommands extends Commands {
     public int getInstanceOfElementText(Locator locator, String expectedText) {
         LOG.info("Finding instance of element [{}] with value [{}].", locator.getName(), expectedText);
         
-        List<String> elementValues = new ElementInspector().getTextOfElements(locator);
+        List<String> elementValues = elementInspector.getTextOfElements(locator);
         for (int i = 0; i < elementValues.size(); i++) {
             if (elementValues.get(i).equals(expectedText)) {
                 LOG.debug("Found value at index [{}].", i);
@@ -410,7 +409,7 @@ public abstract class WebDriverCommands extends Commands {
         LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].", locator.getName(),
                 attribute, expectedValue);
         
-        List<String> attributeValues = new ElementInspector().getAttributeOfElements(locator, attribute);
+        List<String> attributeValues = elementInspector.getAttributeOfElements(locator, attribute);
         for (int i = 0; i < attributeValues.size(); i++) {
             if (attributeValues.get(i).equals(expectedValue)) {
                 LOG.debug("Found value at index [{}].", i);
