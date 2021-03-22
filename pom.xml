@@ -17,6 +17,7 @@
         <java.version>11</java.version>
         
         <commons-io.version>2.8.0</commons-io.version>
+        <commons-lang.version>3.12.0</commons-lang.version>
         <hamcrest.version>2.1</hamcrest.version>
         <jackson.version>2.12.2</jackson.version>
         <json.version>20201115</json.version>
@@ -75,6 +76,12 @@
             <groupId>io.slifer</groupId>
             <artifactId>webdriver-sizzle-injector</artifactId>
             <version>${sizzle.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang.version}</version>
         </dependency>
         
         <dependency>
