@@ -60,9 +60,8 @@ public class JsonCompiler {
             testLog.setEndMillis(testResult.getEndMillis());
             
             Throwable throwable = testResult.getThrowable();
-            testLog.setThrowable(throwable);
             if (throwable != null) {
-                testLog.setThrowableName(throwable.getClass().getName());
+                testLog.setThrowable(throwable.getClass().getName());
                 testLog.setStackTrace(ExceptionUtils.getStackTrace(throwable));
             }
             
