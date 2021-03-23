@@ -12,7 +12,7 @@ public class JsonTest {
     public long startMillis;
     public long endMillis;
     
-    public List<JsonTestLog> jsonTestLogs;
+    public List<JsonTestLog> logs;
     
     public String screenshot;
     public String throwable;
@@ -66,12 +66,12 @@ public class JsonTest {
         this.endMillis = endMillis;
     }
     
-    public List<JsonTestLog> getStepLogs() {
-        return jsonTestLogs;
+    public List<JsonTestLog> getLogs() {
+        return logs;
     }
     
-    public void setStepLogs(List<JsonTestLog> jsonTestLogs) {
-        this.jsonTestLogs = jsonTestLogs;
+    public void setLogs(List<JsonTestLog> logs) {
+        this.logs = logs;
     }
     
     public String getScreenshot() {

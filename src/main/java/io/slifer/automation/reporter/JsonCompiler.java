@@ -66,18 +66,18 @@ public class JsonCompiler {
             }
             
             String fileName = "test-logs/test-" + key + ".json";
-            List<JSONObject> jsonStepLogs = readJsonFile(fileName);
-            List<JsonTestLog> jsonTestLogs = new ArrayList<>();
-            for (JSONObject log : jsonStepLogs) {
+            List<JSONObject> jsonLogs = readJsonFile(fileName);
+            List<JsonTestLog> logs = new ArrayList<>();
+            for (JSONObject log : jsonLogs) {
                 JsonTestLog jsonTestLog = new JsonTestLog();
                 jsonTestLog.setTimestamp(log.getString("timestamp"));
                 jsonTestLog.setLogger(log.getString("logger"));
                 jsonTestLog.setLevel(log.getString("level"));
                 jsonTestLog.setMessage(log.getString("message"));
                 
-                jsonTestLogs.add(jsonTestLog);
+                logs.add(jsonTestLog);
             }
-            jsonTest.setStepLogs(jsonTestLogs);
+            jsonTest.setLogs(logs);
             
             jsonTests.add(jsonTest);
         }
