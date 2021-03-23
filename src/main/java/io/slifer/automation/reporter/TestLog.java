@@ -15,8 +15,7 @@ public class TestLog {
     public List<StepLog> stepLogs;
     
     public String screenshot;
-    public Throwable throwable;
-    public String throwableName;
+    public String throwable;
     public String stackTrace;
     
     public String getClassName() {
@@ -83,20 +82,12 @@ public class TestLog {
         this.screenshot = screenshot;
     }
     
-    public Throwable getThrowable() {
+    public String getThrowable() {
         return throwable;
     }
     
-    public void setThrowable(Throwable throwable) {
+    public void setThrowable(String throwable) {
         this.throwable = throwable;
-    }
-    
-    public String getThrowableName() {
-        return throwableName;
-    }
-    
-    public void setThrowableName(String throwableName) {
-        this.throwableName = throwableName;
     }
     
     public String getStackTrace() {
