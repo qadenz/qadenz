@@ -45,44 +45,44 @@ public class JsonCompiler {
     private void processTestLogs() {
         SUITE_LOG.info("Processing Test Logs.");
         
-        List<TestLog> testLogs = new ArrayList<>();
+        List<JsonTest> jsonTests = new ArrayList<>();
         
         for (String key : resultsMap.keySet()) {
             SUITE_LOG.info("Starting Log Processing for Test [{}]", key);
             ITestResult testResult = resultsMap.get(key);
             
-            TestLog testLog = new TestLog();
-            testLog.setClassName(testResult.getTestClass().getName());
-            testLog.setTestName(testResult.getName());
-            testLog.setParameters(Arrays.toString(testResult.getParameters()).replace("/", "-"));
-            testLog.setResult(computeTestResult(testResult));
-            testLog.setStartMillis(testResult.getStartMillis());
-            testLog.setEndMillis(testResult.getEndMillis());
+            JsonTest jsonTest = new JsonTest();
+            jsonTest.setClassName(testResult.getTestClass().getName());
+            jsonTest.setTestName(testResult.getName());
+            jsonTest.setParameters(Arrays.toString(testResult.getParameters()).replace("/", "-"));
+            jsonTest.setResult(computeTestResult(testResult));
+            jsonTest.setStartMillis(testResult.getStartMillis());
+            jsonTest.setEndMillis(testResult.getEndMillis());
             
             Throwable throwable = testResult.getThrowable();
             if (throwable != null) {
-                testLog.setThrowable(throwable.getClass().getName());
-                testLog.setStackTrace(ExceptionUtils.getStackTrace(throwable));
+                jsonTest.setThrowable(throwable.getClass().getName());
+                jsonTest.setStackTrace(ExceptionUtils.getStackTrace(throwable));
             }
             
             String fileName = "test-logs/test-" + key + ".json";
             List<JSONObject> jsonStepLogs = readJsonFile(fileName);
-            List<StepLog> stepLogs = new ArrayList<>();
+            List<JsonTestLog> jsonTestLogs = new ArrayList<>();
             for (JSONObject log : jsonStepLogs) {
-                StepLog stepLog = new StepLog();
-                stepLog.setTimestamp(log.getString("timestamp"));
-                stepLog.setLogger(log.getString("logger"));
-                stepLog.setLevel(log.getString("level"));
-                stepLog.setMessage(log.getString("message"));
+                JsonTestLog jsonTestLog = new JsonTestLog();
+                jsonTestLog.setTimestamp(log.getString("timestamp"));
+                jsonTestLog.setLogger(log.getString("logger"));
+                jsonTestLog.setLevel(log.getString("level"));
+                jsonTestLog.setMessage(log.getString("message"));
                 
-                stepLogs.add(stepLog);
+                jsonTestLogs.add(jsonTestLog);
             }
-            testLog.setStepLogs(stepLogs);
+            jsonTest.setStepLogs(jsonTestLogs);
             
-            testLogs.add(testLog);
+            jsonTests.add(jsonTest);
         }
         
-        sortTestLogsByResult(testLogs);
+        sortTestLogsByResult(jsonTests);
     }
     
     private List<JSONObject> readJsonFile(String fileName) {
@@ -119,13 +119,13 @@ public class JsonCompiler {
         return null;
     }
     
-    private void sortTestLogsByResult(List<TestLog> testLogs) {
-        List<TestLog> passed = new ArrayList<>();
-        List<TestLog> failed = new ArrayList<>();
-        List<TestLog> stopped = new ArrayList<>();
-        List<TestLog> skipped = new ArrayList<>();
+    private void sortTestLogsByResult(List<JsonTest> jsonTests) {
+        List<JsonTest> passed = new ArrayList<>();
+        List<JsonTest> failed = new ArrayList<>();
+        List<JsonTest> stopped = new ArrayList<>();
+        List<JsonTest> skipped = new ArrayList<>();
         
-        for (TestLog log : testLogs) {
+        for (JsonTest log : jsonTests) {
             switch (log.getResult()) {
                 case PASSED:
                     passed.add(log);

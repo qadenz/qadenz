@@ -1,6 +1,6 @@
 package io.slifer.automation.reporter;
 
-public class StepLog {
+public class JsonTestLog {
     
     public String timestamp;
     public String logger;

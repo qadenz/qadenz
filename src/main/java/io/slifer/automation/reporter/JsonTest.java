@@ -2,7 +2,7 @@ package io.slifer.automation.reporter;
 
 import java.util.List;
 
-public class TestLog {
+public class JsonTest {
     
     public String className;
     public String testName;
@@ -12,7 +12,7 @@ public class TestLog {
     public long startMillis;
     public long endMillis;
     
-    public List<StepLog> stepLogs;
+    public List<JsonTestLog> jsonTestLogs;
     
     public String screenshot;
     public String throwable;
@@ -66,12 +66,12 @@ public class TestLog {
         this.endMillis = endMillis;
     }
     
-    public List<StepLog> getStepLogs() {
-        return stepLogs;
+    public List<JsonTestLog> getStepLogs() {
+        return jsonTestLogs;
     }
     
-    public void setStepLogs(List<StepLog> stepLogs) {
-        this.stepLogs = stepLogs;
+    public void setStepLogs(List<JsonTestLog> jsonTestLogs) {
+        this.jsonTestLogs = jsonTestLogs;
     }
     
     public String getScreenshot() {
