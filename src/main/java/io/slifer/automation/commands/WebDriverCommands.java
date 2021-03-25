@@ -31,7 +31,6 @@ import java.util.List;
  */
 public abstract class WebDriverCommands extends Commands {
     
-    // private static final Logger LOG = RunContext.TEST_LOG;
     private Logger LOG;
     
     private ElementFinder elementFinder = new ElementFinder();
@@ -39,7 +38,7 @@ public abstract class WebDriverCommands extends Commands {
     
     public WebDriverCommands() {
         super();
-        LOG = LoggerFactory.getLogger(BrowserCommands.class);
+        LOG = LoggerFactory.getLogger(WebDriverCommands.class);
     }
     
     public WebDriverCommands(Class<?> proxyLogger) {
