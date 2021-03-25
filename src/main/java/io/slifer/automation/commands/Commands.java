@@ -37,21 +37,20 @@ public abstract class Commands {
         boolean failed = false;
         
         for (Condition condition : conditions) {
+            LOG.info("Asserting Condition - {} :: ", condition.description());
             try {
                 boolean result = condition.result();
                 Assert.assertTrue(result);
-                LOG.info("Asserting Condition - {} :: Result - PASS", condition.description());
+                LOG.info("Result - PASS");
             }
             catch (AssertionError error) {
+                LOG.info("Result - FAIL :: {}", condition.output());
                 exceptions.add(error);
-                LOG.info("Asserting Condition - {} :: Result - FAIL :: Found [{}]",
-                        condition.description(), condition.output());
                 failed = true;
             }
             catch (Exception exception) {
                 exceptions.add(exception);
-                LOG.info("Asserting Condition - {} :: Result - ERROR",
-                        condition.description(), exception);
+                LOG.error("Result - ERROR :: {}", exception.getClass().getName(), exception);
             }
         }
         
