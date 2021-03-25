@@ -5,6 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Common commands for all test types.
  *
@@ -30,27 +33,42 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void verify(Condition... conditions) {
-        boolean hasFailures = false;
+        List<Throwable> exceptions = new ArrayList<>();
+        boolean failed = false;
         
         for (Condition condition : conditions) {
-            LOG.info("Asserting Condition :: {}", condition.description());
             try {
                 boolean result = condition.result();
                 Assert.assertTrue(result);
-                LOG.warn("Result: PASS");
+                LOG.info("Asserting Condition - {} :: Result - PASS", condition.description());
             }
             catch (AssertionError error) {
-                hasFailures = true;
-                LOG.warn("Result: FAIL: {}", condition.output());
+                exceptions.add(error);
+                LOG.info("Asserting Condition - {} :: Result - FAIL :: Found [{}]",
+                        condition.description(), condition.output());
+                failed = true;
             }
             catch (Exception exception) {
-                hasFailures = true;
-                LOG.error("Result: ERROR", exception);
+                exceptions.add(exception);
+                LOG.info("Asserting Condition - {} :: Result - ERROR",
+                        condition.description(), exception);
             }
         }
         
-        if (hasFailures) {
-            throw new AssertionError();
+        if (exceptions.size() > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Throwable throwable : exceptions) {
+                stringBuilder.append(throwable.getMessage() + "\n");
+            }
+            
+            String exceptionMessages = stringBuilder.toString();
+            
+            if (failed) {
+                throw new AssertionError(exceptionMessages);
+            }
+            else {
+                throw new RuntimeException(exceptionMessages);
+            }
         }
     }
     
