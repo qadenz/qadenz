@@ -1,6 +1,7 @@
 package io.slifer.automation.config;
 
 import io.slifer.automation.reporter.ResultsMap;
+import io.slifer.automation.reporter.Screenshots;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -29,6 +30,7 @@ public class AutomatedTest {
     private static final Logger LOG = RunContext.SUITE_LOG;
     
     private ResultsMap resultsMap = new ResultsMap();
+    private Screenshots screenshots = new Screenshots();
     
     /**
      * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
@@ -91,10 +93,17 @@ public class AutomatedTest {
         RunContext.getWebDriver().get(RunContext.appUrl);
     }
     
+    @AfterMethod (alwaysRun = true)
+    public void saveScreenshot(ITestResult testResult) {
+        if (testResult.getStatus() == 2) {
+            screenshots.captureScreenshot();
+        }
+    }
+    
     /**
      * Concludes the test by stopping the WebDriver instance.
      */
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod (alwaysRun = true, dependsOnMethods = "saveScreenshot")
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
         RunContext.getWebDriver().quit();
