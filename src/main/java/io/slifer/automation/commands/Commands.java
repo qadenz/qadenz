@@ -15,11 +15,10 @@ import java.util.List;
  */
 public abstract class Commands {
     
-    // private static final Logger LOG = RunContext.TEST_LOG;
     private Logger LOG;
     
     public Commands() {
-        LOG = LoggerFactory.getLogger(BrowserCommands.class);
+        LOG = LoggerFactory.getLogger(Commands.class);
     }
     
     public Commands(Class<?> proxyLogger) {
