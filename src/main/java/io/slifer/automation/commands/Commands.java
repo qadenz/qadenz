@@ -57,7 +57,7 @@ public abstract class Commands {
         if (exceptions.size() > 0) {
             StringBuilder stringBuilder = new StringBuilder();
             for (Throwable throwable : exceptions) {
-                stringBuilder.append(throwable.getMessage() + "\n");
+                stringBuilder.append("\n").append(throwable.getMessage());
             }
             
             String exceptionMessages = stringBuilder.toString();
