@@ -19,10 +19,12 @@ public class JsonCompiler {
     private static final Logger SUITE_LOG = RunContext.SUITE_LOG;
     
     private ResultsMap resultsMap;
+    private Screenshots screenshots;
     private JsonReport jsonReport;
     
-    public JsonCompiler(ResultsMap resultsMap) {
+    public JsonCompiler(ResultsMap resultsMap, Screenshots screenshots) {
         this.resultsMap = resultsMap;
+        this.screenshots = screenshots;
         jsonReport = new JsonReport();
     }
     
@@ -63,6 +65,7 @@ public class JsonCompiler {
             if (throwable != null) {
                 jsonTest.setThrowable(throwable.getClass().getName());
                 jsonTest.setStackTrace(ExceptionUtils.getStackTrace(throwable));
+                jsonTest.setScreenshot(screenshots.get(key));
             }
             
             String fileName = "test-logs/test-" + key + ".json";
