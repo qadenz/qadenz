@@ -19,6 +19,7 @@
         <commons-io.version>2.8.0</commons-io.version>
         <commons-lang.version>3.12.0</commons-lang.version>
         <hamcrest.version>2.1</hamcrest.version>
+        <imgscalr.version>4.2</imgscalr.version>
         <jackson.version>2.12.2</jackson.version>
         <json.version>20201115</json.version>
         <logback.version>1.2.3</logback.version>
@@ -88,6 +89,12 @@
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>${hamcrest.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.imgscalr</groupId>
+            <artifactId>imgscalr-lib</artifactId>
+            <version>${imgscalr.version}</version>
         </dependency>
         
         <dependency>
