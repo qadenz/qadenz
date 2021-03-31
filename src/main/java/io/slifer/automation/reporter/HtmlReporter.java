@@ -86,6 +86,8 @@ public class HtmlReporter {
         Element executionTimeItem = summary.getElementsByAttributeValue("class", "summary-item bordered wide").get(0);
         executionTimeItem.appendElement("div").attr("class", "summary-item-label").text("Execution Time");
         executionTimeItem.appendElement("div").attr("class", "summary-item-value").text("99:99:99.999");
+        
+        body.appendElement("br");
     }
     
     private void writeHtmlFile(Document document) {
