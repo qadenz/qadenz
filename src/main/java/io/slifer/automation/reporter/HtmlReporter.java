@@ -54,7 +54,7 @@ public class HtmlReporter {
     private void writeSummary(Element body) {
         body.appendElement("div").attr("class", "suite-summary bordered");
         
-        Element summary = body.getElementsByTag("div").get(0);
+        Element summary = body.getElementsByAttributeValue("class", "suite-summary bordered").get(0);
         summary.appendElement("div").attr("class", "suite-name bordered").text("Suite Name Goes Here");
         
         summary.appendElement("div").attr("class", "summary-item bordered");
