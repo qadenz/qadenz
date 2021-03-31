@@ -2,6 +2,7 @@ package io.slifer.automation.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import io.slifer.automation.reporter.HtmlReporter;
 import io.slifer.automation.reporter.JsonCompiler;
 import io.slifer.automation.reporter.JsonReport;
 import io.slifer.automation.reporter.ResultsMap;
@@ -134,5 +135,8 @@ public class AutomatedTest {
         JsonReport jsonReport = new JsonCompiler(resultsMap, screenshots).compileJsonReport();
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
         objectWriter.writeValue(new File("Automation-Report.json"), jsonReport);
+        
+        HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
+        htmlReporter.generateReport();
     }
 }
