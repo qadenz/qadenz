@@ -1,5 +1,9 @@
 package io.slifer.automation.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import io.slifer.automation.reporter.JsonCompiler;
+import io.slifer.automation.reporter.JsonReport;
 import io.slifer.automation.reporter.ResultsMap;
 import io.slifer.automation.reporter.Screenshots;
 import org.openqa.selenium.MutableCapabilities;
@@ -13,6 +17,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -126,6 +131,8 @@ public class AutomatedTest {
      */
     @AfterSuite (alwaysRun = true)
     public void generateReports(ITestContext testContext) throws Exception {
-        // stub for now
+        JsonReport jsonReport = new JsonCompiler(resultsMap, screenshots).compileJsonReport();
+        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        objectWriter.writeValue(new File("Automation-Report.json"), jsonReport);
     }
 }
