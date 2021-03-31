@@ -21,7 +21,7 @@ public class HtmlReporter {
     public void generateReport() {
         Document document = Document.createShell("");
         writeHead(document);
-        writeSummary(document);
+        writeSummary(document.body());
         
         writeHtmlFile(document);
     }
@@ -48,11 +48,39 @@ public class HtmlReporter {
             exception.printStackTrace();
         }
         
-        return contents.replaceAll("\\s", "");
+        return contents.replace("    ", "").replace(" {", "{").replace(": ", ":").replaceAll("\n", "");
     }
     
-    private void writeSummary(Document document) {
+    private void writeSummary(Element body) {
+        body.appendElement("div").attr("class", "suite-summary bordered");
         
+        Element summary = body.getElementsByTag("div").get(0);
+        summary.appendElement("div").attr("class", "suite-name bordered").text("Suite Name Goes Here");
+        summary.appendElement("div").attr("class", "summary-item bordered");
+        
+        // Element totalTestsItem = summary.getElementsByTag("div").get(1);
+        // totalTestsItem.appendElement("div").attr("class", "summary-item-label").text("Total Tests");
+        // totalTestsItem.appendElement("div").attr("class", "summary-item-value").text("9999");
+        // summary.appendElement("div").attr("class", "summary-item bordered");
+        // Element testsPassedItem = summary.getElementsByTag("div").get(2);
+        // testsPassedItem.appendElement("div").attr("class", "summary-item-label").text("Tests Passed");
+        // testsPassedItem.appendElement("div").attr("class", "summary-item-value txt-passed").text("9999");
+        // summary.appendElement("div").attr("class", "summary-item bordered");
+        // Element testsFailedItem = summary.getElementsByTag("div").get(3);
+        // testsFailedItem.appendElement("div").attr("class", "summary-item-label").text("Tests Failed");
+        // testsFailedItem.appendElement("div").attr("class", "summary-item-value txt-failed").text("9999");
+        // summary.appendElement("div").attr("class", "summary-item bordered");
+        // Element testsStoppedItem = summary.getElementsByTag("div").get(4);
+        // testsStoppedItem.appendElement("div").attr("class", "summary-item-label").text("Tests Stopped");
+        // testsStoppedItem.appendElement("div").attr("class", "summary-item-value txt-stopped").text("9999");
+        // summary.appendElement("div").attr("class", "summary-item bordered");
+        // Element testsSkippedItem = summary.getElementsByTag("div").get(5);
+        // testsSkippedItem.appendElement("div").attr("class", "summary-item-label").text("Tests Skipped");
+        // testsSkippedItem.appendElement("div").attr("class", "summary-item-value txt-skipped").text("9999");
+        // summary.appendElement("div").attr("class", "summary-item bordered wide");
+        // Element executionTimeItem = summary.getElementsByTag("div").get(6);
+        // executionTimeItem.appendElement("div").attr("class", "summary-item-label").text("Execution Time");
+        // executionTimeItem.appendElement("div").attr("class", "summary-item-value").text("99:99:99.999");
     }
     
     private void writeHtmlFile(Document document) {
@@ -63,5 +91,12 @@ public class HtmlReporter {
         catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+    
+    public static void main(String[] args) {
+        HtmlReporter r = new HtmlReporter(null);
+        r.generateReport();
+        
+        // System.out.println(r.loadAndMinifyCss());
     }
 }
