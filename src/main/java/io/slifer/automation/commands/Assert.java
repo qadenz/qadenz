@@ -29,23 +29,16 @@ public class Assert {
             }
             catch (Exception exception) {
                 exceptions.add(exception);
-                LOG.error("Result - ERROR :: {}", exception.getClass().getSimpleName(), exception);
+                LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             }
         }
         
         if (exceptions.size() > 0) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (Throwable throwable : exceptions) {
-                stringBuilder.append("\n").append(throwable.getMessage());
-            }
-            
-            String exceptionMessages = stringBuilder.toString();
-            
             if (failed) {
-                throw new AssertionError(exceptionMessages);
+                throw new AssertionError("One or more validations failed.");
             }
             else {
-                throw new RuntimeException(exceptionMessages);
+                throw new RuntimeException("One or more validations encountered an error.");
             }
         }
     }
