@@ -57,37 +57,22 @@ public class HtmlReporter {
         Element summary = body.getElementsByAttributeValue("class", "suite-summary bordered").get(0);
         summary.appendElement("div").attr("class", "suite-name bordered").text("Suite Name Goes Here");
         
-        summary.appendElement("div").attr("class", "summary-item bordered");
-        Element totalTestsItem = summary.getElementsByAttributeValue("class", "summary-item bordered").get(0);
-        totalTestsItem.appendElement("div").attr("class", "summary-item-label").text("Total Tests");
-        totalTestsItem.appendElement("div").attr("class", "summary-item-value").text("9999");
-        
-        summary.appendElement("div").attr("class", "summary-item bordered");
-        Element testsPassedItem = summary.getElementsByAttributeValue("class", "summary-item bordered").get(1);
-        testsPassedItem.appendElement("div").attr("class", "summary-item-label").text("Tests Passed");
-        testsPassedItem.appendElement("div").attr("class", "summary-item-value txt-passed").text("9999");
-        
-        summary.appendElement("div").attr("class", "summary-item bordered");
-        Element testsFailedItem = summary.getElementsByAttributeValue("class", "summary-item bordered").get(2);
-        testsFailedItem.appendElement("div").attr("class", "summary-item-label").text("Tests Failed");
-        testsFailedItem.appendElement("div").attr("class", "summary-item-value txt-failed").text("9999");
-        
-        summary.appendElement("div").attr("class", "summary-item bordered");
-        Element testsStoppedItem = summary.getElementsByAttributeValue("class", "summary-item bordered").get(3);
-        testsStoppedItem.appendElement("div").attr("class", "summary-item-label").text("Tests Stopped");
-        testsStoppedItem.appendElement("div").attr("class", "summary-item-value txt-stopped").text("9999");
-        
-        summary.appendElement("div").attr("class", "summary-item bordered");
-        Element testsSkippedItem = summary.getElementsByAttributeValue("class", "summary-item bordered").get(4);
-        testsSkippedItem.appendElement("div").attr("class", "summary-item-label").text("Tests Skipped");
-        testsSkippedItem.appendElement("div").attr("class", "summary-item-value txt-skipped").text("9999");
-        
-        summary.appendElement("div").attr("class", "summary-item bordered wide");
-        Element executionTimeItem = summary.getElementsByAttributeValue("class", "summary-item bordered wide").get(0);
-        executionTimeItem.appendElement("div").attr("class", "summary-item-label").text("Execution Time");
-        executionTimeItem.appendElement("div").attr("class", "summary-item-value").text("99:99:99.999");
+        writeSummaryItem(summary, false, "", "Total Tests", "9999");
+        writeSummaryItem(summary, false, "txt-passed", "Tests Passed", "9999");
+        writeSummaryItem(summary, false, "txt-failed", "Tests Failed", "9999");
+        writeSummaryItem(summary, false, "txt-stopped", "Tests Stopped", "9999");
+        writeSummaryItem(summary, false, "txt-skipped", "Tests Skipped", "9999");
+        writeSummaryItem(summary, true, "", "Execution Time", "99:99:99.999");
         
         body.appendElement("br");
+    }
+    
+    private void writeSummaryItem(Element summary, boolean wide, String valueAttribute, String label, String value) {
+        String attribute = (wide) ? "summary-item bordered wide" : "summary-item bordered";
+        summary.appendElement("div").attr("class", attribute);
+        Element totalTestsItem = summary.getElementsByAttributeValue("class", attribute).last();
+        totalTestsItem.appendElement("div").attr("class", "summary-item-label").text(label);
+        totalTestsItem.appendElement("div").attr("class", "summary-item-value " + valueAttribute).text(value);
     }
     
     private void writeHtmlFile(Document document) {
