@@ -1,7 +1,6 @@
 package io.slifer.automation.reporter;
 
 import io.slifer.automation.config.RunContext;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.testng.ITestResult;
@@ -63,8 +62,9 @@ public class JsonCompiler {
             
             Throwable throwable = testResult.getThrowable();
             if (throwable != null) {
-                jsonTest.setThrowable(throwable.getClass().getName());
-                jsonTest.setStackTrace(ExceptionUtils.getStackTrace(throwable));
+                // Commenting these items in case the need arises to restore them
+                // jsonTest.setThrowable(throwable.getClass().getName());
+                // jsonTest.setStackTrace(ExceptionUtils.getStackTrace(throwable));
                 jsonTest.setScreenshot(screenshots.get(key));
             }
             
