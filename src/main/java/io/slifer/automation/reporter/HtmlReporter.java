@@ -84,11 +84,4 @@ public class HtmlReporter {
             exception.printStackTrace();
         }
     }
-    
-    public static void main(String[] args) {
-        HtmlReporter r = new HtmlReporter(null);
-        r.generateReport();
-        
-        // System.out.println(r.loadAndMinifyCss());
-    }
 }
