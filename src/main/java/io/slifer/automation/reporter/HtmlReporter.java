@@ -62,13 +62,19 @@ public class HtmlReporter {
         document.body().appendElement("div").addClass("suite-summary bordered");
         
         Element summary = document.body().getElementsByClass("suite-summary bordered").get(0);
-        summary.appendElement("div").addClass("suite-name bordered").text("Suite Name Goes Here");
+        summary.appendElement("div").addClass("suite-name bordered").text(json.getSuiteName());
         
-        writeSummaryItem(summary, false, "", "Total Tests", "9999");
-        writeSummaryItem(summary, false, "txt-passed", "Tests Passed", "9999");
-        writeSummaryItem(summary, false, "txt-failed", "Tests Failed", "9999");
-        writeSummaryItem(summary, false, "txt-stopped", "Tests Stopped", "9999");
-        writeSummaryItem(summary, false, "txt-skipped", "Tests Skipped", "9999");
+        int passed = json.getPassedTests().size();
+        int failed = json.getFailedTests().size();
+        int stopped = json.getStoppedTests().size();
+        int skipped = json.getSkippedTests().size();
+        int total = passed + failed + stopped + skipped;
+        
+        writeSummaryItem(summary, false, "", "Total Tests", String.valueOf(total));
+        writeSummaryItem(summary, false, "txt-passed", "Tests Passed", String.valueOf(passed));
+        writeSummaryItem(summary, false, "txt-failed", "Tests Failed", String.valueOf(failed));
+        writeSummaryItem(summary, false, "txt-stopped", "Tests Stopped", String.valueOf(stopped));
+        writeSummaryItem(summary, false, "txt-skipped", "Tests Skipped", String.valueOf(skipped));
         writeSummaryItem(summary, true, "", "Execution Time", "99:99:99.999");
         
         document.body().appendElement("br");
