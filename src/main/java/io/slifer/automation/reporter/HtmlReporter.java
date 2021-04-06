@@ -14,25 +14,26 @@ import java.nio.file.Paths;
 public class HtmlReporter {
     
     private JsonReport json;
+    private Document document;
     
     public HtmlReporter(JsonReport json) {
         this.json = json;
+        this.document = Document.createShell("");
     }
     
     public void generateReport() {
-        Document document = Document.createShell("");
-        writeHead(document);
-        writeSummary(document.body());
-        writeResultsSection(document.body(), HtmlResult.FAILED);
-        writeResultsSection(document.body(), HtmlResult.STOPPED);
-        writeResultsSection(document.body(), HtmlResult.SKIPPED);
-        writeResultsSection(document.body(), HtmlResult.PASSED);
-        writeScript(document.body());
+        writeHead();
+        writeSummary();
+        writeResultsSection(HtmlResult.FAILED);
+        writeResultsSection(HtmlResult.STOPPED);
+        writeResultsSection(HtmlResult.SKIPPED);
+        writeResultsSection(HtmlResult.PASSED);
+        writeScript();
         
-        writeHtmlFile(document);
+        writeHtmlFile();
     }
     
-    private void writeHead(Document document) {
+    private void writeHead() {
         Element head = document.head();
         head.appendElement("meta").attr("charset", "UTF-8");
         head.appendElement("title").text("Test Report");
@@ -57,10 +58,10 @@ public class HtmlReporter {
         return contents.replace("    ", "").replace(" {", "{").replace(": ", ":").replaceAll("\n", "");
     }
     
-    private void writeSummary(Element body) {
-        body.appendElement("div").addClass("suite-summary bordered");
+    private void writeSummary() {
+        document.body().appendElement("div").addClass("suite-summary bordered");
         
-        Element summary = body.getElementsByClass("suite-summary bordered").get(0);
+        Element summary = document.body().getElementsByClass("suite-summary bordered").get(0);
         summary.appendElement("div").addClass("suite-name bordered").text("Suite Name Goes Here");
         
         writeSummaryItem(summary, false, "", "Total Tests", "9999");
@@ -70,7 +71,7 @@ public class HtmlReporter {
         writeSummaryItem(summary, false, "txt-skipped", "Tests Skipped", "9999");
         writeSummaryItem(summary, true, "", "Execution Time", "99:99:99.999");
         
-        body.appendElement("br");
+        document.body().appendElement("br");
     }
     
     private void writeSummaryItem(Element summary, boolean wide, String valueAttribute, String label, String value) {
@@ -81,9 +82,9 @@ public class HtmlReporter {
         totalTestsItem.appendElement("div").addClass("summary-item-value " + valueAttribute).text(value);
     }
     
-    private void writeResultsSection(Element body, HtmlResult result) {
-        body.appendElement("div").addClass("results-section bordered");
-        Element section = body.getElementsByClass("results-section bordered").last();
+    private void writeResultsSection(HtmlResult result) {
+        document.body().appendElement("div").addClass("results-section bordered");
+        Element section = document.body().getElementsByClass("results-section bordered").last();
         section.appendElement("div").addClass("section-name bordered " + result.resultsSectionStyle)
                .text(result.resultsSectionLabel);
         section.appendElement("div").addClass("test-classes bordered");
@@ -91,7 +92,7 @@ public class HtmlReporter {
         
         writeTestClass(classes);
         
-        body.appendElement("br");
+        document.body().appendElement("br");
     }
     
     private void writeTestClass(Element classes) {
@@ -133,10 +134,10 @@ public class HtmlReporter {
                   .text("99:99:99.999 | INFO | This is a log entry for a test step.");
     }
     
-    private void writeScript(Element body) {
+    private void writeScript() {
         String js = "<script>var acc = document.getElementsByClassName(\"accordion\");" +
-                "var i;" +
-                "for (i = 0; i < acc.length; i++) {" +
+                // "var i;" +
+                "for (var i = 0; i < acc.length; i++) {" +
                 "acc[i].addEventListener(\"click\", function () {" +
                 "this.classList.toggle(\"active\");" +
                 "var panel = this.nextElementSibling;" +
@@ -144,10 +145,10 @@ public class HtmlReporter {
                 "panel.style.display = \"none\";}" +
                 "else {panel.style.display = \"block\";}});}</script>";
         DataNode script = new DataNode(js);
-        body.appendChild(script);
+        document.body().appendChild(script);
     }
     
-    private void writeHtmlFile(Document document) {
+    private void writeHtmlFile() {
         try {
             File file = new File("Automation-Report.html");
             FileUtils.writeStringToFile(file, document.outerHtml(), StandardCharsets.UTF_8);
