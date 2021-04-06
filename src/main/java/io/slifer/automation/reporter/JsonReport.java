@@ -4,18 +4,18 @@ import java.util.List;
 
 public class JsonReport {
     
-    public String suiteName;
+    private String suiteName;
     
-    public String browser;
-    public String browserVersion;
-    public String platform;
+    private String browser;
+    private String browserVersion;
+    private String platform;
     
-    public String appUrl;
+    private String appUrl;
     
-    public List<JsonTest> failedTests;
-    public List<JsonTest> stoppedTests;
-    public List<JsonTest> skippedTests;
-    public List<JsonTest> passedTests;
+    private List<JsonTest> failedTests;
+    private List<JsonTest> stoppedTests;
+    private List<JsonTest> skippedTests;
+    private List<JsonTest> passedTests;
     
     public String getSuiteName() {
         return suiteName;
