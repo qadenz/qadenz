@@ -1,6 +1,7 @@
 package io.slifer.automation.reporter;
 
 import org.apache.commons.io.FileUtils;
+import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -57,10 +58,10 @@ public class HtmlReporter {
     }
     
     private void writeSummary(Element body) {
-        body.appendElement("div").attr("class", "suite-summary bordered");
+        body.appendElement("div").addClass("suite-summary bordered");
         
-        Element summary = body.getElementsByAttributeValue("class", "suite-summary bordered").get(0);
-        summary.appendElement("div").attr("class", "suite-name bordered").text("Suite Name Goes Here");
+        Element summary = body.getElementsByClass("suite-summary bordered").get(0);
+        summary.appendElement("div").addClass("suite-name bordered").text("Suite Name Goes Here");
         
         writeSummaryItem(summary, false, "", "Total Tests", "9999");
         writeSummaryItem(summary, false, "txt-passed", "Tests Passed", "9999");
@@ -74,18 +75,18 @@ public class HtmlReporter {
     
     private void writeSummaryItem(Element summary, boolean wide, String valueAttribute, String label, String value) {
         String attribute = (wide) ? "summary-item bordered wide" : "summary-item bordered";
-        summary.appendElement("div").attr("class", attribute);
-        Element totalTestsItem = summary.getElementsByAttributeValue("class", attribute).last();
-        totalTestsItem.appendElement("div").attr("class", "summary-item-label").text(label);
-        totalTestsItem.appendElement("div").attr("class", "summary-item-value " + valueAttribute).text(value);
+        summary.appendElement("div").addClass(attribute);
+        Element totalTestsItem = summary.getElementsByClass(attribute).last();
+        totalTestsItem.appendElement("div").addClass("summary-item-label").text(label);
+        totalTestsItem.appendElement("div").addClass("summary-item-value " + valueAttribute).text(value);
     }
     
     private void writeResultsSection(Element body, HtmlResult result) {
-        body.appendElement("div").attr("class", "results-section bordered");
+        body.appendElement("div").addClass("results-section bordered");
         Element section = body.getElementsByClass("results-section bordered").last();
-        section.appendElement("div").attr("class", "section-name bordered " + result.resultsSectionStyle)
+        section.appendElement("div").addClass("section-name bordered " + result.resultsSectionStyle)
                .text(result.resultsSectionLabel);
-        section.appendElement("div").attr("class", "test-classes bordered");
+        section.appendElement("div").addClass("test-classes bordered");
         Element classes = section.getElementsByClass("test-classes bordered").last();
         
         writeTestClass(classes);
@@ -94,56 +95,40 @@ public class HtmlReporter {
     }
     
     private void writeTestClass(Element classes) {
-        classes.appendElement("div").attr("class", "test-class");
+        classes.appendElement("div").addClass("test-class");
         Element testClass = classes.getElementsByClass("test-class").last();
-        testClass.appendElement("div").attr("class", "class-name accordion").text("io.slifer.test.cases.SampleTest");
-        testClass.appendElement("div").attr("class", "test-methods panel hide");
+        testClass.appendElement("div").addClass("class-name accordion").text("io.slifer.test.cases.SampleTest");
+        testClass.appendElement("div").addClass("test-methods panel hide");
         Element methods = testClass.getElementsByClass("test-methods panel hide").last();
         
         writeTestMethod(methods);
     }
     
     private void writeTestMethod(Element methods) {
-        methods.appendElement("div").attr("class", "test-method");
+        methods.appendElement("div").addClass("test-method");
         Element testMethod = methods.getElementsByClass("test-method").last();
-        testMethod.appendElement("div").attr("class", "method-name accordion")
+        testMethod.appendElement("div").addClass("method-name accordion")
                   .text("verifySomethingHappensWhenActionIsCompleted");
-        testMethod.appendElement("span").attr("class", "method-detail");
+        testMethod.appendElement("span").addClass("method-detail");
         Element startTime = testMethod.getElementsByClass("method-detail").last();
-        startTime.appendElement("span").attr("class", "method-detail-label").text("Start Time");
-        startTime.appendElement("span").attr("class", "method-detail-value").text("99:99:99.999");
+        startTime.appendElement("span").addClass("method-detail-label").text("Start Time");
+        startTime.appendElement("span").addClass("method-detail-value").text("99:99:99.999");
         Element duration = testMethod.getElementsByClass("method-detail").last();
-        duration.appendElement("span").attr("class", "method-detail-label").text("Start Time");
-        duration.appendElement("span").attr("class", "method-detail-value").text("99:99:99.999");
-        testMethod.appendElement("div").attr("class", "method-logs");
+        duration.appendElement("span").addClass("method-detail-label").text("Start Time");
+        duration.appendElement("span").addClass("method-detail-value").text("99:99:99.999");
+        testMethod.appendElement("div").addClass("method-logs");
         Element methodLogs = testMethod.getElementsByClass("method-logs").last();
         
         writeMethodLogs(methodLogs);
     }
     
     private void writeMethodLogs(Element methodLogs) {
-        methodLogs.appendElement("div").attr("class", "log-entry")
+        methodLogs.appendElement("div").addClass("log-entry")
                   .text("99:99:99.999 | INFO | This is a log entry for a test step.");
     }
     
     private void writeScript(Element body) {
-        /*
-        "var acc = document.getElementsByClassName("accordion");"+
-        "var i;""+
-        "for (i = 0; i < acc.length; i++) {"+
-            "acc[i].addEventListener("click", function () {"+
-                "this.classList.toggle("active");"+
-                "var panel = this.nextElementSibling;"+
-                "if (panel.style.display === "block") {"+
-                "panel.style.display = "none";"+
-                "}"+
-                "else {"+
-                "panel.style.display = "block";"+
-                "}"+
-            "});"+
-        "}"
-         */
-        String script = "var acc = document.getElementsByClassName(\"accordion\");" +
+        String js = "<script>var acc = document.getElementsByClassName(\"accordion\");" +
                 "var i;" +
                 "for (i = 0; i < acc.length; i++) {" +
                 "acc[i].addEventListener(\"click\", function () {" +
@@ -151,8 +136,9 @@ public class HtmlReporter {
                 "var panel = this.nextElementSibling;" +
                 "if (panel.style.display === \"block\") {" +
                 "panel.style.display = \"none\";}" +
-                "else {panel.style.display = \"block\";}});}";
-        body.appendElement("script").text(script);
+                "else {panel.style.display = \"block\";}});}</script>";
+        DataNode script = new DataNode(js);
+        body.appendChild(script);
     }
     
     private void writeHtmlFile(Document document) {
