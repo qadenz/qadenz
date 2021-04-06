@@ -113,20 +113,20 @@ public class HtmlReporter {
         testMethod.appendElement("div").addClass("method-details panel hide");
         Element methodDetails = testMethod.getElementsByClass("method-details panel hide").last();
         
-        methodDetails.appendElement("span").addClass("method-detail");
-        Element startTime = methodDetails.getElementsByClass("method-detail").last();
-        startTime.appendElement("span").addClass("method-detail-label").text("Start Time: ");
-        startTime.appendElement("span").addClass("method-detail-value").text("99:99:99.999");
-        
-        methodDetails.appendElement("span").addClass("method-detail");
-        Element duration = methodDetails.getElementsByClass("method-detail").last();
-        duration.appendElement("span").addClass("method-detail-label").text("Duration: ");
-        duration.appendElement("span").addClass("method-detail-value").text("99:99:99.999");
+        writeMethodDetailItem(methodDetails, "Start Time: ", "99:99:99.999");
+        writeMethodDetailItem(methodDetails, "Duration: ", "99:99:99.999");
         
         methodDetails.appendElement("div").addClass("method-logs");
         Element methodLogs = testMethod.getElementsByClass("method-logs").last();
         
         writeMethodLogs(methodLogs);
+    }
+    
+    private void writeMethodDetailItem(Element methodDetails, String label, String value) {
+        methodDetails.appendElement("span").addClass("method-detail");
+        Element duration = methodDetails.getElementsByClass("method-detail").last();
+        duration.appendElement("span").addClass("method-detail-label").text(label);
+        duration.appendElement("span").addClass("method-detail-value").text(value);
     }
     
     private void writeMethodLogs(Element methodLogs) {
