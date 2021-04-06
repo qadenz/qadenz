@@ -109,14 +109,20 @@ public class HtmlReporter {
         Element testMethod = methods.getElementsByClass("test-method").last();
         testMethod.appendElement("div").addClass("method-name accordion")
                   .text("verifySomethingHappensWhenActionIsCompleted");
-        testMethod.appendElement("span").addClass("method-detail");
-        Element startTime = testMethod.getElementsByClass("method-detail").last();
-        startTime.appendElement("span").addClass("method-detail-label").text("Start Time");
+        testMethod.appendElement("div").addClass("method-details panel hide");
+        Element methodDetails = testMethod.getElementsByClass("method-details panel hide").last();
+        
+        methodDetails.appendElement("span").addClass("method-detail");
+        Element startTime = methodDetails.getElementsByClass("method-detail").last();
+        startTime.appendElement("span").addClass("method-detail-label").text("Start Time: ");
         startTime.appendElement("span").addClass("method-detail-value").text("99:99:99.999");
-        Element duration = testMethod.getElementsByClass("method-detail").last();
-        duration.appendElement("span").addClass("method-detail-label").text("Start Time");
+        
+        methodDetails.appendElement("span").addClass("method-detail");
+        Element duration = methodDetails.getElementsByClass("method-detail").last();
+        duration.appendElement("span").addClass("method-detail-label").text("Duration: ");
         duration.appendElement("span").addClass("method-detail-value").text("99:99:99.999");
-        testMethod.appendElement("div").addClass("method-logs");
+        
+        methodDetails.appendElement("div").addClass("method-logs");
         Element methodLogs = testMethod.getElementsByClass("method-logs").last();
         
         writeMethodLogs(methodLogs);
