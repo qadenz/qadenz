@@ -94,9 +94,11 @@ public class HtmlReporter {
     }
     
     private void writeTestClass(Element classes) {
-        classes.appendElement("div").attr("class", "test-class accordion").text("io.slifer.test.cases.SampleTest");
-        classes.appendElement("div").attr("class", "test-methods panel hide");
-        Element methods = classes.getElementsByClass("test-methods panel hide").last();
+        classes.appendElement("div").attr("class", "test-class");
+        Element testClass = classes.getElementsByClass("test-class").last();
+        testClass.appendElement("div").attr("class", "class-name accordion").text("io.slifer.test.cases.SampleTest");
+        testClass.appendElement("div").attr("class", "test-methods panel hide");
+        Element methods = testClass.getElementsByClass("test-methods panel hide").last();
         
         writeTestMethod(methods);
     }
