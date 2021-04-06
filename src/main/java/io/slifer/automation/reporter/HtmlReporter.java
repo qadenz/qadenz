@@ -70,22 +70,26 @@ public class HtmlReporter {
         int skipped = json.getSkippedTests().size();
         int total = passed + failed + stopped + skipped;
         
-        writeSummaryItem(summary, false, "", "Total Tests", String.valueOf(total));
-        writeSummaryItem(summary, false, "txt-passed", "Tests Passed", String.valueOf(passed));
-        writeSummaryItem(summary, false, "txt-failed", "Tests Failed", String.valueOf(failed));
-        writeSummaryItem(summary, false, "txt-stopped", "Tests Stopped", String.valueOf(stopped));
-        writeSummaryItem(summary, false, "txt-skipped", "Tests Skipped", String.valueOf(skipped));
-        writeSummaryItem(summary, true, "", "Execution Time", "99:99:99.999");
+        writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
+        writeSummaryItem(summary, HtmlResult.PASSED, String.valueOf(passed));
+        writeSummaryItem(summary, HtmlResult.FAILED, String.valueOf(failed));
+        writeSummaryItem(summary, HtmlResult.STOPPED, String.valueOf(stopped));
+        writeSummaryItem(summary, HtmlResult.SKIPPED, String.valueOf(skipped));
+        writeSummaryItem(summary, true, "Execution Time", "", "99:99:99.999");
         
         document.body().appendElement("br");
     }
     
-    private void writeSummaryItem(Element summary, boolean wide, String valueAttribute, String label, String value) {
+    private void writeSummaryItem(Element summary, HtmlResult result, String value) {
+        writeSummaryItem(summary, false, result.summaryItemLabel, result.summaryItemValueStyle, value);
+    }
+    
+    private void writeSummaryItem(Element summary, boolean wide, String label, String style, String value) {
         String attribute = (wide) ? "summary-item bordered wide" : "summary-item bordered";
         summary.appendElement("div").addClass(attribute);
         Element totalTestsItem = summary.getElementsByClass(attribute).last();
         totalTestsItem.appendElement("div").addClass("summary-item-label").text(label);
-        totalTestsItem.appendElement("div").addClass("summary-item-value " + valueAttribute).text(value);
+        totalTestsItem.appendElement("div").addClass("summary-item-value " + style).text(value);
     }
     
     private void writeResultsSection(HtmlResult result) {
