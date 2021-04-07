@@ -5,12 +5,17 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+
 /**
  * Stores information about the test run, and holds the major thread-safe components.
  *
  * @author Tim Slifer
  */
 public class RunContext {
+    
+    public static Date startDate;
+    public static Date endDate;
     
     public static String gridHost;
     public static Browser browser;
