@@ -27,10 +27,18 @@ public class HtmlReporter {
     public void generateReport() {
         writeHead();
         writeSummary();
-        writeResultsSection(json.getFailedTests(), HtmlResult.FAILED);
-        writeResultsSection(json.getStoppedTests(), HtmlResult.STOPPED);
-        writeResultsSection(json.getSkippedTests(), HtmlResult.SKIPPED);
-        writeResultsSection(json.getPassedTests(), HtmlResult.PASSED);
+        if (json.getFailedTests().size() > 0) {
+            writeResultsSection(json.getFailedTests(), HtmlResult.FAILED);
+        }
+        if (json.getStoppedTests().size() > 0) {
+            writeResultsSection(json.getStoppedTests(), HtmlResult.STOPPED);
+        }
+        if (json.getSkippedTests().size() > 0) {
+            writeResultsSection(json.getSkippedTests(), HtmlResult.SKIPPED);
+        }
+        if (json.getPassedTests().size() > 0) {
+            writeResultsSection(json.getPassedTests(), HtmlResult.PASSED);
+        }
         writeScript();
         
         writeHtmlFile();
