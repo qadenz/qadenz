@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.List;
 
@@ -81,7 +82,9 @@ public class HtmlReporter {
         int skipped = json.getSkippedTests().size();
         int total = passed + failed + stopped + skipped;
         
-        writeSummaryItem(summary, true, "Launched", "", "9999-99-99 99:99");
+        String launchDate = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(json.getStartDate());
+        
+        writeSummaryItem(summary, true, "Launched", "", launchDate);
         writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
         writeSummaryItem(summary, HtmlResult.PASSED, String.valueOf(passed));
         writeSummaryItem(summary, HtmlResult.FAILED, String.valueOf(failed));
