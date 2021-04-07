@@ -22,6 +22,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -46,6 +47,8 @@ public class AutomatedTest {
      */
     @BeforeSuite (alwaysRun = true)
     public void processXmlParameters(ITestContext testContext) {
+        RunContext.startDate = new Date();
+        
         LOG.info("Reading XML Parameters.");
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
         XmlParameterValidator parameterValidator = new XmlParameterValidator(xmlParameters);
@@ -132,6 +135,8 @@ public class AutomatedTest {
      */
     @AfterSuite (alwaysRun = true)
     public void generateReports(ITestContext testContext) throws Exception {
+        RunContext.endDate = new Date();
+        
         JsonReport jsonReport = new JsonCompiler(resultsMap, screenshots).compileJsonReport();
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
         objectWriter.writeValue(new File("Automation-Report.json"), jsonReport);
