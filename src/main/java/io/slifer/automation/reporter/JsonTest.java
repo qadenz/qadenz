@@ -4,19 +4,19 @@ import java.util.List;
 
 public class JsonTest {
     
-    public String className;
-    public String testName;
-    public String parameters;
-    public Result result;
+    private String className;
+    private String testName;
+    private String parameters;
+    private Result result;
     
-    public long startMillis;
-    public long endMillis;
+    private long startMillis;
+    private long endMillis;
     
-    public List<JsonTestLog> logs;
+    private List<JsonTestLog> logs;
     
-    public String screenshot;
-    public String throwable;
-    public String stackTrace;
+    private String screenshot;
+    private String throwable;
+    private String stackTrace;
     
     public String getClassName() {
         return className;
