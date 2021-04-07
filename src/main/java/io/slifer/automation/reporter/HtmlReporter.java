@@ -1,5 +1,6 @@
 package io.slifer.automation.reporter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
@@ -108,14 +109,16 @@ public class HtmlReporter {
         
         for (JsonTest jsonTest : jsonTests) {
             Element testClass;
-            if (classes.getElementsContainingText(jsonTest.getClassName()) == null) {
+            if (classes.getElementsContainingText(jsonTest.getClassName()).size() == 0) {
+                System.out.println("testClass is null, creating new");
                 classes.appendElement("div").addClass("test-class");
                 testClass = classes.getElementsByClass("test-class").last();
                 testClass.appendElement("div").addClass("class-name accordion").text(jsonTest.getClassName());
                 testClass.appendElement("div").addClass("test-methods panel hide");
             }
             else {
-                testClass = classes.getElementsContainingText(jsonTest.getClassName()).last();
+                System.out.println("testClass not new, using existing");
+                testClass = classes.getElementsByClass("test-class").last();
             }
             Element testMethods = testClass.getElementsByClass("test-methods panel hide").last();
             testMethods.appendElement("div").addClass("test-method");
@@ -216,8 +219,11 @@ public class HtmlReporter {
         }
     }
     
-    public static void main(String[] args) {
-        HtmlReporter r = new HtmlReporter(null);
+    public static void main(String[] args) throws Exception {
+        JsonReport report =
+                new ObjectMapper().readValue(new File("Automation-Report.json"), JsonReport.class);
+        
+        HtmlReporter r = new HtmlReporter(report);
         r.generateReport();
         
         // System.out.println(r.loadAndMinifyCss());
