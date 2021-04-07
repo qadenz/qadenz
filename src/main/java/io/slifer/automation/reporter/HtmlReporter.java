@@ -118,14 +118,12 @@ public class HtmlReporter {
         for (JsonTest jsonTest : jsonTests) {
             Element testClass;
             if (classes.getElementsContainingText(jsonTest.getClassName()).size() == 0) {
-                System.out.println("testClass is null, creating new");
                 classes.appendElement("div").addClass("test-class");
                 testClass = classes.getElementsByClass("test-class").last();
                 testClass.appendElement("div").addClass("class-name accordion").text(jsonTest.getClassName());
                 testClass.appendElement("div").addClass("test-methods panel hide");
             }
             else {
-                System.out.println("testClass not new, using existing");
                 testClass = classes.getElementsByClass("test-class").last();
             }
             Element testMethods = testClass.getElementsByClass("test-methods panel hide").last();
