@@ -5,7 +5,7 @@ html {
 
 .suite-summary {
     height: 134px;
-    width: 1012px;
+    width: 1202px;
     margin: auto;
 }
 
@@ -18,12 +18,12 @@ html {
 
 .summary-item {
     height: 80px;
-    width: 150px;
+    width: 130px;
     float: left;
 }
 
 .wide {
-    width: 250px;
+    width: 269px;
 }
 
 .summary-item-label {
