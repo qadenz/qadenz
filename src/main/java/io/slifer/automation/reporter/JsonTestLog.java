@@ -2,10 +2,10 @@ package io.slifer.automation.reporter;
 
 public class JsonTestLog {
     
-    public String timestamp;
-    public String logger;
-    public String level;
-    public String message;
+    private String timestamp;
+    private String logger;
+    private String level;
+    private String message;
     
     public String getTimestamp() {
         return timestamp;
