@@ -81,6 +81,7 @@ public class HtmlReporter {
         int skipped = json.getSkippedTests().size();
         int total = passed + failed + stopped + skipped;
         
+        writeSummaryItem(summary, true, "Launched", "", "9999-99-99 99:99");
         writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
         writeSummaryItem(summary, HtmlResult.PASSED, String.valueOf(passed));
         writeSummaryItem(summary, HtmlResult.FAILED, String.valueOf(failed));
