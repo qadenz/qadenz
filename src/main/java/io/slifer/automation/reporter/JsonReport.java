@@ -1,10 +1,13 @@
 package io.slifer.automation.reporter;
 
+import java.util.Date;
 import java.util.List;
 
 public class JsonReport {
     
     private String suiteName;
+    private Date startDate;
+    private Date endDate;
     
     private String browser;
     private String browserVersion;
@@ -23,6 +26,22 @@ public class JsonReport {
     
     public void setSuiteName(String suiteName) {
         this.suiteName = suiteName;
+    }
+    
+    public Date getStartDate() {
+        return startDate;
+    }
+    
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+    
+    public Date getEndDate() {
+        return endDate;
+    }
+    
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
     
     public String getBrowser() {

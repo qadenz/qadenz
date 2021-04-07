@@ -37,6 +37,8 @@ public class JsonCompiler {
     private void setSuiteHeaderInfo() {
         SUITE_LOG.info("Writing Suite Header Info.");
         jsonReport.setSuiteName(resultsMap.getSuiteName());
+        jsonReport.setStartDate(RunContext.startDate);
+        jsonReport.setEndDate(RunContext.endDate);
         jsonReport.setBrowser(RunContext.browser.name());
         jsonReport.setBrowserVersion(RunContext.browserVersion);
         // jsonReport.setPlatform(RunContext.platform.name());
