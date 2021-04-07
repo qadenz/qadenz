@@ -10,6 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
+import java.util.List;
 
 public class HtmlReporter {
     
@@ -24,10 +26,10 @@ public class HtmlReporter {
     public void generateReport() {
         writeHead();
         writeSummary();
-        writeResultsSection(HtmlResult.FAILED);
-        writeResultsSection(HtmlResult.STOPPED);
-        writeResultsSection(HtmlResult.SKIPPED);
-        writeResultsSection(HtmlResult.PASSED);
+        writeResultsSection(json.getFailedTests(), HtmlResult.FAILED);
+        writeResultsSection(json.getStoppedTests(), HtmlResult.STOPPED);
+        writeResultsSection(json.getSkippedTests(), HtmlResult.SKIPPED);
+        writeResultsSection(json.getPassedTests(), HtmlResult.PASSED);
         writeScript();
         
         writeHtmlFile();
@@ -92,7 +94,7 @@ public class HtmlReporter {
         totalTestsItem.appendElement("div").addClass("summary-item-value " + style).text(value);
     }
     
-    private void writeResultsSection(HtmlResult result) {
+    private void writeResultsSection(List<JsonTest> jsonTests, HtmlResult result) {
         document.body().appendElement("div").addClass("results-section bordered");
         Element section = document.body().getElementsByClass("results-section bordered").last();
         section.appendElement("div").addClass("section-name bordered " + result.resultsSectionStyle)
@@ -100,36 +102,40 @@ public class HtmlReporter {
         section.appendElement("div").addClass("test-classes bordered");
         Element classes = section.getElementsByClass("test-classes bordered").last();
         
-        writeTestClass(classes);
+        Comparator<JsonTest> comparator = Comparator.comparing(JsonTest::getClassName)
+                                                    .thenComparing(JsonTest::getTestName);
+        jsonTests.sort(comparator);
+        
+        for (JsonTest jsonTest : jsonTests) {
+            Element testClass;
+            if (classes.getElementsContainingText(jsonTest.getClassName()) == null) {
+                classes.appendElement("div").addClass("test-class");
+                testClass = classes.getElementsByClass("test-class").last();
+                testClass.appendElement("div").addClass("class-name accordion").text(jsonTest.getClassName());
+                testClass.appendElement("div").addClass("test-methods panel hide");
+            }
+            else {
+                testClass = classes.getElementsContainingText(jsonTest.getClassName()).last();
+            }
+            Element testMethods = testClass.getElementsByClass("test-methods panel hide").last();
+            testMethods.appendElement("div").addClass("test-method");
+            Element method = testMethods.getElementsByClass("test-method").last();
+            method.appendElement("div").addClass("method-name accordion").text(jsonTest.getTestName());
+            method.appendElement("div").addClass("method-details panel hide");
+            Element methodDetails = method.getElementsByClass("method-details panel hide").last();
+            writeMethodDetailItem(methodDetails, "Start Time: ", "99:99:99.999");
+            writeMethodDetailItem(methodDetails, "Duration: ", "99:99:99.999");
+            methodDetails.appendElement("div").addClass("method-logs");
+            Element methodLogs = method.getElementsByClass("method-logs").last();
+            for (JsonTestLog log : jsonTest.getLogs()) {
+                writeMethodLogs(log, methodLogs);
+            }
+            if (jsonTest.getScreenshot() != null) {
+                method.appendElement("img").attr("src", "data:image/png;base64, " + jsonTest.getScreenshot());
+            }
+        }
         
         document.body().appendElement("br");
-    }
-    
-    private void writeTestClass(Element classes) {
-        classes.appendElement("div").addClass("test-class");
-        Element testClass = classes.getElementsByClass("test-class").last();
-        testClass.appendElement("div").addClass("class-name accordion").text("io.slifer.test.cases.SampleTest");
-        testClass.appendElement("div").addClass("test-methods panel hide");
-        Element methods = testClass.getElementsByClass("test-methods panel hide").last();
-        
-        writeTestMethod(methods);
-    }
-    
-    private void writeTestMethod(Element methods) {
-        methods.appendElement("div").addClass("test-method");
-        Element testMethod = methods.getElementsByClass("test-method").last();
-        testMethod.appendElement("div").addClass("method-name accordion")
-                  .text("verifySomethingHappensWhenActionIsCompleted");
-        testMethod.appendElement("div").addClass("method-details panel hide");
-        Element methodDetails = testMethod.getElementsByClass("method-details panel hide").last();
-        
-        writeMethodDetailItem(methodDetails, "Start Time: ", "99:99:99.999");
-        writeMethodDetailItem(methodDetails, "Duration: ", "99:99:99.999");
-        
-        methodDetails.appendElement("div").addClass("method-logs");
-        Element methodLogs = testMethod.getElementsByClass("method-logs").last();
-        
-        writeMethodLogs(methodLogs);
     }
     
     private void writeMethodDetailItem(Element methodDetails, String label, String value) {
@@ -139,9 +145,15 @@ public class HtmlReporter {
         duration.appendElement("span").addClass("method-detail-value").text(value);
     }
     
-    private void writeMethodLogs(Element methodLogs) {
+    private void writeMethodLogs(JsonTestLog log, Element methodLogs) {
+        
+        String event = log.getTimestamp().split(" ")[1] +
+                " | " + log.getLevel() +
+                " | " + log.getLogger().substring(log.getLogger().lastIndexOf(".") + 1) +
+                " | " + log.getMessage();
+        
         methodLogs.appendElement("div").addClass("log-entry")
-                  .text("99:99:99.999 | INFO | This is a log entry for a test step.");
+                  .text(event);
     }
     
     private void writeScript() {
