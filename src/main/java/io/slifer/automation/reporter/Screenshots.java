@@ -33,9 +33,8 @@ public class Screenshots extends HashMap<String, String> {
             BufferedImage original = ImageIO.read(rawCapture);
             int originalWidth = original.getWidth();
             LOG.debug("Detected original capture width [{}].", originalWidth);
-            int targetWidth = originalWidth / 2;
             
-            BufferedImage resized = Scalr.resize(original, targetWidth);
+            BufferedImage resized = Scalr.resize(original, 1145);
             LOG.debug("Resized to width [{}].", resized.getWidth());
             
             return resized;
