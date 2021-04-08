@@ -11,7 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 
@@ -82,7 +83,8 @@ public class HtmlReporter {
         int skipped = json.getSkippedTests().size();
         int total = passed + failed + stopped + skipped;
         
-        String launchDate = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(json.getStartDate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d hh:mm");
+        String launchDate = json.getStartDate().format(formatter);
         
         writeSummaryItem(summary, true, "Launched", "", launchDate);
         writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
@@ -90,7 +92,12 @@ public class HtmlReporter {
         writeSummaryItem(summary, HtmlResult.FAILED, String.valueOf(failed));
         writeSummaryItem(summary, HtmlResult.STOPPED, String.valueOf(stopped));
         writeSummaryItem(summary, HtmlResult.SKIPPED, String.valueOf(skipped));
-        writeSummaryItem(summary, true, "Execution Time", "", "99:99:99.999");
+        
+        Duration duration = Duration.between(json.getStartDate(), json.getEndDate());
+        String executionTime = String.format("%02d:%02d:%02d",
+                duration.toHoursPart(), duration.toMinutesPart(), duration.toSecondsPart());
+        
+        writeSummaryItem(summary, true, "Execution Time", "", executionTime);
         
         document.body().appendElement("br");
     }
