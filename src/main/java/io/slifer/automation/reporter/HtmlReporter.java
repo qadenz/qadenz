@@ -12,6 +12,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
@@ -143,8 +146,21 @@ public class HtmlReporter {
             method.appendElement("div").addClass("method-name accordion").text(jsonTest.getTestName());
             method.appendElement("div").addClass("method-details panel hide");
             Element methodDetails = method.getElementsByClass("method-details panel hide").last();
-            writeMethodDetailItem(methodDetails, "Start Time: ", "99:99:99.999");
-            writeMethodDetailItem(methodDetails, "Duration: ", "99:99:99.999");
+            
+            LocalDateTime startDateMillis =
+                    Instant.ofEpochMilli(jsonTest.getStartMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
+            String startDate = startDateMillis.format(formatter);
+            
+            writeMethodDetailItem(methodDetails, "Start Time: ", startDate);
+            
+            LocalDateTime endDateMillis =
+                    Instant.ofEpochMilli(jsonTest.getStartMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+            Duration duration = Duration.between(startDateMillis, endDateMillis);
+            String executionTime = String.format("%02d:%02d:%02d",
+                    duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
+            
+            writeMethodDetailItem(methodDetails, "Duration: ", executionTime);
             methodDetails.appendElement("div").addClass("method-logs");
             Element methodLogs = method.getElementsByClass("method-logs").last();
             for (JsonTestLog log : jsonTest.getLogs()) {
