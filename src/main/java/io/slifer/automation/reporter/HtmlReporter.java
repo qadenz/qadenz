@@ -178,7 +178,6 @@ public class HtmlReporter {
     
     private void writeScript() {
         String js = "<script>var acc = document.getElementsByClassName(\"accordion\");" +
-                // "var i;" +
                 "for (var i = 0; i < acc.length; i++) {" +
                 "acc[i].addEventListener(\"click\", function () {" +
                 "this.classList.toggle(\"active\");" +
