@@ -94,8 +94,8 @@ public class HtmlReporter {
         writeSummaryItem(summary, HtmlResult.SKIPPED, String.valueOf(skipped));
         
         Duration duration = Duration.between(json.getStartDate(), json.getEndDate());
-        String executionTime = String.format("%02d:%02d:%02d",
-                duration.toHoursPart(), duration.toMinutesPart(), duration.toSecondsPart());
+        String executionTime = String.format("%02d:%02d:%02d:%02d",
+                duration.toHoursPart(), duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
         
         writeSummaryItem(summary, true, "Execution Time", "", executionTime);
         
