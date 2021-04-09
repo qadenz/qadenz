@@ -13,6 +13,15 @@ import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Constructs and writes a pre-designed HTML visualization of the Suite configuration, logging events for each test, and
+ * embedded screenshots for failed and stopped tests. This report was built in the spirit of TestNG's emailable-report,
+ * which provides a simple, single-file view of relevant test result data. This report adds a few UI conveniences such
+ * as expanding and collapsing results sections, distinction between failed and stopped tests (assertion fails vs other
+ * exceptions), as well as embedded screenshots on all non-passing tests.
+ *
+ * @author Tim Slifer
+ */
 public class HtmlReporter {
     
     private JsonReport json;
@@ -54,11 +63,9 @@ public class HtmlReporter {
     }
     
     private String loadAndMinifyCss() {
-        
         String contents = null;
         try {
             Path path = Paths.get(ClassLoader.getSystemResource("html/report.css").toURI());
-            
             contents = Files.readString(path, StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
@@ -104,6 +111,7 @@ public class HtmlReporter {
     }
     
     private void writeResultsSection(List<JsonTest> jsonTests, HtmlResult result) {
+        // write main section structure
         document.body().appendElement("div").addClass("results-section bordered");
         Element section = document.body().getElementsByClass("results-section bordered").last();
         section.appendElement("div").addClass("section-name bordered " + result.resultsSectionStyle)
@@ -117,6 +125,7 @@ public class HtmlReporter {
         
         for (JsonTest jsonTest : jsonTests) {
             Element testClass;
+            // if the class name has not yet been written, write it... otherwise, append to the existing class name
             if (classes.getElementsContainingText(jsonTest.getClassName()).size() == 0) {
                 classes.appendElement("div").addClass("test-class");
                 testClass = classes.getElementsByClass("test-class").last();
@@ -126,14 +135,19 @@ public class HtmlReporter {
             else {
                 testClass = classes.getElementsByClass("test-class").last();
             }
+            // write a new test method entry
             Element testMethods = testClass.getElementsByClass("test-methods panel hide").last();
             testMethods.appendElement("div").addClass("test-method");
             Element method = testMethods.getElementsByClass("test-method").last();
             method.appendElement("div").addClass("method-name accordion").text(jsonTest.getTestName());
             method.appendElement("div").addClass("method-details panel hide");
+            
+            // write the method details
             Element methodDetails = method.getElementsByClass("method-details panel hide").last();
             writeMethodDetailItem(methodDetails, "Start Time: ", jsonTest.getTestStartTime());
             writeMethodDetailItem(methodDetails, "Duration: ", jsonTest.getTestExecutionTime());
+            
+            // write the logging output for the test method
             methodDetails.appendElement("div").addClass("method-logs");
             Element methodLogs = method.getElementsByClass("method-logs").last();
             for (JsonTestLog log : jsonTest.getLogs()) {
@@ -157,7 +171,6 @@ public class HtmlReporter {
     }
     
     private void writeMethodLogs(JsonTestLog log, Element methodLogs) {
-        
         String event = log.getTimestamp().split(" ")[1] +
                 " | " + log.getLevel() +
                 " | " + log.getLogger().substring(log.getLogger().lastIndexOf(".") + 1) +
