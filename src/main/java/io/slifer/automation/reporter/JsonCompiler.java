@@ -8,6 +8,8 @@ import org.testng.ITestResult;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,8 +39,17 @@ public class JsonCompiler {
     private void setSuiteHeaderInfo() {
         SUITE_LOG.info("Writing Suite Header Info.");
         jsonReport.setSuiteName(resultsMap.getSuiteName());
-        jsonReport.setStartDate(RunContext.startDate);
-        jsonReport.setEndDate(RunContext.endDate);
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d hh:mm");
+        String startDate = RunContext.startDate.format(formatter);
+        
+        jsonReport.setStartDate(startDate);
+        
+        Duration duration = Duration.between(RunContext.startDate, RunContext.endDate);
+        String executionTime = String.format("%02d:%02d:%02d:%02d",
+                duration.toHoursPart(), duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
+        
+        jsonReport.setDuration(executionTime);
         jsonReport.setBrowser(RunContext.browser.name());
         jsonReport.setBrowserVersion(RunContext.browserVersion);
         // jsonReport.setPlatform(RunContext.platform.name());
