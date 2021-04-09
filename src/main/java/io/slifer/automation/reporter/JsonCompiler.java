@@ -44,15 +44,15 @@ public class JsonCompiler {
         jsonReport.setSuiteName(resultsMap.getSuiteName());
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d hh:mm");
-        String startDate = RunContext.startDate.format(formatter);
+        String startDate = RunContext.suiteStartDate.format(formatter);
         
-        jsonReport.setStartDate(startDate);
+        jsonReport.setSuiteStartDate(startDate);
         
-        Duration duration = Duration.between(RunContext.startDate, RunContext.endDate);
+        Duration duration = Duration.between(RunContext.suiteStartDate, RunContext.suiteEndDate);
         String executionTime = String.format("%02d:%02d:%02d:%02d",
                 duration.toHoursPart(), duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
         
-        jsonReport.setDuration(executionTime);
+        jsonReport.setSuiteExecutionTime(executionTime);
         jsonReport.setBrowser(RunContext.browser.name());
         jsonReport.setBrowserVersion(RunContext.browserVersion);
         // jsonReport.setPlatform(RunContext.platform.name());
@@ -78,18 +78,18 @@ public class JsonCompiler {
                     Instant.ofEpochMilli(resultsMap.get(key).getStartMillis()).atZone(ZoneId.systemDefault())
                            .toLocalDateTime();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
-            String startDate = startDateMillis.format(formatter);
+            String testStartTime = startDateMillis.format(formatter);
             
-            jsonTest.setStartMillis(startDate);
+            jsonTest.setTestStartTime(testStartTime);
             
             LocalDateTime endDateMillis =
                     Instant.ofEpochMilli(resultsMap.get(key).getEndMillis()).atZone(ZoneId.systemDefault())
                            .toLocalDateTime();
             Duration duration = Duration.between(startDateMillis, endDateMillis);
-            String executionTime = String.format("%02d:%02d:%02d",
+            String testExecutionTime = String.format("%02d:%02d:%02d",
                     duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
             
-            jsonTest.setEndMillis(executionTime);
+            jsonTest.setTestExecutionTime(testExecutionTime);
             
             Throwable throwable = testResult.getThrowable();
             if (throwable != null) {

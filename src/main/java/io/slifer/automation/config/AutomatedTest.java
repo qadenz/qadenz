@@ -47,7 +47,7 @@ public class AutomatedTest {
      */
     @BeforeSuite (alwaysRun = true)
     public void processXmlParameters(ITestContext testContext) {
-        RunContext.startDate = LocalDateTime.now();
+        RunContext.suiteStartDate = LocalDateTime.now();
         
         LOG.info("Reading XML Parameters.");
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
@@ -135,7 +135,7 @@ public class AutomatedTest {
      */
     @AfterSuite (alwaysRun = true)
     public void generateReports(ITestContext testContext) throws Exception {
-        RunContext.endDate = LocalDateTime.now();
+        RunContext.suiteEndDate = LocalDateTime.now();
         
         JsonReport jsonReport = new JsonCompiler(resultsMap, screenshots).compileJsonReport();
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
