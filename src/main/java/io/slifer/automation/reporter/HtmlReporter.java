@@ -141,7 +141,9 @@ public class HtmlReporter {
                 writeMethodLogs(log, methodLogs);
             }
             if (jsonTest.getScreenshot() != null) {
-                methodDetails.appendElement("img").attr("src", "data:image/png;base64, " + jsonTest.getScreenshot());
+                methodDetails.appendElement("div").addClass("screenshot");
+                Element screenshot = methodDetails.getElementsByClass("screenshot").last();
+                screenshot.appendElement("img").attr("src", "data:image/png;base64, " + jsonTest.getScreenshot());
             }
         }
         
