@@ -9,6 +9,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,8 +73,23 @@ public class JsonCompiler {
             jsonTest.setTestName(testResult.getName());
             jsonTest.setParameters(Arrays.toString(testResult.getParameters()).replace("/", "-"));
             jsonTest.setResult(computeTestResult(testResult));
-            jsonTest.setStartMillis(testResult.getStartMillis());
-            jsonTest.setEndMillis(testResult.getEndMillis());
+            
+            LocalDateTime startDateMillis =
+                    Instant.ofEpochMilli(resultsMap.get(key).getStartMillis()).atZone(ZoneId.systemDefault())
+                           .toLocalDateTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
+            String startDate = startDateMillis.format(formatter);
+            
+            jsonTest.setStartMillis(startDate);
+            
+            LocalDateTime endDateMillis =
+                    Instant.ofEpochMilli(resultsMap.get(key).getEndMillis()).atZone(ZoneId.systemDefault())
+                           .toLocalDateTime();
+            Duration duration = Duration.between(startDateMillis, endDateMillis);
+            String executionTime = String.format("%02d:%02d:%02d",
+                    duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
+            
+            jsonTest.setEndMillis(executionTime);
             
             Throwable throwable = testResult.getThrowable();
             if (throwable != null) {
