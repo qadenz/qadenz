@@ -9,8 +9,8 @@ public class JsonTest {
     private String parameters;
     private Result result;
     
-    private long startMillis;
-    private long endMillis;
+    private String startMillis;
+    private String endMillis;
     
     private List<JsonTestLog> logs;
     
@@ -50,19 +50,19 @@ public class JsonTest {
         this.result = result;
     }
     
-    public long getStartMillis() {
+    public String getStartMillis() {
         return startMillis;
     }
     
-    public void setStartMillis(long startMillis) {
+    public void setStartMillis(String startMillis) {
         this.startMillis = startMillis;
     }
     
-    public long getEndMillis() {
+    public String getEndMillis() {
         return endMillis;
     }
     
-    public void setEndMillis(long endMillis) {
+    public void setEndMillis(String endMillis) {
         this.endMillis = endMillis;
     }
     
