@@ -13,6 +13,12 @@ import java.io.File;
 import java.util.Base64;
 import java.util.HashMap;
 
+/**
+ * Captures screenshots with WebDriver, then tracks and links each screenshot to the associated test by means of
+ * generated UUID by the Logback MDC.
+ *
+ * @author Tim Slifer
+ */
 public class Screenshots extends HashMap<String, String> {
     
     public static final Logger LOG = RunContext.SUITE_LOG;
