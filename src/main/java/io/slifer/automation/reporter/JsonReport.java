@@ -5,8 +5,8 @@ import java.util.List;
 public class JsonReport {
     
     private String suiteName;
-    private String startDate;
-    private String duration;
+    private String suiteStartDate;
+    private String suiteExecutionTime;
     
     private String browser;
     private String browserVersion;
@@ -27,20 +27,20 @@ public class JsonReport {
         this.suiteName = suiteName;
     }
     
-    public String getStartDate() {
-        return startDate;
+    public String getSuiteStartDate() {
+        return suiteStartDate;
     }
     
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setSuiteStartDate(String suiteStartDate) {
+        this.suiteStartDate = suiteStartDate;
     }
     
-    public String getDuration() {
-        return duration;
+    public String getSuiteExecutionTime() {
+        return suiteExecutionTime;
     }
     
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setSuiteExecutionTime(String suiteExecutionTime) {
+        this.suiteExecutionTime = suiteExecutionTime;
     }
     
     public String getBrowser() {

@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
  */
 public class RunContext {
     
-    public static LocalDateTime startDate;
-    public static LocalDateTime endDate;
+    public static LocalDateTime suiteStartDate;
+    public static LocalDateTime suiteEndDate;
     
     public static String gridHost;
     public static Browser browser;
