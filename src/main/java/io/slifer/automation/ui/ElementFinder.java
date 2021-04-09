@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class ElementFinder {
     
-    // private static final Logger LOG = RunContext.TEST_LOG;
     private static final Logger LOG = LoggerFactory.getLogger(ElementFinder.class);
     
     /**

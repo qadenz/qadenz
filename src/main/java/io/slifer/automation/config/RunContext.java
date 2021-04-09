@@ -31,7 +31,6 @@ public class RunContext {
     private static ThreadLocal<String> testId = new ThreadLocal<>();
     
     public static final Logger SUITE_LOG = LoggerFactory.getLogger("SUITE");
-    // public static final Logger TEST_LOG = LoggerFactory.getLogger("TEST");
     
     public static void setWebDriver(WebDriver webDriver) {
         driver.set(webDriver);
