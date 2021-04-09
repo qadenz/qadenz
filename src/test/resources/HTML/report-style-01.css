@@ -109,7 +109,7 @@ html {
     border-top: 1px solid #808080;
 }
 
-.screenshot > img {
+.screenshot img {
     display: block;
     margin-left: auto;
     margin-right: auto;
