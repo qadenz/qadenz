@@ -36,8 +36,8 @@ public class AutomatedTest {
     
     private static final Logger LOG = RunContext.SUITE_LOG;
     
-    private ResultsMap resultsMap = new ResultsMap();
-    private Screenshots screenshots = new Screenshots();
+    private static ResultsMap resultsMap = new ResultsMap();
+    private static Screenshots screenshots = new Screenshots();
     
     /**
      * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
