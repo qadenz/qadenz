@@ -102,6 +102,11 @@ public class AutomatedTest {
         RunContext.getWebDriver().get(RunContext.appUrl);
     }
     
+    /**
+     * Captures a screenshot for any failed test.
+     *
+     * @param testResult The Injected ITestResult.
+     */
     @AfterMethod (alwaysRun = true)
     public void saveScreenshot(ITestResult testResult) {
         if (testResult.getStatus() == 2) {
@@ -132,6 +137,8 @@ public class AutomatedTest {
     
     /**
      * Triggers the generation of the HTML Report output and supporting JSON files.
+     *
+     * @param testContext The injected ITestContext.
      */
     @AfterSuite (alwaysRun = true)
     public void generateReports(ITestContext testContext) throws Exception {
