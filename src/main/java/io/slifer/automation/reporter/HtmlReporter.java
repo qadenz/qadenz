@@ -86,21 +86,13 @@ public class HtmlReporter {
         int skipped = json.getSkippedTests().size();
         int total = passed + failed + stopped + skipped;
         
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d hh:mm");
-        String launchDate = json.getStartDate().format(formatter);
-        
-        writeSummaryItem(summary, true, "Launched", "", launchDate);
+        writeSummaryItem(summary, true, "Launched", "", json.getStartDate());
         writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
         writeSummaryItem(summary, HtmlResult.PASSED, String.valueOf(passed));
         writeSummaryItem(summary, HtmlResult.FAILED, String.valueOf(failed));
         writeSummaryItem(summary, HtmlResult.STOPPED, String.valueOf(stopped));
         writeSummaryItem(summary, HtmlResult.SKIPPED, String.valueOf(skipped));
-        
-        Duration duration = Duration.between(json.getStartDate(), json.getEndDate());
-        String executionTime = String.format("%02d:%02d:%02d:%02d",
-                duration.toHoursPart(), duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
-        
-        writeSummaryItem(summary, true, "Execution Time", "", executionTime);
+        writeSummaryItem(summary, true, "Execution Time", "", json.getDuration());
         
         document.body().appendElement("br");
     }
