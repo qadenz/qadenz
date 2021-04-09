@@ -1,6 +1,5 @@
 package io.slifer.automation.reporter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
@@ -225,15 +224,5 @@ public class HtmlReporter {
         public String getResultsSectionLabel() {
             return resultsSectionLabel;
         }
-    }
-    
-    public static void main(String[] args) throws Exception {
-        JsonReport report =
-                new ObjectMapper().readValue(new File("Automation-Report.json"), JsonReport.class);
-        
-        HtmlReporter r = new HtmlReporter(report);
-        r.generateReport();
-        
-        // System.out.println(r.loadAndMinifyCss());
     }
 }

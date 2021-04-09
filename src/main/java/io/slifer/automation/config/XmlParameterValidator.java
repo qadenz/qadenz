@@ -9,7 +9,6 @@ import java.util.Map;
 public class XmlParameterValidator {
     
     private static final Logger LOG = RunContext.SUITE_LOG;
-    // private static final Logger LOG = LoggerFactory.getLogger(XmlParameterValidator.class);
     
     private Map<String, String> xmlParameters;
     
