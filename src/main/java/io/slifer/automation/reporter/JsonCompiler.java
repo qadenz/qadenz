@@ -43,13 +43,13 @@ public class JsonCompiler {
         SUITE_LOG.info("Writing Suite Header Info.");
         jsonReport.setSuiteName(resultsMap.getSuiteName());
         
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d hh:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String startDate = RunContext.suiteStartDate.format(formatter);
         
         jsonReport.setSuiteStartDate(startDate);
         
         Duration duration = Duration.between(RunContext.suiteStartDate, RunContext.suiteEndDate);
-        String executionTime = String.format("%02d:%02d:%02d:%02d",
+        String executionTime = String.format("%02dh %02dm %02d.%02ds",
                 duration.toHoursPart(), duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
         
         jsonReport.setSuiteExecutionTime(executionTime);
@@ -86,7 +86,7 @@ public class JsonCompiler {
                     Instant.ofEpochMilli(resultsMap.get(key).getEndMillis()).atZone(ZoneId.systemDefault())
                            .toLocalDateTime();
             Duration duration = Duration.between(startDateMillis, endDateMillis);
-            String testExecutionTime = String.format("%02d:%02d:%02d",
+            String testExecutionTime = String.format("%02dm %02d.%02ds",
                     duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
             
             jsonTest.setTestExecutionTime(testExecutionTime);
