@@ -81,13 +81,13 @@ public class HtmlReporter {
         int skipped = json.getSkippedTests().size();
         int total = passed + failed + stopped + skipped;
         
-        writeSummaryItem(summary, true, "Launched", "", json.getStartDate());
+        writeSummaryItem(summary, true, "Launched", "", json.getSuiteStartDate());
         writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
         writeSummaryItem(summary, HtmlResult.PASSED, String.valueOf(passed));
         writeSummaryItem(summary, HtmlResult.FAILED, String.valueOf(failed));
         writeSummaryItem(summary, HtmlResult.STOPPED, String.valueOf(stopped));
         writeSummaryItem(summary, HtmlResult.SKIPPED, String.valueOf(skipped));
-        writeSummaryItem(summary, true, "Execution Time", "", json.getDuration());
+        writeSummaryItem(summary, true, "Execution Time", "", json.getSuiteExecutionTime());
         
         document.body().appendElement("br");
     }
@@ -133,9 +133,8 @@ public class HtmlReporter {
             method.appendElement("div").addClass("method-name accordion").text(jsonTest.getTestName());
             method.appendElement("div").addClass("method-details panel hide");
             Element methodDetails = method.getElementsByClass("method-details panel hide").last();
-            
-            writeMethodDetailItem(methodDetails, "Start Time: ", jsonTest.getStartMillis());
-            writeMethodDetailItem(methodDetails, "Duration: ", jsonTest.getEndMillis());
+            writeMethodDetailItem(methodDetails, "Start Time: ", jsonTest.getTestStartTime());
+            writeMethodDetailItem(methodDetails, "Duration: ", jsonTest.getTestExecutionTime());
             methodDetails.appendElement("div").addClass("method-logs");
             Element methodLogs = method.getElementsByClass("method-logs").last();
             for (JsonTestLog log : jsonTest.getLogs()) {
