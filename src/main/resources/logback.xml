@@ -5,7 +5,6 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="io.slifer.automation.logs.Layout"/>
-            <!--<pattern>%d{HH:mm:ss.SSS} | %logger{0} | %-5level | %msg%n</pattern>-->
         </encoder>
     </appender>
     
@@ -49,11 +48,6 @@
         <appender-ref ref="JSON-SUITE"/>
         <appender-ref ref="STDOUT"/>
     </logger>
-    
-    <!--<logger name="TEST" level="DEBUG" additivity="false">-->
-    <!--    <appender-ref ref="JSON-TEST"/>-->
-    <!--    <appender-ref ref="STDOUT"/>-->
-    <!--</logger>-->
     
     <root level="debug">
         <appender-ref ref="STDOUT"/>
