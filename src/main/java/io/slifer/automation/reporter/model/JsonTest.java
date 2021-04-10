@@ -1,4 +1,6 @@
-package io.slifer.automation.reporter;
+package io.slifer.automation.reporter.model;
+
+import io.slifer.automation.reporter.Result;
 
 import java.util.List;
 

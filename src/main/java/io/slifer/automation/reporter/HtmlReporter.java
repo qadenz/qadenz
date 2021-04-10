@@ -1,5 +1,8 @@
 package io.slifer.automation.reporter;
 
+import io.slifer.automation.reporter.model.JsonReport;
+import io.slifer.automation.reporter.model.JsonTest;
+import io.slifer.automation.reporter.model.JsonTestLog;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
