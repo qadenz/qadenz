@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Tim Slifer
  */
-public class ConsoleLogLayout extends LayoutBase<ILoggingEvent> {
+public class LogEventLayout extends LayoutBase<ILoggingEvent> {
     
     @Override
     public String doLayout(ILoggingEvent event) {
