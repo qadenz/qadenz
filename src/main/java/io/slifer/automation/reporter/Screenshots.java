@@ -25,9 +25,7 @@ public class Screenshots extends HashMap<String, String> {
     
     public void captureScreenshot() {
         File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
-        
         BufferedImage resizedCapture = resize(rawCapture);
-        
         String screenshot = convertToBase64(resizedCapture);
         
         this.put(RunContext.getTestId(), screenshot);

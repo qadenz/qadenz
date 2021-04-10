@@ -1,6 +1,9 @@
 package io.slifer.automation.reporter;
 
 import io.slifer.automation.config.RunContext;
+import io.slifer.automation.reporter.model.JsonReport;
+import io.slifer.automation.reporter.model.JsonTest;
+import io.slifer.automation.reporter.model.JsonTestLog;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.testng.ITestResult;
