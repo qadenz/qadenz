@@ -1,5 +1,10 @@
 package io.slifer.automation.reporter.model;
 
+/**
+ * This is the JSON model for logging events on a test case.
+ *
+ * @author Tim Slifer
+ */
 public class JsonTestLog {
     
     private String timestamp;
