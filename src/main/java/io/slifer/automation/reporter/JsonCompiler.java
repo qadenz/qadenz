@@ -21,6 +21,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Combines Logback logging output with data pulled from TestNG components to generate an uber-JSON with full detail
+ * results of the test run. This JSON output is fed to the HTML Reporter for visual representation, but is also written
+ * to a file so it can be made available to other consuming systems.
+ *
+ * @author Tim Slifer
+ */
 public class JsonCompiler {
     
     private static final Logger SUITE_LOG = RunContext.SUITE_LOG;
