@@ -4,6 +4,11 @@ import io.slifer.automation.reporter.Result;
 
 import java.util.List;
 
+/**
+ * This is the JSON model for individual test case results and logging events.
+ *
+ * @author Tim Slifer
+ */
 public class JsonTest {
     
     private String className;
