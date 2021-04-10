@@ -9,8 +9,8 @@
     </appender>
     
     <appender name="TestNG" class="com.github.sbabcoc.logback.testng.ReporterAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} | %-5level | %logger{0} | %msg%n</pattern>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="io.slifer.automation.logs.ConsoleLogLayout"/>
         </encoder>
     </appender>
     
