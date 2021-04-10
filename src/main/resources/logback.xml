@@ -44,12 +44,12 @@
         </sift>
     </appender>
     
-    <logger name="SUITE" level="DEBUG" additivity="false">
+    <logger name="SUITE" level="INFO" additivity="false">
         <appender-ref ref="JSON-SUITE"/>
         <appender-ref ref="STDOUT"/>
     </logger>
     
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="TestNG"/>
         <appender-ref ref="JSON-TEST"/>
