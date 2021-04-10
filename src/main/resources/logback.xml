@@ -4,7 +4,7 @@
     
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="io.slifer.automation.logs.Layout"/>
+            <layout class="io.slifer.automation.logs.ConsoleLogLayout"/>
         </encoder>
     </appender>
     

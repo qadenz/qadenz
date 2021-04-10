@@ -12,11 +12,11 @@ import java.util.Date;
  *
  * @author Tim Slifer
  */
-public class Layout extends LayoutBase<ILoggingEvent> {
+public class ConsoleLogLayout extends LayoutBase<ILoggingEvent> {
     
     @Override
     public String doLayout(ILoggingEvent event) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         
         buffer.append(new SimpleDateFormat("HH:mm:ss:SSS").format(new Date()));
         buffer.append("|");
