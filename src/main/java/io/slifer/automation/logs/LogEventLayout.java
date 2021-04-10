@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Defines the logging output for Logback.
+ * Defines a Logback logging layout to be used for the Console and TestNG report loggers.
  *
  * @author Tim Slifer
  */
