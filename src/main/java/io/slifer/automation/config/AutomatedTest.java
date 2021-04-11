@@ -1,18 +1,30 @@
 package io.slifer.automation.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import io.slifer.automation.reporter.HtmlReporter;
+import io.slifer.automation.reporter.JsonCompiler;
+import io.slifer.automation.reporter.ResultsMap;
+import io.slifer.automation.reporter.Screenshots;
+import io.slifer.automation.reporter.model.JsonReport;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * The top-level class for all test classes. The AutomatedTest manages configuration and launch of the WebDriver and
@@ -22,7 +34,10 @@ import java.util.Map;
  */
 public class AutomatedTest {
     
-    private static final Logger LOG = LoggerFactory.getLogger(AutomatedTest.class);
+    private static final Logger LOG = RunContext.SUITE_LOG;
+    
+    private static ResultsMap resultsMap = new ResultsMap();
+    private static Screenshots screenshots = new Screenshots();
     
     /**
      * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
@@ -32,6 +47,8 @@ public class AutomatedTest {
      */
     @BeforeSuite (alwaysRun = true)
     public void processXmlParameters(ITestContext testContext) {
+        RunContext.suiteStartDate = LocalDateTime.now();
+        
         LOG.info("Reading XML Parameters.");
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
         XmlParameterValidator parameterValidator = new XmlParameterValidator(xmlParameters);
@@ -47,13 +64,19 @@ public class AutomatedTest {
     }
     
     /**
-     * Reads and assigns on the RunContext the name of the test method about to be executed.
+     * Captures the test method name, and assigns a UUID in preparation for logging and reporting activities.
      *
      * @param method The injected Method object.
+     * @param testContext The injected ITestContext.
      */
     @BeforeMethod (alwaysRun = true)
-    public void readTestName(Method method) {
+    public void prepareTestInfo(Method method, ITestContext testContext) {
         RunContext.setTestCaseName(method.getName());
+        
+        RunContext.setTestId(UUID.randomUUID().toString());
+        MDC.put("testId", RunContext.getTestId());
+        
+        resultsMap.setSuiteName(testContext.getSuite().getName());
     }
     
     /**
@@ -61,7 +84,7 @@ public class AutomatedTest {
      *
      * @throws Exception on invalid Grid URL.
      */
-    @BeforeMethod (dependsOnMethods = {"readTestName"}, alwaysRun = true)
+    @BeforeMethod (dependsOnMethods = {"prepareTestInfo"}, alwaysRun = true)
     public void startWebDriver() throws Exception {
         LOG.info("Launching RemoteWebDriver for test [{}].", RunContext.getTestCaseName());
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
@@ -80,11 +103,52 @@ public class AutomatedTest {
     }
     
     /**
-     * Concludes the test by stopping the WebDriver instance.
+     * Captures a screenshot for any failed test.
+     *
+     * @param testResult The Injected ITestResult.
      */
     @AfterMethod (alwaysRun = true)
+    public void saveScreenshot(ITestResult testResult) {
+        if (testResult.getStatus() == 2) {
+            screenshots.captureScreenshot();
+        }
+    }
+    
+    /**
+     * Concludes the test by stopping the WebDriver instance.
+     */
+    @AfterMethod (alwaysRun = true, dependsOnMethods = "saveScreenshot")
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
         RunContext.getWebDriver().quit();
+    }
+    
+    /**
+     * Captures the ITestResult instance for the test and links to the generated Test ID for processing by the HTML
+     * Reporter.
+     *
+     * @param testResult The injected ITestResult.
+     */
+    @AfterMethod (alwaysRun = true, dependsOnMethods = "stopWebDriver")
+    public void saveTestNgResult(ITestResult testResult) {
+        LOG.info("Capturing Test Results.");
+        resultsMap.put(RunContext.getTestId(), testResult);
+    }
+    
+    /**
+     * Triggers the generation of the HTML Report output and supporting JSON files.
+     *
+     * @param testContext The injected ITestContext.
+     */
+    @AfterSuite (alwaysRun = true)
+    public void generateReports(ITestContext testContext) throws Exception {
+        RunContext.suiteEndDate = LocalDateTime.now();
+        
+        JsonReport jsonReport = new JsonCompiler(resultsMap, screenshots).compileJsonReport();
+        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        objectWriter.writeValue(new File("Automation-Report.json"), jsonReport);
+        
+        HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
+        htmlReporter.generateReport();
     }
 }

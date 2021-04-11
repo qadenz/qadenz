@@ -4,19 +4,55 @@
     
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="io.slifer.automation.logs.Layout"/>
+            <layout class="io.slifer.automation.logs.LogEventLayout"/>
         </encoder>
     </appender>
     
     <appender name="TestNG" class="com.github.sbabcoc.logback.testng.ReporterAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} | %-5level | %logger{0} | %msg%n</pattern>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="io.slifer.automation.logs.LogEventLayout"/>
         </encoder>
     </appender>
     
-    <root level="${logLevel:-INFO}">
+    <appender name="JSON-SUITE" class="ch.qos.logback.core.FileAppender">
+        <file>suite-log.json</file>
+        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+            <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                <prettyPrint>false</prettyPrint>
+            </jsonFormatter>
+            <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+            <appendLineSeparator>true</appendLineSeparator>
+        </layout>
+    </appender>
+    
+    <appender name="JSON-TEST" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>testId</key>
+            <defaultValue>unknown</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE-${testId}" class="ch.qos.logback.core.FileAppender">
+                <file>test-logs/test-${testId}.json</file>
+                <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                    <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                        <prettyPrint>false</prettyPrint>
+                    </jsonFormatter>
+                    <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+                    <appendLineSeparator>true</appendLineSeparator>
+                </layout>
+            </appender>
+        </sift>
+    </appender>
+    
+    <logger name="SUITE" level="INFO" additivity="false">
+        <appender-ref ref="JSON-SUITE"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    
+    <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="TestNG"/>
+        <appender-ref ref="JSON-TEST"/>
     </root>
 
 </configuration>
