@@ -3,27 +3,19 @@ package io.slifer.automation.commands;
 import io.slifer.automation.conditions.Condition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Common commands for all test types.
+ * A second means of executing validations with Conditions, but outside the confines of the Commands class, with logging
+ * at the WARN level.
  *
  * @author Tim Slifer
  */
-public abstract class Commands {
+public class Assert {
     
-    private Logger LOG;
-    
-    public Commands() {
-        LOG = LoggerFactory.getLogger(Commands.class);
-    }
-    
-    public Commands(Class<?> proxyLogger) {
-        LOG = LoggerFactory.getLogger(proxyLogger);
-    }
+    private Logger LOG = LoggerFactory.getLogger(Assert.class);
     
     /**
      * Evaluates each of the given conditions as a group. If one or more Conditions results in a failure, execution will
@@ -31,19 +23,19 @@ public abstract class Commands {
      *
      * @param conditions The Conditions to be evaluated.
      */
-    public void verify(Condition... conditions) {
+    public void that(Condition... conditions) {
         List<Throwable> exceptions = new ArrayList<>();
         boolean failed = false;
         
         for (Condition condition : conditions) {
-            LOG.info("Asserting Condition - {}", condition.description());
+            LOG.warn("Asserting Condition - {}", condition.description());
             try {
                 boolean result = condition.result();
-                Assert.assertTrue(result);
-                LOG.info("Result - PASS");
+                org.testng.Assert.assertTrue(result);
+                LOG.warn("Result - PASS");
             }
             catch (AssertionError error) {
-                LOG.info("Result - FAIL :: {}", condition.output());
+                LOG.warn("Result - FAIL :: {}", condition.output());
                 exceptions.add(error);
                 failed = true;
             }
@@ -60,24 +52,6 @@ public abstract class Commands {
             else {
                 throw new RuntimeException("One or more validations encountered an error.");
             }
-        }
-    }
-    
-    /**
-     * Pauses execution for the given amount of time, expressed in seconds.
-     *
-     * @param seconds The amount of time to wait.
-     */
-    public void pause(int seconds) {
-        try {
-            LOG.info("Pausing for [{}] seconds.", seconds);
-            Thread.sleep(seconds * 1000);
-        }
-        catch (Exception e) {
-            LOG.error("Error during pause.");
-            
-            throw new RuntimeException("Thread.sleep failed.");
-            // Not ideal, but prevents us from having to add a throws declaration to our upstream methods.
         }
     }
 }
