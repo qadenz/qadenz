@@ -27,7 +27,6 @@ public class RunContext {
     public static boolean retryInterceptedClicks;
     
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    private static ThreadLocal<String> testCaseName = new ThreadLocal<>();
     private static ThreadLocal<String> testId = new ThreadLocal<>();
     
     public static final Logger SUITE_LOG = LoggerFactory.getLogger("SUITE");
@@ -38,14 +37,6 @@ public class RunContext {
     
     public static WebDriver getWebDriver() {
         return driver.get();
-    }
-    
-    public static void setTestCaseName(String name) {
-        testCaseName.set(name);
-    }
-    
-    public static String getTestCaseName() {
-        return testCaseName.get();
     }
     
     public static void setTestId(String id) {
