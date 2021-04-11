@@ -19,7 +19,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -64,15 +63,12 @@ public class AutomatedTest {
     }
     
     /**
-     * Captures the test method name, and assigns a UUID in preparation for logging and reporting activities.
+     * Assigns a UUID in preparation for logging and reporting activities.
      *
-     * @param method The injected Method object.
      * @param testContext The injected ITestContext.
      */
     @BeforeMethod (alwaysRun = true)
-    public void prepareTestInfo(Method method, ITestContext testContext) {
-        RunContext.setTestCaseName(method.getName());
-        
+    public void prepareTestInfo(ITestContext testContext) {
         RunContext.setTestId(UUID.randomUUID().toString());
         MDC.put("testId", RunContext.getTestId());
         
@@ -86,7 +82,7 @@ public class AutomatedTest {
      */
     @BeforeMethod (dependsOnMethods = {"prepareTestInfo"}, alwaysRun = true)
     public void startWebDriver() throws Exception {
-        LOG.info("Launching RemoteWebDriver for test [{}].", RunContext.getTestCaseName());
+        LOG.info("Launching RemoteWebDriver for test [{}].", RunContext.getTestId());
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
         
         try {
