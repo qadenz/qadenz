@@ -34,10 +34,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             RunContext.getWebDriver().switchTo().alert().accept();
         }
-        catch (Exception e) {
-            LOG.error("Error accepting alert.", e);
+        catch (Exception exception) {
+            LOG.error("Error accepting alert :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -49,10 +49,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             RunContext.getWebDriver().switchTo().alert().dismiss();
         }
-        catch (Exception e) {
-            LOG.error("Error dismissing alert.", e);
+        catch (Exception exception) {
+            LOG.error("Error dismissing alert :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -66,10 +66,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             RunContext.getWebDriver().switchTo().alert().sendKeys(input);
         }
-        catch (Exception e) {
-            LOG.error("Error entering text.", e);
+        catch (Exception exception) {
+            LOG.error("Error entering text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -81,10 +81,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             RunContext.getWebDriver().close();
         }
-        catch (Exception e) {
-            LOG.error("Error closing browser.", e);
+        catch (Exception exception) {
+            LOG.error("Error closing browser :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -96,10 +96,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             RunContext.getWebDriver().navigate().back();
         }
-        catch (Exception e) {
-            LOG.error("Error navigating back.", e);
+        catch (Exception exception) {
+            LOG.error("Error navigating back. :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -111,10 +111,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             RunContext.getWebDriver().navigate().forward();
         }
-        catch (Exception e) {
-            LOG.error("Error navigating back.", e);
+        catch (Exception exception) {
+            LOG.error("Error navigating back :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -126,10 +126,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             RunContext.getWebDriver().navigate().refresh();
         }
-        catch (Exception e) {
-            LOG.error("Error refreshing page.", e);
+        catch (Exception exception) {
+            LOG.error("Error refreshing page :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -141,10 +141,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             RunContext.getWebDriver().manage().deleteAllCookies();
         }
-        catch (Exception e) {
-            LOG.error("Error deleting cookies.", e);
+        catch (Exception exception) {
+            LOG.error("Error deleting cookies :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -158,10 +158,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             RunContext.getWebDriver().get(url);
         }
-        catch (Exception e) {
-            LOG.error("Error opening URL.", e);
+        catch (Exception exception) {
+            LOG.error("Error opening URL :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -173,10 +173,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             switchWindowFocus(Window.NEXT);
         }
-        catch (Exception e) {
-            LOG.error("Error switching focus.", e);
+        catch (Exception exception) {
+            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -188,10 +188,10 @@ public class BrowserCommands extends WebDriverCommands {
         try {
             switchWindowFocus(Window.PREVIOUS);
         }
-        catch (Exception e) {
-            LOG.error("Error switching focus.");
+        catch (Exception exception) {
+            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
