@@ -62,10 +62,10 @@ public class HtmlReporter {
         head.appendElement("link")
             .attr("href", "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap")
             .attr("rel", "stylesheet");
-        head.appendElement("style").text(loadAndMinifyCss());
+        head.appendElement("style").text(loadAndCompressCss());
     }
     
-    private String loadAndMinifyCss() {
+    private String loadAndCompressCss() {
         String contents = null;
         try {
             Path path = Paths.get(ClassLoader.getSystemResource("html/report.css").toURI());
@@ -75,6 +75,7 @@ public class HtmlReporter {
             exception.printStackTrace();
         }
         
+        // yeah, it's hacky but it works. I'll revisit this another time
         return contents.replace("    ", "").replace(" {", "{").replace(": ", ":").replaceAll("\n", "");
     }
     
