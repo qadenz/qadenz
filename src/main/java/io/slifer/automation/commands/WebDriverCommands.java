@@ -424,7 +424,17 @@ public abstract class WebDriverCommands extends Commands {
         LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].",
                 locator.getName(), attribute, expectedValue);
         
-        List<String> attributeValues = elementInspector.getAttributeOfElements(locator, attribute);
+        List<String> attributeValues;
+        try {
+            attributeValues = elementInspector.getAttributeOfElements(locator, attribute);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving attributes :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            
+            throw exception;
+        }
+        
         for (int i = 0; i < attributeValues.size(); i++) {
             if (attributeValues.get(i).equals(expectedValue)) {
                 LOG.debug("Found value at index [{}].", i);
