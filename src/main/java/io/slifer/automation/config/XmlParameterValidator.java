@@ -3,13 +3,12 @@ package io.slifer.automation.config;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 public class XmlParameterValidator {
     
-    private static final Logger LOG = LoggerFactory.getLogger(XmlParameterValidator.class);
+    private static final Logger LOG = RunContext.SUITE_LOG;
     
     private Map<String, String> xmlParameters;
     

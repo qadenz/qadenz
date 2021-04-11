@@ -71,7 +71,7 @@ public class ElementFinder {
      */
     public WebElement findWhenVisible(Locator locator) {
         LOG.debug("Finding element [{}] when visible.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), 60);
+        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
         
         try {
             LOG.debug("Initializing element [{}] when visible.", locator.getName());
@@ -94,7 +94,7 @@ public class ElementFinder {
      */
     public List<WebElement> findAllWhenVisible(Locator locator) {
         LOG.debug("Finding elements [{}] when visible.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), 60);
+        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
         
         try {
             LOG.debug("Initializing elements [{}] when visible.", locator.getName());
@@ -117,7 +117,7 @@ public class ElementFinder {
      */
     public WebElement findWhenClickable(Locator locator) {
         LOG.debug("Finding element [{}] when clickable.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), 60);
+        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
         
         try {
             LOG.debug("Initializing element [{}] when clickable.", locator.getName());
@@ -140,7 +140,7 @@ public class ElementFinder {
      */
     public WebElement findWhenPresent(Locator locator) {
         LOG.debug("Finding element [{}] when present.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), 60);
+        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
         
         try {
             LOG.debug("Initializing element [{}] when present.", locator.getName());
