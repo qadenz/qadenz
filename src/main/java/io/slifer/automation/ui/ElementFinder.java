@@ -35,7 +35,7 @@ public class ElementFinder {
             return RunContext.getWebDriver().findElement(bySizzle(locator));
         }
         catch (Exception e) {
-            LOG.error("Could not initialize element [{}].", locator.getName());
+            LOG.debug("Could not initialize element [{}].", locator.getName());
             throw e;
         }
     }
@@ -56,7 +56,7 @@ public class ElementFinder {
             return RunContext.getWebDriver().findElements(bySizzle(locator));
         }
         catch (Exception e) {
-            LOG.error("Could not initialize elements [{}].", locator.getName());
+            LOG.debug("Could not initialize elements [{}].", locator.getName());
             
             throw e;
         }
@@ -79,7 +79,7 @@ public class ElementFinder {
             return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
         }
         catch (Exception e) {
-            LOG.error("Could not initialize element [{}].", locator.getName());
+            LOG.debug("Could not initialize element [{}].", locator.getName());
             
             throw e;
         }
@@ -102,7 +102,7 @@ public class ElementFinder {
             return webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(bySizzle(locator)));
         }
         catch (Exception e) {
-            LOG.error("Could not initialize elements [{}].", locator.getName());
+            LOG.debug("Could not initialize elements [{}].", locator.getName());
             
             throw e;
         }
@@ -125,7 +125,7 @@ public class ElementFinder {
             return webDriverWait.until(ExpectedConditions.elementToBeClickable(bySizzle(locator)));
         }
         catch (Exception e) {
-            LOG.error("Could not initialize element [{}].", locator.getName());
+            LOG.debug("Could not initialize element [{}].", locator.getName());
             
             throw e;
         }
@@ -148,7 +148,7 @@ public class ElementFinder {
             return webDriverWait.until(ExpectedConditions.presenceOfElementLocated(bySizzle(locator)));
         }
         catch (Exception e) {
-            LOG.error("Could not initialize element [{}].", locator.getName());
+            LOG.debug("Could not initialize element [{}].", locator.getName());
             
             throw e;
         }
