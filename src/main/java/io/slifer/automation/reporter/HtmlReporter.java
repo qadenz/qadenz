@@ -103,7 +103,7 @@ public class HtmlReporter {
     }
     
     private void writeSummaryItem(Element summary, HtmlResult result, String value) {
-        writeSummaryItem(summary, false, result.summaryItemLabel, result.summaryItemValueStyle, value);
+        writeSummaryItem(summary, false, result.getSummaryItemLabel(), result.getSummaryItemValueStyle(), value);
     }
     
     private void writeSummaryItem(Element summary, boolean wide, String label, String style, String value) {
@@ -118,8 +118,8 @@ public class HtmlReporter {
         // write main section structure
         document.body().appendElement("div").addClass("results-section bordered");
         Element section = document.body().getElementsByClass("results-section bordered").last();
-        section.appendElement("div").addClass("section-name bordered " + result.resultsSectionStyle)
-               .text(result.resultsSectionLabel);
+        section.appendElement("div").addClass("section-name bordered " + result.getResultsSectionStyle())
+               .text(result.getResultsSectionLabel());
         section.appendElement("div").addClass("test-classes bordered");
         Element classes = section.getElementsByClass("test-classes bordered").last();
         
