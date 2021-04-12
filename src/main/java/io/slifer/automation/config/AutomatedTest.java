@@ -47,7 +47,7 @@ public class AutomatedTest {
         builder.append(File.separator);
         builder.append(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(RunContext.suiteStartDate));
         builder.append(File.separator);
-        builder.append(DateTimeFormatter.ofPattern("HH-mm-ss").format(RunContext.suiteStartDate));
+        builder.append(DateTimeFormatter.ofPattern("HHmm").format(RunContext.suiteStartDate));
         builder.append("-");
         builder.append((testContext.getSuite().getName() != null) ? testContext.getSuite().getName() : "Suite");
         builder.append(File.separator);
