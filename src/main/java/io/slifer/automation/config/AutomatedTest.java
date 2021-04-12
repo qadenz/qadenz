@@ -10,6 +10,7 @@ import io.slifer.automation.reporter.model.JsonReport;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -34,7 +35,7 @@ import java.util.UUID;
  */
 public class AutomatedTest {
     
-    private static final Logger LOG = RunContext.SUITE_LOG;
+    private final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     private static ResultsMap resultsMap = new ResultsMap();
     private static Screenshots screenshots = new Screenshots();
