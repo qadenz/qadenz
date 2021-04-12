@@ -212,7 +212,7 @@ public class HtmlReporter {
     private void writeHtmlFile() {
         SUITE_LOG.debug("Writing HTML File.");
         try {
-            File file = new File("Automation-Report.html");
+            File file = new File(RunContext.reportOutputPath + "results.html");
             FileUtils.writeStringToFile(file, document.outerHtml(), StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
