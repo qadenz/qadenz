@@ -15,7 +15,7 @@
     </appender>
     
     <appender name="JSON-SUITE" class="ch.qos.logback.core.FileAppender">
-        <file>suite-log.json</file>
+        <file>${path.ReportOutput}suite-log.json</file>
         <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
             <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
                 <prettyPrint>false</prettyPrint>
@@ -32,7 +32,7 @@
         </discriminator>
         <sift>
             <appender name="FILE-${testId}" class="ch.qos.logback.core.FileAppender">
-                <file>test-logs/test-${testId}.json</file>
+                <file>${path.ReportOutput}test-logs/test-${testId}.json</file>
                 <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
                     <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
                         <prettyPrint>false</prettyPrint>
