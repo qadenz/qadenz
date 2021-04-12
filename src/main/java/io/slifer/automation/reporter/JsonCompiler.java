@@ -110,7 +110,7 @@ public class JsonCompiler {
                 jsonTest.setScreenshot(screenshots.get(key));
             }
             
-            String fileName = "test-logs/test-" + key + ".json";
+            String fileName = RunContext.reportOutputPath + "test-logs/test-" + key + ".json";
             List<JSONObject> jsonLogs = readJsonFile(fileName);
             List<JsonTestLog> logs = new ArrayList<>();
             for (JSONObject log : jsonLogs) {
