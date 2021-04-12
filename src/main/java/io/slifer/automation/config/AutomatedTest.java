@@ -35,7 +35,7 @@ import java.util.UUID;
  */
 public class AutomatedTest {
     
-    private final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     private static ResultsMap resultsMap = new ResultsMap();
     private static Screenshots screenshots = new Screenshots();
