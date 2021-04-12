@@ -75,7 +75,7 @@ public class JsonCompiler {
         List<JsonTest> jsonTests = new ArrayList<>();
         
         for (String key : resultsMap.keySet()) {
-            SUITE_LOG.info("Starting Log Processing for Test [{}]", key);
+            SUITE_LOG.info("Processing Log for Test [{}]", key);
             ITestResult testResult = resultsMap.get(key);
             
             JsonTest jsonTest = new JsonTest();
@@ -130,7 +130,7 @@ public class JsonCompiler {
     }
     
     private List<JSONObject> readJsonFile(String fileName) {
-        SUITE_LOG.info("Opening logs for test [{}].", fileName);
+        SUITE_LOG.debug("Opening logs for test [{}].", fileName);
         List<JSONObject> jsonLogs = new ArrayList<>();
         
         try (Stream<String> stream = Files.lines(Paths.get(fileName), StandardCharsets.UTF_8)) {
