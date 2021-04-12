@@ -31,7 +31,7 @@ import java.util.stream.Stream;
  */
 public class JsonCompiler {
     
-    private final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     private ResultsMap resultsMap;
     private Screenshots screenshots;

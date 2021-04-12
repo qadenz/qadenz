@@ -22,7 +22,7 @@ import java.util.HashMap;
  */
 public class Screenshots extends HashMap<String, String> {
     
-    private final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     public void captureScreenshot() {
         File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
