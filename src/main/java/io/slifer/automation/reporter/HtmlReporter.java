@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class HtmlReporter {
     
-    private final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     private JsonReport json;
     private Document document;
