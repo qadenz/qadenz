@@ -164,6 +164,6 @@ public class AutomatedTest {
         objectWriter.writeValue(new File(RunContext.reportOutputPath + "results.json"), jsonReport);
         
         HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
-        htmlReporter.generateReport();
+        htmlReporter.generateReport(RunContext.reportOutputPath);
     }
 }
