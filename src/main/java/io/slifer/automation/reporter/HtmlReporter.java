@@ -1,5 +1,6 @@
 package io.slifer.automation.reporter;
 
+import io.slifer.automation.config.RunContext;
 import io.slifer.automation.reporter.model.JsonReport;
 import io.slifer.automation.reporter.model.JsonTest;
 import io.slifer.automation.reporter.model.JsonTestLog;
@@ -7,6 +8,7 @@ import org.apache.commons.io.FileUtils;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +29,8 @@ import java.util.List;
  */
 public class HtmlReporter {
     
+    private static final Logger SUITE_LOG = RunContext.SUITE_LOG;
+    
     private JsonReport json;
     private Document document;
     
@@ -36,18 +40,23 @@ public class HtmlReporter {
     }
     
     public void generateReport() {
+        SUITE_LOG.info("Building HTML Report.");
         writeHead();
         writeSummary();
         if (json.getFailedTests().size() > 0) {
+            SUITE_LOG.debug("Writing Failed Tests.");
             writeResultsSection(json.getFailedTests(), HtmlResult.FAILED);
         }
         if (json.getStoppedTests().size() > 0) {
+            SUITE_LOG.debug("Writing Stopped Tests.");
             writeResultsSection(json.getStoppedTests(), HtmlResult.STOPPED);
         }
         if (json.getSkippedTests().size() > 0) {
+            SUITE_LOG.debug("Writing Skipped Tests.");
             writeResultsSection(json.getSkippedTests(), HtmlResult.SKIPPED);
         }
         if (json.getPassedTests().size() > 0) {
+            SUITE_LOG.debug("Writing Passed Tests.");
             writeResultsSection(json.getPassedTests(), HtmlResult.PASSED);
         }
         writeScript();
@@ -56,6 +65,7 @@ public class HtmlReporter {
     }
     
     private void writeHead() {
+        SUITE_LOG.debug("Writing document head.");
         Element head = document.head();
         head.appendElement("meta").attr("charset", "UTF-8");
         head.appendElement("title").text("Test Report");
@@ -80,6 +90,8 @@ public class HtmlReporter {
     }
     
     private void writeSummary() {
+        SUITE_LOG.debug("Writing Suite summary.");
+        
         document.body().appendElement("div").addClass("suite-summary bordered");
         
         Element summary = document.body().getElementsByClass("suite-summary bordered").get(0);
@@ -198,6 +210,7 @@ public class HtmlReporter {
     }
     
     private void writeHtmlFile() {
+        SUITE_LOG.debug("Writing HTML File.");
         try {
             File file = new File("Automation-Report.html");
             FileUtils.writeStringToFile(file, document.outerHtml(), StandardCharsets.UTF_8);

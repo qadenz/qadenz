@@ -57,10 +57,11 @@ public abstract class WebDriverCommands extends Commands {
             WebElement webElement = elementFinder.findWhenVisible(locator);
             webElement.clear();
         }
-        catch (Exception e) {
-            LOG.error("Error clearing contents.", e);
+        catch (Exception exception) {
+            LOG.error("Error clearing contents :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -76,7 +77,7 @@ public abstract class WebDriverCommands extends Commands {
             webElement = elementFinder.findWhenClickable(locator);
             webElement.click();
         }
-        catch (ElementClickInterceptedException e) {
+        catch (ElementClickInterceptedException exception) {
             if (RunContext.retryInterceptedClicks) {
                 LOG.debug("Click intercepted, trying with Actions.");
                 webElement = elementFinder.findWhenClickable(locator);
@@ -85,15 +86,16 @@ public abstract class WebDriverCommands extends Commands {
                 actions.moveToElement(webElement).click().perform();
             }
             else {
-                LOG.error("Click intercepted.", e);
+                LOG.error("Error clicking with Actions :: {}: {}", exception.getClass().getSimpleName(),
+                        exception.getMessage());
                 
-                throw e;
+                throw exception;
             }
         }
-        catch (Exception e) {
-            LOG.error("Error clicking element.", e);
+        catch (Exception exception) {
+            LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -112,10 +114,10 @@ public abstract class WebDriverCommands extends Commands {
             Actions actions = new Actions(RunContext.getWebDriver());
             actions.moveToElement(webElement, xOffset, yOffset).click().perform();
         }
-        catch (Exception e) {
-            LOG.error("Error clicking element.", e);
+        catch (Exception exception) {
+            LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -139,10 +141,11 @@ public abstract class WebDriverCommands extends Commands {
             actions.keyUp(Keys.CONTROL);
             actions.perform();
         }
-        catch (Exception e) {
-            LOG.error("Error clicking elements.", e);
+        catch (Exception exception) {
+            LOG.error("Error clicking elements :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -159,10 +162,11 @@ public abstract class WebDriverCommands extends Commands {
             Select select = new Select(webElement);
             select.deselectByVisibleText(option);
         }
-        catch (Exception e) {
-            LOG.error("Error deselecting option.", e);
+        catch (Exception exception) {
+            LOG.error("Error deselecting option :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -178,10 +182,11 @@ public abstract class WebDriverCommands extends Commands {
             Actions actions = new Actions(RunContext.getWebDriver());
             actions.doubleClick(webElement).perform();
         }
-        catch (Exception e) {
-            LOG.error("Error double-clicking element.", e);
+        catch (Exception exception) {
+            LOG.error("Error double-clicking element :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -197,10 +202,10 @@ public abstract class WebDriverCommands extends Commands {
             WebElement webElement = elementFinder.findWhenVisible(locator);
             webElement.sendKeys(input);
         }
-        catch (Exception e) {
-            LOG.error("Error entering text.", e);
+        catch (Exception exception) {
+            LOG.error("Error entering text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -216,10 +221,11 @@ public abstract class WebDriverCommands extends Commands {
             Actions actions = new Actions(RunContext.getWebDriver());
             actions.moveToElement(webElement).perform();
         }
-        catch (Exception e) {
-            LOG.error("Error hovering on element.", e);
+        catch (Exception exception) {
+            LOG.error("Error hovering on element :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -236,10 +242,10 @@ public abstract class WebDriverCommands extends Commands {
             Select select = new Select(webElement);
             select.selectByVisibleText(option);
         }
-        catch (Exception e) {
-            LOG.error("Error selecting option.", e);
+        catch (Exception exception) {
+            LOG.error("Error selecting option :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -262,8 +268,8 @@ public abstract class WebDriverCommands extends Commands {
             WebElement webElement = elementFinder.findWhenPresent(fileInput);
             webElement.sendKeys(filePath);
         }
-        catch (Exception e) {
-            LOG.error("Error uploading file.", e);
+        catch (Exception exception) {
+            LOG.error("Error uploading file :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
             throw new RuntimeException("File could not be uploaded.");
         }
@@ -284,14 +290,14 @@ public abstract class WebDriverCommands extends Commands {
      * Moves focus to the default or main frame.
      */
     public void focusOnDefaultContent() {
-        LOG.info("Switch focus to default frame.");
+        LOG.info("Switching focus to default frame.");
         try {
             RunContext.getWebDriver().switchTo().defaultContent();
         }
-        catch (Exception e) {
-            LOG.error("Error switching focus.", e);
+        catch (Exception exception) {
+            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -301,16 +307,16 @@ public abstract class WebDriverCommands extends Commands {
      * @param locator The UI mapping of the frame.
      */
     public void focusOnFrame(Locator locator) {
-        LOG.info("Switch focus to frame [{}]", locator.getName());
+        LOG.info("Switching focus to frame [{}]", locator.getName());
         try {
             RunContext.getWebDriver().switchTo().defaultContent();
             WebElement webElement = elementFinder.findWhenVisible(locator);
             RunContext.getWebDriver().switchTo().frame(webElement);
         }
-        catch (Exception e) {
-            LOG.error("Error switching focus.", e);
+        catch (Exception exception) {
+            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -320,16 +326,16 @@ public abstract class WebDriverCommands extends Commands {
      * @param condition The Condition to be satisfied during the wait.
      */
     public void pause(Condition condition) {
-        LOG.info("Wait for condition :: {}", condition.description());
+        LOG.info("Waiting for condition :: {}", condition.description());
         WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
         
         try {
             webDriverWait.until((ExpectedCondition<Boolean>) webDriver -> condition.result());
         }
-        catch (Exception e) {
-            LOG.error("Error while waiting.", e);
+        catch (Exception exception) {
+            LOG.error("Error while waiting :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -345,10 +351,10 @@ public abstract class WebDriverCommands extends Commands {
         try {
             return elementInspector.getTextOfElement(locator);
         }
-        catch (Exception e) {
-            LOG.error("Error retrieving text.", e);
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -364,10 +370,10 @@ public abstract class WebDriverCommands extends Commands {
         try {
             return elementInspector.getTextOfElements(locator);
         }
-        catch (Exception e) {
-            LOG.error("Error retrieving text.", e);
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -382,7 +388,16 @@ public abstract class WebDriverCommands extends Commands {
     public int getInstanceOfElementText(Locator locator, String expectedText) {
         LOG.info("Finding instance of element [{}] with value [{}].", locator.getName(), expectedText);
         
-        List<String> elementValues = elementInspector.getTextOfElements(locator);
+        List<String> elementValues;
+        try {
+            elementValues = elementInspector.getTextOfElements(locator);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            
+            throw exception;
+        }
+        
         for (int i = 0; i < elementValues.size(); i++) {
             if (elementValues.get(i).equals(expectedText)) {
                 LOG.debug("Found value at index [{}].", i);
@@ -406,10 +421,20 @@ public abstract class WebDriverCommands extends Commands {
      * @return The element instance.
      */
     public int getInstanceOfElementAttribute(Locator locator, String attribute, String expectedValue) {
-        LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].", locator.getName(),
-                attribute, expectedValue);
+        LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].",
+                locator.getName(), attribute, expectedValue);
         
-        List<String> attributeValues = elementInspector.getAttributeOfElements(locator, attribute);
+        List<String> attributeValues;
+        try {
+            attributeValues = elementInspector.getAttributeOfElements(locator, attribute);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving attributes :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            
+            throw exception;
+        }
+        
         for (int i = 0; i < attributeValues.size(); i++) {
             if (attributeValues.get(i).equals(expectedValue)) {
                 LOG.debug("Found value at index [{}].", i);
