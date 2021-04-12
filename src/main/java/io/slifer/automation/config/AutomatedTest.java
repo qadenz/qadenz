@@ -10,6 +10,7 @@ import io.slifer.automation.reporter.model.JsonReport;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -22,6 +23,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.UUID;
 
@@ -33,10 +35,31 @@ import java.util.UUID;
  */
 public class AutomatedTest {
     
-    private static final Logger LOG = RunContext.SUITE_LOG;
+    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     private static ResultsMap resultsMap = new ResultsMap();
     private static Screenshots screenshots = new Screenshots();
+    
+    @BeforeSuite (alwaysRun = true)
+    public void configureReportOutputPath(ITestContext testContext) {
+        RunContext.suiteStartDate = LocalDateTime.now();
+        StringBuilder builder = new StringBuilder();
+        builder.append("./test-results");
+        builder.append(File.separator);
+        builder.append(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(RunContext.suiteStartDate));
+        builder.append(File.separator);
+        builder.append(DateTimeFormatter.ofPattern("HHmm").format(RunContext.suiteStartDate));
+        builder.append("-");
+        builder.append((testContext.getSuite().getName() != null) ? testContext.getSuite().getName() : "Suite");
+        builder.append(File.separator);
+        
+        String path = builder.toString();
+        System.setProperty("path.ReportOutput", path);
+        MDC.put("suiteId", UUID.randomUUID().toString());
+        LOG.info("Report Output Path is [{}]", path);
+        new File(path).mkdirs();
+        RunContext.reportOutputPath = path;
+    }
     
     /**
      * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
@@ -44,9 +67,8 @@ public class AutomatedTest {
      *
      * @param testContext The injected ITestContext.
      */
-    @BeforeSuite (alwaysRun = true)
+    @BeforeSuite (alwaysRun = true, dependsOnMethods = "configureReportOutputPath")
     public void processXmlParameters(ITestContext testContext) {
-        RunContext.suiteStartDate = LocalDateTime.now();
         
         LOG.info("Reading XML Parameters.");
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
@@ -142,9 +164,9 @@ public class AutomatedTest {
         
         JsonReport jsonReport = new JsonCompiler(resultsMap, screenshots).compileJsonReport();
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        objectWriter.writeValue(new File("Automation-Report.json"), jsonReport);
+        objectWriter.writeValue(new File(RunContext.reportOutputPath + "results.json"), jsonReport);
         
         HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
-        htmlReporter.generateReport();
+        htmlReporter.generateReport(RunContext.reportOutputPath);
     }
 }
