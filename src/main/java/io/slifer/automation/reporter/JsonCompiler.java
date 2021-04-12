@@ -6,6 +6,7 @@ import io.slifer.automation.reporter.model.JsonTest;
 import io.slifer.automation.reporter.model.JsonTestLog;
 import org.json.JSONObject;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 
 import java.nio.charset.StandardCharsets;
@@ -30,7 +31,7 @@ import java.util.stream.Stream;
  */
 public class JsonCompiler {
     
-    private static final Logger SUITE_LOG = RunContext.SUITE_LOG;
+    private final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     private ResultsMap resultsMap;
     private Screenshots screenshots;
@@ -50,7 +51,7 @@ public class JsonCompiler {
     }
     
     private void setSuiteHeaderInfo() {
-        SUITE_LOG.info("Writing Suite Header Info.");
+        LOG.info("Writing Suite Header Info.");
         jsonReport.setSuiteName(resultsMap.getSuiteName());
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -70,12 +71,12 @@ public class JsonCompiler {
     }
     
     private void processTestLogs() {
-        SUITE_LOG.info("Processing Test Logs.");
+        LOG.info("Processing Test Logs.");
         
         List<JsonTest> jsonTests = new ArrayList<>();
         
         for (String key : resultsMap.keySet()) {
-            SUITE_LOG.info("Processing Log for Test [{}]", key);
+            LOG.info("Processing Log for Test [{}]", key);
             ITestResult testResult = resultsMap.get(key);
             
             JsonTest jsonTest = new JsonTest();
@@ -130,7 +131,7 @@ public class JsonCompiler {
     }
     
     private List<JSONObject> readJsonFile(String fileName) {
-        SUITE_LOG.debug("Opening logs for test [{}].", fileName);
+        LOG.debug("Opening logs for test [{}].", fileName);
         List<JSONObject> jsonLogs = new ArrayList<>();
         
         try (Stream<String> stream = Files.lines(Paths.get(fileName), StandardCharsets.UTF_8)) {
