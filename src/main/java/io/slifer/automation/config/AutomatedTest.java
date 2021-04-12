@@ -53,6 +53,7 @@ public class AutomatedTest {
         builder.append(File.separator);
         
         String path = builder.toString();
+        System.setProperty("path.ReportOutput", path);
         LOG.info("Report Output Path is [{}]", path);
         new File(path).mkdirs();
         RunContext.reportOutputPath = path;
