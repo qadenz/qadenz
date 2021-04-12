@@ -72,6 +72,19 @@ public class ElementInspector {
     }
     
     /**
+     * Retrieves the value of the given CSS property on an element.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The CSS property value.
+     */
+    public String getCssPropertyOfElement(Locator locator, String cssProperty) {
+        WebElement webElement = elementFinder.findWhenVisible(locator);
+        
+        return webElement.getCssValue(cssProperty);
+    }
+    
+    /**
      * Retrieves the enabled state of an element. Generally useful for determining whether or not input elements are
      * enabled.
      *
