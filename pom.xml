@@ -164,11 +164,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>test-logs</directory>
-            </resource>
-        </resources>
     </build>
 
 </project>

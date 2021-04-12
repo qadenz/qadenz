@@ -2,8 +2,6 @@ package io.slifer.automation.config;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +15,8 @@ public class RunContext {
     public static LocalDateTime suiteStartDate;
     public static LocalDateTime suiteEndDate;
     
+    public static String reportOutputPath;
+    
     public static String gridHost;
     public static Browser browser;
     public static String browserVersion;
@@ -28,8 +28,6 @@ public class RunContext {
     
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static ThreadLocal<String> testId = new ThreadLocal<>();
-    
-    public static final Logger SUITE_LOG = LoggerFactory.getLogger("SUITE");
     
     public static void setWebDriver(WebDriver webDriver) {
         driver.set(webDriver);

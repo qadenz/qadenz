@@ -5,6 +5,7 @@ import org.imgscalr.Scalr;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -21,7 +22,7 @@ import java.util.HashMap;
  */
 public class Screenshots extends HashMap<String, String> {
     
-    public static final Logger LOG = RunContext.SUITE_LOG;
+    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     public void captureScreenshot() {
         File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
