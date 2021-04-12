@@ -43,15 +43,18 @@ public class AutomatedTest {
     public void configureReportOutputPath(ITestContext testContext) {
         RunContext.suiteStartDate = LocalDateTime.now();
         StringBuilder builder = new StringBuilder();
-        builder.append("test-results\\");
+        builder.append("./test-results");
+        builder.append(File.separator);
         builder.append(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(RunContext.suiteStartDate));
-        builder.append("\\");
+        builder.append(File.separator);
         builder.append(DateTimeFormatter.ofPattern("HH-mm-ss").format(RunContext.suiteStartDate));
-        builder.append("\\");
+        builder.append("-");
         builder.append((testContext.getSuite().getName() != null) ? testContext.getSuite().getName() : "Suite");
+        builder.append(File.separator);
         
         String path = builder.toString();
         LOG.info("Report Output Path is [{}]", path);
+        new File(path).mkdirs();
         RunContext.reportOutputPath = path;
     }
     
