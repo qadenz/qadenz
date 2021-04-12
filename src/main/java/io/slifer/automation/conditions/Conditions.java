@@ -95,6 +95,46 @@ public class Conditions {
     }
     
     /**
+     * A Condition to evaluate the value of a CSS property on an element.
+     *
+     * @param locator The mapped UI element.
+     * @param cssPropertyName The name of the property to be evaluated.
+     * @param expectation The expectation for the property value.
+     *
+     * @return The Condition.
+     */
+    public static Condition cssPropertyOfElement(final Locator locator, final String cssPropertyName,
+            final Expectation<String> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            String cssPropertyValue;
+            
+            @Override
+            public String description() {
+                return "CSS Property [" + cssPropertyName + "] of element [" + locator.getName() + "] " +
+                        expectation.description() + ".";
+            }
+            
+            @Override
+            public Boolean result() {
+                ElementInspector elementInspector = new ElementInspector();
+                cssPropertyValue = elementInspector.getCssPropertyOfElement(locator, cssPropertyName);
+                
+                match = expectation.matcher().matches(cssPropertyName);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + cssPropertyValue + "].";
+            }
+        };
+    }
+    
+    /**
      * A Condition for evaluating element to be enabled.
      *
      * @param locator The mapped UI element.
