@@ -77,13 +77,13 @@ public class JsonCompiler {
         
         for (String key : resultsMap.keySet()) {
             LOG.info("Processing Log for Test [{}]", key);
-            ITestResult testResult = resultsMap.get(key);
+            ITestResult testNgResult = resultsMap.get(key);
             
             JsonTest jsonTest = new JsonTest();
-            jsonTest.setClassName(testResult.getTestClass().getName());
-            jsonTest.setTestName(testResult.getName());
-            jsonTest.setParameters(Arrays.toString(testResult.getParameters()).replace("/", "-"));
-            jsonTest.setResult(computeTestResult(testResult));
+            jsonTest.setClassName(testNgResult.getTestClass().getName());
+            jsonTest.setTestName(testNgResult.getName());
+            jsonTest.setParameters(Arrays.toString(testNgResult.getParameters()).replace("/", "-"));
+            jsonTest.setResult(computeTestResult(testNgResult));
             
             LocalDateTime startDateMillis =
                     Instant.ofEpochMilli(resultsMap.get(key).getStartMillis()).atZone(ZoneId.systemDefault())
@@ -102,7 +102,7 @@ public class JsonCompiler {
             
             jsonTest.setTestExecutionTime(testExecutionTime);
             
-            Throwable throwable = testResult.getThrowable();
+            Throwable throwable = testNgResult.getThrowable();
             if (throwable != null) {
                 // Commenting these items in case the need arises to restore them
                 // jsonTest.setThrowable(throwable.getClass().getName());
