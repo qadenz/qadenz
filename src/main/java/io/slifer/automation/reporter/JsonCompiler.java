@@ -111,9 +111,9 @@ public class JsonCompiler {
             }
             
             String fileName = RunContext.reportOutputPath + "test-logs/test-" + key + ".json";
-            List<JSONObject> jsonLogs = readJsonFile(fileName);
+            List<JSONObject> jsonLogFile = readJsonFile(fileName);
             List<JsonTestLog> logs = new ArrayList<>();
-            for (JSONObject log : jsonLogs) {
+            for (JSONObject log : jsonLogFile) {
                 JsonTestLog jsonTestLog = new JsonTestLog();
                 jsonTestLog.setTimestamp(log.getString("timestamp"));
                 jsonTestLog.setLogger(log.getString("logger"));
