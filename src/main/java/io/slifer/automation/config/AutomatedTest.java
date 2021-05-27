@@ -38,7 +38,7 @@ public class AutomatedTest {
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     private static ResultsMap resultsMap = ResultsMap.getInstance();
-    private static Screenshots screenshots = new Screenshots();
+    private static Screenshots screenshots = Screenshots.getInstance();
     
     @BeforeSuite (alwaysRun = true)
     public void configureReportOutputPath(ITestContext testContext) {

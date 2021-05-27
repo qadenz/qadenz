@@ -24,6 +24,20 @@ public class Screenshots extends HashMap<String, String> {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
+    private static Screenshots instance;
+    
+    private Screenshots() {
+        // Singleton
+    }
+    
+    public static Screenshots getInstance() {
+        if (instance == null) {
+            instance = new Screenshots();
+        }
+        
+        return instance;
+    }
+    
     public void captureScreenshot() {
         File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
         BufferedImage resizedCapture = resize(rawCapture);
