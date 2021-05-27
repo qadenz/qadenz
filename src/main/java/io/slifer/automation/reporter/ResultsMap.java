@@ -11,7 +11,20 @@ import java.util.HashMap;
  */
 public class ResultsMap extends HashMap<String, ITestResult> {
     
+    private static ResultsMap instance;
     private String suiteName;
+    
+    private ResultsMap() {
+        // Singleton
+    }
+    
+    public static ResultsMap getInstance() {
+        if (instance == null) {
+            instance = new ResultsMap();
+        }
+        
+        return instance;
+    }
     
     public String getSuiteName() {
         return suiteName;
