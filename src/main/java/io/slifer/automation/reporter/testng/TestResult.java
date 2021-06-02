@@ -19,6 +19,7 @@ public class TestResult {
     private final String testName;
     private final List<ClassResult> failedConfigurationResults;
     private final List<ClassResult> failedTestResults;
+    private final List<ClassResult> stoppedTestResults;
     private final List<ClassResult> skippedConfigurationResults;
     private final List<ClassResult> skippedTestResults;
     private final List<ClassResult> retriedTestResults;
@@ -26,6 +27,7 @@ public class TestResult {
     private final int failedTestCount;
     private final int retriedTestCount;
     private final int skippedTestCount;
+    private final int stoppedTestCount;
     private final int passedTestCount;
     private final long duration;
     private final String includedGroups;
@@ -35,7 +37,8 @@ public class TestResult {
         testName = context.getName();
         
         Set<ITestResult> failedConfigurations = context.getFailedConfigurations().getAllResults();
-        Set<ITestResult> failedTests = context.getFailedTests().getAllResults();
+        Set<ITestResult> failedTests = getFailuresWithAssertionFailures(context.getFailedTests().getAllResults());
+        Set<ITestResult> stoppedTests = getFailuresWithOtherExceptions(context.getFailedTests().getAllResults());
         Set<ITestResult> skippedConfigurations = context.getSkippedConfigurations().getAllResults();
         Set<ITestResult> rawSkipped = context.getSkippedTests().getAllResults();
         Set<ITestResult> skippedTests = pruneSkipped(rawSkipped);
@@ -45,12 +48,14 @@ public class TestResult {
         
         failedConfigurationResults = groupResults(failedConfigurations);
         failedTestResults = groupResults(failedTests);
+        stoppedTestResults = groupResults(stoppedTests);
         skippedConfigurationResults = groupResults(skippedConfigurations);
         skippedTestResults = groupResults(skippedTests);
         retriedTestResults = groupResults(retriedTests);
         passedTestResults = groupResults(passedTests);
         
         failedTestCount = failedTests.size();
+        stoppedTestCount = stoppedTests.size();
         retriedTestCount = retriedTests.size();
         skippedTestCount = skippedTests.size();
         passedTestCount = passedTests.size();
@@ -59,6 +64,16 @@ public class TestResult {
         
         includedGroups = formatGroups(context.getIncludedGroups());
         excludedGroups = formatGroups(context.getExcludedGroups());
+    }
+    
+    private static Set<ITestResult> getFailuresWithAssertionFailures(Set<ITestResult> results) {
+        return results.stream()
+                      .filter(result -> result.getThrowable() instanceof AssertionError).collect(Collectors.toSet());
+    }
+    
+    private static Set<ITestResult> getFailuresWithOtherExceptions(Set<ITestResult> results) {
+        return results.stream()
+                      .filter(result -> !(result.getThrowable() instanceof AssertionError)).collect(Collectors.toSet());
     }
     
     private static Set<ITestResult> pruneSkipped(Set<ITestResult> results) {
@@ -144,6 +159,13 @@ public class TestResult {
     }
     
     /**
+     * @return the results for stopped tests (possibly empty)
+     */
+    public List<ClassResult> getStoppedTestResults() {
+        return stoppedTestResults;
+    }
+    
+    /**
      * @return the results for skipped configurations (possibly empty)
      */
     public List<ClassResult> getSkippedConfigurationResults() {
@@ -170,6 +192,10 @@ public class TestResult {
     
     public int getFailedTestCount() {
         return failedTestCount;
+    }
+    
+    public int getStoppedTestCount() {
+        return stoppedTestCount;
     }
     
     public int getSkippedTestCount() {
