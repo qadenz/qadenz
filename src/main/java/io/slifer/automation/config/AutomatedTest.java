@@ -3,7 +3,7 @@ package io.slifer.automation.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import io.slifer.automation.reporter.HtmlReporter;
-import io.slifer.automation.reporter.JsonCompiler;
+import io.slifer.automation.reporter.OldJsonCompiler;
 import io.slifer.automation.reporter.ResultsMap;
 import io.slifer.automation.reporter.Screenshots;
 import io.slifer.automation.reporter.model.JsonReport;
@@ -18,6 +18,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -33,6 +34,7 @@ import java.util.UUID;
  *
  * @author Tim Slifer
  */
+@Listeners ({io.slifer.automation.reporter.TestReporter.class})
 public class AutomatedTest {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
@@ -162,7 +164,7 @@ public class AutomatedTest {
     public void generateReports(ITestContext testContext) throws Exception {
         RunContext.suiteEndDate = LocalDateTime.now();
         
-        JsonReport jsonReport = new JsonCompiler(resultsMap, screenshots).compileJsonReport();
+        JsonReport jsonReport = new OldJsonCompiler(resultsMap, screenshots).compileJsonReport();
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
         objectWriter.writeValue(new File(RunContext.reportOutputPath + "results.json"), jsonReport);
         
