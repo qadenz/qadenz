@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public class JsonTest {
+public class JsonMethod {
     
     private String className;
     private String testName;
