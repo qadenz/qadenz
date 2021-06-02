@@ -20,10 +20,10 @@ public class JsonReport {
     
     private String appUrl;
     
-    private List<JsonTest> failedTests;
-    private List<JsonTest> stoppedTests;
-    private List<JsonTest> skippedTests;
-    private List<JsonTest> passedTests;
+    private List<JsonMethod> failedTests;
+    private List<JsonMethod> stoppedTests;
+    private List<JsonMethod> skippedTests;
+    private List<JsonMethod> passedTests;
     
     public String getSuiteName() {
         return suiteName;
@@ -81,35 +81,35 @@ public class JsonReport {
         this.appUrl = appUrl;
     }
     
-    public List<JsonTest> getFailedTests() {
+    public List<JsonMethod> getFailedTests() {
         return failedTests;
     }
     
-    public void setFailedTests(List<JsonTest> failedTests) {
+    public void setFailedTests(List<JsonMethod> failedTests) {
         this.failedTests = failedTests;
     }
     
-    public List<JsonTest> getStoppedTests() {
+    public List<JsonMethod> getStoppedTests() {
         return stoppedTests;
     }
     
-    public void setStoppedTests(List<JsonTest> stoppedTests) {
+    public void setStoppedTests(List<JsonMethod> stoppedTests) {
         this.stoppedTests = stoppedTests;
     }
     
-    public List<JsonTest> getSkippedTests() {
+    public List<JsonMethod> getSkippedTests() {
         return skippedTests;
     }
     
-    public void setSkippedTests(List<JsonTest> skippedTests) {
+    public void setSkippedTests(List<JsonMethod> skippedTests) {
         this.skippedTests = skippedTests;
     }
     
-    public List<JsonTest> getPassedTests() {
+    public List<JsonMethod> getPassedTests() {
         return passedTests;
     }
     
-    public void setPassedTests(List<JsonTest> passedTests) {
+    public void setPassedTests(List<JsonMethod> passedTests) {
         this.passedTests = passedTests;
     }
 }
