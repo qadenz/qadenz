@@ -17,6 +17,7 @@ public class TestReporter implements IReporter {
         
         LOG.info("Starting JSON Compilation.");
         JsonReporter jsonReporter = new JsonReporter(xmlSuites.get(0), suites.get(0));
+        jsonReporter.compileJsonReport();
         
         // System.out.println("**********");
         // System.out.println("*");
