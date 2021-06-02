@@ -5,7 +5,7 @@ package io.slifer.automation.reporter.model;
  *
  * @author Tim Slifer
  */
-public class JsonTestLog {
+public class JsonMethodLogEvent {
     
     private String timestamp;
     private String logger;
