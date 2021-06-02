@@ -11,8 +11,7 @@ import java.util.List;
  */
 public class JsonMethod {
     
-    private String className;
-    private String testName;
+    private String methodName;
     private String parameters;
     private Result result;
     
@@ -25,20 +24,12 @@ public class JsonMethod {
     private String throwable;
     private String stackTrace;
     
-    public String getClassName() {
-        return className;
+    public String getMethodName() {
+        return methodName;
     }
     
-    public void setClassName(String className) {
-        this.className = className;
-    }
-    
-    public String getTestName() {
-        return testName;
-    }
-    
-    public void setTestName(String testName) {
-        this.testName = testName;
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
     }
     
     public String getParameters() {
