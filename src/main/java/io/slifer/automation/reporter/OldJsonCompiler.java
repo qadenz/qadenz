@@ -29,7 +29,7 @@ import java.util.stream.Stream;
  *
  * @author Tim Slifer
  */
-public class JsonCompiler {
+public class OldJsonCompiler {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
@@ -37,7 +37,7 @@ public class JsonCompiler {
     private Screenshots screenshots;
     private JsonReport jsonReport;
     
-    public JsonCompiler(ResultsMap resultsMap, Screenshots screenshots) {
+    public OldJsonCompiler(ResultsMap resultsMap, Screenshots screenshots) {
         this.resultsMap = resultsMap;
         this.screenshots = screenshots;
         jsonReport = new JsonReport();
