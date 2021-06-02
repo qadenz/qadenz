@@ -122,7 +122,7 @@ public class OldJsonCompiler {
                 
                 logs.add(jsonMethodLogEvent);
             }
-            jsonMethod.setLogs(logs);
+            jsonMethod.setLogEvents(logs);
             
             jsonMethods.add(jsonMethod);
         }

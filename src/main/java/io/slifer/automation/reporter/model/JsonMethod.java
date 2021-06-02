@@ -18,7 +18,7 @@ public class JsonMethod {
     private String testStartTime;
     private String testExecutionTime;
     
-    private List<JsonMethodLogEvent> logs;
+    private List<JsonMethodLogEvent> logEvents;
     
     private String screenshot;
     private String throwable;
@@ -64,12 +64,12 @@ public class JsonMethod {
         this.testExecutionTime = testExecutionTime;
     }
     
-    public List<JsonMethodLogEvent> getLogs() {
-        return logs;
+    public List<JsonMethodLogEvent> getLogEvents() {
+        return logEvents;
     }
     
-    public void setLogs(List<JsonMethodLogEvent> logs) {
-        this.logs = logs;
+    public void setLogEvents(List<JsonMethodLogEvent> logEvents) {
+        this.logEvents = logEvents;
     }
     
     public String getScreenshot() {
