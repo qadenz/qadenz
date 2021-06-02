@@ -3,7 +3,6 @@ package io.slifer.automation.reporter;
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.reporter.model.JsonClass;
 import io.slifer.automation.reporter.model.JsonMethod;
-import io.slifer.automation.reporter.model.JsonMethodLogEvent;
 import io.slifer.automation.reporter.model.JsonReport;
 import io.slifer.automation.reporter.model.JsonTest;
 import io.slifer.automation.reporter.testng.ClassResult;
@@ -44,11 +43,13 @@ public class JsonReporter {
         this.jsonReport = new JsonReport();
     }
     
-    public void compileJsonReport() {
+    public JsonReport compileJsonReport() {
         SuiteResult suiteResult = new SuiteResult(suite);
         
         setSuiteHeaderDetails(suiteResult);
         processSuiteResults(suiteResult);
+        
+        return jsonReport;
     }
     
     private void setSuiteHeaderDetails(SuiteResult suiteResult) {
@@ -140,8 +141,7 @@ public class JsonReporter {
             // handle screenshots
             
             // handle logging events
-            List<String> logOutput = Reporter.getOutput(result);
-            List<JsonMethodLogEvent> logEvents = processMethodLogOutput(logOutput);
+            List<String> logEvents = siftAndTrim(Reporter.getOutput(result));
             jsonMethod.setLogEvents(logEvents);
             
             jsonMethods.add(jsonMethod);
@@ -150,8 +150,16 @@ public class JsonReporter {
         return jsonMethods;
     }
     
-    private List<JsonMethodLogEvent> processMethodLogOutput(List<String> logOutput) {
-        // TODO maybe we don't need to process these events? perhaps the string list is enough and we don't need 
-        //  separate fields on the json report. it ends up as a concatenated String anyway on html.
+    private List<String> siftAndTrim(List<String> input) {
+        List<String> output = new ArrayList<>();
+        for (int i = 0; i < input.size(); i++) {
+            if (!input.get(i).equals("")) {
+                // Yes, the reporter layout could be changed to accommodate this,
+                // but the console output will not be wrapped.
+                output.add(input.get(i).trim());
+            }
+        }
+        
+        return output;
     }
 }
