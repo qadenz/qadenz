@@ -1,8 +1,8 @@
 package io.slifer.automation.reporter;
 
 import io.slifer.automation.config.RunContext;
+import io.slifer.automation.reporter.model.JsonMethod;
 import io.slifer.automation.reporter.model.JsonReport;
-import io.slifer.automation.reporter.model.JsonTest;
 import io.slifer.automation.reporter.model.JsonTestLog;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -73,17 +73,17 @@ public class OldJsonCompiler {
     private void processTestLogs() {
         LOG.info("Processing Test Logs.");
         
-        List<JsonTest> jsonTests = new ArrayList<>();
+        List<JsonMethod> jsonMethods = new ArrayList<>();
         
         for (String key : resultsMap.keySet()) {
             LOG.info("Processing Log for Test [{}]", key);
             ITestResult testNgResult = resultsMap.get(key);
             
-            JsonTest jsonTest = new JsonTest();
-            jsonTest.setClassName(testNgResult.getTestClass().getName());
-            jsonTest.setTestName(testNgResult.getName());
-            jsonTest.setParameters(Arrays.toString(testNgResult.getParameters()).replace("/", "-"));
-            jsonTest.setResult(computeTestResult(testNgResult));
+            JsonMethod jsonMethod = new JsonMethod();
+            jsonMethod.setClassName(testNgResult.getTestClass().getName());
+            jsonMethod.setTestName(testNgResult.getName());
+            jsonMethod.setParameters(Arrays.toString(testNgResult.getParameters()).replace("/", "-"));
+            jsonMethod.setResult(computeTestResult(testNgResult));
             
             LocalDateTime startDateMillis =
                     Instant.ofEpochMilli(resultsMap.get(key).getStartMillis()).atZone(ZoneId.systemDefault())
@@ -91,7 +91,7 @@ public class OldJsonCompiler {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
             String testStartTime = startDateMillis.format(formatter);
             
-            jsonTest.setTestStartTime(testStartTime);
+            jsonMethod.setTestStartTime(testStartTime);
             
             LocalDateTime endDateMillis =
                     Instant.ofEpochMilli(resultsMap.get(key).getEndMillis()).atZone(ZoneId.systemDefault())
@@ -100,14 +100,14 @@ public class OldJsonCompiler {
             String testExecutionTime = String.format("%02dm %02d.%02ds",
                     duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
             
-            jsonTest.setTestExecutionTime(testExecutionTime);
+            jsonMethod.setTestExecutionTime(testExecutionTime);
             
             Throwable throwable = testNgResult.getThrowable();
             if (throwable != null) {
                 // Commenting these items in case the need arises to restore them
                 // jsonTest.setThrowable(throwable.getClass().getName());
                 // jsonTest.setStackTrace(ExceptionUtils.getStackTrace(throwable));
-                jsonTest.setScreenshot(screenshots.get(key));
+                jsonMethod.setScreenshot(screenshots.get(key));
             }
             
             String fileName = RunContext.reportOutputPath + "test-logs/test-" + key + ".json";
@@ -122,12 +122,12 @@ public class OldJsonCompiler {
                 
                 logs.add(jsonTestLog);
             }
-            jsonTest.setLogs(logs);
+            jsonMethod.setLogs(logs);
             
-            jsonTests.add(jsonTest);
+            jsonMethods.add(jsonMethod);
         }
         
-        sortTestLogsByResult(jsonTests);
+        sortTestLogsByResult(jsonMethods);
     }
     
     private List<JSONObject> readJsonFile(String fileName) {
@@ -164,13 +164,13 @@ public class OldJsonCompiler {
         return null;
     }
     
-    private void sortTestLogsByResult(List<JsonTest> jsonTests) {
-        List<JsonTest> passed = new ArrayList<>();
-        List<JsonTest> failed = new ArrayList<>();
-        List<JsonTest> stopped = new ArrayList<>();
-        List<JsonTest> skipped = new ArrayList<>();
+    private void sortTestLogsByResult(List<JsonMethod> jsonMethods) {
+        List<JsonMethod> passed = new ArrayList<>();
+        List<JsonMethod> failed = new ArrayList<>();
+        List<JsonMethod> stopped = new ArrayList<>();
+        List<JsonMethod> skipped = new ArrayList<>();
         
-        for (JsonTest log : jsonTests) {
+        for (JsonMethod log : jsonMethods) {
             switch (log.getResult()) {
                 case PASSED:
                     passed.add(log);

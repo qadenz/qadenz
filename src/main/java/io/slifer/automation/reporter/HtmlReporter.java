@@ -1,7 +1,7 @@
 package io.slifer.automation.reporter;
 
+import io.slifer.automation.reporter.model.JsonMethod;
 import io.slifer.automation.reporter.model.JsonReport;
-import io.slifer.automation.reporter.model.JsonTest;
 import io.slifer.automation.reporter.model.JsonTestLog;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.nodes.DataNode;
@@ -126,7 +126,7 @@ public class HtmlReporter {
         totalTestsItem.appendElement("div").addClass("summary-item-value " + style).text(value);
     }
     
-    private void writeResultsSection(List<JsonTest> jsonTests, HtmlResult result) {
+    private void writeResultsSection(List<JsonMethod> jsonMethods, HtmlResult result) {
         // write main section structure
         document.body().appendElement("div").addClass("results-section bordered");
         Element section = document.body().getElementsByClass("results-section bordered").last();
@@ -135,17 +135,17 @@ public class HtmlReporter {
         section.appendElement("div").addClass("test-classes bordered");
         Element classes = section.getElementsByClass("test-classes bordered").last();
         
-        Comparator<JsonTest> comparator = Comparator.comparing(JsonTest::getClassName)
-                                                    .thenComparing(JsonTest::getTestName);
-        jsonTests.sort(comparator);
+        Comparator<JsonMethod> comparator = Comparator.comparing(JsonMethod::getClassName)
+                                                      .thenComparing(JsonMethod::getTestName);
+        jsonMethods.sort(comparator);
         
-        for (JsonTest jsonTest : jsonTests) {
+        for (JsonMethod jsonMethod : jsonMethods) {
             Element testClass;
             // if the class name has not yet been written, write it... otherwise, append to the existing class name
-            if (classes.getElementsContainingText(jsonTest.getClassName()).size() == 0) {
+            if (classes.getElementsContainingText(jsonMethod.getClassName()).size() == 0) {
                 classes.appendElement("div").addClass("test-class");
                 testClass = classes.getElementsByClass("test-class").last();
-                testClass.appendElement("div").addClass("class-name accordion").text(jsonTest.getClassName());
+                testClass.appendElement("div").addClass("class-name accordion").text(jsonMethod.getClassName());
                 testClass.appendElement("div").addClass("test-methods panel hide");
             }
             else {
@@ -155,24 +155,24 @@ public class HtmlReporter {
             Element testMethods = testClass.getElementsByClass("test-methods panel hide").last();
             testMethods.appendElement("div").addClass("test-method");
             Element method = testMethods.getElementsByClass("test-method").last();
-            method.appendElement("div").addClass("method-name accordion").text(jsonTest.getTestName());
+            method.appendElement("div").addClass("method-name accordion").text(jsonMethod.getTestName());
             method.appendElement("div").addClass("method-details panel hide");
             
             // write the method details
             Element methodDetails = method.getElementsByClass("method-details panel hide").last();
-            writeMethodDetailItem(methodDetails, "Start Time: ", jsonTest.getTestStartTime());
-            writeMethodDetailItem(methodDetails, "Duration: ", jsonTest.getTestExecutionTime());
+            writeMethodDetailItem(methodDetails, "Start Time: ", jsonMethod.getTestStartTime());
+            writeMethodDetailItem(methodDetails, "Duration: ", jsonMethod.getTestExecutionTime());
             
             // write the logging output for the test method
             methodDetails.appendElement("div").addClass("method-logs");
             Element methodLogs = method.getElementsByClass("method-logs").last();
-            for (JsonTestLog log : jsonTest.getLogs()) {
+            for (JsonTestLog log : jsonMethod.getLogs()) {
                 writeMethodLogs(log, methodLogs);
             }
-            if (jsonTest.getScreenshot() != null) {
+            if (jsonMethod.getScreenshot() != null) {
                 methodDetails.appendElement("div").addClass("screenshot");
                 Element screenshot = methodDetails.getElementsByClass("screenshot").last();
-                screenshot.appendElement("img").attr("src", "data:image/png;base64, " + jsonTest.getScreenshot());
+                screenshot.appendElement("img").attr("src", "data:image/png;base64, " + jsonMethod.getScreenshot());
             }
         }
         
