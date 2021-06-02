@@ -20,10 +20,7 @@ public class JsonReport {
     
     private String appUrl;
     
-    private List<JsonMethod> failedTests;
-    private List<JsonMethod> stoppedTests;
-    private List<JsonMethod> skippedTests;
-    private List<JsonMethod> passedTests;
+    private List<JsonTest> jsonTests;
     
     public String getSuiteName() {
         return suiteName;
@@ -81,35 +78,11 @@ public class JsonReport {
         this.appUrl = appUrl;
     }
     
-    public List<JsonMethod> getFailedTests() {
-        return failedTests;
+    public List<JsonTest> getJsonTests() {
+        return jsonTests;
     }
     
-    public void setFailedTests(List<JsonMethod> failedTests) {
-        this.failedTests = failedTests;
-    }
-    
-    public List<JsonMethod> getStoppedTests() {
-        return stoppedTests;
-    }
-    
-    public void setStoppedTests(List<JsonMethod> stoppedTests) {
-        this.stoppedTests = stoppedTests;
-    }
-    
-    public List<JsonMethod> getSkippedTests() {
-        return skippedTests;
-    }
-    
-    public void setSkippedTests(List<JsonMethod> skippedTests) {
-        this.skippedTests = skippedTests;
-    }
-    
-    public List<JsonMethod> getPassedTests() {
-        return passedTests;
-    }
-    
-    public void setPassedTests(List<JsonMethod> passedTests) {
-        this.passedTests = passedTests;
+    public void setJsonTests(List<JsonTest> jsonTests) {
+        this.jsonTests = jsonTests;
     }
 }

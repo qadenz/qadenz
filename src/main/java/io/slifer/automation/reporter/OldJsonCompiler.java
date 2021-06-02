@@ -186,9 +186,9 @@ public class OldJsonCompiler {
             }
         }
         
-        jsonReport.setPassedTests(passed);
-        jsonReport.setFailedTests(failed);
-        jsonReport.setStoppedTests(stopped);
-        jsonReport.setSkippedTests(skipped);
+        // jsonReport.setPassedTests(passed);
+        // jsonReport.setFailedTests(failed);
+        // jsonReport.setStoppedTests(stopped);
+        // jsonReport.setSkippedTests(skipped);
     }
 }
