@@ -2,8 +2,8 @@ package io.slifer.automation.reporter;
 
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.reporter.model.JsonMethod;
+import io.slifer.automation.reporter.model.JsonMethodLogEvent;
 import io.slifer.automation.reporter.model.JsonReport;
-import io.slifer.automation.reporter.model.JsonTestLog;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -112,15 +112,15 @@ public class OldJsonCompiler {
             
             String fileName = RunContext.reportOutputPath + "test-logs/test-" + key + ".json";
             List<JSONObject> jsonLogFile = readJsonFile(fileName);
-            List<JsonTestLog> logs = new ArrayList<>();
+            List<JsonMethodLogEvent> logs = new ArrayList<>();
             for (JSONObject logEvent : jsonLogFile) {
-                JsonTestLog jsonTestLog = new JsonTestLog();
-                jsonTestLog.setTimestamp(logEvent.getString("timestamp"));
-                jsonTestLog.setLogger(logEvent.getString("logger"));
-                jsonTestLog.setLevel(logEvent.getString("level"));
-                jsonTestLog.setMessage(logEvent.getString("message"));
+                JsonMethodLogEvent jsonMethodLogEvent = new JsonMethodLogEvent();
+                jsonMethodLogEvent.setTimestamp(logEvent.getString("timestamp"));
+                jsonMethodLogEvent.setLogger(logEvent.getString("logger"));
+                jsonMethodLogEvent.setLevel(logEvent.getString("level"));
+                jsonMethodLogEvent.setMessage(logEvent.getString("message"));
                 
-                logs.add(jsonTestLog);
+                logs.add(jsonMethodLogEvent);
             }
             jsonMethod.setLogs(logs);
             
