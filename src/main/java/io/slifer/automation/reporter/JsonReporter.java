@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.ISuite;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+import org.testng.internal.Utils;
 import org.testng.xml.XmlSuite;
 
 import java.time.Duration;
@@ -143,6 +144,10 @@ public class JsonReporter {
                 
                 List<String> logEvents = siftAndTrim(Reporter.getOutput(result));
                 jsonMethod.setLogEvents(logEvents);
+                
+                if (result.getThrowable() != null) {
+                    jsonMethod.setStackTrace(Utils.shortStackTrace(result.getThrowable(), false));
+                }
                 
                 jsonMethods.add(jsonMethod);
             }
