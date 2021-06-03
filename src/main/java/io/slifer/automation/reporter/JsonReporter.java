@@ -119,32 +119,33 @@ public class JsonReporter {
     private List<JsonMethod> processMethodResults(List<MethodResult> methodResults) {
         List<JsonMethod> jsonMethods = new ArrayList<>();
         for (MethodResult methodResult : methodResults) {
-            JsonMethod jsonMethod = new JsonMethod();
-            ITestResult result = methodResult.getResults().iterator().next();
             
-            jsonMethod.setMethodName(result.getName());
-            jsonMethod.setParameters(processParameters(result));
-            
-            LocalDateTime startDateMillis =
-                    Instant.ofEpochMilli(result.getStartMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
-            String testStartTime = startDateMillis.format(formatter);
-            jsonMethod.setTestStartTime(testStartTime);
-            
-            LocalDateTime endDateMillis =
-                    Instant.ofEpochMilli(result.getEndMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
-            Duration duration = Duration.between(startDateMillis, endDateMillis);
-            String testExecutionTime = String.format("%02dm %02d.%02ds",
-                    duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
-            jsonMethod.setTestExecutionTime(testExecutionTime);
-            
-            // handle screenshots
-            
-            // handle logging events
-            List<String> logEvents = siftAndTrim(Reporter.getOutput(result));
-            jsonMethod.setLogEvents(logEvents);
-            
-            jsonMethods.add(jsonMethod);
+            List<ITestResult> results = methodResult.getResults();
+            for (ITestResult result : results) {
+                JsonMethod jsonMethod = new JsonMethod();
+                jsonMethod.setMethodName(result.getName());
+                jsonMethod.setParameters(processParameters(result));
+                
+                LocalDateTime startDateMillis =
+                        Instant.ofEpochMilli(result.getStartMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
+                String testStartTime = startDateMillis.format(formatter);
+                jsonMethod.setTestStartTime(testStartTime);
+                
+                LocalDateTime endDateMillis =
+                        Instant.ofEpochMilli(result.getEndMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+                Duration duration = Duration.between(startDateMillis, endDateMillis);
+                String testExecutionTime = String.format("%02dm %02d.%02ds",
+                        duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
+                jsonMethod.setTestExecutionTime(testExecutionTime);
+                
+                // TODO handle screenshots
+                
+                List<String> logEvents = siftAndTrim(Reporter.getOutput(result));
+                jsonMethod.setLogEvents(logEvents);
+                
+                jsonMethods.add(jsonMethod);
+            }
         }
         
         return jsonMethods;
