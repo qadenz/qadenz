@@ -1,7 +1,5 @@
 package io.slifer.automation.reporter.model;
 
-import io.slifer.automation.reporter.Result;
-
 import java.util.List;
 
 /**
@@ -13,7 +11,6 @@ public class JsonMethod {
     
     private String methodName;
     private String parameters;
-    private Result result;
     
     private String testStartTime;
     private String testExecutionTime;
@@ -38,14 +35,6 @@ public class JsonMethod {
     
     public void setParameters(String parameters) {
         this.parameters = parameters;
-    }
-    
-    public Result getResult() {
-        return result;
-    }
-    
-    public void setResult(Result result) {
-        this.result = result;
     }
     
     public String getTestStartTime() {
