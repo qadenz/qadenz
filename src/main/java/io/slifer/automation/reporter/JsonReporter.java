@@ -123,7 +123,7 @@ public class JsonReporter {
             ITestResult result = methodResult.getResults().iterator().next();
             
             jsonMethod.setMethodName(result.getName());
-            jsonMethod.setParameters(Arrays.toString(result.getParameters()));
+            jsonMethod.setParameters(processParameters(result));
             
             LocalDateTime startDateMillis =
                     Instant.ofEpochMilli(result.getStartMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
@@ -148,6 +148,18 @@ public class JsonReporter {
         }
         
         return jsonMethods;
+    }
+    
+    private String processParameters(ITestResult testResult) {
+        if (testResult.getParameters().length > 0) {
+            return Arrays.toString(testResult.getParameters());
+        }
+        else if (testResult.getFactoryParameters().length > 0) {
+            return Arrays.toString(testResult.getFactoryParameters());
+        }
+        else {
+            return null;
+        }
     }
     
     private List<String> siftAndTrim(List<String> input) {
