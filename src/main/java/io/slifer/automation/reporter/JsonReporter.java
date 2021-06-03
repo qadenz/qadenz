@@ -79,7 +79,7 @@ public class JsonReporter {
             jsonTests.add(processTestResults(testResult));
         }
         
-        jsonReport.setJsonTests(jsonTests);
+        jsonReport.setTests(jsonTests);
     }
     
     private JsonTest processTestResults(TestResult testResult) {
