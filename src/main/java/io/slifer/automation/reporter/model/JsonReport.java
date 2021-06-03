@@ -20,7 +20,7 @@ public class JsonReport {
     
     private String appUrl;
     
-    private List<JsonTest> jsonTests;
+    private List<JsonTest> tests;
     
     public String getSuiteName() {
         return suiteName;
@@ -78,11 +78,11 @@ public class JsonReport {
         this.appUrl = appUrl;
     }
     
-    public List<JsonTest> getJsonTests() {
-        return jsonTests;
+    public List<JsonTest> getTests() {
+        return tests;
     }
     
-    public void setJsonTests(List<JsonTest> jsonTests) {
-        this.jsonTests = jsonTests;
+    public void setTests(List<JsonTest> tests) {
+        this.tests = tests;
     }
 }
