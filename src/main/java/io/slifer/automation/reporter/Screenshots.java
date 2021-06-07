@@ -38,12 +38,12 @@ public class Screenshots extends HashMap<String, String> {
         return instance;
     }
     
-    public void captureScreenshot() {
+    public void captureScreenshot(String id) {
         File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
         BufferedImage resizedCapture = resize(rawCapture);
         String screenshot = convertToBase64(resizedCapture);
         
-        this.put(RunContext.getTestId(), screenshot);
+        this.put(id, screenshot);
     }
     
     private BufferedImage resize(File rawCapture) {
