@@ -3,9 +3,11 @@ package io.slifer.automation.commands;
 import io.slifer.automation.conditions.Condition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Reporter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * A second means of executing validations with Conditions, but outside the confines of the Commands class, with logging
@@ -38,10 +40,14 @@ public class Assert {
                 LOG.warn("Result - FAIL :: {}", condition.output());
                 exceptions.add(error);
                 failed = true;
+                String uuid = UUID.randomUUID().toString();
+                Reporter.log(uuid);
             }
             catch (Exception exception) {
                 exceptions.add(exception);
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+                String uuid = UUID.randomUUID().toString();
+                Reporter.log(uuid);
             }
         }
         

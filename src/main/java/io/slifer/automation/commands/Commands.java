@@ -1,12 +1,15 @@
 package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
+import io.slifer.automation.reporter.Screenshots;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.Reporter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Common commands for all test types.
@@ -46,10 +49,16 @@ public abstract class Commands {
                 LOG.info("Result - FAIL :: {}", condition.output());
                 exceptions.add(error);
                 failed = true;
+                String uuid = UUID.randomUUID().toString();
+                Screenshots.getInstance().captureScreenshot(uuid);
+                Reporter.log(uuid);
             }
             catch (Exception exception) {
                 exceptions.add(exception);
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+                String uuid = UUID.randomUUID().toString();
+                Screenshots.getInstance().captureScreenshot(uuid);
+                Reporter.log(uuid);
             }
         }
         
