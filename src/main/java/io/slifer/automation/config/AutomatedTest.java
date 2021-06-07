@@ -123,21 +123,9 @@ public class AutomatedTest {
     }
     
     /**
-     * Captures a screenshot for any failed test.
-     *
-     * @param testResult The Injected ITestResult.
-     */
-    @AfterMethod (alwaysRun = true)
-    public void saveScreenshot(ITestResult testResult) {
-        if (testResult.getStatus() == 2) {
-            screenshots.captureScreenshot();
-        }
-    }
-    
-    /**
      * Concludes the test by stopping the WebDriver instance.
      */
-    @AfterMethod (alwaysRun = true, dependsOnMethods = "saveScreenshot")
+    @AfterMethod (alwaysRun = true)
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
         RunContext.getWebDriver().quit();
