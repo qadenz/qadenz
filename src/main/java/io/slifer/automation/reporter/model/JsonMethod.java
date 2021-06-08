@@ -17,7 +17,6 @@ public class JsonMethod {
     
     private List<JsonLogEvent> logEvents;
     
-    private String throwable;
     private String stackTrace;
     
     public String getMethodName() {
@@ -58,14 +57,6 @@ public class JsonMethod {
     
     public void setLogEvents(List<JsonLogEvent> logEvents) {
         this.logEvents = logEvents;
-    }
-    
-    public String getThrowable() {
-        return throwable;
-    }
-    
-    public void setThrowable(String throwable) {
-        this.throwable = throwable;
     }
     
     public String getStackTrace() {
