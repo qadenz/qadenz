@@ -155,7 +155,7 @@ public class JsonReporter {
                 List<JsonLogEvent> logEvents = processLogOutput(Reporter.getOutput(result));
                 jsonMethod.setLogEvents(logEvents);
                 
-                if (result.getThrowable() != null) {
+                if (result.getThrowable() != null && !(result.getThrowable() instanceof AssertionError)) {
                     jsonMethod.setStackTrace(Utils.shortStackTrace(result.getThrowable(), false));
                 }
                 
