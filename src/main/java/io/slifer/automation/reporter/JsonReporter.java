@@ -60,7 +60,7 @@ public class JsonReporter {
     
     private void setSuiteHeaderDetails(SuiteResult suiteResult) {
         LOG.info("Writing Header Details.");
-        jsonReport.setSuiteName(suite.getName());
+        jsonReport.setSuiteName(suiteResult.getSuiteName());
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String startDate = RunContext.suiteStartDate.format(formatter);
