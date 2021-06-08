@@ -59,6 +59,7 @@ public class JsonReporter {
     }
     
     private void setSuiteHeaderDetails(SuiteResult suiteResult) {
+        LOG.info("Writing Header Details.");
         jsonReport.setSuiteName(suite.getName());
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -82,6 +83,7 @@ public class JsonReporter {
     private void processSuiteResults(SuiteResult suiteResult) {
         List<JsonTest> jsonTests = new ArrayList<>();
         for (TestResult testResult : suiteResult.getTestResults()) {
+            LOG.info("Processing Test [{}].", suiteResult.getTestResults().indexOf(testResult));
             jsonTests.add(processTestResults(testResult));
         }
         
@@ -110,8 +112,10 @@ public class JsonReporter {
     }
     
     private List<JsonClass> processClassResults(List<ClassResult> classResults) {
+        LOG.info("Processing Class Results.");
         List<JsonClass> jsonClasses = new ArrayList<>();
         for (ClassResult classResult : classResults) {
+            LOG.info("Processing Class [{}].", classResults.indexOf(classResult));
             JsonClass jsonClass = new JsonClass();
             jsonClass.setClassName(classResult.getClassName());
             jsonClass.setMethods(processMethodResults(classResult.getMethodResults()));
@@ -123,8 +127,10 @@ public class JsonReporter {
     }
     
     private List<JsonMethod> processMethodResults(List<MethodResult> methodResults) {
+        LOG.info("Processing Methods.");
         List<JsonMethod> jsonMethods = new ArrayList<>();
         for (MethodResult methodResult : methodResults) {
+            LOG.info("Processing Method [{}].", methodResults.indexOf(methodResult));
             
             List<ITestResult> results = methodResult.getResults();
             for (ITestResult result : results) {
@@ -145,6 +151,7 @@ public class JsonReporter {
                         duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
                 jsonMethod.setTestExecutionTime(testExecutionTime);
                 
+                LOG.info("Processing Logs.");
                 List<JsonLogEvent> logEvents = processLogOutput(Reporter.getOutput());
                 jsonMethod.setLogEvents(logEvents);
                 
@@ -179,13 +186,16 @@ public class JsonReporter {
         List<JsonLogEvent> logEvents = new ArrayList<>();
         
         for (int i = 0; i < logs.size(); i++) {
+            LOG.info("Processing Log [{}]", i);
             String logMessage = logs.get(i);
             String screenshot = null;
             if (checkForUuid(logs.get(i + 1))) {
-                screenshot = Screenshots.getInstance().get(logs.get(i = 1));
+                LOG.info("Found a screenshot.");
+                screenshot = Screenshots.getInstance().get(logs.get(i + 1));
                 i++;
             }
             
+            LOG.info("Adding Log Event.");
             logEvents.add(new JsonLogEvent(logMessage, screenshot));
         }
         
@@ -206,6 +216,7 @@ public class JsonReporter {
     }
     
     private boolean checkForUuid(String input) {
+        LOG.info("Checking for UUID.");
         if (input == null) {
             
             return false;
