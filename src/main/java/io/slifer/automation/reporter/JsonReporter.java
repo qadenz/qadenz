@@ -2,6 +2,7 @@ package io.slifer.automation.reporter;
 
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.reporter.model.JsonClass;
+import io.slifer.automation.reporter.model.JsonLogEvent;
 import io.slifer.automation.reporter.model.JsonMethod;
 import io.slifer.automation.reporter.model.JsonReport;
 import io.slifer.automation.reporter.model.JsonTest;
@@ -25,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class JsonReporter {
     
@@ -35,6 +37,9 @@ public class JsonReporter {
     private SuiteResult suiteResult;
     
     private JsonReport jsonReport;
+    
+    private static final Pattern UUID_PATTERN =
+            Pattern.compile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$");
     
     public JsonReporter(XmlSuite xmlSuite, ISuite suite) {
         this.xmlSuite = xmlSuite;
@@ -140,9 +145,7 @@ public class JsonReporter {
                         duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
                 jsonMethod.setTestExecutionTime(testExecutionTime);
                 
-                // TODO handle screenshots
-                
-                List<String> logEvents = siftAndTrim(Reporter.getOutput(result));
+                List<JsonLogEvent> logEvents = processLogOutput(Reporter.getOutput());
                 jsonMethod.setLogEvents(logEvents);
                 
                 if (result.getThrowable() != null) {
@@ -158,14 +161,35 @@ public class JsonReporter {
     
     private String processParameters(ITestResult testResult) {
         if (testResult.getParameters().length > 0) {
+            
             return Arrays.toString(testResult.getParameters());
         }
         else if (testResult.getFactoryParameters().length > 0) {
+            
             return Arrays.toString(testResult.getFactoryParameters());
         }
         else {
+            
             return null;
         }
+    }
+    
+    private List<JsonLogEvent> processLogOutput(List<String> logOutput) {
+        List<String> logs = siftAndTrim(logOutput);
+        List<JsonLogEvent> logEvents = new ArrayList<>();
+        
+        for (int i = 0; i < logs.size(); i++) {
+            String logMessage = logs.get(i);
+            String screenshot = null;
+            if (checkForUuid(logs.get(i + 1))) {
+                screenshot = Screenshots.getInstance().get(logs.get(i = 1));
+                i++;
+            }
+            
+            logEvents.add(new JsonLogEvent(logMessage, screenshot));
+        }
+        
+        return logEvents;
     }
     
     private List<String> siftAndTrim(List<String> input) {
@@ -179,5 +203,14 @@ public class JsonReporter {
         }
         
         return output;
+    }
+    
+    private boolean checkForUuid(String input) {
+        if (input == null) {
+            
+            return false;
+        }
+        
+        return UUID_PATTERN.matcher(input).matches();
     }
 }
