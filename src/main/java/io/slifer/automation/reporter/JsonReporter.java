@@ -189,10 +189,13 @@ public class JsonReporter {
             LOG.info("Processing Log [{}]", i);
             String logMessage = logs.get(i);
             String screenshot = null;
-            if (checkForUuid(logs.get(i + 1))) {
-                LOG.info("Found a screenshot.");
-                screenshot = Screenshots.getInstance().get(logs.get(i + 1));
-                i++;
+            
+            if ((i + 1) < logs.size()) {
+                if (checkForUuid(logs.get(i + 1))) {
+                    LOG.info("Found a screenshot.");
+                    screenshot = Screenshots.getInstance().get(logs.get(i + 1));
+                    i++;
+                }
             }
             
             LOG.info("Adding Log Event.");
