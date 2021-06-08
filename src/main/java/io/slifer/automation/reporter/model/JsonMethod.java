@@ -17,7 +17,6 @@ public class JsonMethod {
     
     private List<JsonLogEvent> logEvents;
     
-    private String screenshot;
     private String throwable;
     private String stackTrace;
     
@@ -59,14 +58,6 @@ public class JsonMethod {
     
     public void setLogEvents(List<JsonLogEvent> logEvents) {
         this.logEvents = logEvents;
-    }
-    
-    public String getScreenshot() {
-        return screenshot;
-    }
-    
-    public void setScreenshot(String screenshot) {
-        this.screenshot = screenshot;
     }
     
     public String getThrowable() {
