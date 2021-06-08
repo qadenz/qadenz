@@ -152,7 +152,7 @@ public class JsonReporter {
                 jsonMethod.setTestExecutionTime(testExecutionTime);
                 
                 LOG.info("Processing Logs.");
-                List<JsonLogEvent> logEvents = processLogOutput(Reporter.getOutput());
+                List<JsonLogEvent> logEvents = processLogOutput(Reporter.getOutput(result));
                 jsonMethod.setLogEvents(logEvents);
                 
                 if (result.getThrowable() != null) {
