@@ -78,7 +78,7 @@ public class AutomatedTest {
      */
     @BeforeMethod (alwaysRun = true)
     public void startWebDriver() throws Exception {
-        LOG.info("Launching RemoteWebDriver for test [{}].", RunContext.getTestId());
+        LOG.info("Launching WebDriver.");
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
         
         try {
