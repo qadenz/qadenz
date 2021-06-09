@@ -32,17 +32,6 @@ public class TestReporter implements IReporter {
             e.printStackTrace();
         }
         
-        // System.out.println("**********");
-        // System.out.println("*");
-        // System.out.println("* REPORTER");
-        // System.out.println("*");
-        // System.out.println("* Results Map Size: " + ResultsMap.getInstance().size());
-        // System.out.println("* Screenshots Size: " + Screenshots.getInstance().size());
-        // System.out.println("*");
-        // System.out.println("*");
-        // System.out.println("* XML Suites Size: " + xmlSuites.size());
-        // System.out.println("* ISuites size: " + xmlSuites.size());
-        // System.out.println("*");
-        // System.out.println("**********");
+        // TODO: pass the JsonReport to the HTML Reporter and write the file
     }
 }
