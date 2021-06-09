@@ -27,7 +27,6 @@ public class RunContext {
     public static boolean retryInterceptedClicks;
     
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    private static ThreadLocal<String> testId = new ThreadLocal<>();
     
     public static void setWebDriver(WebDriver webDriver) {
         driver.set(webDriver);
@@ -35,13 +34,5 @@ public class RunContext {
     
     public static WebDriver getWebDriver() {
         return driver.get();
-    }
-    
-    public static void setTestId(String id) {
-        testId.set(id);
-    }
-    
-    public static String getTestId() {
-        return testId.get();
     }
 }
