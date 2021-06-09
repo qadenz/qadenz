@@ -1,11 +1,9 @@
 package io.slifer.automation.config;
 
-import io.slifer.automation.reporter.Screenshots;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -19,7 +17,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * The top-level class for all test classes. The AutomatedTest manages configuration and launch of the WebDriver and
@@ -31,8 +28,6 @@ import java.util.UUID;
 public class AutomatedTest {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
-    
-    private static Screenshots screenshots = Screenshots.getInstance();
     
     @BeforeSuite (alwaysRun = true)
     public void configureReportOutputPath(ITestContext testContext) {
@@ -49,7 +44,6 @@ public class AutomatedTest {
         
         String path = builder.toString();
         System.setProperty("path.ReportOutput", path);
-        MDC.put("suiteId", UUID.randomUUID().toString());
         LOG.info("Report Output Path is [{}]", path);
         new File(path).mkdirs();
         RunContext.reportOutputPath = path;
@@ -63,7 +57,6 @@ public class AutomatedTest {
      */
     @BeforeSuite (alwaysRun = true, dependsOnMethods = "configureReportOutputPath")
     public void processXmlParameters(ITestContext testContext) {
-        
         LOG.info("Reading XML Parameters.");
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
         XmlParameterValidator parameterValidator = new XmlParameterValidator(xmlParameters);
@@ -79,22 +72,11 @@ public class AutomatedTest {
     }
     
     /**
-     * Assigns a UUID in preparation for logging and reporting activities.
-     *
-     * @param testContext The injected ITestContext.
-     */
-    @BeforeMethod (alwaysRun = true)
-    public void prepareTestInfo(ITestContext testContext) {
-        RunContext.setTestId(UUID.randomUUID().toString());
-        MDC.put("testId", RunContext.getTestId());
-    }
-    
-    /**
      * Begins execution of a test by launching a RemoteWebDriver on a Selenium Grid, and opening the application URL.
      *
      * @throws Exception on invalid Grid URL.
      */
-    @BeforeMethod (dependsOnMethods = {"prepareTestInfo"}, alwaysRun = true)
+    @BeforeMethod (alwaysRun = true)
     public void startWebDriver() throws Exception {
         LOG.info("Launching RemoteWebDriver for test [{}].", RunContext.getTestId());
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
