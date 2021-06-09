@@ -1,6 +1,5 @@
 package io.slifer.automation.config;
 
-import io.slifer.automation.reporter.ResultsMap;
 import io.slifer.automation.reporter.Screenshots;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -8,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.testng.ITestContext;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -34,7 +32,6 @@ public class AutomatedTest {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
-    private static ResultsMap resultsMap = ResultsMap.getInstance();
     private static Screenshots screenshots = Screenshots.getInstance();
     
     @BeforeSuite (alwaysRun = true)
@@ -90,8 +87,6 @@ public class AutomatedTest {
     public void prepareTestInfo(ITestContext testContext) {
         RunContext.setTestId(UUID.randomUUID().toString());
         MDC.put("testId", RunContext.getTestId());
-        
-        resultsMap.setSuiteName(testContext.getSuite().getName());
     }
     
     /**
@@ -124,18 +119,6 @@ public class AutomatedTest {
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
         RunContext.getWebDriver().quit();
-    }
-    
-    /**
-     * Captures the ITestResult instance for the test and links to the generated Test ID for processing by the HTML
-     * Reporter.
-     *
-     * @param testResult The injected ITestResult.
-     */
-    @AfterMethod (alwaysRun = true, dependsOnMethods = "stopWebDriver")
-    public void saveTestNgResult(ITestResult testResult) {
-        LOG.info("Capturing Test Results.");
-        resultsMap.put(RunContext.getTestId(), testResult);
     }
     
     /**
