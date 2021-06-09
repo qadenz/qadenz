@@ -1,12 +1,7 @@
 package io.slifer.automation.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import io.slifer.automation.reporter.HtmlReporter;
-import io.slifer.automation.reporter.OldJsonCompiler;
 import io.slifer.automation.reporter.ResultsMap;
 import io.slifer.automation.reporter.Screenshots;
-import io.slifer.automation.reporter.model.JsonReport;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -144,19 +139,10 @@ public class AutomatedTest {
     }
     
     /**
-     * Triggers the generation of the HTML Report output and supporting JSON files.
-     *
-     * @param testContext The injected ITestContext.
+     * Captures the date/time when the Suite is completed.
      */
     @AfterSuite (alwaysRun = true)
-    public void generateReports(ITestContext testContext) throws Exception {
+    public void captureEndDateTime() {
         RunContext.suiteEndDate = LocalDateTime.now();
-        
-        JsonReport jsonReport = new OldJsonCompiler(resultsMap, screenshots).compileJsonReport();
-        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        objectWriter.writeValue(new File(RunContext.reportOutputPath + "results.json"), jsonReport);
-        
-        HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
-        htmlReporter.generateReport(RunContext.reportOutputPath);
     }
 }
