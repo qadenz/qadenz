@@ -160,7 +160,13 @@ public class HtmlReporter {
         // write main section structure
         document.body().appendElement("div").addClass("results-section bordered");
         Element section = document.body().getElementsByClass("results-section bordered").last();
-        String header = testName + " | " + jsonClasses.size() + " " + result.getResultsSectionLabel();
+        
+        int methodCount = 0;
+        for (JsonClass jsonClass : jsonClasses) {
+            methodCount += jsonClass.getMethods().size();
+        }
+        String header = testName + " | " + methodCount + " " + result.getResultsSectionLabel();
+        
         section.appendElement("div").addClass("section-name bordered " + result.getResultsSectionStyle()).text(header);
         section.appendElement("div").addClass("test-classes bordered");
         Element classes = section.getElementsByClass("test-classes bordered").last();
