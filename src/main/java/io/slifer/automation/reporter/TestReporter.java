@@ -32,6 +32,7 @@ public class TestReporter implements IReporter {
             e.printStackTrace();
         }
         
-        // TODO: pass the JsonReport to the HTML Reporter and write the file
+        HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
+        htmlReporter.generateReport(RunContext.reportOutputPath + "results.html");
     }
 }
