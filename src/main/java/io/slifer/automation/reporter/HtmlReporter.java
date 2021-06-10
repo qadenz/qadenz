@@ -185,7 +185,9 @@ public class HtmlReporter {
                 Element testMethods = testClass.getElementsByClass("test-methods panel hide").last();
                 testMethods.appendElement("div").addClass("test-method");
                 Element method = testMethods.getElementsByClass("test-method").last();
-                method.appendElement("div").addClass("method-name accordion").text(jsonMethod.getMethodName());
+                String methodName = (jsonMethod.getParameters() == null) ? jsonMethod.getMethodName() :
+                        jsonMethod.getMethodName() + " | " + jsonMethod.getParameters();
+                method.appendElement("div").addClass("method-name accordion").text(methodName);
                 method.appendElement("div").addClass("method-details panel hide");
                 
                 // write the method details
