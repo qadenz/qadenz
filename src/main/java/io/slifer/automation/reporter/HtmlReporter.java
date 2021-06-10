@@ -195,7 +195,7 @@ public class HtmlReporter {
                 methodDetails.appendElement("div").addClass("method-logs");
                 Element methodLogs = method.getElementsByClass("method-logs").last();
                 for (JsonLogEvent jsonLogEvent : jsonMethod.getLogEvents()) {
-                    writeMethodLogs(log, methodLogs);
+                    writeMethodLogs(jsonLogEvent, methodLogs);
                 }
             }
         }
