@@ -13,6 +13,13 @@ public class JsonTest {
     private List<JsonClass> stoppedTests;
     private List<JsonClass> passedTests;
     
+    private int totalFailedConfigurations;
+    private int totalFailedTests;
+    private int totalSkippedConfigurations;
+    private int totalSkippedTests;
+    private int totalStoppedTests;
+    private int totalPassedTests;
+    
     public String getTestName() {
         return testName;
     }
@@ -67,5 +74,53 @@ public class JsonTest {
     
     public void setPassedTests(List<JsonClass> passedTests) {
         this.passedTests = passedTests;
+    }
+    
+    public int getTotalFailedConfigurations() {
+        return totalFailedConfigurations;
+    }
+    
+    public void setTotalFailedConfigurations(int totalFailedConfigurations) {
+        this.totalFailedConfigurations = totalFailedConfigurations;
+    }
+    
+    public int getTotalFailedTests() {
+        return totalFailedTests;
+    }
+    
+    public void setTotalFailedTests(int totalFailedTests) {
+        this.totalFailedTests = totalFailedTests;
+    }
+    
+    public int getTotalSkippedConfigurations() {
+        return totalSkippedConfigurations;
+    }
+    
+    public void setTotalSkippedConfigurations(int totalSkippedConfigurations) {
+        this.totalSkippedConfigurations = totalSkippedConfigurations;
+    }
+    
+    public int getTotalSkippedTests() {
+        return totalSkippedTests;
+    }
+    
+    public void setTotalSkippedTests(int totalSkippedTests) {
+        this.totalSkippedTests = totalSkippedTests;
+    }
+    
+    public int getTotalStoppedTests() {
+        return totalStoppedTests;
+    }
+    
+    public void setTotalStoppedTests(int totalStoppedTests) {
+        this.totalStoppedTests = totalStoppedTests;
+    }
+    
+    public int getTotalPassedTests() {
+        return totalPassedTests;
+    }
+    
+    public void setTotalPassedTests(int totalPassedTests) {
+        this.totalPassedTests = totalPassedTests;
     }
 }
