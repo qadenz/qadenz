@@ -134,10 +134,10 @@ public class HtmlReporter {
         
         writeSummaryItem(summary, true, "Launched", "", jsonReport.getSuiteStartDate());
         writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
-        writeSummaryItem(summary, HtmlResult.PASSED, String.valueOf(passed));
-        writeSummaryItem(summary, HtmlResult.FAILED, String.valueOf(failed));
-        writeSummaryItem(summary, HtmlResult.STOPPED, String.valueOf(stopped));
-        writeSummaryItem(summary, HtmlResult.SKIPPED, String.valueOf(skipped));
+        writeSummaryItem(summary, HtmlResult.PASSED_TESTS, String.valueOf(passed));
+        writeSummaryItem(summary, HtmlResult.FAILED_TESTS, String.valueOf(failed));
+        writeSummaryItem(summary, HtmlResult.STOPPED_TESTS, String.valueOf(stopped));
+        writeSummaryItem(summary, HtmlResult.SKIPPED_TESTS, String.valueOf(skipped));
         writeSummaryItem(summary, true, "Execution Time", "", jsonReport.getSuiteExecutionTime());
         
         document.body().appendElement("br");
