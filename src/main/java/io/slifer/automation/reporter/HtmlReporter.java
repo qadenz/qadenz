@@ -2,6 +2,7 @@ package io.slifer.automation.reporter;
 
 import io.slifer.automation.reporter.model.JsonMethod;
 import io.slifer.automation.reporter.model.JsonReport;
+import io.slifer.automation.reporter.model.JsonTest;
 import io.slifer.automation.reporter.model.JsonTestLog;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.nodes.DataNode;
@@ -31,11 +32,11 @@ public class HtmlReporter {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
-    private JsonReport json;
+    private JsonReport jsonReport;
     private Document document;
     
-    public HtmlReporter(JsonReport json) {
-        this.json = json;
+    public HtmlReporter(JsonReport jsonReport) {
+        this.jsonReport = jsonReport;
         this.document = Document.createShell("");
     }
     
@@ -43,21 +44,24 @@ public class HtmlReporter {
         LOG.info("Building HTML Report.");
         writeHead();
         writeSummary();
-        if (json.getFailedTests().size() > 0) {
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            
+        }
+        if (jsonReport.getFailedTests().size() > 0) {
             LOG.debug("Writing Failed Tests.");
-            writeResultsSection(json.getFailedTests(), HtmlResult.FAILED);
+            writeResultsSection(jsonReport.getFailedTests(), HtmlResult.FAILED);
         }
-        if (json.getStoppedTests().size() > 0) {
+        if (jsonReport.getStoppedTests().size() > 0) {
             LOG.debug("Writing Stopped Tests.");
-            writeResultsSection(json.getStoppedTests(), HtmlResult.STOPPED);
+            writeResultsSection(jsonReport.getStoppedTests(), HtmlResult.STOPPED);
         }
-        if (json.getSkippedTests().size() > 0) {
+        if (jsonReport.getSkippedTests().size() > 0) {
             LOG.debug("Writing Skipped Tests.");
-            writeResultsSection(json.getSkippedTests(), HtmlResult.SKIPPED);
+            writeResultsSection(jsonReport.getSkippedTests(), HtmlResult.SKIPPED);
         }
-        if (json.getPassedTests().size() > 0) {
+        if (jsonReport.getPassedTests().size() > 0) {
             LOG.debug("Writing Passed Tests.");
-            writeResultsSection(json.getPassedTests(), HtmlResult.PASSED);
+            writeResultsSection(jsonReport.getPassedTests(), HtmlResult.PASSED);
         }
         writeScript();
         
@@ -95,21 +99,37 @@ public class HtmlReporter {
         document.body().appendElement("div").addClass("suite-summary bordered");
         
         Element summary = document.body().getElementsByClass("suite-summary bordered").get(0);
-        summary.appendElement("div").addClass("suite-name bordered").text(json.getSuiteName());
+        summary.appendElement("div").addClass("suite-name bordered").text(jsonReport.getSuiteName());
         
-        int passed = json.getPassedTests().size();
-        int failed = json.getFailedTests().size();
-        int stopped = json.getStoppedTests().size();
-        int skipped = json.getSkippedTests().size();
+        int passed = 0;
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            passed += jsonTest.getPassedTests().size();
+        }
+        
+        int failed = 0;
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            failed += jsonTest.getFailedTests().size();
+        }
+        
+        int stopped = 0;
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            stopped += jsonTest.getStoppedTests().size();
+        }
+        
+        int skipped = 0;
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            skipped += jsonTest.getSkippedTests().size();
+        }
+        
         int total = passed + failed + stopped + skipped;
         
-        writeSummaryItem(summary, true, "Launched", "", json.getSuiteStartDate());
+        writeSummaryItem(summary, true, "Launched", "", jsonReport.getSuiteStartDate());
         writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
         writeSummaryItem(summary, HtmlResult.PASSED, String.valueOf(passed));
         writeSummaryItem(summary, HtmlResult.FAILED, String.valueOf(failed));
         writeSummaryItem(summary, HtmlResult.STOPPED, String.valueOf(stopped));
         writeSummaryItem(summary, HtmlResult.SKIPPED, String.valueOf(skipped));
-        writeSummaryItem(summary, true, "Execution Time", "", json.getSuiteExecutionTime());
+        writeSummaryItem(summary, true, "Execution Time", "", jsonReport.getSuiteExecutionTime());
         
         document.body().appendElement("br");
     }
