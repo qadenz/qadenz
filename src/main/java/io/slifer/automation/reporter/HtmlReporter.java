@@ -70,6 +70,8 @@ public class HtmlReporter {
                 LOG.debug("Writing Passed Tests.");
                 writeResultsSection(testName, jsonTest.getPassedTests(), HtmlResult.PASSED_TESTS);
             }
+            
+            document.body().appendElement("br");
         }
         
         writeScript();
@@ -199,8 +201,6 @@ public class HtmlReporter {
                 }
             }
         }
-        
-        document.body().appendElement("br");
     }
     
     private void writeMethodDetailItem(Element methodDetails, String label, String value) {
