@@ -40,6 +40,17 @@ html {
     font-size: 2em;
 }
 
+.test-section {
+    width: 1202px;
+    margin: auto;
+}
+
+.test-name {
+    height: 30px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
 .tests-summary {
     width: 1202px;
 }
