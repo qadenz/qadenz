@@ -33,6 +33,6 @@ public class TestReporter implements IReporter {
         }
         
         HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
-        htmlReporter.generateReport(RunContext.reportOutputPath + "results.html");
+        htmlReporter.generateReport(RunContext.reportOutputPath);
     }
 }
