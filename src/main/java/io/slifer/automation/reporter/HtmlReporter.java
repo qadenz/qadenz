@@ -112,11 +112,6 @@ public class HtmlReporter {
         Element summary = document.body().getElementsByClass("suite-summary bordered").get(0);
         summary.appendElement("div").addClass("suite-name bordered").text(jsonReport.getSuiteName());
         
-        int passed = 0;
-        for (JsonTest jsonTest : jsonReport.getTests()) {
-            passed += jsonTest.getTotalPassedTests();
-        }
-        
         int failed = 0;
         for (JsonTest jsonTest : jsonReport.getTests()) {
             failed += jsonTest.getTotalFailedTests();
@@ -132,7 +127,12 @@ public class HtmlReporter {
             skipped += jsonTest.getTotalSkippedTests();
         }
         
-        int total = passed + failed + stopped + skipped;
+        int passed = 0;
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            passed += jsonTest.getTotalPassedTests();
+        }
+        
+        int total = failed + stopped + skipped + passed;
         
         writeSummaryItem(summary, true, "Launched", "", jsonReport.getSuiteStartDate());
         writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
