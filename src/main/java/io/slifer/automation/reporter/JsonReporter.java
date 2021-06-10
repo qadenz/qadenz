@@ -101,11 +101,46 @@ public class JsonReporter {
         List<JsonClass> skippedTests = processClassResults(testResult.getSkippedTestResults());
         List<JsonClass> passedTests = processClassResults(testResult.getPassedTestResults());
         
+        int totalFailedConfigurations = 0;
+        for (JsonClass jsonClass : failedConfigurations) {
+            totalFailedConfigurations += jsonClass.getMethods().size();
+        }
+        jsonTest.setTotalFailedConfigurations(totalFailedConfigurations);
         jsonTest.setFailedConfigurations(failedConfigurations);
+        
+        int totalFailedTests = 0;
+        for (JsonClass jsonClass : failedTests) {
+            totalFailedTests += jsonClass.getMethods().size();
+        }
+        jsonTest.setTotalFailedTests(totalFailedTests);
         jsonTest.setFailedTests(failedTests);
+        
+        int totalStoppedTests = 0;
+        for (JsonClass jsonClass : stoppedTests) {
+            totalStoppedTests += jsonClass.getMethods().size();
+        }
+        jsonTest.setTotalStoppedTests(totalStoppedTests);
         jsonTest.setStoppedTests(stoppedTests);
+        
+        int totalSkippedConfigurations = 0;
+        for (JsonClass jsonClass : skippedConfigurations) {
+            totalSkippedConfigurations += jsonClass.getMethods().size();
+        }
+        jsonTest.setTotalSkippedConfigurations(totalSkippedConfigurations);
         jsonTest.setSkippedConfigurations(skippedConfigurations);
+        
+        int totalSkippedTests = 0;
+        for (JsonClass jsonClass : skippedTests) {
+            totalSkippedTests += jsonClass.getMethods().size();
+        }
+        jsonTest.setTotalSkippedTests(totalSkippedTests);
         jsonTest.setSkippedTests(skippedTests);
+        
+        int totalPassedTests = 0;
+        for (JsonClass jsonClass : passedTests) {
+            totalPassedTests += jsonClass.getMethods().size();
+        }
+        jsonTest.setTotalPassedTests(totalPassedTests);
         jsonTest.setPassedTests(passedTests);
         
         return jsonTest;
