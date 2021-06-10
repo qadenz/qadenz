@@ -5,7 +5,6 @@ import io.slifer.automation.reporter.model.JsonLogEvent;
 import io.slifer.automation.reporter.model.JsonMethod;
 import io.slifer.automation.reporter.model.JsonReport;
 import io.slifer.automation.reporter.model.JsonTest;
-import io.slifer.automation.reporter.model.JsonTestLog;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
@@ -201,12 +200,6 @@ public class HtmlReporter {
             }
         }
         
-        // if (jsonMethod.getScreenshot() != null) {
-        //     methodDetails.appendElement("div").addClass("screenshot");
-        //     Element screenshot = methodDetails.getElementsByClass("screenshot").last();
-        //     screenshot.appendElement("img").attr("src", "data:image/png;base64, " + jsonMethod.getScreenshot());
-        // }
-        
         document.body().appendElement("br");
     }
     
@@ -217,14 +210,18 @@ public class HtmlReporter {
         duration.appendElement("span").addClass("method-detail-value").text(value);
     }
     
-    private void writeMethodLogs(JsonTestLog log, Element methodLogs) {
-        String event = log.getTimestamp().split(" ")[1] +
-                " | " + log.getLevel() +
-                " | " + log.getLogger().substring(log.getLogger().lastIndexOf(".") + 1) +
-                " | " + log.getMessage();
+    private void writeMethodLogs(JsonLogEvent jsonLogEvent, Element methodLogs) {
+        methodLogs.appendElement("div").addClass("log-entry").text(jsonLogEvent.getLogMessage());
         
-        methodLogs.appendElement("div").addClass("log-entry")
-                  .text(event);
+        if (jsonLogEvent.getScreenshot() != null) {
+            methodLogs.appendElement("div").addClass("log-entry").text("    View Screenshot");
+            
+            // if (jsonMethod.getScreenshot() != null) {
+            //     methodDetails.appendElement("div").addClass("screenshot");
+            //     Element screenshot = methodDetails.getElementsByClass("screenshot").last();
+            //     screenshot.appendElement("img").attr("src", "data:image/png;base64, " + jsonMethod.getScreenshot());
+            // }
+        }
     }
     
     private void writeScript() {
