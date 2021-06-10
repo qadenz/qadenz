@@ -36,6 +36,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error accepting alert :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -51,6 +52,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error dismissing alert :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -68,6 +70,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error entering text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -83,6 +86,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error closing browser :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -98,6 +102,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error navigating back. :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -113,6 +118,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error navigating back :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -128,6 +134,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error refreshing page :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -143,6 +150,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error deleting cookies :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -160,6 +168,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error opening URL :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -175,6 +184,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -190,6 +200,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }

@@ -60,6 +60,7 @@ public abstract class WebDriverCommands extends Commands {
         catch (Exception exception) {
             LOG.error("Error clearing contents :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -88,12 +89,14 @@ public abstract class WebDriverCommands extends Commands {
             else {
                 LOG.error("Error clicking with Actions :: {}: {}", exception.getClass().getSimpleName(),
                         exception.getMessage());
+                captureScreenshot();
                 
                 throw exception;
             }
         }
         catch (Exception exception) {
             LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -116,6 +119,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -144,6 +148,7 @@ public abstract class WebDriverCommands extends Commands {
         catch (Exception exception) {
             LOG.error("Error clicking elements :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -165,6 +170,7 @@ public abstract class WebDriverCommands extends Commands {
         catch (Exception exception) {
             LOG.error("Error deselecting option :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -185,6 +191,7 @@ public abstract class WebDriverCommands extends Commands {
         catch (Exception exception) {
             LOG.error("Error double-clicking element :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -204,6 +211,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error entering text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -224,6 +232,7 @@ public abstract class WebDriverCommands extends Commands {
         catch (Exception exception) {
             LOG.error("Error hovering on element :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -244,6 +253,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error selecting option :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -270,6 +280,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error uploading file :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw new RuntimeException("File could not be uploaded.");
         }
@@ -296,6 +307,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -315,6 +327,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -334,6 +347,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error while waiting :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -353,6 +367,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -372,6 +387,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -394,6 +410,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -407,6 +424,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         
         LOG.error("Could not find instance with expected value.");
+        captureScreenshot();
         
         throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
     }
@@ -431,6 +449,7 @@ public abstract class WebDriverCommands extends Commands {
         catch (Exception exception) {
             LOG.error("Error retrieving attributes :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
+            captureScreenshot();
             
             throw exception;
         }
@@ -444,6 +463,7 @@ public abstract class WebDriverCommands extends Commands {
         }
         
         LOG.error("Could not find instance with expected value.");
+        captureScreenshot();
         
         throw new IllegalArgumentException("Attribute value [" + expectedValue + "] was not found.");
     }
