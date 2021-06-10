@@ -46,29 +46,30 @@ public class HtmlReporter {
         writeHead();
         writeSummary();
         for (JsonTest jsonTest : jsonReport.getTests()) {
+            String testName = jsonTest.getTestName();
             if (jsonTest.getFailedConfigurations().size() > 0) {
                 LOG.debug("Writing Failed Configurations.");
-                writeResultsSection(jsonTest.getFailedConfigurations(), HtmlResult.FAILED);
+                writeResultsSection(testName, jsonTest.getFailedConfigurations(), HtmlResult.FAILED_CONFIGS);
             }
             if (jsonTest.getSkippedConfigurations().size() > 0) {
                 LOG.debug("Writing Skipped Configurations.");
-                writeResultsSection(jsonTest.getSkippedConfigurations(), HtmlResult.SKIPPED);
+                writeResultsSection(testName, jsonTest.getSkippedConfigurations(), HtmlResult.SKIPPED_CONFIGS);
             }
             if (jsonTest.getFailedTests().size() > 0) {
                 LOG.debug("Writing Failed Tests.");
-                writeResultsSection(jsonTest.getFailedTests(), HtmlResult.FAILED);
+                writeResultsSection(testName, jsonTest.getFailedTests(), HtmlResult.FAILED_TESTS);
             }
             if (jsonTest.getStoppedTests().size() > 0) {
                 LOG.debug("Writing Stopped Tests.");
-                writeResultsSection(jsonTest.getStoppedTests(), HtmlResult.STOPPED);
+                writeResultsSection(testName, jsonTest.getStoppedTests(), HtmlResult.STOPPED_TESTS);
             }
             if (jsonTest.getSkippedTests().size() > 0) {
                 LOG.debug("Writing Skipped Tests.");
-                writeResultsSection(jsonTest.getSkippedTests(), HtmlResult.SKIPPED);
+                writeResultsSection(testName, jsonTest.getSkippedTests(), HtmlResult.SKIPPED_TESTS);
             }
             if (jsonTest.getPassedTests().size() > 0) {
                 LOG.debug("Writing Passed Tests.");
-                writeResultsSection(jsonTest.getPassedTests(), HtmlResult.PASSED);
+                writeResultsSection(testName, jsonTest.getPassedTests(), HtmlResult.PASSED_TESTS);
             }
         }
         
