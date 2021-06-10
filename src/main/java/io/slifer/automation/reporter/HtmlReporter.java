@@ -114,22 +114,22 @@ public class HtmlReporter {
         
         int passed = 0;
         for (JsonTest jsonTest : jsonReport.getTests()) {
-            passed += jsonTest.getPassedTests().size();
+            passed += jsonTest.getTotalPassedTests();
         }
         
         int failed = 0;
         for (JsonTest jsonTest : jsonReport.getTests()) {
-            failed += jsonTest.getFailedTests().size();
+            failed += jsonTest.getTotalFailedTests();
         }
         
         int stopped = 0;
         for (JsonTest jsonTest : jsonReport.getTests()) {
-            stopped += jsonTest.getStoppedTests().size();
+            stopped += jsonTest.getTotalStoppedTests();
         }
         
         int skipped = 0;
         for (JsonTest jsonTest : jsonReport.getTests()) {
-            skipped += jsonTest.getSkippedTests().size();
+            skipped += jsonTest.getTotalSkippedTests();
         }
         
         int total = passed + failed + stopped + skipped;
