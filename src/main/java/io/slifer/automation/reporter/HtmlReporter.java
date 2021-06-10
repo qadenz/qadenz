@@ -45,24 +45,32 @@ public class HtmlReporter {
         writeHead();
         writeSummary();
         for (JsonTest jsonTest : jsonReport.getTests()) {
-            
+            if (jsonTest.getFailedConfigurations().size() > 0) {
+                LOG.debug("Writing Failed Configurations.");
+                writeResultsSection(jsonTest.getFailedConfigurations(), HtmlResult.FAILED);
+            }
+            if (jsonTest.getSkippedConfigurations().size() > 0) {
+                LOG.debug("Writing Skipped Configurations.");
+                writeResultsSection(jsonTest.getSkippedConfigurations(), HtmlResult.SKIPPED);
+            }
+            if (jsonTest.getFailedTests().size() > 0) {
+                LOG.debug("Writing Failed Tests.");
+                writeResultsSection(jsonTest.getFailedTests(), HtmlResult.FAILED);
+            }
+            if (jsonTest.getStoppedTests().size() > 0) {
+                LOG.debug("Writing Stopped Tests.");
+                writeResultsSection(jsonTest.getStoppedTests(), HtmlResult.STOPPED);
+            }
+            if (jsonTest.getSkippedTests().size() > 0) {
+                LOG.debug("Writing Skipped Tests.");
+                writeResultsSection(jsonTest.getSkippedTests(), HtmlResult.SKIPPED);
+            }
+            if (jsonTest.getPassedTests().size() > 0) {
+                LOG.debug("Writing Passed Tests.");
+                writeResultsSection(jsonTest.getPassedTests(), HtmlResult.PASSED);
+            }
         }
-        if (jsonReport.getFailedTests().size() > 0) {
-            LOG.debug("Writing Failed Tests.");
-            writeResultsSection(jsonReport.getFailedTests(), HtmlResult.FAILED);
-        }
-        if (jsonReport.getStoppedTests().size() > 0) {
-            LOG.debug("Writing Stopped Tests.");
-            writeResultsSection(jsonReport.getStoppedTests(), HtmlResult.STOPPED);
-        }
-        if (jsonReport.getSkippedTests().size() > 0) {
-            LOG.debug("Writing Skipped Tests.");
-            writeResultsSection(jsonReport.getSkippedTests(), HtmlResult.SKIPPED);
-        }
-        if (jsonReport.getPassedTests().size() > 0) {
-            LOG.debug("Writing Passed Tests.");
-            writeResultsSection(jsonReport.getPassedTests(), HtmlResult.PASSED);
-        }
+        
         writeScript();
         
         writeHtmlFile(outputPath);
