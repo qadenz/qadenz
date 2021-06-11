@@ -48,7 +48,8 @@ public class HtmlReporter {
             writeTestSection(jsonTest);
         }
         
-        writeScript();
+        writeAccordionScript();
+        writeModalScript();
         
         writeHtmlFile(outputPath);
     }
@@ -225,8 +226,12 @@ public class HtmlReporter {
         methodLogs.appendElement("div").addClass("log-entry").text(jsonLogEvent.getLogMessage());
         
         if (jsonLogEvent.getScreenshot() != null) {
-            methodLogs.appendElement("div").addClass("log-entry").text("    View Screenshot");
-            
+            methodLogs.appendElement("div").addClass("log-entry screenshot").text("View Screenshot");
+            Element screenshot = methodLogs.getElementsMatchingText("View Screenshot").last();
+            screenshot.appendElement("div").addClass("overlay");
+            screenshot.appendElement("span").addClass("close").text("&times;");
+            screenshot.appendElement("img").addClass("scr-img")
+                      .attr("src", "data:image/png;base64, " + jsonLogEvent.getScreenshot());
             // if (jsonMethod.getScreenshot() != null) {
             //     methodDetails.appendElement("div").addClass("screenshot");
             //     Element screenshot = methodDetails.getElementsByClass("screenshot").last();
@@ -235,7 +240,7 @@ public class HtmlReporter {
         }
     }
     
-    private void writeScript() {
+    private void writeAccordionScript() {
         String js = "<script>var acc = document.getElementsByClassName(\"accordion\");" +
                 "for (var i = 0; i < acc.length; i++) {" +
                 "acc[i].addEventListener(\"click\", function () {" +
@@ -244,6 +249,22 @@ public class HtmlReporter {
                 "if (panel.style.display === \"block\") {" +
                 "panel.style.display = \"none\";}" +
                 "else {panel.style.display = \"block\";}});}</script>";
+        DataNode script = new DataNode(js);
+        document.body().appendChild(script);
+    }
+    
+    private void writeModalScript() {
+        String js = "<script>var modal = document.getElementById(\"modal\");" +
+                "var scr = document.getElementsByClassName(\"screenshot\");" +
+                "for (var i = 0; i < scr.length; i++) {" +
+                "scr[i].addEventListener(\"click\", function () {" +
+                "modal.style.display = \"block\";" +
+                "var modalImg = document.getElementById(\"modal-img\");" +
+                "var imgSrc = this.getElementsByClassName(\"image\")[0];" +
+                "modalImg.src = imgSrc.src;});}" +
+                "var span = document.getElementsByClassName(\"close\")[0];" +
+                "span.onclick = function () {" +
+                "modal.style.display = \"none\";};</script>";
         DataNode script = new DataNode(js);
         document.body().appendChild(script);
     }
