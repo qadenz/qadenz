@@ -228,15 +228,9 @@ public class HtmlReporter {
         if (jsonLogEvent.getScreenshot() != null) {
             methodLogs.appendElement("div").addClass("log-entry screenshot").text("View Screenshot");
             Element screenshot = methodLogs.getElementsMatchingText("View Screenshot").last();
-            screenshot.appendElement("div").addClass("overlay");
-            screenshot.appendElement("span").addClass("close").text("&times;");
-            screenshot.appendElement("img").addClass("scr-img")
+            screenshot.appendElement("img").addClass("image")
+                      .attr("style", "display: none")
                       .attr("src", "data:image/png;base64, " + jsonLogEvent.getScreenshot());
-            // if (jsonMethod.getScreenshot() != null) {
-            //     methodDetails.appendElement("div").addClass("screenshot");
-            //     Element screenshot = methodDetails.getElementsByClass("screenshot").last();
-            //     screenshot.appendElement("img").attr("src", "data:image/png;base64, " + jsonMethod.getScreenshot());
-            // }
         }
     }
     
