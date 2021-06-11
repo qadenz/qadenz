@@ -45,33 +45,7 @@ public class HtmlReporter {
         writeHead();
         writeSummary();
         for (JsonTest jsonTest : jsonReport.getTests()) {
-            String testName = jsonTest.getTestName();
-            if (jsonTest.getFailedConfigurations().size() > 0) {
-                LOG.debug("Writing Failed Configurations.");
-                writeResultsSection(testName, jsonTest.getFailedConfigurations(), HtmlResult.FAILED_CONFIGS);
-            }
-            if (jsonTest.getSkippedConfigurations().size() > 0) {
-                LOG.debug("Writing Skipped Configurations.");
-                writeResultsSection(testName, jsonTest.getSkippedConfigurations(), HtmlResult.SKIPPED_CONFIGS);
-            }
-            if (jsonTest.getFailedTests().size() > 0) {
-                LOG.debug("Writing Failed Tests.");
-                writeResultsSection(testName, jsonTest.getFailedTests(), HtmlResult.FAILED_TESTS);
-            }
-            if (jsonTest.getStoppedTests().size() > 0) {
-                LOG.debug("Writing Stopped Tests.");
-                writeResultsSection(testName, jsonTest.getStoppedTests(), HtmlResult.STOPPED_TESTS);
-            }
-            if (jsonTest.getSkippedTests().size() > 0) {
-                LOG.debug("Writing Skipped Tests.");
-                writeResultsSection(testName, jsonTest.getSkippedTests(), HtmlResult.SKIPPED_TESTS);
-            }
-            if (jsonTest.getPassedTests().size() > 0) {
-                LOG.debug("Writing Passed Tests.");
-                writeResultsSection(testName, jsonTest.getPassedTests(), HtmlResult.PASSED_TESTS);
-            }
-            
-            document.body().appendElement("br");
+            writeTestSection(jsonTest);
         }
         
         writeScript();
@@ -102,6 +76,41 @@ public class HtmlReporter {
         
         // yeah, it's hacky but it works. I'll revisit this another time
         return contents.replace("    ", "").replace(" {", "{").replace(": ", ":").replaceAll("\n", "");
+    }
+    
+    private void writeTestSection(JsonTest jsonTest) {
+        String testName = jsonTest.getTestName() + " Results";
+        
+        document.body().appendElement("div").addClass("test-section bordered");
+        Element section = document.body().getElementsByClass("test-section bordered").last();
+        section.appendElement("div").addClass("test-name bordered").text(testName);
+        
+        if (jsonTest.getFailedConfigurations().size() > 0) {
+            LOG.debug("Writing Failed Configurations.");
+            writeResultsSection(section, jsonTest.getFailedConfigurations(), HtmlResult.FAILED_CONFIGS);
+        }
+        if (jsonTest.getSkippedConfigurations().size() > 0) {
+            LOG.debug("Writing Skipped Configurations.");
+            writeResultsSection(section, jsonTest.getSkippedConfigurations(), HtmlResult.SKIPPED_CONFIGS);
+        }
+        if (jsonTest.getFailedTests().size() > 0) {
+            LOG.debug("Writing Failed Tests.");
+            writeResultsSection(section, jsonTest.getFailedTests(), HtmlResult.FAILED_TESTS);
+        }
+        if (jsonTest.getStoppedTests().size() > 0) {
+            LOG.debug("Writing Stopped Tests.");
+            writeResultsSection(section, jsonTest.getStoppedTests(), HtmlResult.STOPPED_TESTS);
+        }
+        if (jsonTest.getSkippedTests().size() > 0) {
+            LOG.debug("Writing Skipped Tests.");
+            writeResultsSection(section, jsonTest.getSkippedTests(), HtmlResult.SKIPPED_TESTS);
+        }
+        if (jsonTest.getPassedTests().size() > 0) {
+            LOG.debug("Writing Passed Tests.");
+            writeResultsSection(section, jsonTest.getPassedTests(), HtmlResult.PASSED_TESTS);
+        }
+        
+        document.body().appendElement("br");
     }
     
     private void writeSummary() {
@@ -157,16 +166,16 @@ public class HtmlReporter {
         totalTestsItem.appendElement("div").addClass("summary-item-value " + style).text(value);
     }
     
-    private void writeResultsSection(String testName, List<JsonClass> jsonClasses, HtmlResult result) {
+    private void writeResultsSection(Element testSection, List<JsonClass> jsonClasses, HtmlResult result) {
         // write main section structure
-        document.body().appendElement("div").addClass("results-section bordered");
-        Element section = document.body().getElementsByClass("results-section bordered").last();
+        testSection.appendElement("div").addClass("results-section");
+        Element section = document.body().getElementsByClass("results-section").last();
         
         int methodCount = 0;
         for (JsonClass jsonClass : jsonClasses) {
             methodCount += jsonClass.getMethods().size();
         }
-        String header = testName + " | " + methodCount + " " + result.getResultsSectionLabel();
+        String header = methodCount + " " + result.getResultsSectionLabel();
         
         section.appendElement("div").addClass("section-name bordered " + result.getResultsSectionStyle()).text(header);
         section.appendElement("div").addClass("test-classes bordered");
