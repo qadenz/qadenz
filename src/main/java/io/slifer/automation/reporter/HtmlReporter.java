@@ -48,6 +48,7 @@ public class HtmlReporter {
             writeTestSection(jsonTest);
         }
         
+        writeScreenshotModal();
         writeAccordionScript();
         writeModalScript();
         
@@ -232,6 +233,13 @@ public class HtmlReporter {
                       .attr("style", "display: none")
                       .attr("src", "data:image/png;base64, " + jsonLogEvent.getScreenshot());
         }
+    }
+    
+    private void writeScreenshotModal() {
+        document.body().appendElement("div").attr("id", "modal");
+        Element modal = document.getElementById("modal");
+        modal.appendElement("span").addClass("close").text("&times;");
+        modal.appendElement("img").addClass("modal-content").attr("id", "modal-img");
     }
     
     private void writeAccordionScript() {
