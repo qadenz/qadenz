@@ -192,11 +192,11 @@ html {
 }
 
 .txt-passed {
-    color: #11ff11;
+    color: #11dd11;
 }
 
 .txt-failed {
-    color: #ff1111;
+    color: #ff3333;
 }
 
 .txt-stopped {
@@ -208,11 +208,11 @@ html {
 }
 
 .bg-passed {
-    background-color: #11ff11;
+    background-color: #11dd11;
 }
 
 .bg-failed {
-    background-color: #ff1111;
+    background-color: #ff3333;
 }
 
 .bg-stopped {
