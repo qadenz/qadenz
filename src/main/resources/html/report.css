@@ -156,7 +156,7 @@ html {
     top: 15px;
     right: 35px;
     color: #f1f1f1;
-    font-size: 40px;
+    font-size: 60px;
     font-weight: bold;
     transition: 0.3s;
 }
@@ -175,7 +175,7 @@ html {
 }
 
 .accordion:after {
-    content: '\02795' /* Unicode character for "plus" sign (+) */;
+    content: "\02795" /* Unicode character for "plus" sign (+) */;
     font-size: .75em;
     float: left;
     padding-top: 3px;
@@ -184,7 +184,7 @@ html {
 
 .active:after {
     padding-top: 3px;
-    content: "\2796" /* Unicode character for "minus" sign (-) */;
+    content: "\02796" /* Unicode character for "minus" sign (-) */;
 }
 
 .hide {
