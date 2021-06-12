@@ -134,7 +134,7 @@ html {
     margin: auto;
     display: block;
     width: 80%;
-    max-width: 700px;
+    max-width: 1200px;
 }
 
 .modal-content {
@@ -168,7 +168,7 @@ html {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1200px) {
     .modal-content {
         width: 100%;
     }
