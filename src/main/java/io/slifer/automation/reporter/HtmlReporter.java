@@ -238,7 +238,7 @@ public class HtmlReporter {
     private void writeScreenshotModal() {
         document.body().appendElement("div").attr("id", "modal");
         Element modal = document.getElementById("modal");
-        modal.appendElement("span").addClass("close").text("&times;");
+        modal.appendElement("span").addClass("close").html("&times;");
         modal.appendElement("img").addClass("modal-content").attr("id", "modal-img");
     }
     
