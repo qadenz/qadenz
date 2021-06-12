@@ -192,15 +192,15 @@ html {
 }
 
 .txt-passed {
-    color: #32cd32;
+    color: #11ff11;
 }
 
 .txt-failed {
-    color: #ff3333;
+    color: #ff1111;
 }
 
 .txt-stopped {
-    color: #ffa500;
+    color: #ffaa11;
 }
 
 .txt-skipped {
@@ -208,19 +208,19 @@ html {
 }
 
 .bg-passed {
-    background-color: #32cd32;
+    background-color: #11ff11;
 }
 
 .bg-failed {
-    background-color: #ff3333;
+    background-color: #ff1111;
 }
 
 .bg-stopped {
-    background-color: #ffa500;
+    background-color: #ffaa11;
 }
 
 .bg-skipped {
-    background-color: #a9a9a9;
+    background-color: #cccccc;
 }
 
 .bordered {
