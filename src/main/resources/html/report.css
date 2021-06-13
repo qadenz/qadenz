@@ -139,7 +139,7 @@ html {
 
 .modal-content {
     animation-name: zoom;
-    animation-duration: 0.6s;
+    animation-duration: 0.3s;
 }
 
 @keyframes zoom {
