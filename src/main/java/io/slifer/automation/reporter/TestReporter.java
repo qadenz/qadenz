@@ -2,7 +2,6 @@ package io.slifer.automation.reporter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import io.slifer.automation.config.RunContext;
 import io.slifer.automation.reporter.model.JsonReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,13 +25,13 @@ public class TestReporter implements IReporter {
         
         try {
             ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-            objectWriter.writeValue(new File(RunContext.reportOutputPath + "results.json"), jsonReport);
+            objectWriter.writeValue(new File(outputDirectory + "results.json"), jsonReport);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
         
         HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
-        htmlReporter.generateReport(RunContext.reportOutputPath);
+        htmlReporter.generateReport(outputDirectory);
     }
 }
