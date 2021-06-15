@@ -15,8 +15,6 @@ public class RunContext {
     public static LocalDateTime suiteStartDate;
     public static LocalDateTime suiteEndDate;
     
-    public static String reportOutputPath;
-    
     public static String gridHost;
     public static Browser browser;
     public static String browserVersion;
