@@ -11,11 +11,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -30,23 +28,8 @@ public class AutomatedTest {
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     @BeforeSuite (alwaysRun = true)
-    public void configureReportOutputPath(ITestContext testContext) {
+    public void captureStartDateTime(ITestContext testContext) {
         RunContext.suiteStartDate = LocalDateTime.now();
-        StringBuilder builder = new StringBuilder();
-        builder.append("./test-results");
-        builder.append(File.separator);
-        builder.append(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(RunContext.suiteStartDate));
-        builder.append(File.separator);
-        builder.append(DateTimeFormatter.ofPattern("HHmm").format(RunContext.suiteStartDate));
-        builder.append("-");
-        builder.append((testContext.getSuite().getName() != null) ? testContext.getSuite().getName() : "Suite");
-        builder.append(File.separator);
-        
-        String path = builder.toString();
-        System.setProperty("path.ReportOutput", path);
-        LOG.info("Report Output Path is [{}]", path);
-        new File(path).mkdirs();
-        RunContext.reportOutputPath = path;
     }
     
     /**
@@ -55,7 +38,7 @@ public class AutomatedTest {
      *
      * @param testContext The injected ITestContext.
      */
-    @BeforeSuite (alwaysRun = true, dependsOnMethods = "configureReportOutputPath")
+    @BeforeSuite (alwaysRun = true, dependsOnMethods = "captureStartDateTime")
     public void processXmlParameters(ITestContext testContext) {
         LOG.info("Reading XML Parameters.");
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
