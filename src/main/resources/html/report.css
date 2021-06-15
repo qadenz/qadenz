@@ -116,6 +116,10 @@ html {
     width: 1155px;
 }
 
+.screenshot {
+    cursor: pointer;
+}
+
 #modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
