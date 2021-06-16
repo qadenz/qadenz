@@ -27,6 +27,12 @@ public class AutomatedTest {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
+    /**
+     * Captures a timestamp as the start time of the suite, and sets the report output path from TestNG as a system
+     * property in order to facilitate writing the Suite Log json file.
+     *
+     * @param testContext The injected ITestContext.
+     */
     @BeforeSuite (alwaysRun = true)
     public void captureStartDateTime(ITestContext testContext) {
         RunContext.suiteStartDate = LocalDateTime.now();
