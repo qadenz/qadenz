@@ -3,7 +3,7 @@ package io.slifer.automation.reporter.model;
 import java.util.List;
 
 /**
- * This is the JSON model for individual test case results and logging events.
+ * This is the fourth level data model for individual test case results and logging events.
  *
  * @author Tim Slifer
  */
