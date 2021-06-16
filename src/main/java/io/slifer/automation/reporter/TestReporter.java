@@ -15,6 +15,7 @@ import java.util.List;
 public class TestReporter implements IReporter {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final String FILE_NAME = "suite-results";
     
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
@@ -25,13 +26,13 @@ public class TestReporter implements IReporter {
         
         try {
             ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-            objectWriter.writeValue(new File(outputDirectory + "results.json"), jsonReport);
+            objectWriter.writeValue(new File(outputDirectory, FILE_NAME + ".json"), jsonReport);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
         
         HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
-        htmlReporter.generateReport(outputDirectory);
+        htmlReporter.generateReport(outputDirectory, FILE_NAME);
     }
 }

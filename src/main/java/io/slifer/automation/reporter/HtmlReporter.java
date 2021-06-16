@@ -40,7 +40,7 @@ public class HtmlReporter {
         this.document = Document.createShell("");
     }
     
-    public void generateReport(String outputPath) {
+    public void generateReport(String outputPath, String fileName) {
         LOG.info("Building HTML Report.");
         writeHead();
         writeSummary();
@@ -52,7 +52,7 @@ public class HtmlReporter {
         writeAccordionScript();
         writeModalScript();
         
-        writeHtmlFile(outputPath);
+        writeHtmlFile(outputPath, fileName);
     }
     
     private void writeHead() {
@@ -271,10 +271,10 @@ public class HtmlReporter {
         document.body().appendChild(script);
     }
     
-    private void writeHtmlFile(String outputPath) {
+    private void writeHtmlFile(String outputPath, String fileName) {
         LOG.debug("Writing HTML File.");
         try {
-            File file = new File(outputPath + "results.html");
+            File file = new File(outputPath, fileName + ".html");
             FileUtils.writeStringToFile(file, document.outerHtml(), StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
