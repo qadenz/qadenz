@@ -15,8 +15,6 @@ public class RunContext {
     public static LocalDateTime suiteStartDate;
     public static LocalDateTime suiteEndDate;
     
-    public static String reportOutputPath;
-    
     public static String gridHost;
     public static Browser browser;
     public static String browserVersion;
@@ -27,7 +25,6 @@ public class RunContext {
     public static boolean retryInterceptedClicks;
     
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    private static ThreadLocal<String> testId = new ThreadLocal<>();
     
     public static void setWebDriver(WebDriver webDriver) {
         driver.set(webDriver);
@@ -35,13 +32,5 @@ public class RunContext {
     
     public static WebDriver getWebDriver() {
         return driver.get();
-    }
-    
-    public static void setTestId(String id) {
-        testId.set(id);
-    }
-    
-    public static String getTestId() {
-        return testId.get();
     }
 }

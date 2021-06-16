@@ -1,37 +1,33 @@
 package io.slifer.automation.reporter.model;
 
-import io.slifer.automation.reporter.Result;
-
 import java.util.List;
 
 /**
- * This is the JSON model for individual test case results and logging events.
+ * The second level data model that holds results for each {@code <test>} node on the TestNG Suite XML file.
  *
  * @author Tim Slifer
  */
 public class JsonTest {
     
-    private String className;
     private String testName;
-    private String parameters;
-    private Result result;
     
-    private String testStartTime;
-    private String testExecutionTime;
+    private int totalFailedConfigurations;
+    private List<JsonClass> failedConfigurations;
     
-    private List<JsonTestLog> logs;
+    private int totalSkippedConfigurations;
+    private List<JsonClass> skippedConfigurations;
     
-    private String screenshot;
-    private String throwable;
-    private String stackTrace;
+    private int totalFailedTests;
+    private List<JsonClass> failedTests;
     
-    public String getClassName() {
-        return className;
-    }
+    private int totalStoppedTests;
+    private List<JsonClass> stoppedTests;
     
-    public void setClassName(String className) {
-        this.className = className;
-    }
+    private int totalSkippedTests;
+    private List<JsonClass> skippedTests;
+    
+    private int totalPassedTests;
+    private List<JsonClass> passedTests;
     
     public String getTestName() {
         return testName;
@@ -41,67 +37,99 @@ public class JsonTest {
         this.testName = testName;
     }
     
-    public String getParameters() {
-        return parameters;
+    public int getTotalFailedConfigurations() {
+        return totalFailedConfigurations;
     }
     
-    public void setParameters(String parameters) {
-        this.parameters = parameters;
+    public void setTotalFailedConfigurations(int totalFailedConfigurations) {
+        this.totalFailedConfigurations = totalFailedConfigurations;
     }
     
-    public Result getResult() {
-        return result;
+    public List<JsonClass> getFailedConfigurations() {
+        return failedConfigurations;
     }
     
-    public void setResult(Result result) {
-        this.result = result;
+    public void setFailedConfigurations(List<JsonClass> failedConfigurations) {
+        this.failedConfigurations = failedConfigurations;
     }
     
-    public String getTestStartTime() {
-        return testStartTime;
+    public int getTotalSkippedConfigurations() {
+        return totalSkippedConfigurations;
     }
     
-    public void setTestStartTime(String testStartTime) {
-        this.testStartTime = testStartTime;
+    public void setTotalSkippedConfigurations(int totalSkippedConfigurations) {
+        this.totalSkippedConfigurations = totalSkippedConfigurations;
     }
     
-    public String getTestExecutionTime() {
-        return testExecutionTime;
+    public List<JsonClass> getSkippedConfigurations() {
+        return skippedConfigurations;
     }
     
-    public void setTestExecutionTime(String testExecutionTime) {
-        this.testExecutionTime = testExecutionTime;
+    public void setSkippedConfigurations(List<JsonClass> skippedConfigurations) {
+        this.skippedConfigurations = skippedConfigurations;
     }
     
-    public List<JsonTestLog> getLogs() {
-        return logs;
+    public int getTotalFailedTests() {
+        return totalFailedTests;
     }
     
-    public void setLogs(List<JsonTestLog> logs) {
-        this.logs = logs;
+    public void setTotalFailedTests(int totalFailedTests) {
+        this.totalFailedTests = totalFailedTests;
     }
     
-    public String getScreenshot() {
-        return screenshot;
+    public List<JsonClass> getFailedTests() {
+        return failedTests;
     }
     
-    public void setScreenshot(String screenshot) {
-        this.screenshot = screenshot;
+    public void setFailedTests(List<JsonClass> failedTests) {
+        this.failedTests = failedTests;
     }
     
-    public String getThrowable() {
-        return throwable;
+    public int getTotalStoppedTests() {
+        return totalStoppedTests;
     }
     
-    public void setThrowable(String throwable) {
-        this.throwable = throwable;
+    public void setTotalStoppedTests(int totalStoppedTests) {
+        this.totalStoppedTests = totalStoppedTests;
     }
     
-    public String getStackTrace() {
-        return stackTrace;
+    public List<JsonClass> getStoppedTests() {
+        return stoppedTests;
     }
     
-    public void setStackTrace(String stackTrace) {
-        this.stackTrace = stackTrace;
+    public void setStoppedTests(List<JsonClass> stoppedTests) {
+        this.stoppedTests = stoppedTests;
+    }
+    
+    public int getTotalSkippedTests() {
+        return totalSkippedTests;
+    }
+    
+    public void setTotalSkippedTests(int totalSkippedTests) {
+        this.totalSkippedTests = totalSkippedTests;
+    }
+    
+    public List<JsonClass> getSkippedTests() {
+        return skippedTests;
+    }
+    
+    public void setSkippedTests(List<JsonClass> skippedTests) {
+        this.skippedTests = skippedTests;
+    }
+    
+    public int getTotalPassedTests() {
+        return totalPassedTests;
+    }
+    
+    public void setTotalPassedTests(int totalPassedTests) {
+        this.totalPassedTests = totalPassedTests;
+    }
+    
+    public List<JsonClass> getPassedTests() {
+        return passedTests;
+    }
+    
+    public void setPassedTests(List<JsonClass> passedTests) {
+        this.passedTests = passedTests;
     }
 }
