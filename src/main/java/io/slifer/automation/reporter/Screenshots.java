@@ -15,8 +15,7 @@ import java.util.Base64;
 import java.util.HashMap;
 
 /**
- * Captures screenshots with WebDriver, then tracks and links each screenshot to the associated test by means of
- * generated UUID by the Logback MDC.
+ * Captures screenshots with WebDriver, then stores the images along with a given identifier for later retrieval.
  *
  * @author Tim Slifer
  */
@@ -24,12 +23,26 @@ public class Screenshots extends HashMap<String, String> {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
-    public void captureScreenshot() {
+    private static Screenshots instance;
+    
+    private Screenshots() {
+        // Singleton
+    }
+    
+    public static Screenshots getInstance() {
+        if (instance == null) {
+            instance = new Screenshots();
+        }
+        
+        return instance;
+    }
+    
+    public void captureScreenshot(String id) {
         File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
         BufferedImage resizedCapture = resize(rawCapture);
         String screenshot = convertToBase64(resizedCapture);
         
-        this.put(RunContext.getTestId(), screenshot);
+        this.put(id, screenshot);
     }
     
     private BufferedImage resize(File rawCapture) {

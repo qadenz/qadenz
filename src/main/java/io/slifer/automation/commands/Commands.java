@@ -1,12 +1,15 @@
 package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
+import io.slifer.automation.reporter.Screenshots;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.Reporter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Common commands for all test types.
@@ -46,10 +49,12 @@ public abstract class Commands {
                 LOG.info("Result - FAIL :: {}", condition.output());
                 exceptions.add(error);
                 failed = true;
+                captureScreenshot();
             }
             catch (Exception exception) {
                 exceptions.add(exception);
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+                captureScreenshot();
             }
         }
         
@@ -79,5 +84,11 @@ public abstract class Commands {
             throw new RuntimeException("Thread.sleep failed.");
             // Not ideal, but prevents us from having to add a throws declaration to our upstream methods.
         }
+    }
+    
+    protected void captureScreenshot() {
+        String uuid = UUID.randomUUID().toString();
+        Screenshots.getInstance().captureScreenshot(uuid);
+        Reporter.log(uuid);
     }
 }

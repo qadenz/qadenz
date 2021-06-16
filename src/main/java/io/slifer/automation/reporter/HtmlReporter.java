@@ -1,8 +1,10 @@
 package io.slifer.automation.reporter;
 
+import io.slifer.automation.reporter.model.JsonClass;
+import io.slifer.automation.reporter.model.JsonLogEvent;
+import io.slifer.automation.reporter.model.JsonMethod;
 import io.slifer.automation.reporter.model.JsonReport;
 import io.slifer.automation.reporter.model.JsonTest;
-import io.slifer.automation.reporter.model.JsonTestLog;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
@@ -15,7 +17,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -31,37 +32,27 @@ public class HtmlReporter {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
-    private JsonReport json;
+    private JsonReport jsonReport;
     private Document document;
     
-    public HtmlReporter(JsonReport json) {
-        this.json = json;
+    public HtmlReporter(JsonReport jsonReport) {
+        this.jsonReport = jsonReport;
         this.document = Document.createShell("");
     }
     
-    public void generateReport(String outputPath) {
+    public void generateReport(String outputPath, String fileName) {
         LOG.info("Building HTML Report.");
         writeHead();
         writeSummary();
-        if (json.getFailedTests().size() > 0) {
-            LOG.debug("Writing Failed Tests.");
-            writeResultsSection(json.getFailedTests(), HtmlResult.FAILED);
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            writeTestSection(jsonTest);
         }
-        if (json.getStoppedTests().size() > 0) {
-            LOG.debug("Writing Stopped Tests.");
-            writeResultsSection(json.getStoppedTests(), HtmlResult.STOPPED);
-        }
-        if (json.getSkippedTests().size() > 0) {
-            LOG.debug("Writing Skipped Tests.");
-            writeResultsSection(json.getSkippedTests(), HtmlResult.SKIPPED);
-        }
-        if (json.getPassedTests().size() > 0) {
-            LOG.debug("Writing Passed Tests.");
-            writeResultsSection(json.getPassedTests(), HtmlResult.PASSED);
-        }
-        writeScript();
         
-        writeHtmlFile(outputPath);
+        writeScreenshotModal();
+        writeAccordionScript();
+        writeModalScript();
+        
+        writeHtmlFile(outputPath, fileName);
     }
     
     private void writeHead() {
@@ -89,27 +80,78 @@ public class HtmlReporter {
         return contents.replace("    ", "").replace(" {", "{").replace(": ", ":").replaceAll("\n", "");
     }
     
+    private void writeTestSection(JsonTest jsonTest) {
+        String testName = jsonTest.getTestName() + " Results";
+        
+        document.body().appendElement("div").addClass("test-section bordered");
+        Element section = document.body().getElementsByClass("test-section bordered").last();
+        section.appendElement("div").addClass("test-name bordered").text(testName);
+        
+        if (jsonTest.getFailedConfigurations().size() > 0) {
+            LOG.debug("Writing Failed Configurations.");
+            writeResultsSection(section, jsonTest.getFailedConfigurations(), HtmlResult.FAILED_CONFIGS);
+        }
+        if (jsonTest.getSkippedConfigurations().size() > 0) {
+            LOG.debug("Writing Skipped Configurations.");
+            writeResultsSection(section, jsonTest.getSkippedConfigurations(), HtmlResult.SKIPPED_CONFIGS);
+        }
+        if (jsonTest.getFailedTests().size() > 0) {
+            LOG.debug("Writing Failed Tests.");
+            writeResultsSection(section, jsonTest.getFailedTests(), HtmlResult.FAILED_TESTS);
+        }
+        if (jsonTest.getStoppedTests().size() > 0) {
+            LOG.debug("Writing Stopped Tests.");
+            writeResultsSection(section, jsonTest.getStoppedTests(), HtmlResult.STOPPED_TESTS);
+        }
+        if (jsonTest.getSkippedTests().size() > 0) {
+            LOG.debug("Writing Skipped Tests.");
+            writeResultsSection(section, jsonTest.getSkippedTests(), HtmlResult.SKIPPED_TESTS);
+        }
+        if (jsonTest.getPassedTests().size() > 0) {
+            LOG.debug("Writing Passed Tests.");
+            writeResultsSection(section, jsonTest.getPassedTests(), HtmlResult.PASSED_TESTS);
+        }
+        
+        document.body().appendElement("br");
+    }
+    
     private void writeSummary() {
         LOG.debug("Writing Suite summary.");
         
         document.body().appendElement("div").addClass("suite-summary bordered");
         
         Element summary = document.body().getElementsByClass("suite-summary bordered").get(0);
-        summary.appendElement("div").addClass("suite-name bordered").text(json.getSuiteName());
+        summary.appendElement("div").addClass("suite-name bordered").text(jsonReport.getSuiteName());
         
-        int passed = json.getPassedTests().size();
-        int failed = json.getFailedTests().size();
-        int stopped = json.getStoppedTests().size();
-        int skipped = json.getSkippedTests().size();
-        int total = passed + failed + stopped + skipped;
+        int failed = 0;
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            failed += jsonTest.getTotalFailedTests();
+        }
         
-        writeSummaryItem(summary, true, "Launched", "", json.getSuiteStartDate());
+        int stopped = 0;
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            stopped += jsonTest.getTotalStoppedTests();
+        }
+        
+        int skipped = 0;
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            skipped += jsonTest.getTotalSkippedTests();
+        }
+        
+        int passed = 0;
+        for (JsonTest jsonTest : jsonReport.getTests()) {
+            passed += jsonTest.getTotalPassedTests();
+        }
+        
+        int total = failed + stopped + skipped + passed;
+        
+        writeSummaryItem(summary, true, "Launched", "", jsonReport.getSuiteStartDate());
         writeSummaryItem(summary, false, "Total Tests", "", String.valueOf(total));
-        writeSummaryItem(summary, HtmlResult.PASSED, String.valueOf(passed));
-        writeSummaryItem(summary, HtmlResult.FAILED, String.valueOf(failed));
-        writeSummaryItem(summary, HtmlResult.STOPPED, String.valueOf(stopped));
-        writeSummaryItem(summary, HtmlResult.SKIPPED, String.valueOf(skipped));
-        writeSummaryItem(summary, true, "Execution Time", "", json.getSuiteExecutionTime());
+        writeSummaryItem(summary, HtmlResult.PASSED_TESTS, String.valueOf(passed));
+        writeSummaryItem(summary, HtmlResult.FAILED_TESTS, String.valueOf(failed));
+        writeSummaryItem(summary, HtmlResult.STOPPED_TESTS, String.valueOf(stopped));
+        writeSummaryItem(summary, HtmlResult.SKIPPED_TESTS, String.valueOf(skipped));
+        writeSummaryItem(summary, true, "Execution Time", "", jsonReport.getSuiteExecutionTime());
         
         document.body().appendElement("br");
     }
@@ -126,57 +168,52 @@ public class HtmlReporter {
         totalTestsItem.appendElement("div").addClass("summary-item-value " + style).text(value);
     }
     
-    private void writeResultsSection(List<JsonTest> jsonTests, HtmlResult result) {
+    private void writeResultsSection(Element testSection, List<JsonClass> jsonClasses, HtmlResult result) {
         // write main section structure
-        document.body().appendElement("div").addClass("results-section bordered");
-        Element section = document.body().getElementsByClass("results-section bordered").last();
-        section.appendElement("div").addClass("section-name bordered " + result.getResultsSectionStyle())
-               .text(result.getResultsSectionLabel());
+        testSection.appendElement("div").addClass("results-section");
+        Element section = document.body().getElementsByClass("results-section").last();
+        
+        int methodCount = 0;
+        for (JsonClass jsonClass : jsonClasses) {
+            methodCount += jsonClass.getMethods().size();
+        }
+        String header = methodCount + " " + result.getResultsSectionLabel();
+        
+        section.appendElement("div").addClass("section-name bordered " + result.getResultsSectionStyle()).text(header);
         section.appendElement("div").addClass("test-classes bordered");
         Element classes = section.getElementsByClass("test-classes bordered").last();
         
-        Comparator<JsonTest> comparator = Comparator.comparing(JsonTest::getClassName)
-                                                    .thenComparing(JsonTest::getTestName);
-        jsonTests.sort(comparator);
-        
-        for (JsonTest jsonTest : jsonTests) {
+        for (JsonClass jsonClass : jsonClasses) {
+            // write a new class entry
             Element testClass;
-            // if the class name has not yet been written, write it... otherwise, append to the existing class name
-            if (classes.getElementsContainingText(jsonTest.getClassName()).size() == 0) {
-                classes.appendElement("div").addClass("test-class");
-                testClass = classes.getElementsByClass("test-class").last();
-                testClass.appendElement("div").addClass("class-name accordion").text(jsonTest.getClassName());
-                testClass.appendElement("div").addClass("test-methods panel hide");
-            }
-            else {
-                testClass = classes.getElementsByClass("test-class").last();
-            }
-            // write a new test method entry
-            Element testMethods = testClass.getElementsByClass("test-methods panel hide").last();
-            testMethods.appendElement("div").addClass("test-method");
-            Element method = testMethods.getElementsByClass("test-method").last();
-            method.appendElement("div").addClass("method-name accordion").text(jsonTest.getTestName());
-            method.appendElement("div").addClass("method-details panel hide");
+            classes.appendElement("div").addClass("test-class");
+            testClass = classes.getElementsByClass("test-class").last();
+            testClass.appendElement("div").addClass("class-name accordion").text(jsonClass.getClassName());
+            testClass.appendElement("div").addClass("test-methods panel hide");
             
-            // write the method details
-            Element methodDetails = method.getElementsByClass("method-details panel hide").last();
-            writeMethodDetailItem(methodDetails, "Start Time: ", jsonTest.getTestStartTime());
-            writeMethodDetailItem(methodDetails, "Duration: ", jsonTest.getTestExecutionTime());
-            
-            // write the logging output for the test method
-            methodDetails.appendElement("div").addClass("method-logs");
-            Element methodLogs = method.getElementsByClass("method-logs").last();
-            for (JsonTestLog log : jsonTest.getLogs()) {
-                writeMethodLogs(log, methodLogs);
-            }
-            if (jsonTest.getScreenshot() != null) {
-                methodDetails.appendElement("div").addClass("screenshot");
-                Element screenshot = methodDetails.getElementsByClass("screenshot").last();
-                screenshot.appendElement("img").attr("src", "data:image/png;base64, " + jsonTest.getScreenshot());
+            for (JsonMethod jsonMethod : jsonClass.getMethods()) {
+                // write a new test method entry
+                Element testMethods = testClass.getElementsByClass("test-methods panel hide").last();
+                testMethods.appendElement("div").addClass("test-method");
+                Element method = testMethods.getElementsByClass("test-method").last();
+                String methodName = (jsonMethod.getParameters() == null) ? jsonMethod.getMethodName() :
+                        jsonMethod.getMethodName() + " | " + jsonMethod.getParameters();
+                method.appendElement("div").addClass("method-name accordion").text(methodName);
+                method.appendElement("div").addClass("method-details panel hide");
+                
+                // write the method details
+                Element methodDetails = method.getElementsByClass("method-details panel hide").last();
+                writeMethodDetailItem(methodDetails, "Start Time: ", jsonMethod.getTestStartTime());
+                writeMethodDetailItem(methodDetails, "Duration: ", jsonMethod.getTestExecutionTime());
+                
+                // write the logging output for the test method
+                methodDetails.appendElement("div").addClass("method-logs");
+                Element methodLogs = method.getElementsByClass("method-logs").last();
+                for (JsonLogEvent jsonLogEvent : jsonMethod.getLogEvents()) {
+                    writeMethodLogs(jsonLogEvent, methodLogs);
+                }
             }
         }
-        
-        document.body().appendElement("br");
     }
     
     private void writeMethodDetailItem(Element methodDetails, String label, String value) {
@@ -186,17 +223,26 @@ public class HtmlReporter {
         duration.appendElement("span").addClass("method-detail-value").text(value);
     }
     
-    private void writeMethodLogs(JsonTestLog log, Element methodLogs) {
-        String event = log.getTimestamp().split(" ")[1] +
-                " | " + log.getLevel() +
-                " | " + log.getLogger().substring(log.getLogger().lastIndexOf(".") + 1) +
-                " | " + log.getMessage();
+    private void writeMethodLogs(JsonLogEvent jsonLogEvent, Element methodLogs) {
+        methodLogs.appendElement("div").addClass("log-entry").text(jsonLogEvent.getLogMessage());
         
-        methodLogs.appendElement("div").addClass("log-entry")
-                  .text(event);
+        if (jsonLogEvent.getScreenshot() != null) {
+            methodLogs.appendElement("div").addClass("log-entry screenshot").text("View Screenshot");
+            Element screenshot = methodLogs.getElementsMatchingText("View Screenshot").last();
+            screenshot.appendElement("img").addClass("image")
+                      .attr("style", "display: none")
+                      .attr("src", "data:image/png;base64, " + jsonLogEvent.getScreenshot());
+        }
     }
     
-    private void writeScript() {
+    private void writeScreenshotModal() {
+        document.body().appendElement("div").attr("id", "modal");
+        Element modal = document.getElementById("modal");
+        modal.appendElement("span").addClass("close").html("&times;");
+        modal.appendElement("img").addClass("modal-content").attr("id", "modal-img");
+    }
+    
+    private void writeAccordionScript() {
         String js = "<script>var acc = document.getElementsByClassName(\"accordion\");" +
                 "for (var i = 0; i < acc.length; i++) {" +
                 "acc[i].addEventListener(\"click\", function () {" +
@@ -209,10 +255,26 @@ public class HtmlReporter {
         document.body().appendChild(script);
     }
     
-    private void writeHtmlFile(String outputPath) {
+    private void writeModalScript() {
+        String js = "<script>var modal = document.getElementById(\"modal\");" +
+                "var scr = document.getElementsByClassName(\"screenshot\");" +
+                "for (var i = 0; i < scr.length; i++) {" +
+                "scr[i].addEventListener(\"click\", function () {" +
+                "modal.style.display = \"block\";" +
+                "var modalImg = document.getElementById(\"modal-img\");" +
+                "var imgSrc = this.getElementsByClassName(\"image\")[0];" +
+                "modalImg.src = imgSrc.src;});}" +
+                "var span = document.getElementsByClassName(\"close\")[0];" +
+                "span.onclick = function () {" +
+                "modal.style.display = \"none\";};</script>";
+        DataNode script = new DataNode(js);
+        document.body().appendChild(script);
+    }
+    
+    private void writeHtmlFile(String outputPath, String fileName) {
         LOG.debug("Writing HTML File.");
         try {
-            File file = new File(outputPath + "results.html");
+            File file = new File(outputPath, fileName + ".html");
             FileUtils.writeStringToFile(file, document.outerHtml(), StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
@@ -221,10 +283,12 @@ public class HtmlReporter {
     }
     
     private enum HtmlResult {
-        FAILED("txt-failed", "Tests Failed", "bg-failed", "Failed Tests"),
-        PASSED("txt-passed", "Tests Passed", "bg-passed", "Passed Tests"),
-        SKIPPED("txt-skipped", "Tests Skipped", "bg-skipped", "Skipped Tests"),
-        STOPPED("txt-stopped", "Tests Stopped", "bg-stopped", "Stopped Tests");
+        FAILED_CONFIGS("txt-failed", "Tests Failed", "bg-failed", "Failed Configurations"),
+        SKIPPED_CONFIGS("txt-skipped", "Tests Skipped", "bg-skipped", "Skipped Configurations"),
+        FAILED_TESTS("txt-failed", "Tests Failed", "bg-failed", "Failed Tests"),
+        STOPPED_TESTS("txt-stopped", "Tests Stopped", "bg-stopped", "Stopped Tests"),
+        SKIPPED_TESTS("txt-skipped", "Tests Skipped", "bg-skipped", "Skipped Tests"),
+        PASSED_TESTS("txt-passed", "Tests Passed", "bg-passed", "Passed Tests");
         
         private String summaryItemValueStyle;
         private String summaryItemLabel;
