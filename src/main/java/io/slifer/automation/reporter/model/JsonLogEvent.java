@@ -1,5 +1,10 @@
 package io.slifer.automation.reporter.model;
 
+/**
+ * Models logging output for test cases, and stores Base64 encoded screenshots.
+ *
+ * @author Tim Slifer
+ */
 public class JsonLogEvent {
     
     private String logMessage;

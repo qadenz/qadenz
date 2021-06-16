@@ -2,6 +2,11 @@ package io.slifer.automation.reporter.model;
 
 import java.util.List;
 
+/**
+ * Third level data model that stores individual method results on each test class.
+ *
+ * @author Tim Slifer
+ */
 public class JsonClass {
     
     private String className;
