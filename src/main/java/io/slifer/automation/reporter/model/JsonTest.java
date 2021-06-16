@@ -2,6 +2,11 @@ package io.slifer.automation.reporter.model;
 
 import java.util.List;
 
+/**
+ * The second level data model that holds results for each {@code <test>} node on the TestNG Suite XML file.
+ *
+ * @author Tim Slifer
+ */
 public class JsonTest {
     
     private String testName;
