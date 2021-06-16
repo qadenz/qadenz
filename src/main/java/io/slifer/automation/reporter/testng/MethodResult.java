@@ -4,6 +4,12 @@ import org.testng.ITestResult;
 
 import java.util.List;
 
+/**
+ * Copied from {@link org.testng.reporters.EmailableReporter2} due to being protected and static within the TestNG
+ * project.
+ *
+ * @author TestNG
+ */
 public class MethodResult {
     
     private final List<ITestResult> results;
