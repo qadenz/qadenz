@@ -10,6 +10,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Copied from {@link org.testng.reporters.EmailableReporter2} due to being protected and static within the TestNG
+ * project. Edited to introduce the concept of "Stopped" tests as a new category of results.
+ *
+ * @author TestNG & Tim Slifer
+ */
 public class TestResult {
     
     protected static final Comparator<ITestResult> RESULT_COMPARATOR =

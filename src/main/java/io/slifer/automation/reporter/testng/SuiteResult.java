@@ -7,6 +7,12 @@ import org.testng.xml.XmlSuite.ParallelMode;
 
 import java.util.List;
 
+/**
+ * Copied from {@link org.testng.reporters.EmailableReporter2} due to being protected and static within the TestNG
+ * project.
+ *
+ * @author TestNG
+ */
 public class SuiteResult {
     
     private final String suiteName;
