@@ -30,7 +30,9 @@ public class AutomatedTest {
     @BeforeSuite (alwaysRun = true)
     public void captureStartDateTime(ITestContext testContext) {
         RunContext.suiteStartDate = LocalDateTime.now();
-        System.setProperty("path.ReportOutput", testContext.getOutputDirectory());
+        String outputPath = testContext.getOutputDirectory();
+        outputPath = outputPath.substring(0, outputPath.lastIndexOf("/")) + "/";
+        System.setProperty("path.ReportOutput", outputPath);
     }
     
     /**
