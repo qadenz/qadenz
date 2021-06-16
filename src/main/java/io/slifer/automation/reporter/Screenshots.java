@@ -15,8 +15,7 @@ import java.util.Base64;
 import java.util.HashMap;
 
 /**
- * Captures screenshots with WebDriver, then tracks and links each screenshot to the associated test by means of
- * generated UUID by the Logback MDC.
+ * Captures screenshots with WebDriver, then stores the images along with a given identifier for later retrieval.
  *
  * @author Tim Slifer
  */

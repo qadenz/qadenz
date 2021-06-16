@@ -28,6 +28,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Combines logging output from Logback, with data elements from this library, along with results data extracted from
+ * TestNG to build a JSON data object representing the complete result data of the Test Suite. The intent is to allow
+ * flexible usage of the results data via the in-built {@link HtmlReporter}, as well as via export to external
+ * presentation systems.
+ *
+ * @author Tim Slifer
+ */
 public class JsonReporter {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
