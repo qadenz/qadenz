@@ -86,7 +86,7 @@ public abstract class Commands {
     
     protected void captureScreenshot() {
         // String uuid = UUID.randomUUID().toString();
-        Screenshots.getInstance().captureScreen();
+        Screenshots.captureScreen();
         // Reporter.log(uuid);
     }
 }
