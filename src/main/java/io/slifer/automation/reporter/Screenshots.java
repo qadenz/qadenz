@@ -39,7 +39,7 @@ public class Screenshots extends HashMap<String, String> {
         return instance;
     }
     
-    public void captureScreenshot() {
+    public void captureScreen() {
         String uuid = UUID.randomUUID().toString();
         
         File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
