@@ -26,7 +26,7 @@ public class Screenshots {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
-    private Map<String, String> images = new HashMap<>();
+    private static Map<String, String> images = new HashMap<>();
     // private static Screenshots instance;
     //
     // private Screenshots() {
@@ -41,7 +41,7 @@ public class Screenshots {
     //     return instance;
     // }
     
-    public void captureScreen() {
+    public static synchronized void captureScreen() {
         String uuid = UUID.randomUUID().toString();
         
         File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
@@ -52,7 +52,7 @@ public class Screenshots {
         images.put(uuid, screenshot);
     }
     
-    private BufferedImage resize(File rawCapture) {
+    private static BufferedImage resize(File rawCapture) {
         LOG.debug("Resizing screen capture.");
         try {
             BufferedImage original = ImageIO.read(rawCapture);
@@ -71,7 +71,7 @@ public class Screenshots {
         }
     }
     
-    private String convertToBase64(BufferedImage resizedCapture) {
+    private static String convertToBase64(BufferedImage resizedCapture) {
         LOG.debug("Converting to Base64.");
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -87,7 +87,7 @@ public class Screenshots {
         }
     }
     
-    public Map<String, String> getImages() {
+    public static Map<String, String> getImages() {
         return images;
     }
 }
