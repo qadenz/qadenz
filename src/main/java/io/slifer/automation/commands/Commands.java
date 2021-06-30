@@ -5,11 +5,9 @@ import io.slifer.automation.reporter.Screenshots;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.Reporter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Common commands for all test types.
@@ -87,8 +85,8 @@ public abstract class Commands {
     }
     
     protected void captureScreenshot() {
-        String uuid = UUID.randomUUID().toString();
-        Screenshots.getInstance().captureScreenshot(uuid);
-        Reporter.log(uuid);
+        // String uuid = UUID.randomUUID().toString();
+        Screenshots.getInstance().captureScreenshot();
+        // Reporter.log(uuid);
     }
 }
