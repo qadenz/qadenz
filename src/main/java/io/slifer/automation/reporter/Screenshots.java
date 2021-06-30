@@ -6,6 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Reporter;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -13,6 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Captures screenshots with WebDriver, then stores the images along with a given identifier for later retrieval.
@@ -37,12 +39,15 @@ public class Screenshots extends HashMap<String, String> {
         return instance;
     }
     
-    public void captureScreenshot(String id) {
+    public void captureScreenshot() {
+        String uuid = UUID.randomUUID().toString();
+        
         File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
         BufferedImage resizedCapture = resize(rawCapture);
         String screenshot = convertToBase64(resizedCapture);
         
-        this.put(id, screenshot);
+        Reporter.log(uuid);
+        this.put(uuid, screenshot);
     }
     
     private BufferedImage resize(File rawCapture) {
