@@ -14,6 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -21,23 +22,24 @@ import java.util.UUID;
  *
  * @author Tim Slifer
  */
-public class Screenshots extends HashMap<String, String> {
+public class Screenshots {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
-    private static Screenshots instance;
-    
-    private Screenshots() {
-        // Singleton
-    }
-    
-    public static Screenshots getInstance() {
-        if (instance == null) {
-            instance = new Screenshots();
-        }
-        
-        return instance;
-    }
+    private Map<String, String> images = new HashMap<>();
+    // private static Screenshots instance;
+    //
+    // private Screenshots() {
+    //     // Singleton
+    // }
+    //
+    // public static Screenshots getInstance() {
+    //     if (instance == null) {
+    //         instance = new Screenshots();
+    //     }
+    //    
+    //     return instance;
+    // }
     
     public void captureScreen() {
         String uuid = UUID.randomUUID().toString();
@@ -47,7 +49,7 @@ public class Screenshots extends HashMap<String, String> {
         String screenshot = convertToBase64(resizedCapture);
         
         Reporter.log(uuid);
-        this.put(uuid, screenshot);
+        images.put(uuid, screenshot);
     }
     
     private BufferedImage resize(File rawCapture) {
@@ -83,5 +85,9 @@ public class Screenshots extends HashMap<String, String> {
             
             throw new RuntimeException(e);
         }
+    }
+    
+    public Map<String, String> getImages() {
+        return images;
     }
 }
