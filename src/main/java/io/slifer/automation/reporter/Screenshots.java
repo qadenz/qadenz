@@ -46,7 +46,8 @@ public class Screenshots {
             int originalWidth = original.getWidth();
             LOG.debug("Detected original capture width [{}].", originalWidth);
             
-            BufferedImage resized = Scalr.resize(original, 1145);
+            int targetWidth = Math.max(originalWidth, 1800);
+            BufferedImage resized = Scalr.resize(original, targetWidth);
             LOG.debug("Resized to width [{}].", resized.getWidth());
             
             return resized;
