@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Captures screenshots with WebDriver, then stores the images along with a given identifier for later retrieval.
+ * Captures screenshots with WebDriver, then stores the images along with an identifier for later retrieval.
  *
  * @author Tim Slifer
  */
@@ -27,19 +27,6 @@ public class Screenshots {
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     private static Map<String, String> images = new HashMap<>();
-    // private static Screenshots instance;
-    //
-    // private Screenshots() {
-    //     // Singleton
-    // }
-    //
-    // public static Screenshots getInstance() {
-    //     if (instance == null) {
-    //         instance = new Screenshots();
-    //     }
-    //    
-    //     return instance;
-    // }
     
     public static synchronized void captureScreen() {
         String uuid = UUID.randomUUID().toString();
