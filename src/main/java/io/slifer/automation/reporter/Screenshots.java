@@ -1,7 +1,6 @@
 package io.slifer.automation.reporter;
 
 import io.slifer.automation.config.RunContext;
-import org.imgscalr.Scalr;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
@@ -31,32 +30,20 @@ public class Screenshots {
     public static synchronized void captureScreen() {
         String uuid = UUID.randomUUID().toString();
         
-        File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
-        BufferedImage resizedCapture = resize(rawCapture);
-        String screenshot = convertToBase64(resizedCapture);
-        
-        Reporter.log(uuid);
-        images.put(uuid, screenshot);
-    }
-    
-    private static BufferedImage resize(File rawCapture) {
-        LOG.debug("Resizing screen capture.");
+        String screenshot;
         try {
-            BufferedImage original = ImageIO.read(rawCapture);
-            int originalWidth = original.getWidth();
-            LOG.debug("Detected original capture width [{}].", originalWidth);
-            
-            int targetWidth = Math.max(originalWidth, 1800);
-            BufferedImage resized = Scalr.resize(original, targetWidth);
-            LOG.debug("Resized to width [{}].", resized.getWidth());
-            
-            return resized;
+            File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
+            BufferedImage convertedCapture = ImageIO.read(rawCapture);
+            screenshot = convertToBase64(convertedCapture);
         }
         catch (Exception e) {
-            LOG.error("Error resizing image.", e);
+            LOG.error("Error capturing image.", e);
             
             throw new RuntimeException(e);
         }
+        
+        Reporter.log(uuid);
+        images.put(uuid, screenshot);
     }
     
     private static String convertToBase64(BufferedImage resizedCapture) {
