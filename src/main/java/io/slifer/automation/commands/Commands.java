@@ -47,12 +47,12 @@ public abstract class Commands {
                 LOG.info("Result - FAIL :: {}", condition.output());
                 exceptions.add(error);
                 failed = true;
-                captureScreenshot();
+                Screenshots.captureScreen();
             }
             catch (Exception exception) {
                 exceptions.add(exception);
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-                captureScreenshot();
+                Screenshots.captureScreen();
             }
         }
         
@@ -82,11 +82,5 @@ public abstract class Commands {
             throw new RuntimeException("Thread.sleep failed.");
             // Not ideal, but prevents us from having to add a throws declaration to our upstream methods.
         }
-    }
-    
-    protected void captureScreenshot() {
-        // String uuid = UUID.randomUUID().toString();
-        Screenshots.captureScreen();
-        // Reporter.log(uuid);
     }
 }
