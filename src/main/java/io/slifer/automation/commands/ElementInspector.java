@@ -1,5 +1,7 @@
-package io.slifer.automation.ui;
+package io.slifer.automation.commands;
 
+import io.slifer.automation.ui.ElementFinder;
+import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
