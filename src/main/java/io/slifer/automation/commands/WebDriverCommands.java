@@ -4,7 +4,6 @@ import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.reporter.Screenshots;
 import io.slifer.automation.ui.ElementFinder;
-import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
