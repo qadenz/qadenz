@@ -25,7 +25,39 @@ public abstract class Commands {
     
     /**
      * Evaluates each of the given conditions as a group. If one or more Conditions results in a failure, execution will
-     * be aborted after the final Condition is evaluated.
+     * not be aborted after the final Condition is evaluated. A call to {@link Assertions} will flush the failures and
+     * abort the test at a user designated point in the test. If a call to Verify exists after a call to Check and
+     * before a flush, the test will still be aborted if the verify produces a failure. Execution will be stopped
+     * immediately if an error is encountered.
+     *
+     * @param conditions The Conditions to be evaluated.
+     */
+    public void check(Condition... conditions) {
+        for (Condition condition : conditions) {
+            LOG.info("Checking Condition - {}", condition.description());
+            try {
+                boolean result = condition.result();
+                Assert.assertTrue(result);
+                LOG.info("Result - PASS");
+            }
+            catch (AssertionError error) {
+                LOG.info("Result - FAIL :: {}", condition.output());
+                Assertions.setFailures(true);
+                Screenshots.captureScreen();
+            }
+            catch (Exception exception) {
+                LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+                Screenshots.captureScreen();
+                
+                throw new RuntimeException("Error while verifying condition.");
+            }
+        }
+    }
+    
+    /**
+     * Evaluates each of the given conditions as a group. If one or more Conditions results in a failure, execution will
+     * be aborted after the final Condition is evaluated. Execution will be stopped immediately if an error is
+     * encountered.
      *
      * @param conditions The Conditions to be evaluated.
      */
