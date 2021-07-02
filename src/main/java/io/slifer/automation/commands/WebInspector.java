@@ -19,12 +19,16 @@ import java.util.List;
  */
 public class WebInspector {
     
-    private static final Logger LOG = LoggerFactory.getLogger(WebInspector.class);
+    private Logger LOG;
     
-    private ElementFinder elementFinder;
+    private ElementFinder elementFinder = new ElementFinder();
     
     public WebInspector() {
-        this.elementFinder = new ElementFinder();
+        LOG = LoggerFactory.getLogger(WebInspector.class);
+    }
+    
+    public WebInspector(Class<?> proxyLogger) {
+        LOG = LoggerFactory.getLogger(proxyLogger);
     }
     
     /**
