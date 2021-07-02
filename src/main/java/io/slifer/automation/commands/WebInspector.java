@@ -17,13 +17,13 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public class ElementInspector {
+public class WebInspector {
     
-    private static final Logger LOG = LoggerFactory.getLogger(ElementInspector.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WebInspector.class);
     
     private ElementFinder elementFinder;
     
-    public ElementInspector() {
+    public WebInspector() {
         this.elementFinder = new ElementFinder();
     }
     
