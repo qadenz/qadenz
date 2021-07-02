@@ -34,7 +34,7 @@ public abstract class WebDriverCommands extends Commands {
     private Logger LOG;
     
     private ElementFinder elementFinder = new ElementFinder();
-    private ElementInspector elementInspector = new ElementInspector();
+    private WebInspector webInspector = new WebInspector();
     
     public WebDriverCommands() {
         super();
@@ -363,7 +363,7 @@ public abstract class WebDriverCommands extends Commands {
     public String getTextOfElement(Locator locator) {
         LOG.info("Retrieving text of element [{}].", locator.getName());
         try {
-            return elementInspector.getTextOfElement(locator);
+            return webInspector.getTextOfElement(locator);
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -383,7 +383,7 @@ public abstract class WebDriverCommands extends Commands {
     public List<String> getTextOfElements(Locator locator) {
         LOG.info("Retrieving text of each instance of element [{}].", locator.getName());
         try {
-            return elementInspector.getTextOfElements(locator);
+            return webInspector.getTextOfElements(locator);
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -406,7 +406,7 @@ public abstract class WebDriverCommands extends Commands {
         
         List<String> elementValues;
         try {
-            elementValues = elementInspector.getTextOfElements(locator);
+            elementValues = webInspector.getTextOfElements(locator);
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -444,7 +444,7 @@ public abstract class WebDriverCommands extends Commands {
         
         List<String> attributeValues;
         try {
-            attributeValues = elementInspector.getAttributeOfElements(locator, attribute);
+            attributeValues = webInspector.getAttributeOfElements(locator, attribute);
         }
         catch (Exception exception) {
             LOG.error("Error retrieving attributes :: {}: {}", exception.getClass().getSimpleName(),
