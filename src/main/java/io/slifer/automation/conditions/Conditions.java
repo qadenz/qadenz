@@ -1,8 +1,8 @@
 package io.slifer.automation.conditions;
 
+import io.slifer.automation.commands.ElementInspector;
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.ui.ElementFinder;
-import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.LocatorGroup;
 import org.openqa.selenium.NoAlertPresentException;
