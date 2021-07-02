@@ -6,9 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Common commands for all test types.
  *
@@ -28,16 +25,16 @@ public abstract class Commands {
     
     /**
      * Evaluates each of the given conditions as a group. If one or more Conditions results in a failure, execution will
-     * be aborted after the final Condition is evaluated.
+     * not be aborted after the final Condition is evaluated. A call to {@link Assertions} will flush the failures and
+     * abort the test at a user designated point in the test. If a call to Verify exists after a call to Check and
+     * before a flush, the test will still be aborted if the verify produces a failure. Execution will be stopped
+     * immediately if an error is encountered.
      *
      * @param conditions The Conditions to be evaluated.
      */
-    public void verify(Condition... conditions) {
-        List<Throwable> exceptions = new ArrayList<>();
-        boolean failed = false;
-        
+    public void check(Condition... conditions) {
         for (Condition condition : conditions) {
-            LOG.info("Asserting Condition - {}", condition.description());
+            LOG.info("Checking Condition - {}", condition.description());
             try {
                 boolean result = condition.result();
                 Assert.assertTrue(result);
@@ -45,24 +42,50 @@ public abstract class Commands {
             }
             catch (AssertionError error) {
                 LOG.info("Result - FAIL :: {}", condition.output());
-                exceptions.add(error);
+                Assertions.setFailures(true);
+                Screenshots.captureScreen();
+            }
+            catch (Exception exception) {
+                LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+                Screenshots.captureScreen();
+                
+                throw new RuntimeException("Error while verifying condition.");
+            }
+        }
+    }
+    
+    /**
+     * Evaluates each of the given conditions as a group. If one or more Conditions results in a failure, execution will
+     * be aborted after the final Condition is evaluated. Execution will be stopped immediately if an error is
+     * encountered.
+     *
+     * @param conditions The Conditions to be evaluated.
+     */
+    public void verify(Condition... conditions) {
+        boolean failed = false;
+        
+        for (Condition condition : conditions) {
+            LOG.info("Verifying Condition - {}", condition.description());
+            try {
+                boolean result = condition.result();
+                Assert.assertTrue(result);
+                LOG.info("Result - PASS");
+            }
+            catch (AssertionError error) {
+                LOG.info("Result - FAIL :: {}", condition.output());
                 failed = true;
                 Screenshots.captureScreen();
             }
             catch (Exception exception) {
-                exceptions.add(exception);
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
                 Screenshots.captureScreen();
+                
+                throw new RuntimeException("Error while verifying condition.");
             }
         }
         
-        if (exceptions.size() > 0) {
-            if (failed) {
-                throw new AssertionError("One or more validations failed.");
-            }
-            else {
-                throw new RuntimeException("One or more validations encountered an error.");
-            }
+        if (failed) {
+            throw new AssertionError("One or more validations failed.");
         }
     }
     
