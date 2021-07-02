@@ -6,9 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Common commands for all test types.
  *
@@ -33,11 +30,10 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void verify(Condition... conditions) {
-        List<Throwable> exceptions = new ArrayList<>();
         boolean failed = false;
         
         for (Condition condition : conditions) {
-            LOG.info("Asserting Condition - {}", condition.description());
+            LOG.info("Verifying Condition - {}", condition.description());
             try {
                 boolean result = condition.result();
                 Assert.assertTrue(result);
@@ -45,24 +41,19 @@ public abstract class Commands {
             }
             catch (AssertionError error) {
                 LOG.info("Result - FAIL :: {}", condition.output());
-                exceptions.add(error);
                 failed = true;
                 Screenshots.captureScreen();
             }
             catch (Exception exception) {
-                exceptions.add(exception);
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
                 Screenshots.captureScreen();
+                
+                throw new RuntimeException("Error while verifying condition.");
             }
         }
         
-        if (exceptions.size() > 0) {
-            if (failed) {
-                throw new AssertionError("One or more validations failed.");
-            }
-            else {
-                throw new RuntimeException("One or more validations encountered an error.");
-            }
+        if (failed) {
+            throw new AssertionError("One or more validations failed.");
         }
     }
     
