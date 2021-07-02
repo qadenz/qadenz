@@ -1,5 +1,6 @@
 package io.slifer.automation.commands;
 
+import io.slifer.automation.reporter.Screenshots;
 import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.Dimension;
@@ -40,9 +41,19 @@ public class WebInspector {
      * @return The attribute value.
      */
     public String getAttributeOfElement(Locator locator, String attributeName) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        
-        return webElement.getAttribute(attributeName);
+        LOG.info("Retrieving attribute [{}] of element [{}].", attributeName, locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            
+            return webElement.getAttribute(attributeName);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving attribute :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -54,14 +65,23 @@ public class WebInspector {
      * @return The list of values.
      */
     public List<String> getAttributeOfElements(Locator locator, String attributeName) {
-        List<WebElement> webElements = elementFinder.findAll(locator);
-        List<String> attributeValues = new ArrayList<>();
-        
-        for (WebElement webElement : webElements) {
-            attributeValues.add(webElement.getAttribute(attributeName));
+        LOG.info("Retrieving attribute [{}] of elements [{}].", attributeName, locator.getName());
+        try {
+            List<WebElement> webElements = elementFinder.findAll(locator);
+            List<String> attributeValues = new ArrayList<>();
+            for (WebElement webElement : webElements) {
+                attributeValues.add(webElement.getAttribute(attributeName));
+            }
+            
+            return attributeValues;
         }
-        
-        return attributeValues;
+        catch (Exception exception) {
+            LOG.error("Error retrieving attribute :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -72,9 +92,18 @@ public class WebInspector {
      * @return The instance count.
      */
     public int getCountOfElement(Locator locator) {
-        List<WebElement> webElements = elementFinder.findAll(locator);
-        
-        return webElements.size();
+        LOG.info("Retrieving count of element [{}].", locator.getName());
+        try {
+            List<WebElement> webElements = elementFinder.findAll(locator);
+            
+            return webElements.size();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving count :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -85,9 +114,19 @@ public class WebInspector {
      * @return The CSS property value.
      */
     public String getCssPropertyOfElement(Locator locator, String cssProperty) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        
-        return webElement.getCssValue(cssProperty);
+        LOG.info("Retrieving CSS property [{}] of element [{}].", cssProperty, locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            
+            return webElement.getCssValue(cssProperty);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving CSS property :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -99,9 +138,18 @@ public class WebInspector {
      * @return True if the element is enabled, false otherwise.
      */
     public boolean getEnabledStateOfElement(Locator locator) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        
-        return webElement.isEnabled();
+        LOG.info("Retrieving the enabled state of element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            
+            return webElement.isEnabled();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -112,10 +160,20 @@ public class WebInspector {
      * @return The text of the selected option.
      */
     public String getSelectedMenuOption(Locator locator) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        Select select = new Select(webElement);
-        
-        return select.getFirstSelectedOption().getText();
+        LOG.info("Retrieving the currently selected option of element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            
+            return select.getFirstSelectedOption().getText();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving option :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -127,9 +185,18 @@ public class WebInspector {
      * @return True if the element is selected, false otherwise.
      */
     public boolean getSelectedStateOfElement(Locator locator) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        
-        return webElement.isSelected();
+        LOG.info("Retrieving the selected state of element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            
+            return webElement.isSelected();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -140,9 +207,18 @@ public class WebInspector {
      * @return The text value.
      */
     public String getTextOfElement(Locator locator) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        
-        return webElement.getText();
+        LOG.info("Retrieving text of element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            
+            return webElement.getText();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -153,9 +229,18 @@ public class WebInspector {
      * @return The list of values.
      */
     public List<String> getTextOfElements(Locator locator) {
-        List<WebElement> webElements = elementFinder.findAllWhenVisible(locator);
-        
-        return getTextValuesFromElements(webElements);
+        LOG.info("Retrieving text from elements [{}].", locator.getName());
+        try {
+            List<WebElement> webElements = elementFinder.findAllWhenVisible(locator);
+            
+            return getTextValuesFromElements(webElements);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -166,11 +251,21 @@ public class WebInspector {
      * @return The list of values.
      */
     public List<String> getTextOfOptions(Locator locator) {
-        WebElement webElement = elementFinder.findWhenVisible(locator);
-        Select select = new Select(webElement);
-        List<WebElement> options = select.getOptions();
-        
-        return getTextValuesFromElements(options);
+        LOG.info("Retrieving the options of element [{}].", locator.getName());
+        try {
+            WebElement webElement = elementFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            List<WebElement> options = select.getOptions();
+            
+            return getTextValuesFromElements(options);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving options :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
     }
     
     /**
@@ -182,38 +277,47 @@ public class WebInspector {
      * @return True if the element is found to be visible, false otherwise.
      */
     public boolean getVisibilityOfElement(Locator locator) {
-        List<WebElement> webElements = elementFinder.findAll(locator);
-        boolean visible = (webElements.size() > 0);
-        LOG.debug("Found [{}] instances. Visibility is [{}].", webElements.size(), visible);
-        
+        LOG.info("Retrieving visible state of element [{}].", locator.getName());
         try {
-            if (visible) {
-                Dimension dimension = webElements.get(0).getSize();
-                visible = (dimension.getHeight() > 0 && dimension.getWidth() > 0);
-                LOG.debug("Checked dimensions - Visibility is [{}].", visible);
+            List<WebElement> webElements = elementFinder.findAll(locator);
+            boolean visible = (webElements.size() > 0);
+            LOG.debug("Found [{}] instances - Visibility is [{}].", webElements.size(), visible);
+            
+            try {
+                if (visible) {
+                    Dimension dimension = webElements.get(0).getSize();
+                    visible = (dimension.getHeight() > 0 && dimension.getWidth() > 0);
+                    LOG.debug("Checked dimensions - Visibility is [{}].", visible);
+                }
+                
+                if (visible) {
+                    visible = (!webElements.get(0).getAttribute("style").contains("display: none;"));
+                    LOG.debug("Checked style for 'display: none;' - Visibility is [{}].", visible);
+                }
+                
+                if (visible) {
+                    visible = (!webElements.get(0).getAttribute("style").contains("visibility: hidden;"));
+                    LOG.debug("Checked style for 'visibility: hidden;' - Visibility is [{}].", visible);
+                }
+                
+                if (visible) {
+                    visible = (!webElements.get(0).getAttribute("class").contains("ng-hide"));
+                    LOG.debug("Checked class 'ng-hide' - Visibility is [{}].", visible);
+                }
+            }
+            catch (StaleElementReferenceException e) {
+                visible = false;
+                LOG.debug("Element has gone stale - Visibility is [{}].", visible);
             }
             
-            if (visible) {
-                visible = (!webElements.get(0).getAttribute("style").contains("display: none;"));
-                LOG.debug("Checked style for 'display: none;' - Visibility is [{}].", visible);
-            }
-            
-            if (visible) {
-                visible = (!webElements.get(0).getAttribute("style").contains("visibility: hidden;"));
-                LOG.debug("Checked style for 'visibility: hidden;' - Visibility is [{}].", visible);
-            }
-            
-            if (visible) {
-                visible = (!webElements.get(0).getAttribute("class").contains("ng-hide"));
-                LOG.debug("Checked class 'ng-hide' - Visibility is [{}].", visible);
-            }
+            return visible;
         }
-        catch (StaleElementReferenceException e) {
-            visible = false;
-            LOG.debug("Element has gone stale - Visibility is [{}].", visible);
+        catch (Exception exception) {
+            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
         }
-        
-        return visible;
     }
     
     private List<String> getTextValuesFromElements(List<WebElement> webElements) {
