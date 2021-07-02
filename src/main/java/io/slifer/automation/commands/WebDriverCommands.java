@@ -354,46 +354,6 @@ public abstract class WebDriverCommands extends Commands {
     }
     
     /**
-     * Retrieves the visible inner text of an element and any descendants on the DOM.
-     *
-     * @param locator The mapped UI element.
-     *
-     * @return The text value.
-     */
-    public String getTextOfElement(Locator locator) {
-        LOG.info("Retrieving text of element [{}].", locator.getName());
-        try {
-            return webInspector.getTextOfElement(locator);
-        }
-        catch (Exception exception) {
-            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
-            
-            throw exception;
-        }
-    }
-    
-    /**
-     * Retrieves the visible inner text of each instance of an element, and any descendants, on the DOM.
-     *
-     * @param locator The mapped UI element.
-     *
-     * @return The text value.
-     */
-    public List<String> getTextOfElements(Locator locator) {
-        LOG.info("Retrieving text of each instance of element [{}].", locator.getName());
-        try {
-            return webInspector.getTextOfElements(locator);
-        }
-        catch (Exception exception) {
-            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
-            
-            throw exception;
-        }
-    }
-    
-    /**
      * Retrieves the instance of an element that contains the expected value.
      *
      * @param locator The mapped UI element.
