@@ -13,24 +13,14 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public class BrowserCommands extends WebDriverCommands {
+public class Browser {
     
-    private Logger LOG;
-    
-    public BrowserCommands() {
-        super();
-        LOG = LoggerFactory.getLogger(BrowserCommands.class);
-    }
-    
-    public BrowserCommands(Class<?> proxyLogger) {
-        super(proxyLogger);
-        LOG = LoggerFactory.getLogger(proxyLogger);
-    }
+    private static final Logger LOG = LoggerFactory.getLogger(Browser.class);
     
     /**
      * Accepts a JavaScript Alert.
      */
-    public void acceptAlert() {
+    public static void acceptAlert() {
         LOG.info("Accepting alert.");
         try {
             RunContext.getWebDriver().switchTo().alert().accept();
@@ -46,7 +36,7 @@ public class BrowserCommands extends WebDriverCommands {
     /**
      * Dismisses a JavaScript Alert.
      */
-    public void dismissAlert() {
+    public static void dismissAlert() {
         LOG.info("Dismissing alert.");
         try {
             RunContext.getWebDriver().switchTo().alert().dismiss();
@@ -64,7 +54,7 @@ public class BrowserCommands extends WebDriverCommands {
      *
      * @param input The text input.
      */
-    public void enterTextOnAlert(String input) {
+    public static void enterTextOnAlert(String input) {
         LOG.info("Entering text [{}] into Alert.", input);
         try {
             RunContext.getWebDriver().switchTo().alert().sendKeys(input);
@@ -80,7 +70,7 @@ public class BrowserCommands extends WebDriverCommands {
     /**
      * Closes the current browser window.
      */
-    public void closeBrowser() {
+    public static void closeBrowser() {
         LOG.info("Closing browser.");
         try {
             RunContext.getWebDriver().close();
@@ -96,7 +86,7 @@ public class BrowserCommands extends WebDriverCommands {
     /**
      * Navigates back to the previous page.
      */
-    public void goBack() {
+    public static void goBack() {
         LOG.info("Navigating back.");
         try {
             RunContext.getWebDriver().navigate().back();
@@ -112,7 +102,7 @@ public class BrowserCommands extends WebDriverCommands {
     /**
      * Navigates forward to the next page, if one exists.
      */
-    public void goForward() {
+    public static void goForward() {
         LOG.info("Navigating forward.");
         try {
             RunContext.getWebDriver().navigate().forward();
@@ -128,7 +118,7 @@ public class BrowserCommands extends WebDriverCommands {
     /**
      * Refreshes the current page.
      */
-    public void refreshPage() {
+    public static void refreshPage() {
         LOG.info("Refreshing page.");
         try {
             RunContext.getWebDriver().navigate().refresh();
@@ -144,7 +134,7 @@ public class BrowserCommands extends WebDriverCommands {
     /**
      * Deletes all current cookies.
      */
-    public void deleteCookies() {
+    public static void deleteCookies() {
         LOG.info("Deleting all cookies.");
         try {
             RunContext.getWebDriver().manage().deleteAllCookies();
@@ -162,7 +152,7 @@ public class BrowserCommands extends WebDriverCommands {
      *
      * @param url The URL to be opened.
      */
-    public void openUrl(String url) {
+    public static void openUrl(String url) {
         LOG.info("Opening URL [{}].", url);
         try {
             RunContext.getWebDriver().get(url);
@@ -178,7 +168,7 @@ public class BrowserCommands extends WebDriverCommands {
     /**
      * Moves focus to the new browser window, relative to the current window.
      */
-    public void focusOnNextWindow() {
+    public static void focusOnNextWindow() {
         LOG.info("Switch focus to next window.");
         try {
             switchWindowFocus(Window.NEXT);
@@ -194,7 +184,7 @@ public class BrowserCommands extends WebDriverCommands {
     /**
      * Moves focus to the previous browser window, relative to the current window.
      */
-    public void focusOnPreviousWindow() {
+    public static void focusOnPreviousWindow() {
         LOG.info("Switch focus to previous window.");
         try {
             switchWindowFocus(Window.PREVIOUS);
@@ -207,7 +197,7 @@ public class BrowserCommands extends WebDriverCommands {
         }
     }
     
-    private void switchWindowFocus(Window window) {
+    private static void switchWindowFocus(Window window) {
         int currentWindowIndex;
         List<String> windowHandles = new ArrayList<>(RunContext.getWebDriver().getWindowHandles());
         try {
