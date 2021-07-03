@@ -4,7 +4,6 @@ import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.reporter.Screenshots;
 import io.slifer.automation.ui.ElementFinder;
-import io.slifer.automation.ui.ElementInspector;
 import io.slifer.automation.ui.Locator;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
@@ -35,7 +34,7 @@ public abstract class WebDriverCommands extends Commands {
     private Logger LOG;
     
     private ElementFinder elementFinder = new ElementFinder();
-    private ElementInspector elementInspector = new ElementInspector();
+    private WebInspector webInspector = new WebInspector();
     
     public WebDriverCommands() {
         super();
@@ -352,120 +351,5 @@ public abstract class WebDriverCommands extends Commands {
             
             throw exception;
         }
-    }
-    
-    /**
-     * Retrieves the visible inner text of an element and any descendants on the DOM.
-     *
-     * @param locator The mapped UI element.
-     *
-     * @return The text value.
-     */
-    public String getTextOfElement(Locator locator) {
-        LOG.info("Retrieving text of element [{}].", locator.getName());
-        try {
-            return elementInspector.getTextOfElement(locator);
-        }
-        catch (Exception exception) {
-            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
-            
-            throw exception;
-        }
-    }
-    
-    /**
-     * Retrieves the visible inner text of each instance of an element, and any descendants, on the DOM.
-     *
-     * @param locator The mapped UI element.
-     *
-     * @return The text value.
-     */
-    public List<String> getTextOfElements(Locator locator) {
-        LOG.info("Retrieving text of each instance of element [{}].", locator.getName());
-        try {
-            return elementInspector.getTextOfElements(locator);
-        }
-        catch (Exception exception) {
-            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
-            
-            throw exception;
-        }
-    }
-    
-    /**
-     * Retrieves the instance of an element that contains the expected value.
-     *
-     * @param locator The mapped UI element.
-     * @param expectedText The value to be identified.
-     *
-     * @return The element instance.
-     */
-    public int getInstanceOfElementText(Locator locator, String expectedText) {
-        LOG.info("Finding instance of element [{}] with value [{}].", locator.getName(), expectedText);
-        
-        List<String> elementValues;
-        try {
-            elementValues = elementInspector.getTextOfElements(locator);
-        }
-        catch (Exception exception) {
-            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
-            
-            throw exception;
-        }
-        
-        for (int i = 0; i < elementValues.size(); i++) {
-            if (elementValues.get(i).equals(expectedText)) {
-                LOG.debug("Found value at index [{}].", i);
-                
-                return i;
-            }
-        }
-        
-        LOG.error("Could not find instance with expected value.");
-        Screenshots.captureScreen();
-        
-        throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
-    }
-    
-    /**
-     * Retrieves the instance of an element with an attribute that contains the expected value.
-     *
-     * @param locator The mapped UI element.
-     * @param attribute The attribute to be examined.
-     * @param expectedValue The value to be identified.
-     *
-     * @return The element instance.
-     */
-    public int getInstanceOfElementAttribute(Locator locator, String attribute, String expectedValue) {
-        LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].",
-                locator.getName(), attribute, expectedValue);
-        
-        List<String> attributeValues;
-        try {
-            attributeValues = elementInspector.getAttributeOfElements(locator, attribute);
-        }
-        catch (Exception exception) {
-            LOG.error("Error retrieving attributes :: {}: {}", exception.getClass().getSimpleName(),
-                    exception.getMessage());
-            Screenshots.captureScreen();
-            
-            throw exception;
-        }
-        
-        for (int i = 0; i < attributeValues.size(); i++) {
-            if (attributeValues.get(i).equals(expectedValue)) {
-                LOG.debug("Found value at index [{}].", i);
-                
-                return i;
-            }
-        }
-        
-        LOG.error("Could not find instance with expected value.");
-        Screenshots.captureScreen();
-        
-        throw new IllegalArgumentException("Attribute value [" + expectedValue + "] was not found.");
     }
 }
