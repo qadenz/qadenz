@@ -68,12 +68,8 @@ public class WebInspector {
         LOG.info("Retrieving attribute [{}] of elements [{}].", attributeName, locator.getName());
         try {
             List<WebElement> webElements = elementFinder.findAll(locator);
-            List<String> attributeValues = new ArrayList<>();
-            for (WebElement webElement : webElements) {
-                attributeValues.add(webElement.getAttribute(attributeName));
-            }
             
-            return attributeValues;
+            return getAttributeValuesFromElements(webElements, attributeName);
         }
         catch (Exception exception) {
             LOG.error("Error retrieving attribute :: {}: {}", exception.getClass().getSimpleName(),
@@ -150,6 +146,86 @@ public class WebInspector {
             
             throw exception;
         }
+    }
+    
+    /**
+     * Retrieves the instance of an element with an attribute that contains the expected value.
+     *
+     * @param locator The mapped UI element.
+     * @param attributeName The attribute to be examined.
+     * @param expectedValue The value to be identified.
+     *
+     * @return The element instance.
+     */
+    public int getInstanceOfElementAttribute(Locator locator, String attributeName, String expectedValue) {
+        LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].",
+                locator.getName(), attributeName, expectedValue);
+        
+        List<String> attributeValues;
+        try {
+            List<WebElement> webElements = elementFinder.findAllWhenVisible(locator);
+            
+            attributeValues = getAttributeValuesFromElements(webElements, attributeName);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving instance :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
+        
+        for (int i = 0; i < attributeValues.size(); i++) {
+            if (attributeValues.get(i).equals(expectedValue)) {
+                LOG.debug("Found value at index [{}].", i);
+                
+                return i;
+            }
+        }
+        
+        LOG.error("Could not find instance with expected value.");
+        Screenshots.captureScreen();
+        
+        throw new IllegalArgumentException("Attribute value [" + expectedValue + "] was not found.");
+    }
+    
+    /**
+     * Retrieves the instance of an element that contains the expected value.
+     *
+     * @param locator The mapped UI element.
+     * @param expectedText The value to be identified.
+     *
+     * @return The element instance.
+     */
+    public int getInstanceOfElementText(Locator locator, String expectedText) {
+        LOG.info("Finding instance of element [{}] with value [{}].", locator.getName(), expectedText);
+        
+        List<String> elementValues;
+        try {
+            List<WebElement> webElements = elementFinder.findAllWhenVisible(locator);
+            
+            elementValues = getTextValuesFromElements(webElements);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving instance :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            Screenshots.captureScreen();
+            
+            throw exception;
+        }
+        
+        for (int i = 0; i < elementValues.size(); i++) {
+            if (elementValues.get(i).equals(expectedText)) {
+                LOG.debug("Found value at index [{}].", i);
+                
+                return i;
+            }
+        }
+        
+        LOG.error("Could not find instance with expected value.");
+        Screenshots.captureScreen();
+        
+        throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
     }
     
     /**
@@ -318,6 +394,16 @@ public class WebInspector {
             
             throw exception;
         }
+    }
+    
+    private List<String> getAttributeValuesFromElements(List<WebElement> webElements, String attributeName) {
+        List<String> values = new ArrayList<>();
+        
+        for (WebElement element : webElements) {
+            values.add(element.getAttribute(attributeName));
+        }
+        
+        return values;
     }
     
     private List<String> getTextValuesFromElements(List<WebElement> webElements) {
