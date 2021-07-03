@@ -106,4 +106,26 @@ public abstract class Commands {
             // Not ideal, but prevents us from having to add a throws declaration to our upstream methods.
         }
     }
+    
+    /**
+     * Creates a log event at the WARN level, intended to provide a means to add high level notes to the logging/report
+     * output, such as Labeling procedures, noting sections of tests, or adding information useful to interpreting
+     * results.
+     *
+     * @param message The information to be added to the logs and report.
+     */
+    public void annotate(String message) {
+        LOG.warn(message);
+    }
+    
+    /**
+     * Creates a log event at the INFO level, intended to supplement the in-built logging of individual commands or
+     * inspections. This is useful for capturing system output on the logging output for further analysis or to aid the
+     * investigation of test failures.
+     *
+     * @param message The information to be added to the logs and report.
+     */
+    public void log(String message) {
+        LOG.info(message);
+    }
 }
