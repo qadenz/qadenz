@@ -175,18 +175,7 @@ public class WebInspector {
             throw exception;
         }
         
-        for (int i = 0; i < attributeValues.size(); i++) {
-            if (attributeValues.get(i).equals(expectedValue)) {
-                LOG.debug("Found value at index [{}].", i);
-                
-                return i;
-            }
-        }
-        
-        LOG.error("Could not find instance with expected value.");
-        Screenshots.captureScreen();
-        
-        throw new IllegalArgumentException("Attribute value [" + expectedValue + "] was not found.");
+        return getIndexOfValue(attributeValues, expectedValue);
     }
     
     /**
@@ -214,18 +203,7 @@ public class WebInspector {
             throw exception;
         }
         
-        for (int i = 0; i < elementValues.size(); i++) {
-            if (elementValues.get(i).equals(expectedText)) {
-                LOG.debug("Found value at index [{}].", i);
-                
-                return i;
-            }
-        }
-        
-        LOG.error("Could not find instance with expected value.");
-        Screenshots.captureScreen();
-        
-        throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
+        return getIndexOfValue(elementValues, expectedText);
     }
     
     /**
@@ -414,5 +392,20 @@ public class WebInspector {
         }
         
         return values;
+    }
+    
+    private int getIndexOfValue(List<String> elementValues, String expectedText) {
+        for (int i = 0; i < elementValues.size(); i++) {
+            if (elementValues.get(i).equals(expectedText)) {
+                LOG.debug("Found value at index [{}].", i);
+                
+                return i;
+            }
+        }
+        
+        LOG.error("Could not find instance with expected value.");
+        Screenshots.captureScreen();
+        
+        throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
     }
 }
