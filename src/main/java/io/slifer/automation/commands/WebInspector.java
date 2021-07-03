@@ -276,7 +276,7 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the visible inner text from each instance of an element (any any descendants) on the DOM.
+     * Retrieves the visible inner text from each instance of an element (and any descendants) on the DOM.
      *
      * @param locator The mapped UI element.
      *
