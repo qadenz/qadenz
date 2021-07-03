@@ -29,19 +29,19 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public abstract class WebDriverCommands extends Commands {
+public abstract class WebCommander extends Commands {
     
     private Logger LOG;
     
     private ElementFinder elementFinder = new ElementFinder();
     private WebInspector webInspector = new WebInspector();
     
-    public WebDriverCommands() {
+    public WebCommander() {
         super();
-        LOG = LoggerFactory.getLogger(WebDriverCommands.class);
+        LOG = LoggerFactory.getLogger(WebCommander.class);
     }
     
-    public WebDriverCommands(Class<?> proxyLogger) {
+    public WebCommander(Class<?> proxyLogger) {
         super(proxyLogger);
         LOG = LoggerFactory.getLogger(proxyLogger);
     }
@@ -271,7 +271,7 @@ public abstract class WebDriverCommands extends Commands {
             RemoteWebDriver remoteWebDriver = (RemoteWebDriver) RunContext.getWebDriver();
             remoteWebDriver.setFileDetector(new LocalFileDetector());
             
-            URL url = WebDriverCommands.class.getClassLoader().getResource(fileName);
+            URL url = WebCommander.class.getClassLoader().getResource(fileName);
             File file = Paths.get(url.toURI()).toFile();
             String filePath = file.getAbsolutePath();
             
