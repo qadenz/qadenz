@@ -16,9 +16,9 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public class ElementFinder {
+public class WebFinder {
     
-    private static final Logger LOG = LoggerFactory.getLogger(ElementFinder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WebFinder.class);
     
     /**
      * Initializes the first matching instance of the given locator, using no waits or synchronization.

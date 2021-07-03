@@ -1,8 +1,8 @@
 package io.slifer.automation.commands;
 
 import io.slifer.automation.reporter.Screenshots;
-import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.Locator;
+import io.slifer.automation.ui.WebFinder;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -22,7 +22,7 @@ public class WebInspector {
     
     private Logger LOG;
     
-    private ElementFinder elementFinder = new ElementFinder();
+    private WebFinder webFinder = new WebFinder();
     
     public WebInspector() {
         LOG = LoggerFactory.getLogger(WebInspector.class);
@@ -43,7 +43,7 @@ public class WebInspector {
     public String getAttributeOfElement(Locator locator, String attributeName) {
         LOG.info("Retrieving attribute [{}] of element [{}].", attributeName, locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             
             return webElement.getAttribute(attributeName);
         }
@@ -67,7 +67,7 @@ public class WebInspector {
     public List<String> getAttributeOfElements(Locator locator, String attributeName) {
         LOG.info("Retrieving attribute [{}] of elements [{}].", attributeName, locator.getName());
         try {
-            List<WebElement> webElements = elementFinder.findAll(locator);
+            List<WebElement> webElements = webFinder.findAll(locator);
             
             return getAttributeValuesFromElements(webElements, attributeName);
         }
@@ -90,7 +90,7 @@ public class WebInspector {
     public int getCountOfElement(Locator locator) {
         LOG.info("Retrieving count of element [{}].", locator.getName());
         try {
-            List<WebElement> webElements = elementFinder.findAll(locator);
+            List<WebElement> webElements = webFinder.findAll(locator);
             
             return webElements.size();
         }
@@ -112,7 +112,7 @@ public class WebInspector {
     public String getCssPropertyOfElement(Locator locator, String cssProperty) {
         LOG.info("Retrieving CSS property [{}] of element [{}].", cssProperty, locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             
             return webElement.getCssValue(cssProperty);
         }
@@ -136,7 +136,7 @@ public class WebInspector {
     public boolean getEnabledStateOfElement(Locator locator) {
         LOG.info("Retrieving the enabled state of element [{}].", locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             
             return webElement.isEnabled();
         }
@@ -163,7 +163,7 @@ public class WebInspector {
         
         List<String> attributeValues;
         try {
-            List<WebElement> webElements = elementFinder.findAllWhenVisible(locator);
+            List<WebElement> webElements = webFinder.findAllWhenVisible(locator);
             
             attributeValues = getAttributeValuesFromElements(webElements, attributeName);
         }
@@ -191,7 +191,7 @@ public class WebInspector {
         
         List<String> elementValues;
         try {
-            List<WebElement> webElements = elementFinder.findAllWhenVisible(locator);
+            List<WebElement> webElements = webFinder.findAllWhenVisible(locator);
             
             elementValues = getTextValuesFromElements(webElements);
         }
@@ -216,7 +216,7 @@ public class WebInspector {
     public String getSelectedMenuOption(Locator locator) {
         LOG.info("Retrieving the currently selected option of element [{}].", locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             Select select = new Select(webElement);
             
             return select.getFirstSelectedOption().getText();
@@ -241,7 +241,7 @@ public class WebInspector {
     public boolean getSelectedStateOfElement(Locator locator) {
         LOG.info("Retrieving the selected state of element [{}].", locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             
             return webElement.isSelected();
         }
@@ -263,7 +263,7 @@ public class WebInspector {
     public String getTextOfElement(Locator locator) {
         LOG.info("Retrieving text of element [{}].", locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             
             return webElement.getText();
         }
@@ -285,7 +285,7 @@ public class WebInspector {
     public List<String> getTextOfElements(Locator locator) {
         LOG.info("Retrieving text from elements [{}].", locator.getName());
         try {
-            List<WebElement> webElements = elementFinder.findAllWhenVisible(locator);
+            List<WebElement> webElements = webFinder.findAllWhenVisible(locator);
             
             return getTextValuesFromElements(webElements);
         }
@@ -307,7 +307,7 @@ public class WebInspector {
     public List<String> getTextOfOptions(Locator locator) {
         LOG.info("Retrieving the options of element [{}].", locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             Select select = new Select(webElement);
             List<WebElement> options = select.getOptions();
             
@@ -333,7 +333,7 @@ public class WebInspector {
     public boolean getVisibilityOfElement(Locator locator) {
         LOG.info("Retrieving visible state of element [{}].", locator.getName());
         try {
-            List<WebElement> webElements = elementFinder.findAll(locator);
+            List<WebElement> webElements = webFinder.findAll(locator);
             boolean visible = (webElements.size() > 0);
             LOG.debug("Found [{}] instances - Visibility is [{}].", webElements.size(), visible);
             
