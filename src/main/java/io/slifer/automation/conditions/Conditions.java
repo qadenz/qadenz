@@ -2,9 +2,9 @@ package io.slifer.automation.conditions;
 
 import io.slifer.automation.commands.WebInspector;
 import io.slifer.automation.config.RunContext;
-import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.LocatorGroup;
+import io.slifer.automation.ui.WebFinder;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
@@ -281,8 +281,8 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                ElementFinder elementFinder = new ElementFinder();
-                present = elementFinder.findAll(locator).size() > 0;
+                WebFinder webFinder = new WebFinder();
+                present = webFinder.findAll(locator).size() > 0;
                 
                 match = expectation.matcher().matches(present);
                 
@@ -320,10 +320,10 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                ElementFinder elementFinder = new ElementFinder();
+                WebFinder webFinder = new WebFinder();
                 
                 for (Locator locator : locatorGroup) {
-                    boolean present = elementFinder.findAll(locator).size() > 0;
+                    boolean present = webFinder.findAll(locator).size() > 0;
                     Boolean instanceMatch = expectation.matcher().matches(present);
                     
                     if (!instanceMatch) {
