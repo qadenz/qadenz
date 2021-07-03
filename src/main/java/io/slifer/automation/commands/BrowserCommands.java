@@ -13,19 +13,9 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public class BrowserCommands extends WebDriverCommands {
+public class BrowserCommands {
     
-    private Logger LOG;
-    
-    public BrowserCommands() {
-        super();
-        LOG = LoggerFactory.getLogger(BrowserCommands.class);
-    }
-    
-    public BrowserCommands(Class<?> proxyLogger) {
-        super(proxyLogger);
-        LOG = LoggerFactory.getLogger(proxyLogger);
-    }
+    private Logger LOG = LoggerFactory.getLogger(BrowserCommands.class);
     
     /**
      * Accepts a JavaScript Alert.
