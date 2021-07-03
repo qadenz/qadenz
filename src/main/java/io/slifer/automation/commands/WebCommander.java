@@ -29,7 +29,7 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public abstract class WebCommander extends Commands {
+public class WebCommander extends Commands {
     
     private Logger LOG;
     
