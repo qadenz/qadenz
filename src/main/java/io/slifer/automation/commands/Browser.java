@@ -13,9 +13,9 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public class BrowserCommands {
+public class Browser {
     
-    private Logger LOG = LoggerFactory.getLogger(BrowserCommands.class);
+    private Logger LOG = LoggerFactory.getLogger(Browser.class);
     
     /**
      * Accepts a JavaScript Alert.
