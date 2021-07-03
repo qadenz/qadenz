@@ -3,8 +3,8 @@ package io.slifer.automation.commands;
 import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.RunContext;
 import io.slifer.automation.reporter.Screenshots;
-import io.slifer.automation.ui.ElementFinder;
 import io.slifer.automation.ui.Locator;
+import io.slifer.automation.ui.WebFinder;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -29,19 +29,19 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public abstract class WebDriverCommands extends Commands {
+public class WebCommander extends Commands {
     
     private Logger LOG;
     
-    private ElementFinder elementFinder = new ElementFinder();
+    private WebFinder webFinder = new WebFinder();
     private WebInspector webInspector = new WebInspector();
     
-    public WebDriverCommands() {
+    public WebCommander() {
         super();
-        LOG = LoggerFactory.getLogger(WebDriverCommands.class);
+        LOG = LoggerFactory.getLogger(WebCommander.class);
     }
     
-    public WebDriverCommands(Class<?> proxyLogger) {
+    public WebCommander(Class<?> proxyLogger) {
         super(proxyLogger);
         LOG = LoggerFactory.getLogger(proxyLogger);
     }
@@ -54,7 +54,7 @@ public abstract class WebDriverCommands extends Commands {
     public void clear(Locator locator) {
         LOG.info("Clearing the contents of element [{}].", locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             webElement.clear();
         }
         catch (Exception exception) {
@@ -75,13 +75,13 @@ public abstract class WebDriverCommands extends Commands {
         LOG.info("Clicking element [{}].", locator.getName());
         WebElement webElement;
         try {
-            webElement = elementFinder.findWhenClickable(locator);
+            webElement = webFinder.findWhenClickable(locator);
             webElement.click();
         }
         catch (ElementClickInterceptedException exception) {
             if (RunContext.retryInterceptedClicks) {
                 LOG.debug("Click intercepted, trying with Actions.");
-                webElement = elementFinder.findWhenClickable(locator);
+                webElement = webFinder.findWhenClickable(locator);
                 
                 Actions actions = new Actions(RunContext.getWebDriver());
                 actions.moveToElement(webElement).click().perform();
@@ -112,7 +112,7 @@ public abstract class WebDriverCommands extends Commands {
     public void click(Locator locator, int xOffset, int yOffset) {
         LOG.info("Clicking element [{}] at point [{}, {}].", locator.getName(), xOffset, yOffset);
         try {
-            WebElement webElement = elementFinder.findWhenClickable(locator);
+            WebElement webElement = webFinder.findWhenClickable(locator);
             
             Actions actions = new Actions(RunContext.getWebDriver());
             actions.moveToElement(webElement, xOffset, yOffset).click().perform();
@@ -139,7 +139,7 @@ public abstract class WebDriverCommands extends Commands {
             Actions actions = new Actions(RunContext.getWebDriver());
             actions.keyDown(Keys.CONTROL);
             for (Locator locator : locators) {
-                WebElement element = elementFinder.findWhenClickable(locator);
+                WebElement element = webFinder.findWhenClickable(locator);
                 actions.click(element);
             }
             actions.keyUp(Keys.CONTROL);
@@ -163,7 +163,7 @@ public abstract class WebDriverCommands extends Commands {
     public void deselect(Locator locator, String option) {
         LOG.info("Deselecting option [{}] from element [{}].", option, locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             Select select = new Select(webElement);
             select.deselectByVisibleText(option);
         }
@@ -184,7 +184,7 @@ public abstract class WebDriverCommands extends Commands {
     public void doubleClick(Locator locator) {
         LOG.info("Double-clicking element [{}].", locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenClickable(locator);
+            WebElement webElement = webFinder.findWhenClickable(locator);
             Actions actions = new Actions(RunContext.getWebDriver());
             actions.doubleClick(webElement).perform();
         }
@@ -206,7 +206,7 @@ public abstract class WebDriverCommands extends Commands {
     public void enterText(Locator locator, CharSequence... input) {
         LOG.info("Entering text [{}] into element [{}].", input, locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             webElement.sendKeys(input);
         }
         catch (Exception exception) {
@@ -225,7 +225,7 @@ public abstract class WebDriverCommands extends Commands {
     public void hover(Locator locator) {
         LOG.info("Hovering on element [{}].", locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             Actions actions = new Actions(RunContext.getWebDriver());
             actions.moveToElement(webElement).perform();
         }
@@ -247,7 +247,7 @@ public abstract class WebDriverCommands extends Commands {
     public void select(Locator locator, String option) {
         LOG.info("Selecting option [{}] from element [{}].", option, locator.getName());
         try {
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             Select select = new Select(webElement);
             select.selectByVisibleText(option);
         }
@@ -271,11 +271,11 @@ public abstract class WebDriverCommands extends Commands {
             RemoteWebDriver remoteWebDriver = (RemoteWebDriver) RunContext.getWebDriver();
             remoteWebDriver.setFileDetector(new LocalFileDetector());
             
-            URL url = WebDriverCommands.class.getClassLoader().getResource(fileName);
+            URL url = WebCommander.class.getClassLoader().getResource(fileName);
             File file = Paths.get(url.toURI()).toFile();
             String filePath = file.getAbsolutePath();
             
-            WebElement webElement = elementFinder.findWhenPresent(fileInput);
+            WebElement webElement = webFinder.findWhenPresent(fileInput);
             webElement.sendKeys(filePath);
         }
         catch (Exception exception) {
@@ -322,7 +322,7 @@ public abstract class WebDriverCommands extends Commands {
         LOG.info("Switching focus to frame [{}]", locator.getName());
         try {
             RunContext.getWebDriver().switchTo().defaultContent();
-            WebElement webElement = elementFinder.findWhenVisible(locator);
+            WebElement webElement = webFinder.findWhenVisible(locator);
             RunContext.getWebDriver().switchTo().frame(webElement);
         }
         catch (Exception exception) {
