@@ -1,6 +1,6 @@
 package io.slifer.automation.commands;
 
-import io.slifer.automation.config.RunContext;
+import io.slifer.automation.config.WebDriverProvider;
 import io.slifer.automation.reporter.Screenshots;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class Browser {
     public static void acceptAlert() {
         LOG.info("Accepting alert.");
         try {
-            RunContext.getWebDriver().switchTo().alert().accept();
+            WebDriverProvider.getWebDriver().switchTo().alert().accept();
         }
         catch (Exception exception) {
             LOG.error("Error accepting alert :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -39,7 +39,7 @@ public class Browser {
     public static void dismissAlert() {
         LOG.info("Dismissing alert.");
         try {
-            RunContext.getWebDriver().switchTo().alert().dismiss();
+            WebDriverProvider.getWebDriver().switchTo().alert().dismiss();
         }
         catch (Exception exception) {
             LOG.error("Error dismissing alert :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -57,7 +57,7 @@ public class Browser {
     public static void enterTextOnAlert(String input) {
         LOG.info("Entering text [{}] into Alert.", input);
         try {
-            RunContext.getWebDriver().switchTo().alert().sendKeys(input);
+            WebDriverProvider.getWebDriver().switchTo().alert().sendKeys(input);
         }
         catch (Exception exception) {
             LOG.error("Error entering text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -73,7 +73,7 @@ public class Browser {
     public static void closeBrowser() {
         LOG.info("Closing browser.");
         try {
-            RunContext.getWebDriver().close();
+            WebDriverProvider.getWebDriver().close();
         }
         catch (Exception exception) {
             LOG.error("Error closing browser :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -89,7 +89,7 @@ public class Browser {
     public static void goBack() {
         LOG.info("Navigating back.");
         try {
-            RunContext.getWebDriver().navigate().back();
+            WebDriverProvider.getWebDriver().navigate().back();
         }
         catch (Exception exception) {
             LOG.error("Error navigating back. :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -105,7 +105,7 @@ public class Browser {
     public static void goForward() {
         LOG.info("Navigating forward.");
         try {
-            RunContext.getWebDriver().navigate().forward();
+            WebDriverProvider.getWebDriver().navigate().forward();
         }
         catch (Exception exception) {
             LOG.error("Error navigating back :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -121,7 +121,7 @@ public class Browser {
     public static void refreshPage() {
         LOG.info("Refreshing page.");
         try {
-            RunContext.getWebDriver().navigate().refresh();
+            WebDriverProvider.getWebDriver().navigate().refresh();
         }
         catch (Exception exception) {
             LOG.error("Error refreshing page :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -137,7 +137,7 @@ public class Browser {
     public static void deleteCookies() {
         LOG.info("Deleting all cookies.");
         try {
-            RunContext.getWebDriver().manage().deleteAllCookies();
+            WebDriverProvider.getWebDriver().manage().deleteAllCookies();
         }
         catch (Exception exception) {
             LOG.error("Error deleting cookies :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -155,7 +155,7 @@ public class Browser {
     public static void openUrl(String url) {
         LOG.info("Opening URL [{}].", url);
         try {
-            RunContext.getWebDriver().get(url);
+            WebDriverProvider.getWebDriver().get(url);
         }
         catch (Exception exception) {
             LOG.error("Error opening URL :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -199,19 +199,20 @@ public class Browser {
     
     private static void switchWindowFocus(Window window) {
         int currentWindowIndex;
-        List<String> windowHandles = new ArrayList<>(RunContext.getWebDriver().getWindowHandles());
+        List<String> windowHandles = new ArrayList<>(WebDriverProvider.getWebDriver().getWindowHandles());
         try {
-            currentWindowIndex = windowHandles.indexOf(RunContext.getWebDriver().getWindowHandle());
+            currentWindowIndex = windowHandles.indexOf(WebDriverProvider.getWebDriver().getWindowHandle());
         }
         catch (Exception exception) {
             currentWindowIndex = windowHandles.size();
         }
         
-        if (window == Window.NEXT && RunContext.getWebDriver().getWindowHandles().size() - 1 > currentWindowIndex) {
-            RunContext.getWebDriver().switchTo().window(windowHandles.get(currentWindowIndex + 1));
+        if (window == Window.NEXT &&
+                WebDriverProvider.getWebDriver().getWindowHandles().size() - 1 > currentWindowIndex) {
+            WebDriverProvider.getWebDriver().switchTo().window(windowHandles.get(currentWindowIndex + 1));
         }
-        else if (window == Window.PREVIOUS && RunContext.getWebDriver().getWindowHandles().size() >= 1) {
-            RunContext.getWebDriver().switchTo().window(windowHandles.get(currentWindowIndex - 1));
+        else if (window == Window.PREVIOUS && WebDriverProvider.getWebDriver().getWindowHandles().size() >= 1) {
+            WebDriverProvider.getWebDriver().switchTo().window(windowHandles.get(currentWindowIndex - 1));
         }
     }
     
