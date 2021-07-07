@@ -2,6 +2,7 @@ package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.RunContext;
+import io.slifer.automation.config.WebDriverProvider;
 import io.slifer.automation.reporter.Screenshots;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.WebFinder;
@@ -83,7 +84,7 @@ public class WebCommander extends Commands {
                 LOG.debug("Click intercepted, trying with Actions.");
                 webElement = webFinder.findWhenClickable(locator);
                 
-                Actions actions = new Actions(RunContext.getWebDriver());
+                Actions actions = new Actions(WebDriverProvider.getWebDriver());
                 actions.moveToElement(webElement).click().perform();
             }
             else {
@@ -114,7 +115,7 @@ public class WebCommander extends Commands {
         try {
             WebElement webElement = webFinder.findWhenClickable(locator);
             
-            Actions actions = new Actions(RunContext.getWebDriver());
+            Actions actions = new Actions(WebDriverProvider.getWebDriver());
             actions.moveToElement(webElement, xOffset, yOffset).click().perform();
         }
         catch (Exception exception) {
@@ -136,7 +137,7 @@ public class WebCommander extends Commands {
         LOG.info("Control-Clicking elements [{}]", names);
         
         try {
-            Actions actions = new Actions(RunContext.getWebDriver());
+            Actions actions = new Actions(WebDriverProvider.getWebDriver());
             actions.keyDown(Keys.CONTROL);
             for (Locator locator : locators) {
                 WebElement element = webFinder.findWhenClickable(locator);
@@ -185,7 +186,7 @@ public class WebCommander extends Commands {
         LOG.info("Double-clicking element [{}].", locator.getName());
         try {
             WebElement webElement = webFinder.findWhenClickable(locator);
-            Actions actions = new Actions(RunContext.getWebDriver());
+            Actions actions = new Actions(WebDriverProvider.getWebDriver());
             actions.doubleClick(webElement).perform();
         }
         catch (Exception exception) {
@@ -226,7 +227,7 @@ public class WebCommander extends Commands {
         LOG.info("Hovering on element [{}].", locator.getName());
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
-            Actions actions = new Actions(RunContext.getWebDriver());
+            Actions actions = new Actions(WebDriverProvider.getWebDriver());
             actions.moveToElement(webElement).perform();
         }
         catch (Exception exception) {
@@ -268,7 +269,7 @@ public class WebCommander extends Commands {
     public void uploadFile(Locator fileInput, String fileName) {
         LOG.info("Uploading file [{}].", fileName);
         try {
-            RemoteWebDriver remoteWebDriver = (RemoteWebDriver) RunContext.getWebDriver();
+            RemoteWebDriver remoteWebDriver = (RemoteWebDriver) WebDriverProvider.getWebDriver();
             remoteWebDriver.setFileDetector(new LocalFileDetector());
             
             URL url = WebCommander.class.getClassLoader().getResource(fileName);
@@ -303,7 +304,7 @@ public class WebCommander extends Commands {
     public void focusOnDefaultContent() {
         LOG.info("Switching focus to default frame.");
         try {
-            RunContext.getWebDriver().switchTo().defaultContent();
+            WebDriverProvider.getWebDriver().switchTo().defaultContent();
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -321,9 +322,9 @@ public class WebCommander extends Commands {
     public void focusOnFrame(Locator locator) {
         LOG.info("Switching focus to frame [{}]", locator.getName());
         try {
-            RunContext.getWebDriver().switchTo().defaultContent();
+            WebDriverProvider.getWebDriver().switchTo().defaultContent();
             WebElement webElement = webFinder.findWhenVisible(locator);
-            RunContext.getWebDriver().switchTo().frame(webElement);
+            WebDriverProvider.getWebDriver().switchTo().frame(webElement);
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -340,7 +341,7 @@ public class WebCommander extends Commands {
      */
     public void pause(Condition condition) {
         LOG.info("Waiting for condition :: {}", condition.description());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), RunContext.timeout);
         
         try {
             webDriverWait.until((ExpectedCondition<Boolean>) webDriver -> condition.result());
