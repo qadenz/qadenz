@@ -1,7 +1,7 @@
 package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
-import io.slifer.automation.config.RunContext;
+import io.slifer.automation.config.WebConfig;
 import io.slifer.automation.config.WebDriverProvider;
 import io.slifer.automation.reporter.Screenshots;
 import io.slifer.automation.ui.Locator;
@@ -80,7 +80,7 @@ public class WebCommander extends Commands {
             webElement.click();
         }
         catch (ElementClickInterceptedException exception) {
-            if (RunContext.retryInterceptedClicks) {
+            if (WebConfig.retryInterceptedClicks) {
                 LOG.debug("Click intercepted, trying with Actions.");
                 webElement = webFinder.findWhenClickable(locator);
                 
@@ -341,7 +341,7 @@ public class WebCommander extends Commands {
      */
     public void pause(Condition condition) {
         LOG.info("Waiting for condition :: {}", condition.description());
-        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), RunContext.timeout);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
         
         try {
             webDriverWait.until((ExpectedCondition<Boolean>) webDriver -> condition.result());
