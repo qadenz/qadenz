@@ -1,7 +1,6 @@
 package io.slifer.automation.config;
 
 import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
 
 import java.time.LocalDateTime;
 
@@ -23,14 +22,4 @@ public class RunContext {
     public static String appUrl;
     public static int timeout;
     public static boolean retryInterceptedClicks;
-    
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    
-    public static void setWebDriver(WebDriver webDriver) {
-        driver.set(webDriver);
-    }
-    
-    public static WebDriver getWebDriver() {
-        return driver.get();
-    }
 }
