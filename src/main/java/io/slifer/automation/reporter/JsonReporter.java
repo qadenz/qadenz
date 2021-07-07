@@ -1,6 +1,6 @@
 package io.slifer.automation.reporter;
 
-import io.slifer.automation.config.RunContext;
+import io.slifer.automation.config.WebConfig;
 import io.slifer.automation.reporter.model.JsonClass;
 import io.slifer.automation.reporter.model.JsonLogEvent;
 import io.slifer.automation.reporter.model.JsonMethod;
@@ -71,11 +71,11 @@ public class JsonReporter {
         jsonReport.setSuiteName(suiteResult.getSuiteName());
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        String startDate = RunContext.suiteStartDate.format(formatter);
+        String startDate = WebConfig.suiteStartDate.format(formatter);
         
         jsonReport.setSuiteStartDate(startDate);
         
-        Duration duration = Duration.between(RunContext.suiteStartDate, RunContext.suiteEndDate);
+        Duration duration = Duration.between(WebConfig.suiteStartDate, WebConfig.suiteEndDate);
         String executionTime = String.format("%02dh %02dm %02d.%02ds",
                 duration.toHoursPart(), duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
         
