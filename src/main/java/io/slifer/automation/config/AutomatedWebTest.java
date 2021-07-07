@@ -23,7 +23,7 @@ import java.util.Map;
  * @author Tim Slifer
  */
 @Listeners ({io.slifer.automation.reporter.TestReporter.class})
-public class AutomatedTest {
+public class AutomatedWebTest {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
