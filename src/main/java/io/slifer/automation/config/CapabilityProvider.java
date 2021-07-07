@@ -19,7 +19,7 @@ public class CapabilityProvider {
      * @return The Browser Options.
      */
     public static MutableCapabilities getBrowserOptions() {
-        Browser browser = RunContext.browser;
+        Browser browser = WebConfig.browser;
         
         MutableCapabilities capabilities = null;
         switch (browser) {
@@ -37,16 +37,16 @@ public class CapabilityProvider {
                 break;
         }
         
-        if (RunContext.browserVersion != null) {
-            capabilities.setCapability("version", RunContext.browserVersion);
+        if (WebConfig.browserVersion != null) {
+            capabilities.setCapability("version", WebConfig.browserVersion);
         }
         
-        if (RunContext.platform != null) {
-            capabilities.setCapability("platform", RunContext.platform);
+        if (WebConfig.platform != null) {
+            capabilities.setCapability("platform", WebConfig.platform);
         }
         
-        if (RunContext.applicationName != null) {
-            capabilities.setCapability("applicationName", RunContext.applicationName);
+        if (WebConfig.applicationName != null) {
+            capabilities.setCapability("applicationName", WebConfig.applicationName);
         }
         
         return capabilities;
