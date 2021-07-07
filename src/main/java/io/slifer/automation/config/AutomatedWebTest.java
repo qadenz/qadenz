@@ -23,7 +23,7 @@ import java.util.Map;
  * @author Tim Slifer
  */
 @Listeners ({io.slifer.automation.reporter.TestReporter.class})
-public class AutomatedTest {
+public class AutomatedWebTest {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
@@ -35,7 +35,7 @@ public class AutomatedTest {
      */
     @BeforeSuite (alwaysRun = true)
     public void captureStartDateTime(ITestContext testContext) {
-        RunContext.suiteStartDate = LocalDateTime.now();
+        WebConfig.suiteStartDate = LocalDateTime.now();
         String outputPath = testContext.getOutputDirectory();
         outputPath = outputPath.substring(0, outputPath.lastIndexOf("/")) + "/";
         System.setProperty("path.ReportOutput", outputPath);
@@ -53,14 +53,14 @@ public class AutomatedTest {
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
         XmlParameterValidator parameterValidator = new XmlParameterValidator(xmlParameters);
         
-        RunContext.gridHost = parameterValidator.validateGridHost();
-        RunContext.browser = parameterValidator.validateBrowser();
-        RunContext.browserVersion = parameterValidator.validateBrowserVersion();
-        RunContext.platform = parameterValidator.validatePlatform();
-        RunContext.applicationName = parameterValidator.validateApplicationName();
-        RunContext.timeout = parameterValidator.validateTimeout();
-        RunContext.appUrl = parameterValidator.validateAppUrl();
-        RunContext.retryInterceptedClicks = parameterValidator.validateRetryInterceptedClicks();
+        WebConfig.gridHost = parameterValidator.validateGridHost();
+        WebConfig.browser = parameterValidator.validateBrowser();
+        WebConfig.browserVersion = parameterValidator.validateBrowserVersion();
+        WebConfig.platform = parameterValidator.validatePlatform();
+        WebConfig.applicationName = parameterValidator.validateApplicationName();
+        WebConfig.timeout = parameterValidator.validateTimeout();
+        WebConfig.appUrl = parameterValidator.validateAppUrl();
+        WebConfig.retryInterceptedClicks = parameterValidator.validateRetryInterceptedClicks();
     }
     
     /**
@@ -74,16 +74,16 @@ public class AutomatedTest {
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
         
         try {
-            RunContext.setWebDriver(
-                    new RemoteWebDriver(new URL("http://" + RunContext.gridHost + ":4444/wd/hub"), capabilities));
+            WebDriverProvider.setWebDriver(
+                    new RemoteWebDriver(new URL("http://" + WebConfig.gridHost + ":4444/wd/hub"), capabilities));
         }
         catch (MalformedURLException exception) {
             LOG.error("Grid URL is invalid.");
             throw exception;
         }
         
-        RunContext.getWebDriver().manage().window().maximize();
-        RunContext.getWebDriver().get(RunContext.appUrl);
+        WebDriverProvider.getWebDriver().manage().window().maximize();
+        WebDriverProvider.getWebDriver().get(WebConfig.appUrl);
     }
     
     /**
@@ -92,7 +92,7 @@ public class AutomatedTest {
     @AfterMethod (alwaysRun = true)
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
-        RunContext.getWebDriver().quit();
+        WebDriverProvider.getWebDriver().quit();
     }
     
     /**
@@ -100,6 +100,6 @@ public class AutomatedTest {
      */
     @AfterSuite (alwaysRun = true)
     public void captureEndDateTime() {
-        RunContext.suiteEndDate = LocalDateTime.now();
+        WebConfig.suiteEndDate = LocalDateTime.now();
     }
 }

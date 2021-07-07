@@ -1,6 +1,7 @@
 package io.slifer.automation.ui;
 
-import io.slifer.automation.config.RunContext;
+import io.slifer.automation.config.WebConfig;
+import io.slifer.automation.config.WebDriverProvider;
 import io.slifer.sizzlecss.BySizzle;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,7 @@ public class WebFinder {
         
         try {
             LOG.debug("Initializing element [{}].", locator.getName());
-            return RunContext.getWebDriver().findElement(bySizzle(locator));
+            return WebDriverProvider.getWebDriver().findElement(bySizzle(locator));
         }
         catch (Exception e) {
             LOG.debug("Could not initialize element [{}].", locator.getName());
@@ -53,7 +54,7 @@ public class WebFinder {
         try {
             LOG.debug("Initializing elements [{}].", locator.getName());
             
-            return RunContext.getWebDriver().findElements(bySizzle(locator));
+            return WebDriverProvider.getWebDriver().findElements(bySizzle(locator));
         }
         catch (Exception e) {
             LOG.debug("Could not initialize elements [{}].", locator.getName());
@@ -71,7 +72,7 @@ public class WebFinder {
      */
     public WebElement findWhenVisible(Locator locator) {
         LOG.debug("Finding element [{}] when visible.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
         
         try {
             LOG.debug("Initializing element [{}] when visible.", locator.getName());
@@ -94,7 +95,7 @@ public class WebFinder {
      */
     public List<WebElement> findAllWhenVisible(Locator locator) {
         LOG.debug("Finding elements [{}] when visible.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
         
         try {
             LOG.debug("Initializing elements [{}] when visible.", locator.getName());
@@ -117,7 +118,7 @@ public class WebFinder {
      */
     public WebElement findWhenClickable(Locator locator) {
         LOG.debug("Finding element [{}] when clickable.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
         
         try {
             LOG.debug("Initializing element [{}] when clickable.", locator.getName());
@@ -140,7 +141,7 @@ public class WebFinder {
      */
     public WebElement findWhenPresent(Locator locator) {
         LOG.debug("Finding element [{}] when present.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(RunContext.getWebDriver(), RunContext.timeout);
+        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
         
         try {
             LOG.debug("Initializing element [{}] when present.", locator.getName());

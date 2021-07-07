@@ -1,6 +1,6 @@
 package io.slifer.automation.reporter;
 
-import io.slifer.automation.config.RunContext;
+import io.slifer.automation.config.WebConfig;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class Screenshots {
         
         String screenshot;
         try {
-            File rawCapture = ((TakesScreenshot) RunContext.getWebDriver()).getScreenshotAs(OutputType.FILE);
+            File rawCapture = ((TakesScreenshot) WebConfig.getWebDriver()).getScreenshotAs(OutputType.FILE);
             BufferedImage convertedCapture = ImageIO.read(rawCapture);
             screenshot = convertToBase64(convertedCapture);
         }
