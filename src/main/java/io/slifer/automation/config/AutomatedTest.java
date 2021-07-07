@@ -74,7 +74,7 @@ public class AutomatedTest {
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
         
         try {
-            RunContext.setWebDriver(
+            WebDriverProvider.setWebDriver(
                     new RemoteWebDriver(new URL("http://" + RunContext.gridHost + ":4444/wd/hub"), capabilities));
         }
         catch (MalformedURLException exception) {
@@ -82,8 +82,8 @@ public class AutomatedTest {
             throw exception;
         }
         
-        RunContext.getWebDriver().manage().window().maximize();
-        RunContext.getWebDriver().get(RunContext.appUrl);
+        WebDriverProvider.getWebDriver().manage().window().maximize();
+        WebDriverProvider.getWebDriver().get(RunContext.appUrl);
     }
     
     /**
@@ -92,7 +92,7 @@ public class AutomatedTest {
     @AfterMethod (alwaysRun = true)
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
-        RunContext.getWebDriver().quit();
+        WebDriverProvider.getWebDriver().quit();
     }
     
     /**
