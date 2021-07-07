@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  *
  * @author Tim Slifer
  */
-public class RunContext {
+public class WebConfig {
     
     public static LocalDateTime suiteStartDate;
     public static LocalDateTime suiteEndDate;
