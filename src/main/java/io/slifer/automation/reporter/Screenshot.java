@@ -42,7 +42,7 @@ public class Screenshot {
         ScreenshotData.getInstance().put(uuid, screenshot);
     }
     
-    private static String convertToBase64(BufferedImage resizedCapture) {
+    private String convertToBase64(BufferedImage resizedCapture) {
         LOG.debug("Converting to Base64.");
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
