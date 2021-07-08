@@ -21,7 +21,7 @@ import java.util.UUID;
  *
  * @author Tim Slifer
  */
-public class Screenshots {
+public class Screenshot {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
