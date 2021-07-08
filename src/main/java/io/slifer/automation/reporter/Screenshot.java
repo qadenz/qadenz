@@ -27,7 +27,7 @@ public class Screenshot {
     
     private static Map<String, String> images = new HashMap<>();
     
-    public static synchronized void captureScreen() {
+    public void capture() {
         String uuid = UUID.randomUUID().toString();
         
         String screenshot;
