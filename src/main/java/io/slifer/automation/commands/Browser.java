@@ -1,7 +1,7 @@
 package io.slifer.automation.commands;
 
 import io.slifer.automation.config.WebDriverProvider;
-import io.slifer.automation.reporter.Screenshots;
+import io.slifer.automation.reporter.Screenshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +17,8 @@ public class Browser {
     
     private static final Logger LOG = LoggerFactory.getLogger(Browser.class);
     
+    private static Screenshot screenshot = new Screenshot();
+    
     /**
      * Accepts a JavaScript Alert.
      */
@@ -27,7 +29,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error accepting alert :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -43,7 +45,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error dismissing alert :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -61,7 +63,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error entering text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -77,7 +79,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error closing browser :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -93,7 +95,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error navigating back. :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -109,7 +111,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error navigating back :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -125,7 +127,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error refreshing page :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -141,7 +143,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error deleting cookies :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -159,7 +161,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error opening URL :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -175,7 +177,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -191,7 +193,7 @@ public class Browser {
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
