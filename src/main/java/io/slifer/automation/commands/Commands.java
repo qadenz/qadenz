@@ -1,7 +1,7 @@
 package io.slifer.automation.commands;
 
 import io.slifer.automation.conditions.Condition;
-import io.slifer.automation.reporter.Screenshots;
+import io.slifer.automation.reporter.Screenshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -14,6 +14,8 @@ import org.testng.Assert;
 public abstract class Commands {
     
     private Logger LOG;
+    
+    private Screenshot screenshot = new Screenshot();
     
     public Commands() {
         LOG = LoggerFactory.getLogger(Commands.class);
@@ -43,11 +45,11 @@ public abstract class Commands {
             catch (AssertionError error) {
                 LOG.info("Result - FAIL :: {}", condition.output());
                 Assertions.setFailures(true);
-                Screenshots.captureScreen();
+                screenshot.capture();
             }
             catch (Exception exception) {
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-                Screenshots.captureScreen();
+                screenshot.capture();
                 
                 throw new RuntimeException("Error while verifying condition.");
             }
@@ -74,11 +76,11 @@ public abstract class Commands {
             catch (AssertionError error) {
                 LOG.info("Result - FAIL :: {}", condition.output());
                 failed = true;
-                Screenshots.captureScreen();
+                screenshot.capture();
             }
             catch (Exception exception) {
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-                Screenshots.captureScreen();
+                screenshot.capture();
                 
                 throw new RuntimeException("Error while verifying condition.");
             }
