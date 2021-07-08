@@ -236,7 +236,7 @@ public class JsonReporter {
             if ((i + 1) < logs.size()) {
                 if (checkForUuid(logs.get(i + 1))) {
                     LOG.info("Found a screenshot.");
-                    screenshot = Screenshots.getImages().get(logs.get(i + 1));
+                    screenshot = ScreenshotData.getInstance().get(logs.get(i + 1));
                     i++;
                 }
             }

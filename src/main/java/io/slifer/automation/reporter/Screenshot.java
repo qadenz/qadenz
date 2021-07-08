@@ -12,8 +12,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -24,8 +22,6 @@ import java.util.UUID;
 public class Screenshot {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
-    
-    private static Map<String, String> images = new HashMap<>();
     
     public void capture() {
         String uuid = UUID.randomUUID().toString();
@@ -43,7 +39,7 @@ public class Screenshot {
         }
         
         Reporter.log(uuid);
-        images.put(uuid, screenshot);
+        ScreenshotData.getInstance().put(uuid, screenshot);
     }
     
     private static String convertToBase64(BufferedImage resizedCapture) {
@@ -60,9 +56,5 @@ public class Screenshot {
             
             throw new RuntimeException(e);
         }
-    }
-    
-    public static Map<String, String> getImages() {
-        return images;
     }
 }
