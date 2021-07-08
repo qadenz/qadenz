@@ -23,13 +23,15 @@
         <jackson.version>2.12.2</jackson.version>
         <json.version>20201115</json.version>
         <jsoup.version>1.13.1</jsoup.version>
-        <junit.version>5.7.2</junit.version>
         <logback.version>1.2.3</logback.version>
         <logback-contrib.version>0.1.5</logback-contrib.version>
         <logback-testng.version>1.2.0</logback-testng.version>
         <selenium.version>3.141.59</selenium.version>
         <sizzle.version>3.141.59-R1</sizzle.version>
         <testng.version>7.0.0</testng.version>
+        
+        <junit.version>5.7.2</junit.version>
+        <mockito.version>3.11.2</mockito.version>
     </properties>
     
     <dependencies>
@@ -112,13 +114,6 @@
         </dependency>
         
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.2</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
@@ -128,6 +123,21 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
+        </dependency>
+        
+        <!--Test Dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     
