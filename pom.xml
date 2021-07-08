@@ -23,6 +23,7 @@
         <jackson.version>2.12.2</jackson.version>
         <json.version>20201115</json.version>
         <jsoup.version>1.13.1</jsoup.version>
+        <junit.version>4.13.2</junit.version>
         <logback.version>1.2.3</logback.version>
         <logback-contrib.version>0.1.5</logback-contrib.version>
         <logback-testng.version>1.2.0</logback-testng.version>
@@ -78,6 +79,13 @@
             <groupId>io.slifer</groupId>
             <artifactId>webdriver-sizzle-injector</artifactId>
             <version>${sizzle.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
         
         <dependency>
