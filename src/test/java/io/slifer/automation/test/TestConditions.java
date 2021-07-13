@@ -15,7 +15,7 @@ public class TestConditions {
         return new Condition() {
             @Override
             public String description() {
-                return "";
+                return "Always returns true.";
             }
             
             @Override
@@ -25,7 +25,7 @@ public class TestConditions {
             
             @Override
             public String output() {
-                return "";
+                return "Returned true.";
             }
         };
     }
@@ -34,7 +34,7 @@ public class TestConditions {
         return new Condition() {
             @Override
             public String description() {
-                return "";
+                return "Always returns false.";
             }
             
             @Override
@@ -44,7 +44,7 @@ public class TestConditions {
             
             @Override
             public String output() {
-                return "";
+                return "Returned false.";
             }
         };
     }
@@ -53,7 +53,7 @@ public class TestConditions {
         return new Condition() {
             @Override
             public String description() {
-                return "";
+                return "Always throws an error.";
             }
             
             @Override
@@ -63,7 +63,7 @@ public class TestConditions {
             
             @Override
             public String output() {
-                return "";
+                return "Threw an error.";
             }
         };
     }
