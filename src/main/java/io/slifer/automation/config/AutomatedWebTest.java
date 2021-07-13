@@ -1,5 +1,6 @@
 package io.slifer.automation.config;
 
+import io.slifer.automation.commands.Assertions;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -71,6 +72,7 @@ public class AutomatedWebTest {
     @BeforeMethod (alwaysRun = true)
     public void startWebDriver() throws Exception {
         LOG.info("Launching WebDriver.");
+        Assertions.init();
         MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
         
         try {
