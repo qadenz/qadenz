@@ -1,6 +1,6 @@
 package io.slifer.automation.commands;
 
-import io.slifer.automation.reporter.Screenshots;
+import io.slifer.automation.reporter.Screenshot;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.WebFinder;
 import org.openqa.selenium.Dimension;
@@ -23,6 +23,7 @@ public class WebInspector {
     private Logger LOG;
     
     private WebFinder webFinder = new WebFinder();
+    private Screenshot screenshot = new Screenshot();
     
     public WebInspector() {
         LOG = LoggerFactory.getLogger(WebInspector.class);
@@ -50,7 +51,7 @@ public class WebInspector {
         catch (Exception exception) {
             LOG.error("Error retrieving attribute :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -74,7 +75,7 @@ public class WebInspector {
         catch (Exception exception) {
             LOG.error("Error retrieving attribute :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -96,7 +97,7 @@ public class WebInspector {
         }
         catch (Exception exception) {
             LOG.error("Error retrieving count :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -119,7 +120,7 @@ public class WebInspector {
         catch (Exception exception) {
             LOG.error("Error retrieving CSS property :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -142,7 +143,7 @@ public class WebInspector {
         }
         catch (Exception exception) {
             LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -170,7 +171,7 @@ public class WebInspector {
         catch (Exception exception) {
             LOG.error("Error retrieving instance :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -198,7 +199,7 @@ public class WebInspector {
         catch (Exception exception) {
             LOG.error("Error retrieving instance :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -224,7 +225,7 @@ public class WebInspector {
         catch (Exception exception) {
             LOG.error("Error retrieving option :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -247,7 +248,7 @@ public class WebInspector {
         }
         catch (Exception exception) {
             LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -269,7 +270,7 @@ public class WebInspector {
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -291,7 +292,7 @@ public class WebInspector {
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -316,7 +317,7 @@ public class WebInspector {
         catch (Exception exception) {
             LOG.error("Error retrieving options :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -368,7 +369,7 @@ public class WebInspector {
         }
         catch (Exception exception) {
             LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -404,7 +405,7 @@ public class WebInspector {
         }
         
         LOG.error("Could not find instance with expected value.");
-        Screenshots.captureScreen();
+        screenshot.capture();
         
         throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
     }

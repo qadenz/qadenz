@@ -3,7 +3,7 @@ package io.slifer.automation.commands;
 import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.config.WebConfig;
 import io.slifer.automation.config.WebDriverProvider;
-import io.slifer.automation.reporter.Screenshots;
+import io.slifer.automation.reporter.Screenshot;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.WebFinder;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -35,7 +35,7 @@ public class WebCommander extends Commands {
     private Logger LOG;
     
     private WebFinder webFinder = new WebFinder();
-    private WebInspector webInspector = new WebInspector();
+    private Screenshot screenshot = new Screenshot();
     
     public WebCommander() {
         super();
@@ -61,7 +61,7 @@ public class WebCommander extends Commands {
         catch (Exception exception) {
             LOG.error("Error clearing contents :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -90,14 +90,14 @@ public class WebCommander extends Commands {
             else {
                 LOG.error("Error clicking with Actions :: {}: {}", exception.getClass().getSimpleName(),
                         exception.getMessage());
-                Screenshots.captureScreen();
+                screenshot.capture();
                 
                 throw exception;
             }
         }
         catch (Exception exception) {
             LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -120,7 +120,7 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -149,7 +149,7 @@ public class WebCommander extends Commands {
         catch (Exception exception) {
             LOG.error("Error clicking elements :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -171,7 +171,7 @@ public class WebCommander extends Commands {
         catch (Exception exception) {
             LOG.error("Error deselecting option :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -192,7 +192,7 @@ public class WebCommander extends Commands {
         catch (Exception exception) {
             LOG.error("Error double-clicking element :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -212,7 +212,7 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error entering text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -233,7 +233,7 @@ public class WebCommander extends Commands {
         catch (Exception exception) {
             LOG.error("Error hovering on element :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -254,7 +254,7 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error selecting option :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -281,7 +281,7 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error uploading file :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw new RuntimeException("File could not be uploaded.");
         }
@@ -308,7 +308,7 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -328,7 +328,7 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
@@ -348,7 +348,7 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error while waiting :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-            Screenshots.captureScreen();
+            screenshot.capture();
             
             throw exception;
         }
