@@ -3,6 +3,7 @@ package io.slifer.automation.test;
 import io.slifer.automation.commands.Assertions;
 import io.slifer.automation.conditions.Condition;
 import io.slifer.automation.reporter.Screenshot;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,11 @@ public class CheckTest {
     
     @InjectMocks
     private TestCommander commander;
+    
+    @BeforeEach
+    private void initAssertions() {
+        Assertions.setFailures(false);
+    }
     
     @Test
     public void singleCondition_ReturnsTrue_ResultIsPass() {
