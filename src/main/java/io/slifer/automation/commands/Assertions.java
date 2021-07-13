@@ -9,6 +9,10 @@ public class Assertions {
     
     private static ThreadLocal<Boolean> failures = new ThreadLocal<>();
     
+    public static void init() {
+        failures.set(false);
+    }
+    
     public static void setFailures(boolean failed) {
         failures.set(failed);
     }
