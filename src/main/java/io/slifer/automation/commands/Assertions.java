@@ -25,7 +25,7 @@ public class Assertions {
     /**
      * Checks if a failure has been detected and, if so, aborts execution.
      */
-    public static void flush() {
+    public static void purge() {
         if (failures.get()) {
             LOG.info("Purging soft assert failures - failures detected.");
             throw new AssertionError("One or more validations failed.");
