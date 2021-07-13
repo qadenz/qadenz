@@ -58,7 +58,7 @@ public class TestConditions {
             
             @Override
             public Boolean result() {
-                throw new IllegalStateException();
+                throw new IllegalStateException("Testing a validation that produces an error.");
             }
             
             @Override
