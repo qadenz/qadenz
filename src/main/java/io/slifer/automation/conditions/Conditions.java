@@ -631,7 +631,7 @@ public class Conditions {
      *
      * @return The converted Array.
      */
-    public Condition[] toArray(List<Condition> conditions) {
-        return new Condition[conditions.size()];
+    public static Condition[] toArray(List<Condition> conditions) {
+        return conditions.toArray(new Condition[conditions.size()]);
     }
 }
