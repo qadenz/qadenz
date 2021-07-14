@@ -42,5 +42,7 @@
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="TestNG"/>
     </root>
+    
+    <logger name="io.slifer.automation.conditions.Conditions" level="OFF"/>
 
 </configuration>
