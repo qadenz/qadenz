@@ -231,10 +231,10 @@ public class HtmlReporter {
             methodLogs.appendElement("div").addClass("log-entry bold").text(jsonLogEvent.getLogMessage());
         }
         else if (jsonLogEvent.getLogMessage().contains("| Result - PASS")) {
-            methodLogs.appendElement("div").addClass("log-entry txt-passed").text(jsonLogEvent.getLogMessage());
+            methodLogs.appendElement("div").addClass("log-entry log-pass").text(jsonLogEvent.getLogMessage());
         }
         else if (jsonLogEvent.getLogMessage().contains("| Result - FAIL")) {
-            methodLogs.appendElement("div").addClass("log-entry txt-failed").text(jsonLogEvent.getLogMessage());
+            methodLogs.appendElement("div").addClass("log-entry log-fail").text(jsonLogEvent.getLogMessage());
         }
         else {
             methodLogs.appendElement("div").addClass("log-entry ").text(jsonLogEvent.getLogMessage());
