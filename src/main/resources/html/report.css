@@ -231,6 +231,14 @@ html {
     background-color: #cccccc;
 }
 
+.log-pass {
+    color: #118811;
+}
+
+.log-fail {
+    color: #bb2020;
+}
+
 .bordered {
     border: 1px solid #000000;
 }
