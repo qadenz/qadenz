@@ -3,6 +3,10 @@ html {
     background-color: #ffffff;
 }
 
+.bold {
+    font-weight: 900;
+}
+
 .suite-summary {
     height: 134px;
     width: 1202px;
