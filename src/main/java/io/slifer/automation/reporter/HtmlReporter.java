@@ -63,6 +63,9 @@ public class HtmlReporter {
         head.appendElement("link")
             .attr("href", "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap")
             .attr("rel", "stylesheet");
+        head.appendElement("link")
+            .attr("href", "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@900&display=swap")
+            .attr("rel", "stylesheet");
         head.appendElement("style").text(loadAndCompressCss());
     }
     
@@ -76,7 +79,7 @@ public class HtmlReporter {
             exception.printStackTrace();
         }
         
-        // yeah, it's hacky but it works. I'll revisit this another time
+        // Yeah, it's hacky but it works. I'll revisit this another time.
         return contents.replace("    ", "").replace(" {", "{").replace(": ", ":").replaceAll("\n", "");
     }
     
@@ -224,7 +227,12 @@ public class HtmlReporter {
     }
     
     private void writeMethodLogs(JsonLogEvent jsonLogEvent, Element methodLogs) {
-        methodLogs.appendElement("div").addClass("log-entry").text(jsonLogEvent.getLogMessage());
+        if (!jsonLogEvent.getLogMessage().contains("| WARN |")) {
+            methodLogs.appendElement("div").addClass("log-entry").text(jsonLogEvent.getLogMessage());
+        }
+        else {
+            methodLogs.appendElement("div").addClass("log-entry bold").text(jsonLogEvent.getLogMessage());
+        }
         
         if (jsonLogEvent.getScreenshot() != null) {
             methodLogs.appendElement("div").addClass("log-entry screenshot").text("View Screenshot");
