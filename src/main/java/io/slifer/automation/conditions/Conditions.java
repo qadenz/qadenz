@@ -42,7 +42,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 attributeValue = webInspector.getAttributeOfElement(locator, attributeName);
                 
                 match = expectation.matcher().matches(attributeValue);
@@ -79,7 +79,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 elementCount = webInspector.getCountOfElement(locator);
                 
                 match = expectation.matcher().matches(elementCount);
@@ -119,7 +119,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 cssPropertyValue = webInspector.getCssPropertyOfElement(locator, cssPropertyName);
                 
                 match = expectation.matcher().matches(cssPropertyName);
@@ -156,7 +156,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 enabled = webInspector.getEnabledStateOfElement(locator);
                 
                 match = expectation.matcher().matches(enabled);
@@ -195,7 +195,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 
                 for (Locator locator : locatorGroup) {
                     boolean enabled = webInspector.getEnabledStateOfElement(locator);
@@ -365,7 +365,7 @@ public class Conditions {
             }
             
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 selectedOption = webInspector.getSelectedMenuOption(locator);
                 
                 match = expectation.matcher().matches(selectedOption);
@@ -402,7 +402,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 selected = webInspector.getSelectedStateOfElement(locator);
                 
                 match = expectation.matcher().matches(selected);
@@ -472,7 +472,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 elementText = webInspector.getTextOfElement(locator);
                 
                 match = expectation.matcher().matches(elementText);
@@ -511,7 +511,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 elementValues = webInspector.getTextOfElements(locator);
                 
                 for (int i = 0; i < elementValues.size(); i++) {
@@ -560,7 +560,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 visible = webInspector.getVisibilityOfElement(locator);
                 
                 match = expectation.matcher().matches(visible);
@@ -599,7 +599,7 @@ public class Conditions {
             
             @Override
             public Boolean result() {
-                WebInspector webInspector = new WebInspector();
+                WebInspector webInspector = new WebInspector(Conditions.class);
                 
                 for (Locator locator : locatorGroup) {
                     boolean visible = webInspector.getVisibilityOfElement(locator);
