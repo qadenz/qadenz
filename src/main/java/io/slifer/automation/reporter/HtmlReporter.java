@@ -227,11 +227,17 @@ public class HtmlReporter {
     }
     
     private void writeMethodLogs(JsonLogEvent jsonLogEvent, Element methodLogs) {
-        if (!jsonLogEvent.getLogMessage().contains("| WARN |")) {
-            methodLogs.appendElement("div").addClass("log-entry").text(jsonLogEvent.getLogMessage());
+        if (jsonLogEvent.getLogMessage().contains("| WARN |")) {
+            methodLogs.appendElement("div").addClass("log-entry bold").text(jsonLogEvent.getLogMessage());
+        }
+        else if (jsonLogEvent.getLogMessage().contains("| Result - PASS")) {
+            methodLogs.appendElement("div").addClass("log-entry txt-passed").text(jsonLogEvent.getLogMessage());
+        }
+        else if (jsonLogEvent.getLogMessage().contains("| Result - FAIL")) {
+            methodLogs.appendElement("div").addClass("log-entry txt-failed").text(jsonLogEvent.getLogMessage());
         }
         else {
-            methodLogs.appendElement("div").addClass("log-entry bold").text(jsonLogEvent.getLogMessage());
+            methodLogs.appendElement("div").addClass("log-entry ").text(jsonLogEvent.getLogMessage());
         }
         
         if (jsonLogEvent.getScreenshot() != null) {
