@@ -199,13 +199,13 @@ public class WebCommander extends Commands {
     }
     
     /**
-     * Enters text into an input field.
+     * Sends text and/or other keystrokes into an element.
      *
      * @param locator The mapped UI element.
-     * @param input The text input.
+     * @param input The text/keystrokes to send.
      */
     public void enterText(Locator locator, CharSequence... input) {
-        LOG.info("Entering text [{}] into element [{}].", input, locator.getName());
+        LOG.info("Entering text [{}] into element [{}].", stringify(input), locator.getName());
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
             webElement.sendKeys(input);
@@ -352,5 +352,22 @@ public class WebCommander extends Commands {
             
             throw exception;
         }
+    }
+    
+    private String stringify(CharSequence... input) {
+        StringBuilder builder = new StringBuilder();
+        String separator = "";
+        for (CharSequence charSequence : input) {
+            builder.append(separator);
+            if (charSequence instanceof String) {
+                builder.append(charSequence);
+            }
+            else if (charSequence instanceof Keys) {
+                builder.append(((Keys) charSequence).name());
+            }
+            separator = ", ";
+        }
+        
+        return builder.toString();
     }
 }
