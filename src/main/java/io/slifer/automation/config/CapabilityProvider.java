@@ -78,8 +78,9 @@ public class CapabilityProvider {
             stream.forEach(options::add);
         }
         catch (Exception exception) {
-            exception.printStackTrace();
-            return null;
+            LOG.error("Error loading args for browser [{}] :: {}: {}", browser.toString(),
+                    exception.getClass().getSimpleName(), exception.getMessage());
+            // Log the exception and return an empty list.
         }
         
         return options;
