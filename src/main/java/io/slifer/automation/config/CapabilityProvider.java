@@ -38,7 +38,7 @@ public class CapabilityProvider {
         switch (browser) {
             case CHROME:
                 capabilities = new ChromeOptions();
-                LOG.info("Chrome Options: {}", browserOptions);
+                LOG.info("Chrome Args: {}", browserOptions);
                 ((ChromeOptions) capabilities).addArguments(browserOptions);
                 break;
             case EDGE:
@@ -46,7 +46,7 @@ public class CapabilityProvider {
                 break;
             case FIREFOX:
                 capabilities = new FirefoxOptions();
-                LOG.info("Chrome Options: {}", browserOptions);
+                LOG.info("Firefox Args: {}", browserOptions);
                 ((FirefoxOptions) capabilities).addArguments(browserOptions);
                 break;
             case INTERNET_EXPLORER:
@@ -71,7 +71,7 @@ public class CapabilityProvider {
     
     public static List<String> loadOptions(Browser browser) {
         List<String> options = new ArrayList<>();
-        String fileName = "config/" + browser.name().toLowerCase() + ".options";
+        String fileName = "config/" + browser.name().toLowerCase() + ".args";
         
         try (Stream<String> stream = Files.lines(Paths.get(ClassLoader.getSystemResource(fileName).toURI()),
                 StandardCharsets.UTF_8)) {
