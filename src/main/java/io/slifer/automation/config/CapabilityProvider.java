@@ -69,7 +69,7 @@ public class CapabilityProvider {
         return capabilities;
     }
     
-    public static List<String> loadOptions(Browser browser) {
+    private static List<String> loadOptions(Browser browser) {
         List<String> options = new ArrayList<>();
         String fileName = "config/" + browser.name().toLowerCase() + ".args";
         
