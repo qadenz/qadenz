@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -20,6 +22,8 @@ import java.util.stream.Stream;
  */
 public class CapabilityProvider {
     
+    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    
     /**
      * Loads the options for the given browser, and performs default configurations based on Suite Parameters.
      *
@@ -34,15 +38,16 @@ public class CapabilityProvider {
         switch (browser) {
             case CHROME:
                 capabilities = new ChromeOptions();
-                
+                LOG.info("Chrome Options: {}", browserOptions);
                 ((ChromeOptions) capabilities).addArguments(browserOptions);
-                
                 break;
             case EDGE:
                 capabilities = new EdgeOptions();
                 break;
             case FIREFOX:
                 capabilities = new FirefoxOptions();
+                LOG.info("Chrome Options: {}", browserOptions);
+                ((FirefoxOptions) capabilities).addArguments(browserOptions);
                 break;
             case INTERNET_EXPLORER:
                 capabilities = new InternetExplorerOptions();
