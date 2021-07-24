@@ -11,21 +11,16 @@ import java.util.List;
 
 public class VisibilityOptions {
     
-    private static VisibilityOptions instance;
+    private static List<JSONObject> options = null;
     
-    private List<JSONObject> options = new ArrayList<>();
-    
-    private VisibilityOptions() {
-        init();
-    }
-    
-    private void init() {
+    private static void init() {
         try {
+            options = new ArrayList<>();
             Path jsonFile = Paths.get(ClassLoader.getSystemResource("config/visibility.json").toURI());
-            String jsonText = new String(Files.readAllBytes(jsonFile));
+            String jsonText = Files.readString(jsonFile);
             JSONArray jsonArray = new JSONArray(jsonText);
             for (int i = 0; i < jsonArray.length(); i++) {
-                options.add(new JSONObject(jsonArray.getJSONObject(i)));
+                options.add(new JSONObject(jsonArray.get(i).toString()));
             }
         }
         catch (Exception exception) {
@@ -33,15 +28,10 @@ public class VisibilityOptions {
         }
     }
     
-    public static VisibilityOptions getInstance() {
-        if (instance == null) {
-            instance = new VisibilityOptions();
+    public static List<JSONObject> getOptions() {
+        if (options == null) {
+            init();
         }
-        
-        return instance;
-    }
-    
-    public List<JSONObject> getVisibilityOptions() {
         return options;
     }
 }
