@@ -3,6 +3,7 @@ package io.slifer.automation.commands;
 import io.slifer.automation.reporter.Screenshot;
 import io.slifer.automation.ui.Locator;
 import io.slifer.automation.ui.WebFinder;
+import org.json.JSONObject;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -358,6 +359,16 @@ public class WebInspector {
                 if (visible) {
                     visible = (!webElements.get(0).getAttribute("class").contains("ng-hide"));
                     LOG.debug("Checked class 'ng-hide' - Visibility is [{}].", visible);
+                }
+                
+                for (JSONObject json : VisibilityOptions.getOptions()) {
+                    String attribute = json.getString("attribute");
+                    String value = json.getString("value");
+                    if (visible) {
+                        visible = (!webElements.get(0).getAttribute(attribute).contains(value));
+                        LOG.debug("Checked attribute [{}] for value [{}] - Visibility is [{}].",
+                                attribute, value, visible);
+                    }
                 }
             }
             catch (StaleElementReferenceException e) {
