@@ -1,5 +1,7 @@
 package io.slifer.automation.config;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -8,12 +10,11 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Configures the Browser Options for the session.
@@ -71,11 +72,15 @@ public class CapabilityProvider {
     
     private static List<String> loadOptions(Browser browser) {
         List<String> options = new ArrayList<>();
-        String fileName = "config/" + browser.name().toLowerCase() + ".args";
+        String fileName = "config/" + browser.name().toLowerCase() + "-args.json";
         
-        try (Stream<String> stream = Files.lines(Paths.get(ClassLoader.getSystemResource(fileName).toURI()),
-                StandardCharsets.UTF_8)) {
-            stream.forEach(options::add);
+        try {
+            Path jsonFile = Paths.get(ClassLoader.getSystemResource(fileName).toURI());
+            String jsonText = Files.readString(jsonFile);
+            JSONArray jsonArray = new JSONObject(jsonText).getJSONArray("args");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                options.add(jsonArray.get(i).toString());
+            }
         }
         catch (Exception exception) {
             LOG.error("Error loading args for browser [{}] :: {}: {}", browser.toString(),
