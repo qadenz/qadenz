@@ -9,6 +9,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A handler for custom configuration allowing the addition of user defined attribute/value combinations to be included
+ * when the visibility of an element is being evaluated.
+ *
+ * @author Tim Slifer
+ */
 public class VisibilityOptions {
     
     private static List<JSONObject> options = null;
