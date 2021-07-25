@@ -24,7 +24,7 @@ public class VisibilityOptions {
             }
         }
         catch (Exception exception) {
-            exception.printStackTrace();
+            // do nothing, just return an empty list
         }
     }
     
