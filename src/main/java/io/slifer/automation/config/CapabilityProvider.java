@@ -33,22 +33,22 @@ public class CapabilityProvider {
     public static MutableCapabilities getBrowserOptions() {
         Browser browser = WebConfig.browser;
         
-        List<String> browserOptions = loadOptions(browser);
+        List<String> browserArgs = loadArgs(browser);
         
         MutableCapabilities capabilities = null;
         switch (browser) {
             case CHROME:
                 capabilities = new ChromeOptions();
-                LOG.info("Chrome Args: {}", browserOptions);
-                ((ChromeOptions) capabilities).addArguments(browserOptions);
+                LOG.info("Chrome Args: {}", browserArgs);
+                ((ChromeOptions) capabilities).addArguments(browserArgs);
                 break;
             case EDGE:
                 capabilities = new EdgeOptions();
                 break;
             case FIREFOX:
                 capabilities = new FirefoxOptions();
-                LOG.info("Firefox Args: {}", browserOptions);
-                ((FirefoxOptions) capabilities).addArguments(browserOptions);
+                LOG.info("Firefox Args: {}", browserArgs);
+                ((FirefoxOptions) capabilities).addArguments(browserArgs);
                 break;
             case INTERNET_EXPLORER:
                 capabilities = new InternetExplorerOptions();
@@ -70,8 +70,8 @@ public class CapabilityProvider {
         return capabilities;
     }
     
-    private static List<String> loadOptions(Browser browser) {
-        List<String> options = new ArrayList<>();
+    private static List<String> loadArgs(Browser browser) {
+        List<String> args = new ArrayList<>();
         String fileName = "config/" + browser.name().toLowerCase() + "-args.json";
         
         try {
@@ -79,7 +79,7 @@ public class CapabilityProvider {
             String jsonText = Files.readString(jsonFile);
             JSONArray jsonArray = new JSONObject(jsonText).getJSONArray("args");
             for (int i = 0; i < jsonArray.length(); i++) {
-                options.add(jsonArray.get(i).toString());
+                args.add(jsonArray.get(i).toString());
             }
         }
         catch (Exception exception) {
@@ -88,6 +88,6 @@ public class CapabilityProvider {
             // Log the exception and return an empty list.
         }
         
-        return options;
+        return args;
     }
 }
