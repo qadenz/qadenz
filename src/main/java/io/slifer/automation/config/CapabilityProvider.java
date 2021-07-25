@@ -33,7 +33,7 @@ public class CapabilityProvider {
     public static MutableCapabilities getBrowserOptions() {
         Browser browser = WebConfig.browser;
         
-        List<String> browserOptions = loadOptions(browser);
+        List<String> browserOptions = loadArgs(browser);
         
         MutableCapabilities capabilities = null;
         switch (browser) {
@@ -70,8 +70,8 @@ public class CapabilityProvider {
         return capabilities;
     }
     
-    private static List<String> loadOptions(Browser browser) {
-        List<String> options = new ArrayList<>();
+    private static List<String> loadArgs(Browser browser) {
+        List<String> args = new ArrayList<>();
         String fileName = "config/" + browser.name().toLowerCase() + "-args.json";
         
         try {
@@ -79,7 +79,7 @@ public class CapabilityProvider {
             String jsonText = Files.readString(jsonFile);
             JSONArray jsonArray = new JSONObject(jsonText).getJSONArray("args");
             for (int i = 0; i < jsonArray.length(); i++) {
-                options.add(jsonArray.get(i).toString());
+                args.add(jsonArray.get(i).toString());
             }
         }
         catch (Exception exception) {
@@ -88,6 +88,6 @@ public class CapabilityProvider {
             // Log the exception and return an empty list.
         }
         
-        return options;
+        return args;
     }
 }
