@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description></description>
-    <url>http://github.com/tim-slifer/reference-automation</url>
+    <url>http://github.com/qadenz/qadnez</url>
     
     <properties>
         <java.version>11</java.version>
