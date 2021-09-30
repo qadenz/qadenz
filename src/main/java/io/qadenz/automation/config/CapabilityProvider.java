@@ -44,6 +44,8 @@ public class CapabilityProvider {
                 break;
             case EDGE:
                 capabilities = new EdgeOptions();
+                LOG.info("Edge Args: {}", browserArgs);
+                ((EdgeOptions) capabilities).addArguments(browserArgs);
                 break;
             case FIREFOX:
                 capabilities = new FirefoxOptions();
