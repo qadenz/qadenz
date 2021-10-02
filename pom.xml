@@ -27,7 +27,7 @@
         <logback-contrib.version>0.1.5</logback-contrib.version>
         <logback-testng.version>1.3.4</logback-testng.version>
         <selenium.version>4.0.0-rc-1</selenium.version>
-        <sizzle.version>3.141.59-R1</sizzle.version>
+        <sizzle.version>4.0.0-rc-1-R1</sizzle.version>
         <testng.version>7.4.0</testng.version>
         
         <byte-buddy.version>1.11.18</byte-buddy.version>
