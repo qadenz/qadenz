@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -72,7 +73,8 @@ public class WebFinder {
      */
     public WebElement findWhenVisible(Locator locator) {
         LOG.debug("Finding element [{}] when visible.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
+        WebDriverWait webDriverWait =
+                new WebDriverWait(WebDriverProvider.getWebDriver(), Duration.ofSeconds(WebConfig.timeout));
         
         try {
             LOG.debug("Initializing element [{}] when visible.", locator.getName());
@@ -95,7 +97,8 @@ public class WebFinder {
      */
     public List<WebElement> findAllWhenVisible(Locator locator) {
         LOG.debug("Finding elements [{}] when visible.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
+        WebDriverWait webDriverWait =
+                new WebDriverWait(WebDriverProvider.getWebDriver(), Duration.ofSeconds(WebConfig.timeout));
         
         try {
             LOG.debug("Initializing elements [{}] when visible.", locator.getName());
@@ -118,7 +121,8 @@ public class WebFinder {
      */
     public WebElement findWhenClickable(Locator locator) {
         LOG.debug("Finding element [{}] when clickable.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
+        WebDriverWait webDriverWait =
+                new WebDriverWait(WebDriverProvider.getWebDriver(), Duration.ofSeconds(WebConfig.timeout));
         
         try {
             LOG.debug("Initializing element [{}] when clickable.", locator.getName());
@@ -141,7 +145,8 @@ public class WebFinder {
      */
     public WebElement findWhenPresent(Locator locator) {
         LOG.debug("Finding element [{}] when present.", locator.getName());
-        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
+        WebDriverWait webDriverWait =
+                new WebDriverWait(WebDriverProvider.getWebDriver(), Duration.ofSeconds(WebConfig.timeout));
         
         try {
             LOG.debug("Initializing element [{}] when present.", locator.getName());
