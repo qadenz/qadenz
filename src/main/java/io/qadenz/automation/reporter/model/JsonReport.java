@@ -3,7 +3,7 @@ package io.qadenz.automation.reporter.model;
 import java.util.List;
 
 /**
- * This is the top level data model for for reporting content that drives the HTML reports. The JSON generated from this
+ * This is the top level data model for reporting content that drives the HTML reports. The JSON generated from this
  * object can be shared with other systems to visualize the captured information from during the test run.
  *
  * @author Tim Slifer
