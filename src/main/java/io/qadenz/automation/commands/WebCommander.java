@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -341,7 +342,8 @@ public class WebCommander extends Commands {
      */
     public void pause(Condition condition) {
         LOG.info("Waiting for condition :: {}", condition.description());
-        WebDriverWait webDriverWait = new WebDriverWait(WebDriverProvider.getWebDriver(), WebConfig.timeout);
+        WebDriverWait webDriverWait =
+                new WebDriverWait(WebDriverProvider.getWebDriver(), Duration.ofSeconds(WebConfig.timeout));
         
         try {
             webDriverWait.until((ExpectedCondition<Boolean>) webDriver -> condition.result());
