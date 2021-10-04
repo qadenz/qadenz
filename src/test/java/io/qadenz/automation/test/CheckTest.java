@@ -35,7 +35,7 @@ public class CheckTest {
         Condition returnsTrue = spy(TestConditions.returnsTrue());
         commander.check(returnsTrue);
         verify(returnsTrue, times(1)).result();
-        Assertions.purge();
+        Assertions.flush();
     }
     
     @Test
@@ -44,7 +44,7 @@ public class CheckTest {
         doNothing().when(screenshot).capture();
         commander.check(returnsFalse);
         verify(returnsFalse, times(1)).result();
-        assertThrows(AssertionError.class, Assertions::purge);
+        assertThrows(AssertionError.class, Assertions::flush);
     }
     
     @Test
@@ -64,7 +64,7 @@ public class CheckTest {
         verify(returnsTrue1, times(1)).result();
         verify(returnsTrue2, times(1)).result();
         verify(returnsTrue3, times(1)).result();
-        Assertions.purge();
+        Assertions.flush();
     }
     
     @Test
@@ -77,7 +77,7 @@ public class CheckTest {
         verify(returnsFalse, times(1)).result();
         verify(returnsTrue1, times(1)).result();
         verify(returnsTrue2, times(1)).result();
-        assertThrows(AssertionError.class, Assertions::purge);
+        assertThrows(AssertionError.class, Assertions::flush);
     }
     
     @Test
@@ -122,10 +122,10 @@ public class CheckTest {
         Condition returnsTrue1 = spy(TestConditions.returnsTrue());
         commander.check(returnsTrue);
         verify(returnsTrue, times(1)).result();
-        Assertions.purge();
+        Assertions.flush();
         commander.check(returnsTrue1);
         verify(returnsTrue1, times(1)).result();
-        Assertions.purge();
+        Assertions.flush();
     }
     
     @Test
@@ -134,10 +134,10 @@ public class CheckTest {
         Condition returnsFalse = spy(TestConditions.returnsFalse());
         commander.check(returnsTrue);
         verify(returnsTrue, times(1)).result();
-        Assertions.purge();
+        Assertions.flush();
         commander.check(returnsFalse);
         verify(returnsFalse, times(1)).result();
-        assertThrows(AssertionError.class, Assertions::purge);
+        assertThrows(AssertionError.class, Assertions::flush);
     }
     
     @Test
@@ -146,7 +146,7 @@ public class CheckTest {
         Condition throwsError = spy(TestConditions.throwsError());
         commander.check(returnsTrue);
         verify(returnsTrue, times(1)).result();
-        Assertions.purge();
+        Assertions.flush();
         assertThrows(RuntimeException.class, () -> commander.check(throwsError));
         verify(throwsError, times(1)).result();
     }
