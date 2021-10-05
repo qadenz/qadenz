@@ -86,7 +86,7 @@ public class WebCommander extends Commands {
                 webElement = webFinder.findWhenClickable(locator);
                 
                 Actions actions = new Actions(WebDriverProvider.getWebDriver());
-                actions.moveToElement(webElement).click().perform();
+                actions.click(webElement).perform();
             }
             else {
                 LOG.error("Error clicking with Actions :: {}: {}", exception.getClass().getSimpleName(),
