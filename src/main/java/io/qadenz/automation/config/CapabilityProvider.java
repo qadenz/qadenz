@@ -2,6 +2,7 @@ package io.qadenz.automation.config;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -30,7 +31,7 @@ public class CapabilityProvider {
      *
      * @return The Browser Options.
      */
-    public static MutableCapabilities getBrowserOptions() {
+    public static Capabilities getBrowserOptions() {
         Browser browser = WebConfig.browser;
         
         List<String> browserArgs = loadArgs(browser);
@@ -44,6 +45,8 @@ public class CapabilityProvider {
                 break;
             case EDGE:
                 capabilities = new EdgeOptions();
+                LOG.info("Edge Args: {}", browserArgs);
+                ((EdgeOptions) capabilities).addArguments(browserArgs);
                 break;
             case FIREFOX:
                 capabilities = new FirefoxOptions();
