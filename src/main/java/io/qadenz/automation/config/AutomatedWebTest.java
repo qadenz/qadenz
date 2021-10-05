@@ -2,7 +2,7 @@ package io.qadenz.automation.config;
 
 import io.qadenz.automation.commands.Assertions;
 import io.qadenz.automation.reporter.TestReporter;
-import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,7 +74,7 @@ public class AutomatedWebTest {
     public void startWebDriver() throws Exception {
         LOG.info("Launching WebDriver.");
         Assertions.init();
-        MutableCapabilities capabilities = CapabilityProvider.getBrowserOptions();
+        Capabilities capabilities = CapabilityProvider.getBrowserOptions();
         
         try {
             WebDriverProvider.setWebDriver(
