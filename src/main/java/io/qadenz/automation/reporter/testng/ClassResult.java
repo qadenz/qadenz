@@ -1,10 +1,28 @@
+/*
+Copyright 2021 Tim Slifer
+
+Licensed under the PolyForm Internal Use License, Version 1.0.0 (the "License");
+you may not use this file except in compliance with the License.
+A copy of the License may be obtained at
+
+https://polyformproject.org/licenses/internal-use/1.0.0/
+
+This is derived from the org.testng.reporters.EmailableReporter2.java source 
+file, available in the TestNG Library. The original work is licensed under the 
+Apache 2.0 license and is Copyright Cedric Beust and the TestNG Team.
+
+http://www.apache.org/licenses/LICENSE-2.0
+ */
 package io.qadenz.automation.reporter.testng;
 
 import java.util.List;
 
 /**
- * Copied from {@link org.testng.reporters.EmailableReporter2} due to being protected and static within the TestNG
- * project.
+ * Copied from {@link org.testng.reporters.EmailableReporter2}. The original class is protected and static which
+ * prevented direct usage from within the Qadenz library. The original class is unchanged, apart from being converted to
+ * a public class.
+ * <p>
+ * TestNG JavaDoc: Groups {@link MethodResult}s by class.
  *
  * @author TestNG
  */
