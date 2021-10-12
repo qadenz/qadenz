@@ -29,9 +29,10 @@ import java.util.stream.Collectors;
  * Copied from {@link org.testng.reporters.EmailableReporter2}. The original class is protected and static which
  * prevented direct usage from within the Qadenz library. To implement the concept of "Stopped" tests, logic was added
  * to this class to examine TestNG's "Failed" tests and re-classify as "Failed" or "Stopped" based on the type of
- * exception that was caught during execution. This involved adding two new class fields, a method variable inside the
- * constructor, and two new methods to contain the logic for separating the test results; {@code
- * getFailuresWithAssertionFailures()} and {@code getFailuresWithOtherExceptions()}.
+ * exception that was caught during execution. This involved adding two new class fields and a method variable
+ * (identified by naming context referencing "stopped" tests) inside the constructor, and two new methods to contain the
+ * logic for separating the test results; {@code getFailuresWithAssertionFailures()} and {@code
+ * getFailuresWithOtherExceptions()}.
  * <p>
  * TestNG JavaDoc: Groups {@link ClassResult}s by test, type (configuration or test), and status.
  *
