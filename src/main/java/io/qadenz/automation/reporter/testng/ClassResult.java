@@ -7,9 +7,14 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
 
-This is derived from the org.testng.reporters.EmailableReporter2.java source 
-file, available in the TestNG Library. The original work is licensed under the 
-Apache 2.0 license and is Copyright Cedric Beust and the TestNG Team.
+This file is derived from the org.testng.reporters.EmailableReporter2.java source 
+file, available in the TestNG Library. 
+
+The original work is Copyright Cedric Beust and the TestNG Team.
+
+TestNG is licensed under the Apache 2.0 License (the "Apache License");
+you may not use this file except in compliance with the Apache License.
+A copy of the Apache License may be obtained at
 
 http://www.apache.org/licenses/LICENSE-2.0
  */
