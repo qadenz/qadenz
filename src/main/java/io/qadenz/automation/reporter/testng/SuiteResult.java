@@ -12,7 +12,7 @@ file, available in the TestNG Library.
 
 The original work is Copyright Cedric Beust and the TestNG Team.
 
-TestNG is licensed under the Apache 2.0 License (the "Apache License");
+TestNG is licensed under the Apache License, Version 2.0 (the "Apache License");
 you may not use this file except in compliance with the Apache License.
 A copy of the Apache License may be obtained at
 
