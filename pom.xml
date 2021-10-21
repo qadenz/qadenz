@@ -13,6 +13,19 @@
     <description>A robust test automation library.</description>
     <url>http://github.com/qadenz/qadenz</url>
     
+    <licenses>
+        <license>
+            <name>PolyForm Internal Use License</name>
+            <url>https://polyformproject.org/licenses/internal-use/1.0.0</url>
+        </license>
+    </licenses>
+    
+    <scm>
+        <connection>scm:git:git://github.com/qadenz.qadenz.git</connection>
+        <developerConnection>scm:git:ssh://github.com:qadenz/qadenz.git</developerConnection>
+        <url>https://github.com/qadenz/qadenz/tree/master</url>
+    </scm>
+    
     <properties>
         <java.version>11</java.version>
         
@@ -26,8 +39,8 @@
         <logback.version>1.2.6</logback.version>
         <logback-contrib.version>0.1.5</logback-contrib.version>
         <logback-testng.version>1.3.4</logback-testng.version>
-        <selenium.version>4.0.0-rc-1</selenium.version>
-        <sizzle.version>4.0.0-rc-1-R1</sizzle.version>
+        <selenium.version>4.0.0</selenium.version>
+        <sizzle.version>4.0.0-R1</sizzle.version>
         <testng.version>7.4.0</testng.version>
         
         <byte-buddy.version>1.11.18</byte-buddy.version>
