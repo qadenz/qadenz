@@ -13,6 +13,19 @@
     <description>A robust test automation library.</description>
     <url>http://github.com/qadenz/qadenz</url>
     
+    <licenses>
+        <license>
+            <name>PolyForm Internal Use License</name>
+            <url>https://polyformproject.org/licenses/internal-use/1.0.0</url>
+        </license>
+    </licenses>
+    
+    <scm>
+        <connection>scm:git:git://github.com/qadenz.qadenz.git</connection>
+        <developerConnection>scm:git:ssh://github.com:qadenz/qadenz.git</developerConnection>
+        <url>https://github.com/qadenz/qadenz/tree/master</url>
+    </scm>
+    
     <properties>
         <java.version>11</java.version>
         
