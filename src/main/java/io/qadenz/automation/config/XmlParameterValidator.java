@@ -32,13 +32,13 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Ensures the {@code grid-host} parameter has been provided.
+     * Ensures the {@code gridHost} parameter has been provided.
      *
      * @return The validated Grid Host.
      */
     public String validateGridHost() {
-        if (xmlParameters.containsKey("grid-host")) {
-            String gridHost = xmlParameters.get("grid-host");
+        if (xmlParameters.containsKey("gridHost")) {
+            String gridHost = xmlParameters.get("gridHost");
             LOG.info("Using Selenium Grid at Host [{}].", gridHost);
             
             return gridHost;
@@ -81,13 +81,13 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Reads and returns the value of the {@code browser-version} parameter, if one is provided.
+     * Reads and returns the value of the {@code browserVersion} parameter, if one is provided.
      *
      * @return The Browser Version value.
      */
     public String validateBrowserVersion() {
-        if (xmlParameters.containsKey("browser-version")) {
-            String xmlBrowserVersion = xmlParameters.get("browser-version");
+        if (xmlParameters.containsKey("browserVersion")) {
+            String xmlBrowserVersion = xmlParameters.get("browserVersion");
             LOG.info("Using Browser Version [{}].", xmlBrowserVersion);
             
             return xmlBrowserVersion;
@@ -148,7 +148,7 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Reads and returns the Timeout limit, if one is provided, otherwise a default value is set.
+     * Reads and returns the {@code timeout} parameter, if one is provided, otherwise a default value is set.
      *
      * @return The Timeout limit.
      */
@@ -167,13 +167,13 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Ensures the {@code app-url} parameter has been provided.
+     * Ensures the {@code appUrl} parameter has been provided.
      *
      * @return The application URL.
      */
     public String validateAppUrl() {
-        if (xmlParameters.containsKey("app-url")) {
-            String url = xmlParameters.get("app-url");
+        if (xmlParameters.containsKey("appUrl")) {
+            String url = xmlParameters.get("appUrl");
             LOG.info("Using Application URL [" + url + "].");
             
             return url;
