@@ -119,7 +119,8 @@ public class Browser {
             WebDriverProvider.getWebDriver().navigate().forward();
         }
         catch (Exception exception) {
-            LOG.error("Error navigating back :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error navigating forward :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -185,7 +186,8 @@ public class Browser {
             switchWindowFocus(Window.NEXT);
         }
         catch (Exception exception) {
-            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error switching to next window :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -201,7 +203,8 @@ public class Browser {
             switchWindowFocus(Window.PREVIOUS);
         }
         catch (Exception exception) {
-            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error switching previous window :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
