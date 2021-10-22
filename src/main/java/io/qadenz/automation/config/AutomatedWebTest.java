@@ -20,6 +20,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
 import java.net.MalformedURLException;
@@ -59,19 +60,29 @@ public class AutomatedWebTest {
      * @param testContext The injected ITestContext.
      */
     @BeforeSuite (alwaysRun = true, dependsOnMethods = "captureStartDateTime")
-    public void processXmlParameters(ITestContext testContext) {
-        LOG.info("Reading XML Parameters.");
-        Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
-        XmlParameterValidator parameterValidator = new XmlParameterValidator(xmlParameters);
+    public void processXmlSuiteParameters(ITestContext testContext) {
+        LOG.info("Reading XML Suite Parameters.");
         
-        WebConfig.gridHost = parameterValidator.validateGridHost();
-        WebConfig.browser = parameterValidator.validateBrowser();
-        WebConfig.browserVersion = parameterValidator.validateBrowserVersion();
-        WebConfig.platform = parameterValidator.validatePlatform();
-        WebConfig.applicationName = parameterValidator.validateApplicationName();
-        WebConfig.timeout = parameterValidator.validateTimeout();
-        WebConfig.appUrl = parameterValidator.validateAppUrl();
-        WebConfig.retryInterceptedClicks = parameterValidator.validateRetryInterceptedClicks();
+        Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
+        XmlParameterValidator xmlParameterValidator = new XmlParameterValidator(xmlParameters);
+        
+        WebConfig.gridHost = xmlParameterValidator.validateGridHost();
+        WebConfig.applicationName = xmlParameterValidator.validateApplicationName();
+    }
+    
+    @BeforeTest (alwaysRun = true)
+    public void processXmlTestParameters(ITestContext testContext) {
+        LOG.info("Reading XML Test Parameters.");
+        
+        Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
+        XmlParameterValidator xmlParameterValidator = new XmlParameterValidator(xmlParameters);
+        
+        WebConfig.browser = xmlParameterValidator.validateBrowser();
+        WebConfig.browserVersion = xmlParameterValidator.validateBrowserVersion();
+        WebConfig.platform = xmlParameterValidator.validatePlatform();
+        WebConfig.timeout = xmlParameterValidator.validateTimeout();
+        WebConfig.appUrl = xmlParameterValidator.validateAppUrl();
+        WebConfig.retryInterceptedClicks = xmlParameterValidator.validateRetryInterceptedClicks();
     }
     
     /**
