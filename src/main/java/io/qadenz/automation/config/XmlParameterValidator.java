@@ -16,6 +16,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
+/**
+ * Validates parameters given on the Suite XML file.
+ *
+ * @author Tim Slifer
+ */
 public class XmlParameterValidator {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
