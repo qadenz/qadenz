@@ -14,7 +14,7 @@ import org.openqa.selenium.Platform;
 import java.time.LocalDateTime;
 
 /**
- * Stores information about the test run, and holds the major thread-safe components.
+ * Stores parameter values and other information useful to the test run.
  *
  * @author Tim Slifer
  */
