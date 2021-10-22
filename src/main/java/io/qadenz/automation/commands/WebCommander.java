@@ -84,7 +84,7 @@ public class WebCommander extends Commands {
      */
     public void click(Locator locator) {
         LOG.info("Clicking element [{}].", locator.getName());
-        WebElement webElement;
+        WebElement webElement = null;
         try {
             webElement = webFinder.findWhenClickable(locator);
             webElement.click();
@@ -93,7 +93,6 @@ public class WebCommander extends Commands {
             if (WebConfig.retryInterceptedClicks) {
                 try {
                     LOG.debug("Click intercepted, trying with Actions.");
-                    webElement = webFinder.findWhenClickable(locator);
                     
                     Actions actions = new Actions(WebDriverProvider.getWebDriver());
                     actions.click(webElement).perform();
