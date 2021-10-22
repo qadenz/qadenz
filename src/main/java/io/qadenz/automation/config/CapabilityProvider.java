@@ -36,7 +36,8 @@ public class CapabilityProvider {
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     /**
-     * Loads the options for the given browser, and performs default configurations based on Suite Parameters.
+     * Loads the options for the given browser, and performs default configurations based on Suite Parameters and
+     * external configuration files.
      *
      * @return The Browser Options.
      */

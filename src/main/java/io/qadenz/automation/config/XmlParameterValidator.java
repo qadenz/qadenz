@@ -32,7 +32,7 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Ensures the `grid-host` parameter has been provided.
+     * Ensures the {@code grid-host} parameter has been provided.
      *
      * @return The validated Grid Host.
      */
@@ -52,7 +52,7 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Ensures the 'browser' parameter has been provided and is a valid option.
+     * Ensures the {@code browser} parameter has been provided and is a valid option.
      *
      * @return The enumerated Browser name.
      */
@@ -81,7 +81,7 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Reads and returns the value of the 'browser-version' parameter, if one is provided.
+     * Reads and returns the value of the {@code browser-version} parameter, if one is provided.
      *
      * @return The Browser Version value.
      */
@@ -100,7 +100,8 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Reads and returns the value of the 'platform' parameter, if one is provided and is a valid Platform option.
+     * Reads and returns the value of the {@code platform} parameter, if one is provided and is a valid Platform
+     * option.
      *
      * @return The enumerated Platform value.
      */
@@ -128,7 +129,7 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Reads and returns the value of the 'application-name' parameter, if one is provided.
+     * Reads and returns the value of the {@code application-name} parameter, if one is provided.
      *
      * @return The Application Name value.
      */
@@ -166,7 +167,7 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Ensures the `app-url` parameter has been provided.
+     * Ensures the {@code app-url} parameter has been provided.
      *
      * @return The application URL.
      */
@@ -186,8 +187,8 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Reads and returns the value of the 'retryInterceptedClicks' parameter, if one is provided, otherwise a default
-     * value is set.
+     * Reads and returns the value of the {@code retryInterceptedClicks} parameter, if one is provided, otherwise a
+     * default value is set.
      *
      * @return The retryInterceptedClicks value.
      */
