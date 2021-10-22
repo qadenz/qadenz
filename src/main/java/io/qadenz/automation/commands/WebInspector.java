@@ -68,7 +68,7 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the the value of an attribute from each instance of an element on the DOM.
+     * Retrieves the value of an attribute from each instance of an element on the DOM.
      *
      * @param locator The mapped UI element.
      * @param attributeName The name of the attribute to inspect.
@@ -92,7 +92,7 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the total number of instance of an element on the page.
+     * Retrieves the total number of instances of an element on the page.
      *
      * @param locator The mapped UI element.
      *
@@ -137,8 +137,7 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the enabled state of an element. Generally useful for determining whether or not input elements are
-     * enabled.
+     * Determines whether an element is enabled.
      *
      * @param locator The mapped UI element.
      *
@@ -190,7 +189,7 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the instance of an element that contains the expected value.
+     * Retrieves the instance of an element that contains the expected text.
      *
      * @param locator The mapped UI element.
      * @param expectedText The value to be identified.
@@ -218,7 +217,7 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the value of the currently selected option on a a {@code <select>} element.
+     * Retrieves the value of the currently selected option on a {@code <select>} element.
      *
      * @param locator The mapped UI element.
      *
@@ -242,7 +241,7 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the selected state of an element. This applies only elements such as checkboxes, radio options, and
+     * Determines whether an element is selected. This applies only elements such as checkboxes, radio options, and
      * {@code <option>} child of a {@code <select>} elements.
      *
      * @param locator The mapped UI element.
@@ -334,8 +333,8 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the visibility state of an element. An element is determined to be visible if it is present on the DOM,
-     * has a height and width greater than zero, and is not styled to be hidden.
+     * Determines whether an element is visible. An element is visible if it is present on the DOM, has a height and
+     * width greater than zero, and is not styled to be hidden.
      *
      * @param locator The mapped UI element.
      *
