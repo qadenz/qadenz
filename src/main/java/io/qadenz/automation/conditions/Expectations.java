@@ -64,7 +64,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be greater than the expected value.
+     * An Expectation for an integer value to be greater than the given value.
      *
      * @return The Expectation.
      */
@@ -85,7 +85,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be greater than or equal to the expected value.
+     * An Expectation for an integer value to be greater than or equal to the given value.
      *
      * @return The Expectation.
      */
@@ -106,7 +106,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be equal to the expected value.
+     * An Expectation for an integer value to be equal to the given value.
      *
      * @return The Expectation.
      */
@@ -127,7 +127,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be not equal to the expected value.
+     * An Expectation for an integer value to be not equal to the given value.
      *
      * @return The Expectation.
      */
@@ -148,7 +148,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be less than or equal to the expected value.
+     * An Expectation for an integer value to be less than or equal to the given value.
      *
      * @return The Expectation.
      */
@@ -169,7 +169,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be less than the expected value.
+     * An Expectation for an integer value to be less than the given value.
      *
      * @return The Expectation.
      */
@@ -190,7 +190,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to be equal to the expected value.
+     * An Expectation for a String value to be equal to the given value.
      *
      * @return The Expectation.
      */
@@ -211,7 +211,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to be equal to the expected value, ignoring case.
+     * An Expectation for a String value to be equal to the given value, ignoring case.
      *
      * @return The Expectation.
      */
@@ -232,7 +232,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to be not equal to the expected value.
+     * An Expectation for a String value to be not equal to the given value.
      *
      * @return The Expectation.
      */
@@ -253,7 +253,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to contain the expected value.
+     * An Expectation for a String value to contain the given value.
      *
      * @return The Expectation.
      */
@@ -274,7 +274,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to contain the expected value, ignoring case.
+     * An Expectation for a String value to contain the given value, ignoring case.
      *
      * @return The Expectation.
      */
@@ -295,7 +295,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to not contain the expected value.
+     * An Expectation for a String value to not contain the given value.
      *
      * @return The Expectation.
      */
@@ -316,7 +316,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to start with the expected value.
+     * An Expectation for a String value to start with the given value.
      *
      * @return The Expectation.
      */
@@ -337,7 +337,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to not start with the expected value.
+     * An Expectation for a String value to not start with the given value.
      *
      * @return The Expectation.
      */
@@ -358,7 +358,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to end with the expected value.
+     * An Expectation for a String value to end with the given value.
      *
      * @return The Expectation.
      */
@@ -379,7 +379,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to not end with the expected value.
+     * An Expectation for a String value to not end with the given value.
      *
      * @return The Expectation.
      */
