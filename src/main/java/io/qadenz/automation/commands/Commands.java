@@ -109,7 +109,7 @@ public abstract class Commands {
     public void pause(int seconds) {
         try {
             LOG.info("Pausing for [{}] seconds.", seconds);
-            Thread.sleep(seconds * 1000);
+            Thread.sleep(seconds * 1000L);
         }
         catch (Exception e) {
             LOG.error("Error during pause.");
