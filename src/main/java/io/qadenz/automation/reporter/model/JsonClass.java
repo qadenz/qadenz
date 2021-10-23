@@ -12,7 +12,7 @@ package io.qadenz.automation.reporter.model;
 import java.util.List;
 
 /**
- * Third level data model that stores individual method results on each test class.
+ * Model that stores individual method results on each test class.
  *
  * @author Tim Slifer
  */

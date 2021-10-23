@@ -10,7 +10,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package io.qadenz.automation.reporter.model;
 
 /**
- * Models logging output for test cases, and stores Base64 encoded screenshots.
+ * Models individual logging events as test steps, along with Base64 encoded screenshots of failures and errors.
  *
  * @author Tim Slifer
  */
