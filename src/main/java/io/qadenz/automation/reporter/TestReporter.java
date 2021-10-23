@@ -22,8 +22,8 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Implements the TestNG {@link IReporter} interface to make available a new presentation of suite results using a JSON
- * model to store data, and a custom stand-along HTML report that presents the data.
+ * Compiles Suite results using a JSON model to store data, and a custom stand-alone HTML report that presents the
+ * data.
  *
  * @author Tim Slifer
  */
