@@ -147,7 +147,7 @@ public class Conditions {
      * A Condition for evaluating element to be enabled.
      *
      * @param locator The mapped UI element.
-     * @param expectation The expectation of whether or not the element is to be enabled.
+     * @param expectation The expectation of whether the element is to be enabled.
      *
      * @return The Condition.
      */
@@ -181,10 +181,10 @@ public class Conditions {
     }
     
     /**
-     * A Condition for evaluating whether or not a group of elements is enabled.
+     * A Condition for evaluating whether a group of elements is enabled.
      *
      * @param locatorGroup The mapped UI elements.
-     * @param expectation The expectation of whether or not each element is to be enabled.
+     * @param expectation The expectation of whether each element is to be enabled.
      *
      * @return The Condition.
      */
@@ -230,9 +230,9 @@ public class Conditions {
     }
     
     /**
-     * A Condition for evaluating whether or not a JavaScript Alert is present.
+     * A Condition for evaluating whether a JavaScript Alert is present.
      *
-     * @param expectation The expectation of whether or not the alert is to be present.
+     * @param expectation The expectation of whether the alert is to be present.
      *
      * @return The Condition.
      */
@@ -268,11 +268,11 @@ public class Conditions {
     }
     
     /**
-     * A Condition for evaluating whether or not an element is present on the DOM, regardless of if the element is
-     * visible on the page.
+     * A Condition for evaluating whether an element is present on the DOM, regardless of if the element is visible on
+     * the page.
      *
      * @param locator The mapped UI element.
-     * @param expectation The expectation of whether or not the element is to be present.
+     * @param expectation The expectation of whether the element is to be present.
      *
      * @return The Condition.
      */
@@ -306,11 +306,11 @@ public class Conditions {
     }
     
     /**
-     * A Condition for evaluating whether or not a group of elements is present on the DOM, regardless of if the
-     * elements are visible on the page.
+     * A Condition for evaluating whether a group of elements is present on the DOM, regardless of if the elements are
+     * visible on the page.
      *
      * @param locatorGroup The mapped UI elements.
-     * @param expectation The expectation of whether or not each element is to be present.
+     * @param expectation The expectation of whether each element is to be present.
      *
      * @return The Condition.
      */
@@ -393,7 +393,7 @@ public class Conditions {
      * options, and {@code <option>} child of a {@code <select>} elements.
      *
      * @param locator The mapped UI element.
-     * @param expectation The expectation of whether or not the element is to be selected.
+     * @param expectation The expectation of whether the element is to be selected.
      *
      * @return The Condition.
      */
@@ -551,7 +551,7 @@ public class Conditions {
      * DOM, has a height and width greater than zero, and is not styled to be hidden.
      *
      * @param locator The mapped UI element.
-     * @param expectation The expectation of whether or not the element is to be visible.
+     * @param expectation The expectation of whether the element is to be visible.
      *
      * @return The Condition.
      */
@@ -589,7 +589,7 @@ public class Conditions {
      * the DOM, has a height and width greater than zero, and is not styled to be hidden.
      *
      * @param locatorGroup The mapped UI elements.
-     * @param expectation The expectation of whether or not each element is to be visible.
+     * @param expectation The expectation of whether each element is to be visible.
      *
      * @return The Condition.
      */

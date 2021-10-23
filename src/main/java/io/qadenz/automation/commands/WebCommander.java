@@ -84,21 +84,29 @@ public class WebCommander extends Commands {
      */
     public void click(Locator locator) {
         LOG.info("Clicking element [{}].", locator.getName());
-        WebElement webElement;
+        WebElement webElement = null;
         try {
             webElement = webFinder.findWhenClickable(locator);
             webElement.click();
         }
         catch (ElementClickInterceptedException exception) {
             if (WebConfig.retryInterceptedClicks) {
-                LOG.debug("Click intercepted, trying with Actions.");
-                webElement = webFinder.findWhenClickable(locator);
-                
-                Actions actions = new Actions(WebDriverProvider.getWebDriver());
-                actions.click(webElement).perform();
+                try {
+                    LOG.debug("Click intercepted, trying with Actions.");
+                    
+                    Actions actions = new Actions(WebDriverProvider.getWebDriver());
+                    actions.click(webElement).perform();
+                }
+                catch (Exception exception1) {
+                    LOG.error("Error clicking with Actions :: {}: {}", exception.getClass().getSimpleName(),
+                            exception.getMessage());
+                    screenshot.capture();
+                    
+                    throw exception1;
+                }
             }
             else {
-                LOG.error("Error clicking with Actions :: {}: {}", exception.getClass().getSimpleName(),
+                LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(),
                         exception.getMessage());
                 screenshot.capture();
                 
@@ -106,7 +114,8 @@ public class WebCommander extends Commands {
             }
         }
         catch (Exception exception) {
-            LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -129,7 +138,8 @@ public class WebCommander extends Commands {
             actions.moveToElement(webElement, xOffset, yOffset).click().perform();
         }
         catch (Exception exception) {
-            LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -221,7 +231,8 @@ public class WebCommander extends Commands {
             webElement.sendKeys(input);
         }
         catch (Exception exception) {
-            LOG.error("Error entering text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error entering text :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -263,7 +274,8 @@ public class WebCommander extends Commands {
             select.selectByVisibleText(option);
         }
         catch (Exception exception) {
-            LOG.error("Error selecting option :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error selecting option :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -290,7 +302,8 @@ public class WebCommander extends Commands {
             webElement.sendKeys(filePath);
         }
         catch (Exception exception) {
-            LOG.error("Error uploading file :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error uploading file :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw new RuntimeException("File could not be uploaded.");
@@ -317,7 +330,8 @@ public class WebCommander extends Commands {
             WebDriverProvider.getWebDriver().switchTo().defaultContent();
         }
         catch (Exception exception) {
-            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -337,7 +351,8 @@ public class WebCommander extends Commands {
             WebDriverProvider.getWebDriver().switchTo().frame(webElement);
         }
         catch (Exception exception) {
-            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error switching focus :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -358,7 +373,8 @@ public class WebCommander extends Commands {
             webDriverWait.until((ExpectedCondition<Boolean>) webDriver -> condition.result());
         }
         catch (Exception exception) {
-            LOG.error("Error while waiting :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error while waiting :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
