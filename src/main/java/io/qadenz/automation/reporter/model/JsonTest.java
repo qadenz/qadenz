@@ -12,7 +12,7 @@ package io.qadenz.automation.reporter.model;
 import java.util.List;
 
 /**
- * The second level data model that holds results for each {@code <test>} node on the TestNG Suite XML file.
+ * Model that holds results for each {@code <test>} on the TestNG Suite XML file.
  *
  * @author Tim Slifer
  */

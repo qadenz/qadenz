@@ -12,7 +12,7 @@ package io.qadenz.automation.reporter.model;
 import java.util.List;
 
 /**
- * This is the fourth level data model for individual test case results and logging events.
+ * Models an individual test case for results and logging events.
  *
  * @author Tim Slifer
  */
