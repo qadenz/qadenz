@@ -43,7 +43,7 @@ public class AutomatedWebTest {
      * Captures a timestamp as the start time of the suite, and sets the report output path from TestNG as a system
      * property in order to facilitate writing the Suite Log json file.
      *
-     * @param testContext The injected ITestContext.
+     * @param testContext The injected {@link ITestContext}.
      */
     @BeforeSuite (alwaysRun = true)
     public void captureStartDateTime(ITestContext testContext) {
@@ -54,10 +54,10 @@ public class AutomatedWebTest {
     }
     
     /**
-     * Begins the suite execution process by reading the parameters given on the Suite XML file, validating, and
-     * assigning values on the RunContext.
+     * Begins the suite execution process by reading the Suite-level parameters given on the Suite XML file, validating,
+     * and assigning values on the {@link WebConfig}.
      *
-     * @param testContext The injected ITestContext.
+     * @param testContext The injected {@link ITestContext}.
      */
     @BeforeSuite (alwaysRun = true, dependsOnMethods = "captureStartDateTime")
     public void processXmlSuiteParameters(ITestContext testContext) {
@@ -70,6 +70,12 @@ public class AutomatedWebTest {
         WebConfig.applicationName = xmlParameterValidator.validateApplicationName();
     }
     
+    /**
+     * Prior to each {@code <test>} on the Suite XML file, reads the given Test-level parameters, validates, and assigns
+     * values on the {@link WebConfig}.
+     *
+     * @param testContext The injected {@link ITestContext}.
+     */
     @BeforeTest (alwaysRun = true)
     public void processXmlTestParameters(ITestContext testContext) {
         LOG.info("Reading XML Test Parameters.");
@@ -86,7 +92,8 @@ public class AutomatedWebTest {
     }
     
     /**
-     * Begins execution of a test by launching a RemoteWebDriver on a Selenium Grid, and opening the application URL.
+     * Begins execution of a test by launching a {@link RemoteWebDriver} on a Selenium Grid, and opening the application
+     * URL.
      *
      * @throws Exception on invalid Grid URL.
      */
