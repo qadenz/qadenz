@@ -4,18 +4,163 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
-    <groupId>io.slifer</groupId>
-    <artifactId>reference-automation</artifactId>
-    <version>0.0.0</version>
+    <groupId>io.qadenz</groupId>
+    <artifactId>qadenz</artifactId>
+    <version>1.0.0-BETA-1</version>
     
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>A reference design for automation abstraction libraries.</description>
-    <url>http://github.com/tim-slifer/reference-automation</url>
+    <description>A robust test automation library.</description>
+    <url>http://github.com/qadenz/qadenz</url>
+    
+    <licenses>
+        <license>
+            <name>PolyForm Internal Use License</name>
+            <url>https://polyformproject.org/licenses/internal-use/1.0.0</url>
+        </license>
+    </licenses>
+    
+    <scm>
+        <connection>scm:git:git://github.com/qadenz.qadenz.git</connection>
+        <developerConnection>scm:git:ssh://github.com:qadenz/qadenz.git</developerConnection>
+        <url>https://github.com/qadenz/qadenz/tree/master</url>
+    </scm>
     
     <properties>
         <java.version>11</java.version>
+        
+        <commons-io.version>2.11.0</commons-io.version>
+        <commons-lang.version>3.12.0</commons-lang.version>
+        <hamcrest.version>2.2</hamcrest.version>
+        <imgscalr.version>4.2</imgscalr.version>
+        <jackson.version>2.12.5</jackson.version>
+        <json.version>20210307</json.version>
+        <jsoup.version>1.14.2</jsoup.version>
+        <logback.version>1.2.6</logback.version>
+        <logback-contrib.version>0.1.5</logback-contrib.version>
+        <logback-testng.version>1.3.4</logback-testng.version>
+        <selenium.version>4.0.0</selenium.version>
+        <sizzle.version>4.0.0-R1</sizzle.version>
+        <testng.version>7.4.0</testng.version>
+        
+        <byte-buddy.version>1.11.18</byte-buddy.version>
+        <junit.version>5.8.1</junit.version>
+        <mockito.version>3.12.4</mockito.version>
     </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback.contrib</groupId>
+            <artifactId>logback-json-classic</artifactId>
+            <version>${logback-contrib.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback.contrib</groupId>
+            <artifactId>logback-jackson</artifactId>
+            <version>${logback-contrib.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.github.sbabcoc</groupId>
+            <artifactId>logback-testng</artifactId>
+            <version>${logback-testng.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>io.slifer</groupId>
+            <artifactId>webdriver-sizzle-injector</artifactId>
+            <version>${sizzle.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.imgscalr</groupId>
+            <artifactId>imgscalr-lib</artifactId>
+            <version>${imgscalr.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+        
+        <!--Test Dependencies -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>${byte-buddy.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     
     <build>
         <plugins>

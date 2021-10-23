@@ -1,4 +1,6 @@
-# Reference-Automation
+# Qadenz
 
-This project is a continuation of my research and development efforts in building powerful but easy to use
- abstraction libraries for automated testing using Selenium.
+The Qadenz project is a test automation library that wraps standard Selenium and TestNG functionality, and includes
+custom features such as easy and precise assertions, as well as detailed logging and reporting.
+
+...It's pronounced "cadence"
