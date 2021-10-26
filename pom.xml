@@ -6,7 +6,7 @@
     
     <groupId>io.qadenz</groupId>
     <artifactId>qadenz</artifactId>
-    <version>1.0.0-BETA-1</version>
+    <version>1.0.0-BETA-1.1</version>
     
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -19,6 +19,15 @@
             <url>https://polyformproject.org/licenses/internal-use/1.0.0</url>
         </license>
     </licenses>
+    
+    <developers>
+        <developer>
+            <name>Tim Slifer</name>
+            <email>oss@slifer.io</email>
+            <organization>slifer.io</organization>
+            <organizationUrl>http://www.slifer.io</organizationUrl>
+        </developer>
+    </developers>
     
     <scm>
         <connection>scm:git:git://github.com/qadenz.qadenz.git</connection>
