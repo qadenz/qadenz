@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  * <p>
  * TestNG JavaDoc: Groups {@link ClassResult}s by test, type (configuration or test), and status.
  *
- * @author TestNG & Tim Slifer
+ * @author TestNG and Tim Slifer
  */
 public class TestResult {
     
