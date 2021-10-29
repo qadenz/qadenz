@@ -117,9 +117,6 @@ public class TestResult {
         return results.stream().filter(ITestResult::wasRetried).collect(Collectors.toSet());
     }
     
-    /**
-     * Groups test results by method and then by class.
-     */
     protected List<ClassResult> groupResults(Set<ITestResult> results) {
         List<ClassResult> classResults = Lists.newArrayList();
         if (!results.isEmpty()) {
@@ -255,9 +252,6 @@ public class TestResult {
         return excludedGroups;
     }
     
-    /**
-     * Formats an array of groups for display.
-     */
     protected String formatGroups(String[] groups) {
         if (groups.length == 0) {
             return "";
