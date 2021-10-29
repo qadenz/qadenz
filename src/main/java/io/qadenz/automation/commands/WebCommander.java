@@ -94,7 +94,7 @@ public class WebCommander extends Commands {
                 try {
                     LOG.debug("Click intercepted, trying with Actions.");
                     webElement = webFinder.findWhenClickable(locator);
-
+                    
                     Actions actions = new Actions(WebDriverProvider.getWebDriver());
                     actions.click(webElement).perform();
                 }
@@ -102,7 +102,7 @@ public class WebCommander extends Commands {
                     LOG.error("Error clicking with Actions :: {}: {}", exception.getClass().getSimpleName(),
                             exception.getMessage());
                     screenshot.capture();
-
+                    
                     throw exception1;
                 }
             }
@@ -110,7 +110,7 @@ public class WebCommander extends Commands {
                 LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(),
                         exception.getMessage());
                 screenshot.capture();
-
+                
                 throw exception;
             }
         }
