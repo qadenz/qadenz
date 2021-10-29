@@ -84,15 +84,16 @@ public class WebCommander extends Commands {
      */
     public void click(Locator locator) {
         LOG.info("Clicking element [{}].", locator.getName());
-        WebElement webElement = null;
+        WebElement webElement;
         try {
             webElement = webFinder.findWhenClickable(locator);
             webElement.click();
         }
-        catch (ElementClickInterceptedException exception) {
-            if (WebConfig.retryInterceptedClicks) {
+        catch (Exception exception) {
+            if (WebConfig.retryInterceptedClicks && exception instanceof ElementClickInterceptedException) {
                 try {
                     LOG.debug("Click intercepted, trying with Actions.");
+                    webElement = webFinder.findWhenClickable(locator);
                     
                     Actions actions = new Actions(WebDriverProvider.getWebDriver());
                     actions.click(webElement).perform();
@@ -112,13 +113,6 @@ public class WebCommander extends Commands {
                 
                 throw exception;
             }
-        }
-        catch (Exception exception) {
-            LOG.error("Error clicking element :: {}: {}", exception.getClass().getSimpleName(),
-                    exception.getMessage());
-            screenshot.capture();
-            
-            throw exception;
         }
     }
     
