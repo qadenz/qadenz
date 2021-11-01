@@ -117,6 +117,7 @@ public class WebInspector {
      * Retrieves the value of the given CSS property on an element.
      *
      * @param locator The mapped UI element.
+     * @param cssProperty The name of the CSS Property to inspect.
      *
      * @return The CSS property value.
      */
