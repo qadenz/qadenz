@@ -66,6 +66,8 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be greater than the given value.
      *
+     * @param value The value for comparison.
+     *
      * @return The Expectation.
      */
     public static Expectation<Integer> isGreaterThan(final int value) {
@@ -86,6 +88,8 @@ public class Expectations {
     
     /**
      * An Expectation for an integer value to be greater than or equal to the given value.
+     *
+     * @param value The value for comparison.
      *
      * @return The Expectation.
      */
@@ -108,6 +112,8 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be equal to the given value.
      *
+     * @param value The value for comparison.
+     *
      * @return The Expectation.
      */
     public static Expectation<Integer> isEqualTo(final int value) {
@@ -128,6 +134,8 @@ public class Expectations {
     
     /**
      * An Expectation for an integer value to be not equal to the given value.
+     *
+     * @param value The value for comparison.
      *
      * @return The Expectation.
      */
@@ -150,6 +158,8 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be less than or equal to the given value.
      *
+     * @param value The value for comparison.
+     *
      * @return The Expectation.
      */
     public static Expectation<Integer> isLessThanOrEqualTo(final int value) {
@@ -170,6 +180,8 @@ public class Expectations {
     
     /**
      * An Expectation for an integer value to be less than the given value.
+     *
+     * @param value The value for comparison.
      *
      * @return The Expectation.
      */
@@ -192,6 +204,8 @@ public class Expectations {
     /**
      * An Expectation for a String value to be equal to the given value.
      *
+     * @param text The value for comparison.
+     *
      * @return The Expectation.
      */
     public static Expectation<String> isEqualTo(final String text) {
@@ -212,6 +226,8 @@ public class Expectations {
     
     /**
      * An Expectation for a String value to be equal to the given value, ignoring case.
+     *
+     * @param text The value for comparison.
      *
      * @return The Expectation.
      */
@@ -234,6 +250,8 @@ public class Expectations {
     /**
      * An Expectation for a String value to be not equal to the given value.
      *
+     * @param text The value for comparison.
+     *
      * @return The Expectation.
      */
     public static Expectation<String> isNotEqualTo(final String text) {
@@ -254,6 +272,8 @@ public class Expectations {
     
     /**
      * An Expectation for a String value to contain the given value.
+     *
+     * @param text The value for comparison.
      *
      * @return The Expectation.
      */
@@ -276,6 +296,8 @@ public class Expectations {
     /**
      * An Expectation for a String value to contain the given value, ignoring case.
      *
+     * @param text The value for comparison.
+     *
      * @return The Expectation.
      */
     public static Expectation<String> containsIgnoreCase(final String text) {
@@ -296,6 +318,8 @@ public class Expectations {
     
     /**
      * An Expectation for a String value to not contain the given value.
+     *
+     * @param text The value for comparison.
      *
      * @return The Expectation.
      */
@@ -318,6 +342,8 @@ public class Expectations {
     /**
      * An Expectation for a String value to start with the given value.
      *
+     * @param text The value for comparison.
+     *
      * @return The Expectation.
      */
     public static Expectation<String> startsWith(final String text) {
@@ -338,6 +364,8 @@ public class Expectations {
     
     /**
      * An Expectation for a String value to not start with the given value.
+     *
+     * @param text The value for comparison.
      *
      * @return The Expectation.
      */
@@ -360,6 +388,8 @@ public class Expectations {
     /**
      * An Expectation for a String value to end with the given value.
      *
+     * @param text The value for comparison.
+     *
      * @return The Expectation.
      */
     public static Expectation<String> endsWith(final String text) {
@@ -381,6 +411,8 @@ public class Expectations {
     /**
      * An Expectation for a String value to not end with the given value.
      *
+     * @param text The value for comparison.
+     *
      * @return The Expectation.
      */
     public static Expectation<String> doesNotEndWith(final String text) {
@@ -401,6 +433,8 @@ public class Expectations {
     
     /**
      * An Expectation for a String value to be equal to one of several possible options.
+     *
+     * @param options The group of possible options.
      *
      * @return The Expectation.
      */

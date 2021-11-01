@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  * <p>
  * TestNG JavaDoc: Groups {@link ClassResult}s by test, type (configuration or test), and status.
  *
- * @author TestNG & Tim Slifer
+ * @author TestNG and Tim Slifer
  */
 public class TestResult {
     
@@ -117,9 +117,6 @@ public class TestResult {
         return results.stream().filter(ITestResult::wasRetried).collect(Collectors.toSet());
     }
     
-    /**
-     * Groups test results by method and then by class.
-     */
     protected List<ClassResult> groupResults(Set<ITestResult> results) {
         List<ClassResult> classResults = Lists.newArrayList();
         if (!results.isEmpty()) {
@@ -255,9 +252,6 @@ public class TestResult {
         return excludedGroups;
     }
     
-    /**
-     * Formats an array of groups for display.
-     */
     protected String formatGroups(String[] groups) {
         if (groups.length == 0) {
             return "";
