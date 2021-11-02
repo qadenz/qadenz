@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -81,8 +82,9 @@ public class HtmlReporter {
     private String loadAndCompressCss() {
         String contents = null;
         try {
-            String path = File.separator + "html" + File.separator + "report.css";
-            contents = IOUtils.resourceToString(path, StandardCharsets.UTF_8);
+            InputStream inputStream =
+                    getClass().getResourceAsStream(File.separator + "html" + File.separator + "report.css");
+            contents = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
             exception.printStackTrace();
