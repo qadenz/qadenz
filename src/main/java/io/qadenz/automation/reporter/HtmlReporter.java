@@ -83,7 +83,7 @@ public class HtmlReporter {
     private String loadAndCompressCss() {
         String contents = null;
         try {
-            Path path = Paths.get(ClassLoader.getSystemResource("html/report.css").toURI());
+            Path path = Paths.get(ClassLoader.getSystemResource("html" + File.separator + "report.css").toURI());
             contents = Files.readString(path, StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
