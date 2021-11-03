@@ -82,8 +82,7 @@ public class HtmlReporter {
     private String loadAndCompressCss() {
         String contents = null;
         try {
-            InputStream inputStream =
-                    getClass().getResourceAsStream(File.separator + "html" + File.separator + "report.css");
+            InputStream inputStream = getClass().getResourceAsStream("/html/report.css");
             contents = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
