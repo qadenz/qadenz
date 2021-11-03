@@ -15,6 +15,7 @@ import io.qadenz.automation.reporter.model.JsonMethod;
 import io.qadenz.automation.reporter.model.JsonReport;
 import io.qadenz.automation.reporter.model.JsonTest;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,10 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -83,8 +82,8 @@ public class HtmlReporter {
     private String loadAndCompressCss() {
         String contents = null;
         try {
-            Path path = Paths.get(ClassLoader.getSystemResource("html/report.css").toURI());
-            contents = Files.readString(path, StandardCharsets.UTF_8);
+            InputStream inputStream = getClass().getResourceAsStream("/html/report.css");
+            contents = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
             exception.printStackTrace();
