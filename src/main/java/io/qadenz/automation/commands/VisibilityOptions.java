@@ -9,12 +9,12 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package io.qadenz.automation.commands;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +31,8 @@ public class VisibilityOptions {
     private static void init() {
         try {
             options = new ArrayList<>();
-            Path jsonFile = Paths.get(ClassLoader.getSystemResource("config/visibility.json").toURI());
-            String jsonText = Files.readString(jsonFile);
+            InputStream inputStream = VisibilityOptions.class.getResourceAsStream("/config/visibility.json");
+            String jsonText = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
             JSONArray jsonArray = new JSONArray(jsonText);
             for (int i = 0; i < jsonArray.length(); i++) {
                 options.add(new JSONObject(jsonArray.get(i).toString()));
