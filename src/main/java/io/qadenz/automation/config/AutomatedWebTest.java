@@ -23,6 +23,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -49,7 +50,7 @@ public class AutomatedWebTest {
     public void captureStartDateTime(ITestContext testContext) {
         WebConfig.suiteStartDate = LocalDateTime.now();
         String outputPath = testContext.getOutputDirectory();
-        outputPath = outputPath.substring(0, outputPath.lastIndexOf("/")) + "/";
+        outputPath = outputPath.substring(0, outputPath.lastIndexOf(File.separator)) + File.separator;
         System.setProperty("path.ReportOutput", outputPath);
     }
     
