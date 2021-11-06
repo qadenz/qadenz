@@ -50,7 +50,7 @@ public abstract class Commands {
     
     /**
      * An overloaded implementation of {@code check()} that allows the user to disable the screenshot for failures
-     * encountered by this validation.
+     * encountered by this validation. This overload only need to called if screenshots are to be disabled.
      *
      * @param captureScreen False to disable screenshots.
      * @param conditions The Conditions to be evaluated.
@@ -84,7 +84,7 @@ public abstract class Commands {
     /**
      * Evaluates each of the given {@link Condition}s as a group. If one or more Conditions results in a failure,
      * execution will be aborted after the final Condition is evaluated. Execution will be stopped immediately if an
-     * error is encountered.
+     * error is encountered. A screenshot will be captured for each failed Condition.
      *
      * @param conditions The Conditions to be evaluated.
      */
@@ -94,7 +94,7 @@ public abstract class Commands {
     
     /**
      * An overloaded implementation of {@code verify()} that allows the user to disable the screenshot for failures
-     * encountered by this validation.
+     * encountered by this validation. This overload only need to called if screenshots are to be disabled.
      *
      * @param captureScreen False to disable screenshots.
      * @param conditions The Conditions to be evaluated.
