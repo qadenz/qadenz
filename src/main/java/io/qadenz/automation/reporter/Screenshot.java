@@ -32,6 +32,11 @@ public class Screenshot {
     
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
+    /**
+     * A convenience boolean to pass to {@code check()} or {@code verify()} to enhance readability of the code.
+     */
+    private static final boolean SKIP = false;
+    
     public void capture() {
         String uuid = UUID.randomUUID().toString();
         
