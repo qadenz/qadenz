@@ -547,6 +547,43 @@ public class Conditions {
     }
     
     /**
+     * A Condition to evaluate the text shown inside an {@code <input>} element.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfInputElement(final Locator locator, final Expectation<String> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            String elementText;
+            
+            @Override
+            public String description() {
+                return "Text of input element [" + locator.getName() + "] " + expectation.description() + ".";
+            }
+            
+            @Override
+            public Boolean result() {
+                WebInspector webInspector = new WebInspector(Conditions.class);
+                elementText = webInspector.getAttributeOfElement(locator, "value");
+                
+                match = expectation.matcher().matches(elementText);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + elementText + "].";
+            }
+        };
+    }
+    
+    /**
      * A Condition for evaluating the visibility of an element. An element determined to be visible is present on the
      * DOM, has a height and width greater than zero, and is not styled to be hidden.
      *
