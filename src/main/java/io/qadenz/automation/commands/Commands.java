@@ -40,11 +40,22 @@ public abstract class Commands {
      * flush the failures and abort the test at a user designated point in the test. If a call to {@code verify()}
      * exists after a call to Check and before a call to {@code flush()}, the test will still be aborted if {@code
      * verify()} produces a failure. Execution will be stopped immediately if an error is encountered during the {@code
-     * check()}.
+     * check()}. A screenshot will be captured for each failed Condition.
      *
      * @param conditions The Conditions to be evaluated.
      */
     public void check(Condition... conditions) {
+        check(true, conditions);
+    }
+    
+    /**
+     * An overloaded implementation of {@code check()} that allows the user to disable the screenshot for failures
+     * encountered by this validation.
+     *
+     * @param captureScreen False to disable screenshots.
+     * @param conditions The Conditions to be evaluated.
+     */
+    public void check(boolean captureScreen, Condition... conditions) {
         for (Condition condition : conditions) {
             LOG.info("Checking Condition - {}", condition.description());
             try {
@@ -55,11 +66,15 @@ public abstract class Commands {
             catch (AssertionError error) {
                 LOG.info("Result - FAIL :: {}", condition.output());
                 Assertions.setFailures(true);
-                screenshot.capture();
+                if (captureScreen) {
+                    screenshot.capture();
+                }
             }
             catch (Exception exception) {
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-                screenshot.capture();
+                if (captureScreen) {
+                    screenshot.capture();
+                }
                 
                 throw new RuntimeException("Error while verifying condition.");
             }
@@ -74,6 +89,17 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void verify(Condition... conditions) {
+        verify(true, conditions);
+    }
+    
+    /**
+     * An overloaded implementation of {@code verify()} that allows the user to disable the screenshot for failures
+     * encountered by this validation.
+     *
+     * @param captureScreen False to disable screenshots.
+     * @param conditions The Conditions to be evaluated.
+     */
+    public void verify(boolean captureScreen, Condition... conditions) {
         boolean failed = false;
         
         for (Condition condition : conditions) {
@@ -86,11 +112,15 @@ public abstract class Commands {
             catch (AssertionError error) {
                 LOG.info("Result - FAIL :: {}", condition.output());
                 failed = true;
-                screenshot.capture();
+                if (captureScreen) {
+                    screenshot.capture();
+                }
             }
             catch (Exception exception) {
                 LOG.error("Result - ERROR :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
-                screenshot.capture();
+                if (captureScreen) {
+                    screenshot.capture();
+                }
                 
                 throw new RuntimeException("Error while verifying condition.");
             }
