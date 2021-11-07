@@ -96,7 +96,7 @@ public class CapabilityProvider {
             }
         }
         catch (Exception exception) {
-            LOG.debug("No custom configuration found for browser [{}].", browser.toString());
+            LOG.debug("No custom configuration found for browser [{}].", browser.getName());
             // Log the exception and return an empty list.
         }
         
