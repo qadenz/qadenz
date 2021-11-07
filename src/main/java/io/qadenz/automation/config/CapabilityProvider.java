@@ -85,7 +85,7 @@ public class CapabilityProvider {
     
     private static List<String> loadArgs(Browser browser) {
         List<String> args = new ArrayList<>();
-        String fileName = "config/" + browser.name().toLowerCase() + "-args.json";
+        String fileName = "config/" + browser.getName().toLowerCase() + "-args.json";
         
         try {
             Path jsonFile = Paths.get(ClassLoader.getSystemResource(fileName).toURI());
@@ -96,8 +96,7 @@ public class CapabilityProvider {
             }
         }
         catch (Exception exception) {
-            LOG.error("Error loading args for browser [{}] :: {}: {}", browser.toString(),
-                    exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.debug("No custom configuration found for browser [{}].", browser.getName());
             // Log the exception and return an empty list.
         }
         
