@@ -61,7 +61,7 @@ public class XmlParameterValidator {
             String xmlBrowser = xmlParameters.get("browser");
             try {
                 Browser browser = Browser.fromString(xmlBrowser);
-                LOG.info("Using Browser [{}].", browser.toString());
+                LOG.info("Using Browser [{}].", browser.getName());
                 
                 return browser;
             }

@@ -23,19 +23,19 @@ public enum Browser {
     FIREFOX("Firefox"),
     INTERNET_EXPLORER("Internet Explorer");
     
-    private String browser;
+    private String name;
     
-    Browser(String browser) {
-        this.browser = browser;
+    Browser(String name) {
+        this.name = name;
     }
     
-    public String toString() {
-        return browser;
+    public String getName() {
+        return name;
     }
     
     public static Browser fromString(String name) {
         for (Browser browser : values()) {
-            if (browser.toString().equalsIgnoreCase(name)) {
+            if (browser.getName().equalsIgnoreCase(name)) {
                 return browser;
             }
         }
