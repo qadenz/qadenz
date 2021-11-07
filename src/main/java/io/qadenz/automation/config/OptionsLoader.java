@@ -24,14 +24,14 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public class VisibilityOptions {
+public class OptionsLoader {
     
     private static List<JSONObject> options = null;
     
     private static void init() {
         try {
             options = new ArrayList<>();
-            InputStream inputStream = VisibilityOptions.class.getResourceAsStream("/config/visibility.json");
+            InputStream inputStream = OptionsLoader.class.getResourceAsStream("/config/visibility.json");
             String jsonText = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
             JSONArray jsonArray = new JSONArray(jsonText);
             for (int i = 0; i < jsonArray.length(); i++) {
