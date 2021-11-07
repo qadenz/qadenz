@@ -29,10 +29,13 @@ public class OptionsLoader {
     private static List<JSONObject> selectedStateOptions = null;
     private static List<JSONObject> visibilityOptions = null;
     
-    private static List<JSONObject> init() {
+    private static final String SELECTED = "selected";
+    private static final String VISIBILITY = "visibility";
+    
+    private static List<JSONObject> init(String name) {
         List<JSONObject> options = new ArrayList<>();
         try {
-            InputStream inputStream = OptionsLoader.class.getResourceAsStream("/config/visibility.json");
+            InputStream inputStream = OptionsLoader.class.getResourceAsStream("/config/" + name + ".json");
             String jsonText = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
             JSONArray jsonArray = new JSONArray(jsonText);
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -48,7 +51,7 @@ public class OptionsLoader {
     
     public static List<JSONObject> getSelectedStateOptions() {
         if (selectedStateOptions == null) {
-            selectedStateOptions = init();
+            selectedStateOptions = init(SELECTED);
         }
         
         return selectedStateOptions;
@@ -56,7 +59,7 @@ public class OptionsLoader {
     
     public static List<JSONObject> getVisibilityOptions() {
         if (visibilityOptions == null) {
-            visibilityOptions = init();
+            visibilityOptions = init(VISIBILITY);
         }
         
         return visibilityOptions;
