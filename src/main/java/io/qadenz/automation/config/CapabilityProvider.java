@@ -85,7 +85,7 @@ public class CapabilityProvider {
     
     private static List<String> loadArgs(Browser browser) {
         List<String> args = new ArrayList<>();
-        String fileName = "config/" + browser.name().toLowerCase() + "-args.json";
+        String fileName = "config/" + browser.getName().toLowerCase() + "-args.json";
         
         try {
             Path jsonFile = Paths.get(ClassLoader.getSystemResource(fileName).toURI());
