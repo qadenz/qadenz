@@ -460,7 +460,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to either empty or null.
+     * An Expectation for a String value to be either empty or null.
      *
      * @return The Expectation.
      */
@@ -476,6 +476,27 @@ public class Expectations {
             @Override
             public String description() {
                 return "is null or empty";
+            }
+        };
+    }
+    
+    /**
+     * An Expectation for a String value to be neither empty nor null.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<String> isNotEmptyOrNull() {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<String> matcher() {
+                return Matchers.not(emptyOrNullString());
+            }
+            
+            @Override
+            public String description() {
+                return "is neither null nor empty";
             }
         };
     }
