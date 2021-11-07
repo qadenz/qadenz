@@ -7,7 +7,7 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
  */
-package io.qadenz.automation.commands;
+package io.qadenz.automation.config;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -20,18 +20,22 @@ import java.util.List;
 
 /**
  * A handler for custom configuration allowing the addition of user defined attribute/value combinations to be included
- * when the visibility of an element is being evaluated.
+ * when the selected state or visibility of an element is being evaluated.
  *
  * @author Tim Slifer
  */
-public class VisibilityOptions {
+public class OptionsLoader {
     
-    private static List<JSONObject> options = null;
+    private static List<JSONObject> selectedStateOptions = null;
+    private static List<JSONObject> visibilityOptions = null;
     
-    private static void init() {
+    private static final String SELECTED = "selected";
+    private static final String VISIBILITY = "visibility";
+    
+    private static List<JSONObject> init(String name) {
+        List<JSONObject> options = new ArrayList<>();
         try {
-            options = new ArrayList<>();
-            InputStream inputStream = VisibilityOptions.class.getResourceAsStream("/config/visibility.json");
+            InputStream inputStream = OptionsLoader.class.getResourceAsStream("/config/" + name + ".json");
             String jsonText = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
             JSONArray jsonArray = new JSONArray(jsonText);
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -41,12 +45,23 @@ public class VisibilityOptions {
         catch (Exception exception) {
             // do nothing, just return an empty list
         }
+        
+        return options;
     }
     
-    public static List<JSONObject> getOptions() {
-        if (options == null) {
-            init();
+    public static List<JSONObject> getSelectedStateOptions() {
+        if (selectedStateOptions == null) {
+            selectedStateOptions = init(SELECTED);
         }
-        return options;
+        
+        return selectedStateOptions;
+    }
+    
+    public static List<JSONObject> getVisibilityOptions() {
+        if (visibilityOptions == null) {
+            visibilityOptions = init(VISIBILITY);
+        }
+        
+        return visibilityOptions;
     }
 }
