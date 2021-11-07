@@ -35,7 +35,7 @@ public class Screenshot {
     /**
      * A convenience boolean to pass to {@code check()} or {@code verify()} to enhance readability of the code.
      */
-    private static final boolean SKIP = false;
+    public static final boolean SKIP = false;
     
     public void capture() {
         String uuid = UUID.randomUUID().toString();
