@@ -96,8 +96,7 @@ public class CapabilityProvider {
             }
         }
         catch (Exception exception) {
-            LOG.error("Error loading args for browser [{}] :: {}: {}", browser.toString(),
-                    exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.debug("No custom configuration found for browser [{}].", browser.toString());
             // Log the exception and return an empty list.
         }
         
