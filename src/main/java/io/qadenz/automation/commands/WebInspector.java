@@ -371,7 +371,7 @@ public class WebInspector {
                     LOG.debug("Checked class 'ng-hide' - Visibility is [{}].", visible);
                 }
                 
-                for (JSONObject json : OptionsLoader.getOptions()) {
+                for (JSONObject json : OptionsLoader.getVisibilityOptions()) {
                     String attribute = json.getString("attribute");
                     String value = json.getString("value");
                     if (visible) {
