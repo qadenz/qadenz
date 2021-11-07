@@ -7,7 +7,7 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
  */
-package io.qadenz.automation.commands;
+package io.qadenz.automation.config;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
