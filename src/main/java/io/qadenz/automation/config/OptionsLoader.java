@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * A handler for custom configuration allowing the addition of user defined attribute/value combinations to be included
- * when the visibility of an element is being evaluated.
+ * when the selected state or visibility of an element is being evaluated.
  *
  * @author Tim Slifer
  */
