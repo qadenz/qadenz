@@ -9,7 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package io.qadenz.automation.commands;
 
-import io.qadenz.automation.config.VisibilityOptions;
+import io.qadenz.automation.config.OptionsLoader;
 import io.qadenz.automation.reporter.Screenshot;
 import io.qadenz.automation.ui.Locator;
 import io.qadenz.automation.ui.WebFinder;
@@ -371,7 +371,7 @@ public class WebInspector {
                     LOG.debug("Checked class 'ng-hide' - Visibility is [{}].", visible);
                 }
                 
-                for (JSONObject json : VisibilityOptions.getOptions()) {
+                for (JSONObject json : OptionsLoader.getOptions()) {
                     String attribute = json.getString("attribute");
                     String value = json.getString("value");
                     if (visible) {
