@@ -28,24 +28,26 @@ public class OptionsLoader {
     
     private static List<JSONObject> visibilityOptions = null;
     
-    private static void init() {
+    private static List<JSONObject> init() {
+        List<JSONObject> options = new ArrayList<>();
         try {
-            visibilityOptions = new ArrayList<>();
             InputStream inputStream = OptionsLoader.class.getResourceAsStream("/config/visibility.json");
             String jsonText = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
             JSONArray jsonArray = new JSONArray(jsonText);
             for (int i = 0; i < jsonArray.length(); i++) {
-                visibilityOptions.add(new JSONObject(jsonArray.get(i).toString()));
+                options.add(new JSONObject(jsonArray.get(i).toString()));
             }
         }
         catch (Exception exception) {
             // do nothing, just return an empty list
         }
+        
+        return options;
     }
     
     public static List<JSONObject> getVisibilityOptions() {
         if (visibilityOptions == null) {
-            init();
+            visibilityOptions = init();
         }
         
         return visibilityOptions;
