@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class OptionsLoader {
     
+    private static List<JSONObject> selectedStateOptions = null;
     private static List<JSONObject> visibilityOptions = null;
     
     private static List<JSONObject> init() {
@@ -43,6 +44,14 @@ public class OptionsLoader {
         }
         
         return options;
+    }
+    
+    public static List<JSONObject> getSelectedStateOptions() {
+        if (selectedStateOptions == null) {
+            selectedStateOptions = init();
+        }
+        
+        return selectedStateOptions;
     }
     
     public static List<JSONObject> getVisibilityOptions() {
