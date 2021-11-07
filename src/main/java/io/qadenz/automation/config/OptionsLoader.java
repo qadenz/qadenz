@@ -26,16 +26,16 @@ import java.util.List;
  */
 public class OptionsLoader {
     
-    private static List<JSONObject> options = null;
+    private static List<JSONObject> visibilityOptions = null;
     
     private static void init() {
         try {
-            options = new ArrayList<>();
+            visibilityOptions = new ArrayList<>();
             InputStream inputStream = OptionsLoader.class.getResourceAsStream("/config/visibility.json");
             String jsonText = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
             JSONArray jsonArray = new JSONArray(jsonText);
             for (int i = 0; i < jsonArray.length(); i++) {
-                options.add(new JSONObject(jsonArray.get(i).toString()));
+                visibilityOptions.add(new JSONObject(jsonArray.get(i).toString()));
             }
         }
         catch (Exception exception) {
@@ -43,10 +43,11 @@ public class OptionsLoader {
         }
     }
     
-    public static List<JSONObject> getOptions() {
-        if (options == null) {
+    public static List<JSONObject> getVisibilityOptions() {
+        if (visibilityOptions == null) {
             init();
         }
-        return options;
+        
+        return visibilityOptions;
     }
 }
