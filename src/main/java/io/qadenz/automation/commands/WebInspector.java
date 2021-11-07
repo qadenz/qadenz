@@ -255,7 +255,18 @@ public class WebInspector {
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
             
-            return webElement.isSelected();
+            boolean selected = webElement.isSelected();
+            for (JSONObject json : OptionsLoader.getSelectedStateOptions()) {
+                String attribute = json.getString("attribute");
+                String value = json.getString("value");
+                if (selected) {
+                    selected = (webElement.getAttribute(attribute).contains(value));
+                    LOG.debug("Checked attribute [{}] for value [{}] - Selected State is [{}].",
+                            attribute, value, selected);
+                }
+            }
+            
+            return selected;
         }
         catch (Exception exception) {
             LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
