@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class HtmlReporter {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = LoggerFactory.getLogger("REPORTER");
     
     private JsonReport jsonReport;
     private Document document;
