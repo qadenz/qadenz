@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
  */
 public class JsonReporter {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = LoggerFactory.getLogger("REPORTER");
     
     private XmlSuite xmlSuite;
     private ISuite suite;
