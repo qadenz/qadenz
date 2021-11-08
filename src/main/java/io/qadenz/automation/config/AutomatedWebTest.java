@@ -23,7 +23,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -41,17 +40,13 @@ public class AutomatedWebTest {
     private static final Logger LOG = LoggerFactory.getLogger("SUITE");
     
     /**
-     * Captures a timestamp as the start time of the suite, and sets the report output path from TestNG as a system
-     * property in order to facilitate writing the Suite Log json file.
+     * Captures a timestamp as the start time of the suite.
      *
      * @param testContext The injected {@link ITestContext}.
      */
     @BeforeSuite (alwaysRun = true)
     public void captureStartDateTime(ITestContext testContext) {
         WebConfig.suiteStartDate = LocalDateTime.now();
-        String outputPath = testContext.getOutputDirectory();
-        outputPath = outputPath.substring(0, outputPath.lastIndexOf(File.separator)) + File.separator;
-        System.setProperty("path.ReportOutput", outputPath);
     }
     
     /**
