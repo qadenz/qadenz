@@ -18,11 +18,15 @@
         <appender-ref ref="STDOUT"/>
     </logger>
     
+    <logger name="REPORTER" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    
+    <logger name="io.qadenz.automation.conditions.Conditions" level="OFF"/>
+    
     <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="TestNG"/>
     </root>
-    
-    <logger name="io.qadenz.automation.conditions.Conditions" level="OFF"/>
 
 </configuration>
