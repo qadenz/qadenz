@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Defines a Logback logging layout to be used for the TestNG report logger.
+ * Defines a Logback log event layout to be used for the TestNG report logger.
  *
  * @author Tim Slifer
  */
