@@ -9,7 +9,7 @@
     
     <appender name="TestNG" class="com.github.sbabcoc.logback.testng.ReporterAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="io.qadenz.automation.logs.LogEventLayout"/>
+            <layout class="io.qadenz.automation.logs.TestNgLogLayout"/>
         </encoder>
     </appender>
     
