@@ -17,11 +17,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Defines a Logback logging layout to be used for the Console and TestNG report loggers.
+ * Defines a Logback logging layout to be used for the TestNG report logger.
  *
  * @author Tim Slifer
  */
-public class LogEventLayout extends LayoutBase<ILoggingEvent> {
+public class TestNgLogLayout extends LayoutBase<ILoggingEvent> {
     
     @Override
     public String doLayout(ILoggingEvent event) {
