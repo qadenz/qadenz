@@ -16,6 +16,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -26,6 +27,7 @@ import org.testng.annotations.Listeners;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -74,7 +76,7 @@ public class AutomatedWebTest {
      */
     @BeforeTest (alwaysRun = true)
     public void processXmlTestParameters(ITestContext testContext) {
-        LOG.info("Reading XML Test Parameters.");
+        LOG.info("Reading XML Test Parameters for Test [{}].", testContext.getCurrentXmlTest().getName());
         
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
         XmlParameterValidator xmlParameterValidator = new XmlParameterValidator(xmlParameters);
@@ -94,8 +96,12 @@ public class AutomatedWebTest {
      * @throws Exception on invalid Grid URL.
      */
     @BeforeMethod (alwaysRun = true)
-    public void startWebDriver() throws Exception {
-        LOG.info("Launching WebDriver.");
+    public void startWebDriver(ITestResult testResult) throws Exception {
+        LOG.info("Executing Method [{}].", testResult.getMethod().getMethodName());
+        if (getParameters(testResult).length() > 0) {
+            LOG.info("Parameters: {}", getParameters(testResult));
+        }
+        
         Assertions.init();
         Capabilities capabilities = CapabilityProvider.getBrowserOptions();
         
@@ -110,6 +116,18 @@ public class AutomatedWebTest {
         
         WebDriverProvider.getWebDriver().manage().window().maximize();
         WebDriverProvider.getWebDriver().get(WebConfig.appUrl);
+    }
+    
+    private String getParameters(ITestResult testResult) {
+        String parameters = "";
+        if (testResult.getParameters().length > 0) {
+            parameters = Arrays.toString(testResult.getParameters());
+        }
+        else if (testResult.getFactoryParameters().length > 0) {
+            parameters = Arrays.toString(testResult.getFactoryParameters());
+        }
+        
+        return parameters;
     }
     
     /**
