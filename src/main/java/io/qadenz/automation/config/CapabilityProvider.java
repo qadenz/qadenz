@@ -9,6 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package io.qadenz.automation.config;
 
+import io.qadenz.automation.logs.Loggers;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.Capabilities;
@@ -18,7 +19,6 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class CapabilityProvider {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = Loggers.getSuiteLogger();
     
     /**
      * Loads the options for the given browser, and performs default configurations based on Suite Parameters and

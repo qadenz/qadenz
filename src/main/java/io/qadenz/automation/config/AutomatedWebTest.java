@@ -10,11 +10,11 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package io.qadenz.automation.config;
 
 import io.qadenz.automation.commands.Assertions;
+import io.qadenz.automation.logs.Loggers;
 import io.qadenz.automation.reporter.TestReporter;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -39,7 +39,7 @@ import java.util.Map;
 @Listeners ({TestReporter.class})
 public class AutomatedWebTest {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = Loggers.getSuiteLogger();
     
     /**
      * Captures a timestamp as the start time of the suite.
