@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class TestReporter implements IReporter {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = LoggerFactory.getLogger("REPORTER");
     private static final String FILE_NAME = "suite-results";
     
     @Override

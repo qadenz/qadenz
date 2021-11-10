@@ -10,12 +10,13 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package io.qadenz.automation.config;
 
 import io.qadenz.automation.commands.Assertions;
+import io.qadenz.automation.logs.Loggers;
 import io.qadenz.automation.reporter.TestReporter;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -23,10 +24,10 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -38,20 +39,16 @@ import java.util.Map;
 @Listeners ({TestReporter.class})
 public class AutomatedWebTest {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = Loggers.getSuiteLogger();
     
     /**
-     * Captures a timestamp as the start time of the suite, and sets the report output path from TestNG as a system
-     * property in order to facilitate writing the Suite Log json file.
+     * Captures a timestamp as the start time of the suite.
      *
      * @param testContext The injected {@link ITestContext}.
      */
     @BeforeSuite (alwaysRun = true)
     public void captureStartDateTime(ITestContext testContext) {
         WebConfig.suiteStartDate = LocalDateTime.now();
-        String outputPath = testContext.getOutputDirectory();
-        outputPath = outputPath.substring(0, outputPath.lastIndexOf(File.separator)) + File.separator;
-        System.setProperty("path.ReportOutput", outputPath);
     }
     
     /**
@@ -79,7 +76,7 @@ public class AutomatedWebTest {
      */
     @BeforeTest (alwaysRun = true)
     public void processXmlTestParameters(ITestContext testContext) {
-        LOG.info("Reading XML Test Parameters.");
+        LOG.info("Reading XML Test Parameters for Test [{}].", testContext.getCurrentXmlTest().getName());
         
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
         XmlParameterValidator xmlParameterValidator = new XmlParameterValidator(xmlParameters);
@@ -99,8 +96,12 @@ public class AutomatedWebTest {
      * @throws Exception on invalid Grid URL.
      */
     @BeforeMethod (alwaysRun = true)
-    public void startWebDriver() throws Exception {
-        LOG.info("Launching WebDriver.");
+    public void startWebDriver(ITestResult testResult) throws Exception {
+        LOG.info("Executing Method [{}].", testResult.getMethod().getMethodName());
+        if (getParameters(testResult).length() > 0) {
+            LOG.info("Parameters: {}", getParameters(testResult));
+        }
+        
         Assertions.init();
         Capabilities capabilities = CapabilityProvider.getBrowserOptions();
         
@@ -115,6 +116,18 @@ public class AutomatedWebTest {
         
         WebDriverProvider.getWebDriver().manage().window().maximize();
         WebDriverProvider.getWebDriver().get(WebConfig.appUrl);
+    }
+    
+    private String getParameters(ITestResult testResult) {
+        String parameters = "";
+        if (testResult.getParameters().length > 0) {
+            parameters = Arrays.toString(testResult.getParameters());
+        }
+        else if (testResult.getFactoryParameters().length > 0) {
+            parameters = Arrays.toString(testResult.getFactoryParameters());
+        }
+        
+        return parameters;
     }
     
     /**
