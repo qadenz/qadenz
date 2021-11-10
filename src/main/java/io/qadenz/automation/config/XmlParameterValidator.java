@@ -9,10 +9,10 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package io.qadenz.automation.config;
 
+import io.qadenz.automation.logs.Loggers;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ import java.util.Map;
  */
 public class XmlParameterValidator {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = Loggers.getSuiteLogger();
     
     private Map<String, String> xmlParameters;
     
