@@ -84,32 +84,46 @@ public class CapabilityProvider {
     }
     
     private static List<String> loadArgs(Browser browser) {
-        List<String> args = new ArrayList<>();
         String fileName = "config/" + browser.getName().toLowerCase() + "-config.json";
+        JSONArray jsonConfig = loadJsonFile(fileName, browser);
         
-        try {
-            Path jsonFile = Paths.get(ClassLoader.getSystemResource(fileName).toURI());
-            String jsonText = Files.readString(jsonFile);
-            JSONArray jsonArray = new JSONArray(jsonText);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                if (((String) jsonObject.get("profile")).equalsIgnoreCase(WebConfig.browserConfigProfile)) {
-                    JSONArray jsonArgs = jsonObject.getJSONArray("args");
-                    for (int j = 0; j < jsonArgs.length(); j++) {
-                        args.add(jsonArgs.get(j).toString());
-                    }
-                }
-            }
-        }
-        catch (Exception exception) {
-            LOG.debug("No custom configuration found for browser [{}].", browser.getName());
-            // Log the exception and return an empty list.
+        List<String> args = new ArrayList<>();
+        if (jsonConfig != null) {
+            args = parseArgs(jsonConfig);
         }
         
         return args;
     }
     
-    public List<String> run() {
-        return loadArgs(Browser.CHROME);
+    private static JSONArray loadJsonFile(String fileName, Browser browser) {
+        try {
+            Path jsonFile = Paths.get(ClassLoader.getSystemResource(fileName).toURI());
+            String jsonText = Files.readString(jsonFile);
+            return new JSONArray(jsonText);
+        }
+        catch (Exception exception) {
+            LOG.debug("No custom configuration file found for browser [{}].", browser.getName());
+            return null;
+        }
+    }
+    
+    private static List<String> parseArgs(JSONArray jsonArray) {
+        List<String> args = new ArrayList<>();
+        
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            if (((String) jsonObject.get("profile")).equalsIgnoreCase(WebConfig.browserConfigProfile)) {
+                JSONArray jsonArgs = jsonObject.getJSONArray("args");
+                for (int j = 0; j < jsonArgs.length(); j++) {
+                    args.add(jsonArgs.get(j).toString());
+                }
+            }
+        }
+        
+        if (args.size() == 0) {
+            LOG.debug("No matching browser configuration profile for [{}].", WebConfig.browserConfigProfile);
+        }
+        
+        return args;
     }
 }
