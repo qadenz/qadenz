@@ -83,6 +83,7 @@ public class AutomatedWebTest {
         
         WebConfig.browser = xmlParameterValidator.validateBrowser();
         WebConfig.browserVersion = xmlParameterValidator.validateBrowserVersion();
+        WebConfig.browserConfigProfile = xmlParameterValidator.validateBrowserConfigProfile();
         WebConfig.platform = xmlParameterValidator.validatePlatform();
         WebConfig.timeout = xmlParameterValidator.validateTimeout();
         WebConfig.appUrl = xmlParameterValidator.validateAppUrl();

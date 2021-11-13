@@ -100,6 +100,25 @@ public class XmlParameterValidator {
     }
     
     /**
+     * Reads and returns the value of the {@code browserConfigProfile} parameter, if one is provided.
+     *
+     * @return The Browser Config Profile value.
+     */
+    public String validateBrowserConfigProfile() {
+        if (xmlParameters.containsKey("browserConfigProfile")) {
+            String xmlBrowserConfigProfile = xmlParameters.get("browserConfigProfile");
+            LOG.info("Using Browser Config Profile [{}].", xmlBrowserConfigProfile);
+            
+            return xmlBrowserConfigProfile;
+        }
+        else {
+            LOG.info("No Browser Config Profile given.");
+            
+            return null;
+        }
+    }
+    
+    /**
      * Reads and returns the value of the {@code platform} parameter, if one is provided and is a valid Platform
      * option.
      *
