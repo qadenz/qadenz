@@ -94,6 +94,8 @@ public class AutomatedWebTest {
      * Begins execution of a test by launching a {@link RemoteWebDriver} on a Selenium Grid, and opening the application
      * URL.
      *
+     * @param testResult The injected {@link ITestResult}.
+     *
      * @throws Exception on invalid Grid URL.
      */
     @BeforeMethod (alwaysRun = true)
