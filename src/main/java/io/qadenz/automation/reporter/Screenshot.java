@@ -10,10 +10,10 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package io.qadenz.automation.reporter;
 
 import io.qadenz.automation.config.WebDriverProvider;
+import io.qadenz.automation.logs.Loggers;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Reporter;
 
 import javax.imageio.ImageIO;
@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public class Screenshot {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = Loggers.getSuiteLogger();
     
     /**
      * A convenience boolean to pass to {@code check()} or {@code verify()} to enhance readability of the code.
