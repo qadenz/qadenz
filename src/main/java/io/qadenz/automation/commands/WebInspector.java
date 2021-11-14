@@ -40,8 +40,8 @@ public class WebInspector {
         LOG = LoggerFactory.getLogger(WebInspector.class);
     }
     
-    public WebInspector(Class<?> proxyLogger) {
-        LOG = LoggerFactory.getLogger(proxyLogger);
+    public WebInspector(Class<?> logger) {
+        LOG = LoggerFactory.getLogger(logger);
     }
     
     /**

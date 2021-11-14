@@ -224,7 +224,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: \n" + failures;
+                return "Discrepancies: \n" + failures.toString();
             }
         };
     }
@@ -349,7 +349,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: \n" + failures;
+                return "Discrepancies: \n" + failures.toString();
             }
         };
     }
@@ -541,7 +541,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: \n" + failures;
+                return "Discrepancies: \n" + failures.toString();
             }
         };
     }
@@ -665,7 +665,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: \n" + failures;
+                return "Discrepancies: \n" + failures.toString();
             }
         };
     }
