@@ -9,6 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package io.qadenz.automation.reporter;
 
+import io.qadenz.automation.logs.Loggers;
 import io.qadenz.automation.reporter.model.JsonClass;
 import io.qadenz.automation.reporter.model.JsonLogEvent;
 import io.qadenz.automation.reporter.model.JsonMethod;
@@ -20,7 +21,6 @@ import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.InputStream;
@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class HtmlReporter {
     
-    private static final Logger LOG = LoggerFactory.getLogger("REPORTER");
+    private static final Logger LOG = Loggers.getReporterLogger();
     
     private JsonReport jsonReport;
     private Document document;
@@ -303,7 +303,8 @@ public class HtmlReporter {
             FileUtils.writeStringToFile(file, document.outerHtml(), StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
-            LOG.error("Error writing HTML file: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error writing HTML file :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
         }
     }
     
