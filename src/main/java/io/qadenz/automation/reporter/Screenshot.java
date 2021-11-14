@@ -33,10 +33,14 @@ public class Screenshot {
     private static final Logger LOG = Loggers.getSuiteLogger();
     
     /**
-     * A convenience boolean to pass to {@code check()} or {@code verify()} to enhance readability of the code.
+     * A convenience boolean to pass to {@code check()} or {@code verify()} when disabling screenshots, to enhance
+     * readability of the code.
      */
     public static final boolean SKIP = false;
     
+    /**
+     * Captures and stores a screenshot of the current browser.
+     */
     public void capture() {
         String uuid = UUID.randomUUID().toString();
         
