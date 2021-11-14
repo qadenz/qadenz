@@ -9,6 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package io.qadenz.automation.config;
 
+import io.qadenz.automation.logs.Loggers;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.Capabilities;
@@ -18,7 +19,6 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class CapabilityProvider {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = Loggers.getSuiteLogger();
     
     /**
      * Loads the options for the given browser, and performs default configurations based on Suite Parameters and
@@ -84,21 +84,46 @@ public class CapabilityProvider {
     }
     
     private static List<String> loadArgs(Browser browser) {
-        List<String> args = new ArrayList<>();
-        String fileName = "config/" + browser.name().toLowerCase() + "-args.json";
+        String fileName = "config/" + browser.getName().toLowerCase() + "-config.json";
+        JSONArray jsonConfig = loadJsonFile(fileName, browser);
         
+        List<String> args = new ArrayList<>();
+        if (jsonConfig != null) {
+            args = parseArgs(jsonConfig);
+        }
+        
+        return args;
+    }
+    
+    private static JSONArray loadJsonFile(String fileName, Browser browser) {
         try {
             Path jsonFile = Paths.get(ClassLoader.getSystemResource(fileName).toURI());
             String jsonText = Files.readString(jsonFile);
-            JSONArray jsonArray = new JSONObject(jsonText).getJSONArray("args");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                args.add(jsonArray.get(i).toString());
-            }
+            
+            return new JSONArray(jsonText);
         }
         catch (Exception exception) {
-            LOG.error("Error loading args for browser [{}] :: {}: {}", browser.toString(),
-                    exception.getClass().getSimpleName(), exception.getMessage());
-            // Log the exception and return an empty list.
+            LOG.debug("No custom configuration file found for browser [{}].", browser.getName());
+            
+            return null;
+        }
+    }
+    
+    private static List<String> parseArgs(JSONArray jsonArray) {
+        List<String> args = new ArrayList<>();
+        
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            if (((String) jsonObject.get("profile")).equalsIgnoreCase(WebConfig.browserConfigProfile)) {
+                JSONArray jsonArgs = jsonObject.getJSONArray("args");
+                for (int j = 0; j < jsonArgs.length(); j++) {
+                    args.add(jsonArgs.get(j).toString());
+                }
+            }
+        }
+        
+        if (args.size() == 0) {
+            LOG.debug("No matching browser configuration profile for [{}].", WebConfig.browserConfigProfile);
         }
         
         return args;

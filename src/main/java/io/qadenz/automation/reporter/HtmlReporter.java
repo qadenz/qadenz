@@ -9,23 +9,22 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package io.qadenz.automation.reporter;
 
+import io.qadenz.automation.logs.Loggers;
 import io.qadenz.automation.reporter.model.JsonClass;
 import io.qadenz.automation.reporter.model.JsonLogEvent;
 import io.qadenz.automation.reporter.model.JsonMethod;
 import io.qadenz.automation.reporter.model.JsonReport;
 import io.qadenz.automation.reporter.model.JsonTest;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -39,7 +38,7 @@ import java.util.List;
  */
 public class HtmlReporter {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = Loggers.getReporterLogger();
     
     private JsonReport jsonReport;
     private Document document;
@@ -50,8 +49,6 @@ public class HtmlReporter {
     }
     
     public void generateReport(String outputPath, String fileName) {
-        LOG.info("Building HTML Report.");
-        
         writeComment();
         writeHead();
         writeSummary();
@@ -67,7 +64,6 @@ public class HtmlReporter {
     }
     
     private void writeHead() {
-        LOG.debug("Writing document head.");
         Element head = document.head();
         head.appendElement("meta").attr("charset", "UTF-8");
         head.appendElement("title").text("Test Report");
@@ -83,11 +79,11 @@ public class HtmlReporter {
     private String loadAndCompressCss() {
         String contents = null;
         try {
-            Path path = Paths.get(ClassLoader.getSystemResource("html/report.css").toURI());
-            contents = Files.readString(path, StandardCharsets.UTF_8);
+            InputStream inputStream = getClass().getResourceAsStream("/html/report.css");
+            contents = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
-            exception.printStackTrace();
+            LOG.error("Error loading CSS file: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
         }
         
         // Yeah, it's hacky but it works. I'll revisit this another time.
@@ -102,27 +98,21 @@ public class HtmlReporter {
         section.appendElement("div").addClass("test-name bordered").text(testName);
         
         if (jsonTest.getFailedConfigurations().size() > 0) {
-            LOG.debug("Writing Failed Configurations.");
             writeResultsSection(section, jsonTest.getFailedConfigurations(), HtmlResult.FAILED_CONFIGS);
         }
         if (jsonTest.getSkippedConfigurations().size() > 0) {
-            LOG.debug("Writing Skipped Configurations.");
             writeResultsSection(section, jsonTest.getSkippedConfigurations(), HtmlResult.SKIPPED_CONFIGS);
         }
         if (jsonTest.getFailedTests().size() > 0) {
-            LOG.debug("Writing Failed Tests.");
             writeResultsSection(section, jsonTest.getFailedTests(), HtmlResult.FAILED_TESTS);
         }
         if (jsonTest.getStoppedTests().size() > 0) {
-            LOG.debug("Writing Stopped Tests.");
             writeResultsSection(section, jsonTest.getStoppedTests(), HtmlResult.STOPPED_TESTS);
         }
         if (jsonTest.getSkippedTests().size() > 0) {
-            LOG.debug("Writing Skipped Tests.");
             writeResultsSection(section, jsonTest.getSkippedTests(), HtmlResult.SKIPPED_TESTS);
         }
         if (jsonTest.getPassedTests().size() > 0) {
-            LOG.debug("Writing Passed Tests.");
             writeResultsSection(section, jsonTest.getPassedTests(), HtmlResult.PASSED_TESTS);
         }
         
@@ -130,8 +120,6 @@ public class HtmlReporter {
     }
     
     private void writeSummary() {
-        LOG.debug("Writing Suite summary.");
-        
         document.body().appendElement("div").addClass("suite-summary bordered");
         
         Element summary = document.body().getElementsByClass("suite-summary bordered").get(0);
@@ -310,13 +298,13 @@ public class HtmlReporter {
     }
     
     private void writeHtmlFile(String outputPath, String fileName) {
-        LOG.debug("Writing HTML File.");
         try {
             File file = new File(outputPath, fileName + ".html");
             FileUtils.writeStringToFile(file, document.outerHtml(), StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
-            exception.printStackTrace();
+            LOG.error("Error writing HTML file :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
         }
     }
     

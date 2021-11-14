@@ -224,7 +224,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: \n" + failures;
+                return "Discrepancies: \n" + failures.toString();
             }
         };
     }
@@ -349,7 +349,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: \n" + failures;
+                return "Discrepancies: \n" + failures.toString();
             }
         };
     }
@@ -541,7 +541,44 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: \n" + failures;
+                return "Discrepancies: \n" + failures.toString();
+            }
+        };
+    }
+    
+    /**
+     * A Condition to evaluate the text shown inside an {@code <input>} element.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfInputElement(final Locator locator, final Expectation<String> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            String elementText;
+            
+            @Override
+            public String description() {
+                return "Text of input element [" + locator.getName() + "] " + expectation.description() + ".";
+            }
+            
+            @Override
+            public Boolean result() {
+                WebInspector webInspector = new WebInspector(Conditions.class);
+                elementText = webInspector.getAttributeOfElement(locator, "value");
+                
+                match = expectation.matcher().matches(elementText);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + elementText + "].";
             }
         };
     }
@@ -628,7 +665,7 @@ public class Conditions {
             
             @Override
             public String output() {
-                return "Discrepancies: \n" + failures;
+                return "Discrepancies: \n" + failures.toString();
             }
         };
     }

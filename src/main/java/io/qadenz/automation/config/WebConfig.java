@@ -26,6 +26,7 @@ public class WebConfig {
     public static String gridHost;
     public static Browser browser;
     public static String browserVersion;
+    public static String browserConfigProfile;
     public static Platform platform;
     public static String applicationName;
     public static String appUrl;

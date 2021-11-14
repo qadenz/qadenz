@@ -9,10 +9,10 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package io.qadenz.automation.config;
 
+import io.qadenz.automation.logs.Loggers;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ import java.util.Map;
  */
 public class XmlParameterValidator {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = Loggers.getSuiteLogger();
     
     private Map<String, String> xmlParameters;
     
@@ -61,7 +61,7 @@ public class XmlParameterValidator {
             String xmlBrowser = xmlParameters.get("browser");
             try {
                 Browser browser = Browser.fromString(xmlBrowser);
-                LOG.info("Using Browser [{}].", browser.toString());
+                LOG.info("Using Browser [{}].", browser.getName());
                 
                 return browser;
             }
@@ -94,6 +94,25 @@ public class XmlParameterValidator {
         }
         else {
             LOG.info("No Browser Version given, using any available.");
+            
+            return null;
+        }
+    }
+    
+    /**
+     * Reads and returns the value of the {@code browserConfigProfile} parameter, if one is provided.
+     *
+     * @return The Browser Config Profile value.
+     */
+    public String validateBrowserConfigProfile() {
+        if (xmlParameters.containsKey("browserConfigProfile")) {
+            String xmlBrowserConfigProfile = xmlParameters.get("browserConfigProfile");
+            LOG.info("Using Browser Config Profile [{}].", xmlBrowserConfigProfile);
+            
+            return xmlBrowserConfigProfile;
+        }
+        else {
+            LOG.info("No Browser Config Profile given.");
             
             return null;
         }
