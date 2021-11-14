@@ -23,16 +23,16 @@
     <developers>
         <developer>
             <name>Tim Slifer</name>
-            <email>oss@slifer.io</email>
-            <organization>slifer.io</organization>
-            <organizationUrl>http://www.slifer.io</organizationUrl>
+            <roles>
+                <role>Project Owner</role>
+            </roles>
         </developer>
     </developers>
     
     <scm>
-        <connection>scm:git:git://github.com/qadenz.qadenz.git</connection>
+        <connection>scm:git:git://github.com/qadenz/qadenz.git</connection>
         <developerConnection>scm:git:ssh://github.com:qadenz/qadenz.git</developerConnection>
-        <url>https://github.com/qadenz/qadenz/tree/master</url>
+        <url>https://github.com/qadenz/qadenz</url>
     </scm>
     
     <properties>
