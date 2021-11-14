@@ -52,9 +52,9 @@ public class WebCommander extends Commands {
         LOG = LoggerFactory.getLogger(WebCommander.class);
     }
     
-    public WebCommander(Class<?> proxyLogger) {
-        super(proxyLogger);
-        LOG = LoggerFactory.getLogger(proxyLogger);
+    public WebCommander(Class<?> logger) {
+        super(logger);
+        LOG = LoggerFactory.getLogger(logger);
     }
     
     /**

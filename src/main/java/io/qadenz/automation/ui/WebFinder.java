@@ -43,10 +43,12 @@ public class WebFinder {
         
         try {
             LOG.debug("Initializing element [{}].", locator.getName());
+            
             return WebDriverProvider.getWebDriver().findElement(bySizzle(locator));
         }
         catch (Exception e) {
             LOG.debug("Could not initialize element [{}].", locator.getName());
+            
             throw e;
         }
     }

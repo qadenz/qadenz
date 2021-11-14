@@ -30,8 +30,8 @@ public abstract class Commands {
         LOG = LoggerFactory.getLogger(Commands.class);
     }
     
-    public Commands(Class<?> proxyLogger) {
-        LOG = LoggerFactory.getLogger(proxyLogger);
+    public Commands(Class<?> logger) {
+        LOG = LoggerFactory.getLogger(logger);
     }
     
     /**
