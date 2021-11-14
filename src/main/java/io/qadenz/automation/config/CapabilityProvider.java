@@ -99,10 +99,12 @@ public class CapabilityProvider {
         try {
             Path jsonFile = Paths.get(ClassLoader.getSystemResource(fileName).toURI());
             String jsonText = Files.readString(jsonFile);
+            
             return new JSONArray(jsonText);
         }
         catch (Exception exception) {
             LOG.debug("No custom configuration file found for browser [{}].", browser.getName());
+            
             return null;
         }
     }
