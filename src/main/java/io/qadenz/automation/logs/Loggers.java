@@ -22,4 +22,8 @@ public class Loggers {
     public static Logger getSuiteLogger() {
         return LoggerFactory.getLogger("SUITE");
     }
+    
+    public static Logger getReporterLogger() {
+        return LoggerFactory.getLogger("REPORTER");
+    }
 }
