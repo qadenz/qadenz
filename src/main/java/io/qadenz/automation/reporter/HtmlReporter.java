@@ -303,7 +303,8 @@ public class HtmlReporter {
             FileUtils.writeStringToFile(file, document.outerHtml(), StandardCharsets.UTF_8);
         }
         catch (Exception exception) {
-            LOG.error("Error writing HTML file: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error writing HTML file :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
         }
     }
     

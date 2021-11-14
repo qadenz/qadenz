@@ -43,8 +43,9 @@ public class TestReporter implements IReporter {
             ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
             objectWriter.writeValue(new File(outputDirectory, FILE_NAME + ".json"), jsonReport);
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception exception) {
+            LOG.error("Error writing JSON file :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
         }
         
         HtmlReporter htmlReporter = new HtmlReporter(jsonReport);
