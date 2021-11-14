@@ -11,9 +11,9 @@ package io.qadenz.automation.reporter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import io.qadenz.automation.logs.Loggers;
 import io.qadenz.automation.reporter.model.JsonReport;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.IReporter;
 import org.testng.ISuite;
 import org.testng.xml.XmlSuite;
@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class TestReporter implements IReporter {
     
-    private static final Logger LOG = LoggerFactory.getLogger("SUITE");
+    private static final Logger LOG = Loggers.getReporterLogger();
     private static final String FILE_NAME = "suite-results";
     
     @Override
@@ -43,8 +43,9 @@ public class TestReporter implements IReporter {
             ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
             objectWriter.writeValue(new File(outputDirectory, FILE_NAME + ".json"), jsonReport);
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception exception) {
+            LOG.error("Error writing JSON file :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
         }
         
         HtmlReporter htmlReporter = new HtmlReporter(jsonReport);

@@ -1,48 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <timestamp key="byMillis" datePattern="MMdd'-'HHmmss.SSS"/>
     
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="io.qadenz.automation.logs.LogEventLayout"/>
+            <layout class="io.qadenz.automation.logs.ConsoleLogLayout"/>
         </encoder>
     </appender>
     
     <appender name="TestNG" class="com.github.sbabcoc.logback.testng.ReporterAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="io.qadenz.automation.logs.LogEventLayout"/>
+            <layout class="io.qadenz.automation.logs.TestNgLogLayout"/>
         </encoder>
     </appender>
     
-    <appender name="JSON-SUITE" class="ch.qos.logback.classic.sift.SiftingAppender">
-        <discriminator>
-            <key>suiteId</key>
-            <defaultValue>unknown</defaultValue>
-        </discriminator>
-        <sift>
-            <appender name="FILE-${suiteId}" class="ch.qos.logback.core.FileAppender">
-                <file>${path.ReportOutput}suite-log.json</file>
-                <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
-                    <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
-                        <prettyPrint>false</prettyPrint>
-                    </jsonFormatter>
-                    <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
-                    <appendLineSeparator>true</appendLineSeparator>
-                </layout>
-            </appender>
-        </sift>
-    </appender>
-    
     <logger name="SUITE" level="INFO" additivity="false">
-        <appender-ref ref="JSON-SUITE"/>
         <appender-ref ref="STDOUT"/>
     </logger>
+    
+    <logger name="REPORTER" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    
+    <logger name="io.qadenz.automation.conditions.Conditions" level="OFF"/>
     
     <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="TestNG"/>
     </root>
-    
-    <logger name="io.qadenz.automation.conditions.Conditions" level="OFF"/>
 
 </configuration>

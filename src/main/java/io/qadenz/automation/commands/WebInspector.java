@@ -9,6 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package io.qadenz.automation.commands;
 
+import io.qadenz.automation.config.OptionsLoader;
 import io.qadenz.automation.reporter.Screenshot;
 import io.qadenz.automation.ui.Locator;
 import io.qadenz.automation.ui.WebFinder;
@@ -39,8 +40,8 @@ public class WebInspector {
         LOG = LoggerFactory.getLogger(WebInspector.class);
     }
     
-    public WebInspector(Class<?> proxyLogger) {
-        LOG = LoggerFactory.getLogger(proxyLogger);
+    public WebInspector(Class<?> logger) {
+        LOG = LoggerFactory.getLogger(logger);
     }
     
     /**
@@ -117,6 +118,7 @@ public class WebInspector {
      * Retrieves the value of the given CSS property on an element.
      *
      * @param locator The mapped UI element.
+     * @param cssProperty The name of the CSS Property to inspect.
      *
      * @return The CSS property value.
      */
@@ -253,7 +255,18 @@ public class WebInspector {
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
             
-            return webElement.isSelected();
+            boolean selected = webElement.isSelected();
+            for (JSONObject json : OptionsLoader.getSelectedStateOptions()) {
+                String attribute = json.getString("attribute");
+                String value = json.getString("value");
+                if (selected) {
+                    selected = (webElement.getAttribute(attribute).contains(value));
+                    LOG.debug("Checked attribute [{}] for value [{}] - Selected State is [{}].",
+                            attribute, value, selected);
+                }
+            }
+            
+            return selected;
         }
         catch (Exception exception) {
             LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -369,7 +382,7 @@ public class WebInspector {
                     LOG.debug("Checked class 'ng-hide' - Visibility is [{}].", visible);
                 }
                 
-                for (JSONObject json : VisibilityOptions.getOptions()) {
+                for (JSONObject json : OptionsLoader.getVisibilityOptions()) {
                     String attribute = json.getString("attribute");
                     String value = json.getString("value");
                     if (visible) {
