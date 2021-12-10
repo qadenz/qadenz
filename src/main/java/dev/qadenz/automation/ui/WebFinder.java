@@ -11,7 +11,6 @@ package dev.qadenz.automation.ui;
 
 import dev.qadenz.automation.config.WebConfig;
 import dev.qadenz.automation.config.WebDriverProvider;
-import io.slifer.sizzlecss.BySizzle;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -46,10 +45,10 @@ public class WebFinder {
             
             return WebDriverProvider.getWebDriver().findElement(bySizzle(locator));
         }
-        catch (Exception e) {
+        catch (Exception exception) {
             LOG.debug("Could not initialize element [{}].", locator.getName());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -68,10 +67,10 @@ public class WebFinder {
             
             return WebDriverProvider.getWebDriver().findElements(bySizzle(locator));
         }
-        catch (Exception e) {
+        catch (Exception exception) {
             LOG.debug("Could not initialize elements [{}].", locator.getName());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -92,10 +91,10 @@ public class WebFinder {
             
             return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(bySizzle(locator)));
         }
-        catch (Exception e) {
+        catch (Exception exception) {
             LOG.debug("Could not initialize element [{}].", locator.getName());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -116,10 +115,10 @@ public class WebFinder {
             
             return webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(bySizzle(locator)));
         }
-        catch (Exception e) {
+        catch (Exception exception) {
             LOG.debug("Could not initialize elements [{}].", locator.getName());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -140,10 +139,10 @@ public class WebFinder {
             
             return webDriverWait.until(ExpectedConditions.elementToBeClickable(bySizzle(locator)));
         }
-        catch (Exception e) {
+        catch (Exception exception) {
             LOG.debug("Could not initialize element [{}].", locator.getName());
             
-            throw e;
+            throw exception;
         }
     }
     
@@ -164,10 +163,10 @@ public class WebFinder {
             
             return webDriverWait.until(ExpectedConditions.presenceOfElementLocated(bySizzle(locator)));
         }
-        catch (Exception e) {
+        catch (Exception exception) {
             LOG.debug("Could not initialize element [{}].", locator.getName());
             
-            throw e;
+            throw exception;
         }
     }
     
