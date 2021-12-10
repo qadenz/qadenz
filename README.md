@@ -37,7 +37,7 @@ the `<dependencies>` section:
 ```xml
 
 <dependency>
-    <groupId>io.qadenz</groupId>
+    <groupId>dev.qadenz</groupId>
     <artifactId>qadenz</artifactId>
     <version>1.0.0-BETA-2</version>
 </dependency>
