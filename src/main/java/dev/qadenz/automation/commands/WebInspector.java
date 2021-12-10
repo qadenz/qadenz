@@ -377,11 +377,6 @@ public class WebInspector {
                     LOG.debug("Checked style for 'visibility: hidden;' - Visibility is [{}].", visible);
                 }
                 
-                if (visible) {
-                    visible = (!webElements.get(0).getAttribute("class").contains("ng-hide"));
-                    LOG.debug("Checked class 'ng-hide' - Visibility is [{}].", visible);
-                }
-                
                 for (JSONObject json : OptionsLoader.getVisibilityOptions()) {
                     String attribute = json.getString("attribute");
                     String value = json.getString("value");
