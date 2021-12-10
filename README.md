@@ -43,7 +43,7 @@ the `<dependencies>` section:
 </dependency>
 ```
 
-Documentation for the library is available at [qadenz.io](http://qadenz.io).
+Documentation for the library is available at [qadenz.dev](http://qadenz.dev).
 
 Happy automating :)
 
