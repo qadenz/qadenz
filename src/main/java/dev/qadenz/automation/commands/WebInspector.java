@@ -378,7 +378,7 @@ public class WebInspector {
                 }
     
                 if (visible) {
-                    visible = (!webElements.get(0).getAttribute("hidden").equalsIgnoreCase("true"));
+                    visible = (webElements.get(0).getAttribute("hidden") == null);
                     LOG.debug("Checked for attribute 'hidden' - Visibility is [{}].", visible);
                 }
                 
