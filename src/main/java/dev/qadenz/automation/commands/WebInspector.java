@@ -376,6 +376,11 @@ public class WebInspector {
                     visible = (!webElements.get(0).getAttribute("style").contains("visibility: hidden;"));
                     LOG.debug("Checked style for 'visibility: hidden;' - Visibility is [{}].", visible);
                 }
+    
+                if (visible) {
+                    visible = (!webElements.get(0).getAttribute("hidden").equalsIgnoreCase("true"));
+                    LOG.debug("Checked for attribute 'hidden' - Visibility is [{}].", visible);
+                }
                 
                 for (JSONObject json : OptionsLoader.getVisibilityOptions()) {
                     String attribute = json.getString("attribute");
