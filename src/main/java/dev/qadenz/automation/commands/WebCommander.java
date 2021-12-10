@@ -375,6 +375,13 @@ public class WebCommander extends Commands {
         }
     }
     
+    /**
+     * Captures a screenshot of the current browser.
+     */
+    public void captureScreenshot() {
+        screenshot.capture();
+    }
+    
     private String stringify(CharSequence... input) {
         StringBuilder builder = new StringBuilder();
         String separator = "";
