@@ -3,13 +3,13 @@
     
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="ConsoleLogLayout"/>
+            <layout class="dev.qadenz.automation.logs.ConsoleLogLayout"/>
         </encoder>
     </appender>
     
     <appender name="TestNG" class="com.github.sbabcoc.logback.testng.ReporterAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="TestNgLogLayout"/>
+            <layout class="dev.qadenz.automation.logs.TestNgLogLayout"/>
         </encoder>
     </appender>
     
@@ -21,7 +21,7 @@
         <appender-ref ref="STDOUT"/>
     </logger>
     
-    <logger name="Conditions" level="OFF"/>
+    <logger name="dev.qadenz.automation.conditions.Conditions" level="OFF"/>
     
     <root level="info">
         <appender-ref ref="STDOUT"/>
