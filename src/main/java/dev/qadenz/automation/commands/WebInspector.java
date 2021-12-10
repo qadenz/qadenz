@@ -376,10 +376,10 @@ public class WebInspector {
                     visible = (!webElements.get(0).getAttribute("style").contains("visibility: hidden;"));
                     LOG.debug("Checked style for 'visibility: hidden;' - Visibility is [{}].", visible);
                 }
-                
+    
                 if (visible) {
-                    visible = (!webElements.get(0).getAttribute("class").contains("ng-hide"));
-                    LOG.debug("Checked class 'ng-hide' - Visibility is [{}].", visible);
+                    visible = (webElements.get(0).getAttribute("hidden") == null);
+                    LOG.debug("Checked for attribute 'hidden' - Visibility is [{}].", visible);
                 }
                 
                 for (JSONObject json : OptionsLoader.getVisibilityOptions()) {
