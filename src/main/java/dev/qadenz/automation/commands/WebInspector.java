@@ -12,7 +12,6 @@ package dev.qadenz.automation.commands;
 import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.WebFinder;
-import org.json.JSONObject;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -368,13 +367,17 @@ public class WebInspector {
                     visible = (!webElements.get(0).getAttribute("style").contains("visibility: hidden;"));
                     LOG.debug("Checked style for 'visibility: hidden;' - Visibility is [{}].", visible);
                 }
-    
+                
                 if (visible) {
                     visible = (webElements.get(0).getAttribute("hidden") == null);
                     LOG.debug("Checked for attribute 'hidden' - Visibility is [{}].", visible);
                 }
                 
-                // Check Locator field
+                if (visible) {
+                    visible = (webElements.get(0).getAttribute(locator.getHiddenAttribute()) != null);
+                    LOG.debug("Checked for attribute '{}' - Visibility is [{}].", 
+                            locator.getHiddenAttribute(), visible);
+                }
             }
             catch (StaleElementReferenceException e) {
                 visible = false;
