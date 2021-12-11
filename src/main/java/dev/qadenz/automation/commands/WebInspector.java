@@ -9,7 +9,6 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.commands;
 
-import dev.qadenz.automation.config.OptionsLoader;
 import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.WebFinder;
@@ -256,15 +255,8 @@ public class WebInspector {
             WebElement webElement = webFinder.findWhenVisible(locator);
             
             boolean selected = webElement.isSelected();
-            for (JSONObject json : OptionsLoader.getSelectedStateOptions()) {
-                String attribute = json.getString("attribute");
-                String value = json.getString("value");
-                if (selected) {
-                    selected = (webElement.getAttribute(attribute).contains(value));
-                    LOG.debug("Checked attribute [{}] for value [{}] - Selected State is [{}].",
-                            attribute, value, selected);
-                }
-            }
+            
+            // Check Locator fields
             
             return selected;
         }
@@ -382,15 +374,7 @@ public class WebInspector {
                     LOG.debug("Checked for attribute 'hidden' - Visibility is [{}].", visible);
                 }
                 
-                for (JSONObject json : OptionsLoader.getVisibilityOptions()) {
-                    String attribute = json.getString("attribute");
-                    String value = json.getString("value");
-                    if (visible) {
-                        visible = (!webElements.get(0).getAttribute(attribute).contains(value));
-                        LOG.debug("Checked attribute [{}] for value [{}] - Visibility is [{}].",
-                                attribute, value, visible);
-                    }
-                }
+                // Check Locator field
             }
             catch (StaleElementReferenceException e) {
                 visible = false;
