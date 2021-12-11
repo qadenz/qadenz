@@ -19,6 +19,10 @@ public class Locator {
     private String name;
     private String selector;
     
+    private String hiddenAttribute;
+    private String selectedAttribute;
+    private String unselectedAttribute;
+    
     public Locator(String name, String selector) {
         this.name = name;
         this.selector = selector;
@@ -35,5 +39,29 @@ public class Locator {
     
     public String getSelector() {
         return selector;
+    }
+    
+    public String getHiddenAttribute() {
+        return hiddenAttribute;
+    }
+    
+    public void setHiddenAttribute(String hiddenAttribute) {
+        this.hiddenAttribute = hiddenAttribute;
+    }
+    
+    public String getSelectedAttribute() {
+        return selectedAttribute;
+    }
+    
+    public void setSelectedAttribute(String selectedAttribute) {
+        this.selectedAttribute = selectedAttribute;
+    }
+    
+    public String getUnselectedAttribute() {
+        return unselectedAttribute;
+    }
+    
+    public void setUnselectedAttribute(String unselectedAttribute) {
+        this.unselectedAttribute = unselectedAttribute;
     }
 }
