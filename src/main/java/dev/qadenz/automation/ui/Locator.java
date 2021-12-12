@@ -9,6 +9,8 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.ui;
 
+import org.testng.internal.collections.Pair;
+
 /**
  * Defines a mapped UI Element.
  *
@@ -19,9 +21,9 @@ public class Locator {
     private String name;
     private String selector;
     
-    private String hiddenAttribute;
-    private String selectedAttribute;
-    private String unselectedAttribute;
+    private Pair<String, String> hiddenAttribute;
+    private Pair<String, String> selectedAttribute;
+    private Pair<String, String> unselectedAttribute;
     
     public Locator(String name, String selector) {
         this.name = name;
@@ -41,27 +43,27 @@ public class Locator {
         return selector;
     }
     
-    public String getHiddenAttribute() {
+    public Pair<String, String> getHiddenAttribute() {
         return hiddenAttribute;
     }
     
-    public void setHiddenAttribute(String hiddenAttribute) {
-        this.hiddenAttribute = hiddenAttribute;
+    public void setHiddenAttribute(String attribute, String value) {
+        this.hiddenAttribute = new Pair<>(attribute, value);
     }
     
-    public String getSelectedAttribute() {
+    public Pair<String, String> getSelectedAttribute() {
         return selectedAttribute;
     }
     
-    public void setSelectedAttribute(String selectedAttribute) {
-        this.selectedAttribute = selectedAttribute;
+    public void setSelectedAttribute(String attribute, String value) {
+        this.selectedAttribute = new Pair<>(attribute, value);
     }
     
-    public String getUnselectedAttribute() {
+    public Pair<String, String> getUnselectedAttribute() {
         return unselectedAttribute;
     }
     
-    public void setUnselectedAttribute(String unselectedAttribute) {
-        this.unselectedAttribute = unselectedAttribute;
+    public void setUnselectedAttribute(String attribute, String value) {
+        this.unselectedAttribute = new Pair<>(attribute, value);
     }
 }
