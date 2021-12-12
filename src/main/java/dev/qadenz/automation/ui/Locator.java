@@ -47,23 +47,29 @@ public class Locator {
         return hiddenAttribute;
     }
     
-    public void setHiddenAttribute(String attribute, String value) {
+    public Locator setHiddenAttribute(String attribute, String value) {
         this.hiddenAttribute = new Pair<>(attribute, value);
+        
+        return this;
     }
     
     public Pair<String, String> getSelectedAttribute() {
         return selectedAttribute;
     }
     
-    public void setSelectedAttribute(String attribute, String value) {
+    public Locator setSelectedAttribute(String attribute, String value) {
         this.selectedAttribute = new Pair<>(attribute, value);
+        
+        return this;
     }
     
     public Pair<String, String> getUnselectedAttribute() {
         return unselectedAttribute;
     }
     
-    public void setUnselectedAttribute(String attribute, String value) {
+    public Locator setUnselectedAttribute(String attribute, String value) {
         this.unselectedAttribute = new Pair<>(attribute, value);
+        
+        return this;
     }
 }
