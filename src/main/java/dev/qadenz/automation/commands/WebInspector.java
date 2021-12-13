@@ -254,13 +254,59 @@ public class WebInspector {
             WebElement webElement = webFinder.findWhenVisible(locator);
             
             boolean selected = webElement.isSelected();
-            
-            // Check Locator fields
+            if (!selected) {
+                Boolean unselectedAttribute = null;
+                if (locator.getUnselectedAttribute() != null) {
+                    if (locator.getUnselectedAttribute().second() == null) {
+                        unselectedAttribute =
+                                (webElement.getAttribute(locator.getUnselectedAttribute().first()) == null);
+                        LOG.debug("Checked for presence of attribute [{}] - Found [{}].",
+                                locator.getUnselectedAttribute().first(), unselectedAttribute);
+                    }
+                    else {
+                        unselectedAttribute = (locator.getUnselectedAttribute()
+                                                      .second()
+                                                      .equalsIgnoreCase(webElement.getAttribute(
+                                                              locator.getUnselectedAttribute().first())));
+                        LOG.debug("Checked for attribute [{}] to have value [{}] - Found [{}].",
+                                locator.getUnselectedAttribute().first(), locator.getUnselectedAttribute().second(),
+                                unselectedAttribute);
+                    }
+                }
+                
+                Boolean selectedAttribute = null;
+                if (locator.getSelectedAttribute() != null) {
+                    if (locator.getSelectedAttribute().second() == null) {
+                        selectedAttribute =
+                                (webElement.getAttribute(locator.getSelectedAttribute().first()) == null);
+                        LOG.debug("Checked for presence of attribute [{}] - Found [{}].",
+                                locator.getSelectedAttribute().first(), selectedAttribute);
+                    }
+                    else {
+                        selectedAttribute = (locator.getSelectedAttribute()
+                                                    .second()
+                                                    .equalsIgnoreCase(webElement.getAttribute(
+                                                            locator.getSelectedAttribute().first())));
+                        LOG.debug("Checked for attribute [{}] to have value [{}] - Found [{}].",
+                                locator.getSelectedAttribute().first(), locator.getSelectedAttribute().second(),
+                                selectedAttribute);
+                    }
+                }
+                
+                if (selectedAttribute && (!unselectedAttribute || unselectedAttribute == null)) {
+                    selected = true;
+                }
+                else if (selectedAttribute == unselectedAttribute) {
+                    LOG.error("Selected state attributes for element [{}] cannot match.", locator.getName());
+                    throw new RuntimeException();
+                }
+            }
             
             return selected;
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -282,7 +328,8 @@ public class WebInspector {
             return webElement.getText();
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -304,7 +351,8 @@ public class WebInspector {
             return getTextValuesFromElements(webElements);
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -373,10 +421,22 @@ public class WebInspector {
                     LOG.debug("Checked for attribute 'hidden' - Visibility is [{}].", visible);
                 }
                 
-                if (visible) {
-                    visible = (webElements.get(0).getAttribute(locator.getHiddenAttribute()) != null);
-                    LOG.debug("Checked for attribute '{}' - Visibility is [{}].", 
-                            locator.getHiddenAttribute(), visible);
+                if (visible && locator.getHiddenAttribute() != null) {
+                    if (locator.getHiddenAttribute().second() == null) {
+                        visible = (webElements.get(0).getAttribute(locator.getHiddenAttribute().first()) == null);
+                        LOG.info("Checked for presence of attribute [{}] - Visibility is [{}].",
+                                locator.getHiddenAttribute().first(), visible);
+                    }
+                    else {
+                        visible = (!locator.getHiddenAttribute()
+                                           .second()
+                                           .equalsIgnoreCase(
+                                                   webElements.get(0)
+                                                              .getAttribute(locator.getHiddenAttribute().first())));
+                        LOG.info("Checked for attribute [{}] to have value [{}] - Visibility is [{}].",
+                                locator.getHiddenAttribute().first(), locator.getHiddenAttribute().second(),
+                                visible);
+                    }
                 }
             }
             catch (StaleElementReferenceException e) {
@@ -387,7 +447,8 @@ public class WebInspector {
             return visible;
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
             screenshot.capture();
             
             throw exception;
