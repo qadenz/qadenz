@@ -429,7 +429,7 @@ public class WebInspector {
         throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
     }
     
-    public Boolean checkAttributePair(WebElement webElement, Pair<String, String> attribute) {
+    private Boolean checkAttributePair(WebElement webElement, Pair<String, String> attribute) {
         boolean state = false;
         if (attribute != null) {
             if (attribute.second() == null) {
