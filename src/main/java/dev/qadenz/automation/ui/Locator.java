@@ -21,6 +21,7 @@ public class Locator {
     private String name;
     private String selector;
     
+    private Pair<String, String> disabledByAttribute;
     private Pair<String, String> hiddenByAttribute;
     private Pair<String, String> selectedByAttribute;
     
@@ -40,6 +41,22 @@ public class Locator {
     
     public String getSelector() {
         return selector;
+    }
+    
+    public Pair<String, String> getDisabledByAttribute() {
+        return disabledByAttribute;
+    }
+    
+    public Locator setDisabledByAttribute(String attribute) {
+        setDisabledByAttribute(attribute, null);
+        
+        return this;
+    }
+    
+    public Locator setDisabledByAttribute(String attribute, String value) {
+        this.disabledByAttribute = new Pair<>(attribute, value);
+        
+        return this;
     }
     
     public Pair<String, String> getHiddenByAttribute() {
