@@ -269,23 +269,6 @@ public class WebInspector {
         }
     }
     
-    public Boolean checkAttributePair(WebElement webElement, Pair<String, String> attribute) {
-        boolean state = false;
-        if (attribute != null) {
-            if (attribute.second() == null) {
-                state = (webElement.getAttribute(attribute.first()) == null);
-                LOG.debug("Checked for presence of attribute [{}] - Found [{}].", attribute.first(), state);
-            }
-            else {
-                state = (webElement.getAttribute(attribute.first()).contains(attribute.second()));
-                LOG.debug("Checked for attribute [{}] to have value [{}] - Found [{}].",
-                        attribute.first(), attribute.second(), state);
-            }
-        }
-        
-        return state;
-    }
-    
     /**
      * Retrieves the visible inner text of an element and any descendants on the DOM.
      *
@@ -394,22 +377,8 @@ public class WebInspector {
                     LOG.debug("Checked for attribute 'hidden' - Visibility is [{}].", visible);
                 }
                 
-                if (visible && locator.getHiddenAttribute() != null) {
-                    if (locator.getHiddenAttribute().second() == null) {
-                        visible = (webElements.get(0).getAttribute(locator.getHiddenAttribute().first()) == null);
-                        LOG.info("Checked for presence of attribute [{}] - Visibility is [{}].",
-                                locator.getHiddenAttribute().first(), visible);
-                    }
-                    else {
-                        visible = (!locator.getHiddenAttribute()
-                                           .second()
-                                           .equalsIgnoreCase(
-                                                   webElements.get(0)
-                                                              .getAttribute(locator.getHiddenAttribute().first())));
-                        LOG.info("Checked for attribute [{}] to have value [{}] - Visibility is [{}].",
-                                locator.getHiddenAttribute().first(), locator.getHiddenAttribute().second(),
-                                visible);
-                    }
+                if (visible) {
+                    visible = checkAttributePair(webElements.get(0), locator.getHiddenAttribute());
                 }
             }
             catch (StaleElementReferenceException e) {
@@ -461,5 +430,22 @@ public class WebInspector {
         screenshot.capture();
         
         throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
+    }
+    
+    public Boolean checkAttributePair(WebElement webElement, Pair<String, String> attribute) {
+        boolean state = false;
+        if (attribute != null) {
+            if (attribute.second() == null) {
+                state = (webElement.getAttribute(attribute.first()) == null);
+                LOG.debug("Checked for presence of attribute [{}] - Found [{}].", attribute.first(), state);
+            }
+            else {
+                state = (webElement.getAttribute(attribute.first()).contains(attribute.second()));
+                LOG.debug("Checked for attribute [{}] to have value [{}] - Found [{}].",
+                        attribute.first(), attribute.second(), state);
+            }
+        }
+        
+        return state;
     }
 }
