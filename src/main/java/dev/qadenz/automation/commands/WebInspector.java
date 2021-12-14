@@ -150,7 +150,7 @@ public class WebInspector {
             WebElement webElement = webFinder.findWhenVisible(locator);
             
             boolean enabled = webElement.isEnabled();
-            if (!enabled) {
+            if (enabled) {
                 enabled = !checkAttributePair(webElement, locator.getDisabledByAttribute());
             }
             
