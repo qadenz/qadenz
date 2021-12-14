@@ -256,23 +256,22 @@ public class WebInspector {
             
             boolean selected = webElement.isSelected();
             if (!selected) {
-                Boolean unselectedAttribute = checkAttributePair(webElement, locator.getUnselectedAttribute());
-                Boolean selectedAttribute = checkAttributePair(webElement, locator.getSelectedAttribute());
+                boolean isMarkedUnselected = checkAttributePair(webElement, locator.getUnselectedAttribute());
+                boolean isMarkedSelected = checkAttributePair(webElement, locator.getSelectedAttribute());
                 
-                if (selectedAttribute && (unselectedAttribute == null || !unselectedAttribute)) {
-                    selected = true;
-                }
-                else if (selectedAttribute == unselectedAttribute) {
+                if (isMarkedSelected == isMarkedUnselected) {
                     LOG.error("Selected state attributes for element [{}] cannot match.", locator.getName());
                     throw new RuntimeException();
+                }
+                else {
+                    selected = isMarkedSelected;
                 }
             }
             
             return selected;
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(),
-                    exception.getMessage());
+            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -280,7 +279,7 @@ public class WebInspector {
     }
     
     public Boolean checkAttributePair(WebElement webElement, Pair<String, String> attribute) {
-        Boolean state = null;
+        boolean state = false;
         if (attribute != null) {
             if (attribute.second() == null) {
                 state = (webElement.getAttribute(attribute.first()) == null);
