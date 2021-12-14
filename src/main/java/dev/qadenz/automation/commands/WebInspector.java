@@ -284,8 +284,7 @@ public class WebInspector {
             return webElement.getText();
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(),
-                    exception.getMessage());
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -307,8 +306,7 @@ public class WebInspector {
             return getTextValuesFromElements(webElements);
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(),
-                    exception.getMessage());
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             screenshot.capture();
             
             throw exception;
@@ -389,8 +387,7 @@ public class WebInspector {
             return visible;
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(),
-                    exception.getMessage());
+            LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             screenshot.capture();
             
             throw exception;
