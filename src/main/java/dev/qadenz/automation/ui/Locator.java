@@ -23,7 +23,6 @@ public class Locator {
     
     private Pair<String, String> hiddenAttribute;
     private Pair<String, String> selectedAttribute;
-    private Pair<String, String> unselectedAttribute;
     
     public Locator(String name, String selector) {
         this.name = name;
@@ -59,16 +58,6 @@ public class Locator {
     
     public Locator setSelectedAttribute(String attribute, String value) {
         this.selectedAttribute = new Pair<>(attribute, value);
-        
-        return this;
-    }
-    
-    public Pair<String, String> getUnselectedAttribute() {
-        return unselectedAttribute;
-    }
-    
-    public Locator setUnselectedAttribute(String attribute, String value) {
-        this.unselectedAttribute = new Pair<>(attribute, value);
         
         return this;
     }
