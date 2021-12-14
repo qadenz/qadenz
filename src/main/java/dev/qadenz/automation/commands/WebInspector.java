@@ -277,7 +277,7 @@ public class WebInspector {
                 LOG.debug("Checked for presence of attribute [{}] - Found [{}].", attribute.first(), state);
             }
             else {
-                state = (attribute.second().equalsIgnoreCase(webElement.getAttribute(attribute.first())));
+                state = (webElement.getAttribute(attribute.first()).contains(attribute.second()));
                 LOG.debug("Checked for attribute [{}] to have value [{}] - Found [{}].",
                         attribute.first(), attribute.second(), state);
             }
