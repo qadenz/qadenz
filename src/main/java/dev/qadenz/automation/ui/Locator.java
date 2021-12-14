@@ -46,6 +46,12 @@ public class Locator {
         return hiddenAttribute;
     }
     
+    public Locator setHiddenAttribute(String attribute) {
+        setHiddenAttribute(attribute, null);
+        
+        return this;
+    }
+    
     public Locator setHiddenAttribute(String attribute, String value) {
         this.hiddenAttribute = new Pair<>(attribute, value);
         
@@ -54,6 +60,12 @@ public class Locator {
     
     public Pair<String, String> getSelectedAttribute() {
         return selectedAttribute;
+    }
+    
+    public Locator setSelectedAttribute(String attribute) {
+        setSelectedAttribute(attribute, null);
+        
+        return this;
     }
     
     public Locator setSelectedAttribute(String attribute, String value) {
