@@ -376,7 +376,7 @@ public class WebInspector {
                 }
                 
                 if (visible) {
-                    visible = checkAttributePair(webElements.get(0), locator.getHiddenAttribute());
+                    visible = !checkAttributePair(webElements.get(0), locator.getHiddenAttribute());
                 }
             }
             catch (StaleElementReferenceException e) {
