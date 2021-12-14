@@ -21,8 +21,8 @@ public class Locator {
     private String name;
     private String selector;
     
-    private Pair<String, String> hiddenAttribute;
-    private Pair<String, String> selectedAttribute;
+    private Pair<String, String> hiddenByAttribute;
+    private Pair<String, String> selectedByAttribute;
     
     public Locator(String name, String selector) {
         this.name = name;
@@ -42,34 +42,34 @@ public class Locator {
         return selector;
     }
     
-    public Pair<String, String> getHiddenAttribute() {
-        return hiddenAttribute;
+    public Pair<String, String> getHiddenByAttribute() {
+        return hiddenByAttribute;
     }
     
-    public Locator setHiddenAttribute(String attribute) {
-        setHiddenAttribute(attribute, null);
+    public Locator setHiddenByAttribute(String attribute) {
+        setHiddenByAttribute(attribute, null);
         
         return this;
     }
     
-    public Locator setHiddenAttribute(String attribute, String value) {
-        this.hiddenAttribute = new Pair<>(attribute, value);
+    public Locator setHiddenByAttribute(String attribute, String value) {
+        this.hiddenByAttribute = new Pair<>(attribute, value);
         
         return this;
     }
     
-    public Pair<String, String> getSelectedAttribute() {
-        return selectedAttribute;
+    public Pair<String, String> getSelectedByAttribute() {
+        return selectedByAttribute;
     }
     
-    public Locator setSelectedAttribute(String attribute) {
-        setSelectedAttribute(attribute, null);
+    public Locator setSelectedByAttribute(String attribute) {
+        setSelectedByAttribute(attribute, null);
         
         return this;
     }
     
-    public Locator setSelectedAttribute(String attribute, String value) {
-        this.selectedAttribute = new Pair<>(attribute, value);
+    public Locator setSelectedByAttribute(String attribute, String value) {
+        this.selectedByAttribute = new Pair<>(attribute, value);
         
         return this;
     }
