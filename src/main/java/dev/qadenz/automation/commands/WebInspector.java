@@ -9,17 +9,16 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.commands;
 
-import dev.qadenz.automation.config.OptionsLoader;
 import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.WebFinder;
-import org.json.JSONObject;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.internal.collections.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -256,14 +255,8 @@ public class WebInspector {
             WebElement webElement = webFinder.findWhenVisible(locator);
             
             boolean selected = webElement.isSelected();
-            for (JSONObject json : OptionsLoader.getSelectedStateOptions()) {
-                String attribute = json.getString("attribute");
-                String value = json.getString("value");
-                if (selected) {
-                    selected = (webElement.getAttribute(attribute).contains(value));
-                    LOG.debug("Checked attribute [{}] for value [{}] - Selected State is [{}].",
-                            attribute, value, selected);
-                }
+            if (!selected) {
+                selected = checkAttributePair(webElement, locator.getSelectedByAttribute());
             }
             
             return selected;
@@ -376,20 +369,14 @@ public class WebInspector {
                     visible = (!webElements.get(0).getAttribute("style").contains("visibility: hidden;"));
                     LOG.debug("Checked style for 'visibility: hidden;' - Visibility is [{}].", visible);
                 }
-    
+                
                 if (visible) {
                     visible = (webElements.get(0).getAttribute("hidden") == null);
                     LOG.debug("Checked for attribute 'hidden' - Visibility is [{}].", visible);
                 }
                 
-                for (JSONObject json : OptionsLoader.getVisibilityOptions()) {
-                    String attribute = json.getString("attribute");
-                    String value = json.getString("value");
-                    if (visible) {
-                        visible = (!webElements.get(0).getAttribute(attribute).contains(value));
-                        LOG.debug("Checked attribute [{}] for value [{}] - Visibility is [{}].",
-                                attribute, value, visible);
-                    }
+                if (visible) {
+                    visible = !checkAttributePair(webElements.get(0), locator.getHiddenByAttribute());
                 }
             }
             catch (StaleElementReferenceException e) {
@@ -440,5 +427,22 @@ public class WebInspector {
         screenshot.capture();
         
         throw new IllegalArgumentException("Value [" + expectedText + "] was not found.");
+    }
+    
+    private Boolean checkAttributePair(WebElement webElement, Pair<String, String> attribute) {
+        boolean state = false;
+        if (attribute != null) {
+            if (attribute.second() == null) {
+                state = (webElement.getAttribute(attribute.first()) == null);
+                LOG.debug("Checked for presence of attribute [{}] - Found [{}].", attribute.first(), state);
+            }
+            else {
+                state = (webElement.getAttribute(attribute.first()).contains(attribute.second()));
+                LOG.debug("Checked for attribute [{}] to have value [{}] - Found [{}].",
+                        attribute.first(), attribute.second(), state);
+            }
+        }
+        
+        return state;
     }
 }
