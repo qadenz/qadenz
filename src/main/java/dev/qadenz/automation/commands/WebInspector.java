@@ -256,16 +256,7 @@ public class WebInspector {
             
             boolean selected = webElement.isSelected();
             if (!selected) {
-                boolean isMarkedUnselected = checkAttributePair(webElement, locator.getUnselectedAttribute());
-                boolean isMarkedSelected = checkAttributePair(webElement, locator.getSelectedAttribute());
-                
-                if (isMarkedSelected == isMarkedUnselected) {
-                    LOG.error("Selected state attributes for element [{}] cannot match.", locator.getName());
-                    throw new RuntimeException();
-                }
-                else {
-                    selected = isMarkedSelected;
-                }
+                selected = checkAttributePair(webElement, locator.getSelectedAttribute());
             }
             
             return selected;
