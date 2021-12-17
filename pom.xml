@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
-    <groupId>io.qadenz</groupId>
+    <groupId>dev.qadenz</groupId>
     <artifactId>qadenz</artifactId>
-    <version>1.0.0-BETA-2</version>
+    <version>1.0.0-BETA-3</version>
     
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -42,19 +42,19 @@
         <commons-lang.version>3.12.0</commons-lang.version>
         <hamcrest.version>2.2</hamcrest.version>
         <imgscalr.version>4.2</imgscalr.version>
-        <jackson.version>2.12.5</jackson.version>
-        <json.version>20210307</json.version>
-        <jsoup.version>1.14.2</jsoup.version>
-        <logback.version>1.2.6</logback.version>
+        <jackson.version>2.13.0</jackson.version>
+        <json.version>20211205</json.version>
+        <jsoup.version>1.14.3</jsoup.version>
+        <logback.version>1.2.7</logback.version>
         <logback-contrib.version>0.1.5</logback-contrib.version>
         <logback-testng.version>1.3.4</logback-testng.version>
-        <selenium.version>4.0.0</selenium.version>
-        <sizzle.version>4.0.0-R1</sizzle.version>
+        <selenium.version>4.1.0</selenium.version>
+        <sizzle.version>2.3.4</sizzle.version>
         <testng.version>7.4.0</testng.version>
         
-        <byte-buddy.version>1.11.18</byte-buddy.version>
-        <junit.version>5.8.1</junit.version>
-        <mockito.version>3.12.4</mockito.version>
+        <byte-buddy.version>1.12.3</byte-buddy.version>
+        <junit.version>5.8.2</junit.version>
+        <mockito.version>4.1.0</mockito.version>
     </properties>
     
     <dependencies>
@@ -101,12 +101,6 @@
         </dependency>
         
         <dependency>
-            <groupId>io.slifer</groupId>
-            <artifactId>webdriver-sizzle-injector</artifactId>
-            <version>${sizzle.version}</version>
-        </dependency>
-        
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang.version}</version>
@@ -146,6 +140,12 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>sizzle</artifactId>
+            <version>${sizzle.version}</version>
         </dependency>
         
         <!--Test Dependencies -->
@@ -210,6 +210,17 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
             </plugin>
         </plugins>
     </build>
