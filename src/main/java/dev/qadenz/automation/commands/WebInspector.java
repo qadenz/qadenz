@@ -149,7 +149,12 @@ public class WebInspector {
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
             
-            return webElement.isEnabled();
+            boolean enabled = webElement.isEnabled();
+            if (enabled) {
+                enabled = !checkAttributePair(webElement, locator.getDisabledByAttribute());
+            }
+            
+            return enabled;
         }
         catch (Exception exception) {
             LOG.error("Error retrieving state :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
