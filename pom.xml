@@ -50,7 +50,7 @@
         <logback-testng.version>1.3.4</logback-testng.version>
         <selenium.version>4.1.4</selenium.version>
         <sizzle.version>2.3.4</sizzle.version>
-        <testng.version>7.5.0</testng.version>
+        <testng.version>7.5</testng.version>
         
         <byte-buddy.version>1.12.3</byte-buddy.version>
         <junit.version>5.8.2</junit.version>
