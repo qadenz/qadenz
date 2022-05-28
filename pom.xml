@@ -48,9 +48,9 @@
         <logback.version>1.2.7</logback.version>
         <logback-contrib.version>0.1.5</logback-contrib.version>
         <logback-testng.version>1.3.4</logback-testng.version>
-        <selenium.version>4.1.4</selenium.version>
+        <selenium.version>4.2.0</selenium.version>
         <sizzle.version>2.3.4</sizzle.version>
-        <testng.version>7.5</testng.version>
+        <testng.version>7.6.0</testng.version>
         
         <byte-buddy.version>1.12.3</byte-buddy.version>
         <junit.version>5.8.2</junit.version>
