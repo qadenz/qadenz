@@ -6,7 +6,7 @@
     
     <groupId>dev.qadenz</groupId>
     <artifactId>qadenz</artifactId>
-    <version>1.0.0-BETA-3.3</version>
+    <version>1.0.0</version>
     
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
