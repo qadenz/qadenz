@@ -29,7 +29,8 @@ The Qadenz Library is made available under
 the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a "Source Available"
 library. Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as
 needed, but are prohibited from re-distributing the library or marketing/selling Qadenz (and derivative works of Qadenz)
-as a product for their customers. Please see the [FAQ](https://qadenz.dev/docs/faq/licensing) for more detail on licensing.
+as a product for their customers. Please see the [FAQ](https://qadenz.dev/docs/faq/licensing) for more detail on
+licensing.
 
 # Getting Started
 
@@ -40,7 +41,7 @@ the `<dependencies>` section:
 <dependency>
     <groupId>dev.qadenz</groupId>
     <artifactId>qadenz</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 

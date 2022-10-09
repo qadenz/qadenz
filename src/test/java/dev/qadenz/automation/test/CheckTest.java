@@ -10,8 +10,8 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package dev.qadenz.automation.test;
 
 import dev.qadenz.automation.commands.Assertions;
-import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.conditions.Condition;
+import dev.qadenz.automation.reporter.Screenshot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@ExtendWith (MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class CheckTest {
     
     @Mock
@@ -35,7 +35,7 @@ public class CheckTest {
     private TestCommander commander;
     
     @BeforeEach
-    private void initAssertions() {
+    public void initAssertions() {
         Assertions.setFailures(false);
     }
     
