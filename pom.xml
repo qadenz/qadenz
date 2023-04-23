@@ -6,7 +6,7 @@
     
     <groupId>dev.qadenz</groupId>
     <artifactId>qadenz</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -44,17 +44,17 @@
         <imgscalr-lib.version>4.2</imgscalr-lib.version>
         <jackson-databind.version>2.14.2</jackson-databind.version>
         <json.version>20230227</json.version>
-        <jsoup.version>1.15.3</jsoup.version>
-        <logback-classic.version>1.4.6</logback-classic.version>
+        <jsoup.version>1.15.4</jsoup.version>
+        <logback-classic.version>1.4.7</logback-classic.version>
         <logback-contrib.version>0.1.5</logback-contrib.version>
         <logback-testng.version>2.0.0</logback-testng.version>
-        <selenium.version>4.8.3</selenium.version>
+        <selenium.version>4.9.0</selenium.version>
         <sizzle.version>2.3.4</sizzle.version>
         <testng.version>7.7.1</testng.version>
         
-        <byte-buddy.version>1.14.3</byte-buddy.version>
+        <byte-buddy.version>1.14.4</byte-buddy.version>
         <junit-jupiter-api.version>5.9.2</junit-jupiter-api.version>
-        <mockito-junit-jupiter.version>5.2.0</mockito-junit-jupiter.version>
+        <mockito-junit-jupiter.version>5.3.1</mockito-junit-jupiter.version>
     </properties>
     
     <dependencies>
