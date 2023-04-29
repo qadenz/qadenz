@@ -12,6 +12,7 @@ package dev.qadenz.automation.commands;
 import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.WebFinder;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -131,6 +132,39 @@ public class WebInspector {
         catch (Exception exception) {
             LOG.error("Error retrieving CSS property :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The text value.
+     */
+    public String getDirectTextOfElement(Locator locator) {
+        LOG.info("Retrieving direct text of element [{}].", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = webElement.getText();
+            List<String> childElementValues = getTextValuesFromElements(webElement.findElements(By.xpath("./*")));
+            for (String child : childElementValues) {
+                int lastIndex = elementText.lastIndexOf(child);
+                if (lastIndex != -1) {
+                    String start = elementText.substring(0, lastIndex);
+                    String end = elementText.substring(lastIndex + child.length());
+                    
+                    elementText = (start + end).trim();
+                }
+            }
+            
+            return elementText;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
             screenshot.capture();
             
             throw exception;
