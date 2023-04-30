@@ -11,12 +11,14 @@ package dev.qadenz.automation.conditions;
 
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -256,6 +258,29 @@ public class Expectations {
     }
     
     /**
+     * An expectation for the text of an element, represented as a LocalTime, to be after the given LocalTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isAfter(final LocalTime date) {
+        
+        return new Expectation<LocalTime>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.after(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is after [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
      * An expectation for the text of an element, represented as a LocalDate, to be the same as or after the given
      * LocalDate.
      *
@@ -294,6 +319,30 @@ public class Expectations {
             @Override
             public Matcher<LocalDateTime> matcher() {
                 return LocalDateTimeMatchers.sameOrAfter(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as or after [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same as or after the given
+     * LocalTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameAsOrAfter(final LocalTime date) {
+        
+        return new Expectation<LocalTime>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.sameOrAfter(date);
             }
             
             @Override
@@ -447,6 +496,30 @@ public class Expectations {
     }
     
     /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same as or before the given
+     * LocalTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameAsOrBefore(final LocalTime date) {
+        
+        return new Expectation<LocalTime>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.sameOrBefore(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as or before [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
      * An expectation for the text of an element, represented as a LocalDate, to be before the given LocalDate.
      *
      * @param date The formatted date value for comparison.
@@ -483,6 +556,29 @@ public class Expectations {
             @Override
             public Matcher<LocalDateTime> matcher() {
                 return LocalDateTimeMatchers.before(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is before [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be before the given LocalTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isBefore(final LocalTime date) {
+        
+        return new Expectation<LocalTime>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.before(date);
             }
             
             @Override
@@ -546,6 +642,32 @@ public class Expectations {
     }
     
     /**
+     * An expectation for the text of an element, represented as a LocalTime, to be within a timeframe of the given
+     * LocalTime.
+     *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isWithin(final Long period, final ChronoUnit unit, final LocalTime date) {
+        
+        return new Expectation<LocalTime>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.within(period, unit, date);
+            }
+            
+            @Override
+            public String description() {
+                return "is within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
      * An expectation for the text of an element, represented as a LocalDate, to not be within a timeframe of the given
      * LocalDate.
      *
@@ -589,6 +711,32 @@ public class Expectations {
             @Override
             public Matcher<LocalDateTime> matcher() {
                 return Matchers.not(LocalDateTimeMatchers.within(period, unit, date));
+            }
+            
+            @Override
+            public String description() {
+                return "is not within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to not be within a timeframe of the given
+     * LocalTime.
+     *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isNotWithin(final Long period, final ChronoUnit unit, final LocalTime date) {
+        
+        return new Expectation<LocalTime>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return Matchers.not(LocalTimeMatchers.within(period, unit, date));
             }
             
             @Override
