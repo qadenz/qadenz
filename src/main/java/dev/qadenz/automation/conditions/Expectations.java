@@ -70,6 +70,144 @@ public class Expectations {
     }
     
     /**
+     * An Expectation for an integer value to be greater than the given value.
+     *
+     * @param value The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<Integer> isGreaterThan(final int value) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<Integer> matcher() {
+                return Matchers.greaterThan(value);
+            }
+            
+            @Override
+            public String description() {
+                return "is greater than [" + value + "]";
+            }
+        };
+    }
+    
+    /**
+     * An Expectation for an integer value to be greater than or equal to the given value.
+     *
+     * @param value The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<Integer> isGreaterThanOrEqualTo(final int value) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<Integer> matcher() {
+                return Matchers.greaterThanOrEqualTo(value);
+            }
+            
+            @Override
+            public String description() {
+                return "is greater than or equal to [" + value + "]";
+            }
+        };
+    }
+    
+    /**
+     * An Expectation for an integer value to be equal to the given value.
+     *
+     * @param value The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<Integer> isEqualTo(final int value) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<Integer> matcher() {
+                return Matchers.equalTo(value);
+            }
+            
+            @Override
+            public String description() {
+                return "is equal to [" + value + "]";
+            }
+        };
+    }
+    
+    /**
+     * An Expectation for an integer value to be not equal to the given value.
+     *
+     * @param value The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<Integer> isNotEqualTo(final int value) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<Integer> matcher() {
+                return not(Matchers.equalTo(value));
+            }
+            
+            @Override
+            public String description() {
+                return "is not equal to [" + value + "]";
+            }
+        };
+    }
+    
+    /**
+     * An Expectation for an integer value to be less than or equal to the given value.
+     *
+     * @param value The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<Integer> isLessThanOrEqualTo(final int value) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<Integer> matcher() {
+                return Matchers.lessThanOrEqualTo(value);
+            }
+            
+            @Override
+            public String description() {
+                return "is less than or equal to [" + value + "]";
+            }
+        };
+    }
+    
+    /**
+     * An Expectation for an integer value to be less than the given value.
+     *
+     * @param value The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<Integer> isLessThan(final int value) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<Integer> matcher() {
+                return Matchers.lessThan(value);
+            }
+            
+            @Override
+            public String description() {
+                return "is less than [" + value + "]";
+            }
+        };
+    }
+    
+    /**
      * An expectation for the text of an element, represented as a Date, to be after the given Date.
      *
      * @param date The formatted date value for comparison.
@@ -300,144 +438,6 @@ public class Expectations {
             @Override
             public String description() {
                 return "is not day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
-            }
-        };
-    }
-    
-    /**
-     * An Expectation for an integer value to be greater than the given value.
-     *
-     * @param value The value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static Expectation<Integer> isGreaterThan(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.greaterThan(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is greater than [" + value + "]";
-            }
-        };
-    }
-    
-    /**
-     * An Expectation for an integer value to be greater than or equal to the given value.
-     *
-     * @param value The value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static Expectation<Integer> isGreaterThanOrEqualTo(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.greaterThanOrEqualTo(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is greater than or equal to [" + value + "]";
-            }
-        };
-    }
-    
-    /**
-     * An Expectation for an integer value to be equal to the given value.
-     *
-     * @param value The value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static Expectation<Integer> isEqualTo(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.equalTo(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is equal to [" + value + "]";
-            }
-        };
-    }
-    
-    /**
-     * An Expectation for an integer value to be not equal to the given value.
-     *
-     * @param value The value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static Expectation<Integer> isNotEqualTo(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return not(Matchers.equalTo(value));
-            }
-            
-            @Override
-            public String description() {
-                return "is not equal to [" + value + "]";
-            }
-        };
-    }
-    
-    /**
-     * An Expectation for an integer value to be less than or equal to the given value.
-     *
-     * @param value The value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static Expectation<Integer> isLessThanOrEqualTo(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.lessThanOrEqualTo(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is less than or equal to [" + value + "]";
-            }
-        };
-    }
-    
-    /**
-     * An Expectation for an integer value to be less than the given value.
-     *
-     * @param value The value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static Expectation<Integer> isLessThan(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.lessThan(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is less than [" + value + "]";
             }
         };
     }
