@@ -19,8 +19,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -587,7 +587,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition textOfElementAsDateTime(final Locator locator, final DateTimeFormatter dateTimeFormatter,
-            final Expectation<Date> expectation) {
+            final Expectation<LocalDateTime> expectation) {
         
         return new Condition() {
             
@@ -627,7 +627,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition textOfElementAsTime(final Locator locator, final DateTimeFormatter dateTimeFormatter,
-            final Expectation<Date> expectation) {
+            final Expectation<LocalTime> expectation) {
         
         return new Condition() {
             
