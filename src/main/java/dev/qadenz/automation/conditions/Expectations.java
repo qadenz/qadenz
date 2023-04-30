@@ -13,11 +13,14 @@ import org.exparity.hamcrest.date.DateMatchers;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.not;
@@ -182,8 +185,33 @@ public class Expectations {
     }
     
     /**
+     * An expectation for the text of an element, represented as a Date, to be before the given Date.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<Date> isBefore(final Date date) {
+        
+        return new Expectation<Date>() {
+            
+            @Override
+            public Matcher<Date> matcher() {
+                return DateMatchers.before(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is before [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
      * An expectation for the text of an element, represented as a Date, to be within a timeframe of the given Date.
      *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
      * @param date The formatted date value for comparison.
      *
      * @return The Expectation.
@@ -205,24 +233,73 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be before the given Date.
+     * An expectation for the text of an element, represented as a Date, to not be within a timeframe of the given
+     * Date.
      *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
      * @param date The formatted date value for comparison.
      *
      * @return The Expectation.
      */
-    public static Expectation<Date> isBefore(final Date date) {
+    public static Expectation<Date> isNotWithin(final Long period, final ChronoUnit unit, final Date date) {
         
         return new Expectation<Date>() {
             
             @Override
             public Matcher<Date> matcher() {
-                return DateMatchers.before(date);
+                return Matchers.not(DateMatchers.within(period, unit, date));
             }
             
             @Override
             public String description() {
-                return "is before [" + date.toString() + "]";
+                return "is not within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a Date, to be on the given day of the week.
+     *
+     * @param dayOfWeek The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<Date> isDayOfWeek(final DayOfWeek dayOfWeek) {
+        
+        return new Expectation<Date>() {
+            
+            @Override
+            public Matcher<Date> matcher() {
+                return DateMatchers.isDayOfWeek(dayOfWeek);
+            }
+            
+            @Override
+            public String description() {
+                return "is day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a Date, to not be on the given day of the week.
+     *
+     * @param dayOfWeek The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<Date> isNotDayOfWeek(final DayOfWeek dayOfWeek) {
+        
+        return new Expectation<Date>() {
+            
+            @Override
+            public Matcher<Date> matcher() {
+                return Matchers.not(DateMatchers.isDayOfWeek(dayOfWeek));
+            }
+            
+            @Override
+            public String description() {
+                return "is not day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
             }
         };
     }
