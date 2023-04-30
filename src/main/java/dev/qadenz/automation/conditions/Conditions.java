@@ -17,6 +17,9 @@ import dev.qadenz.automation.ui.WebFinder;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -536,19 +539,21 @@ public class Conditions {
     }
     
     /**
-     * A Condition to evaluate the visible inner text of an element as a formatted Date value.
+     * A Condition to evaluate the visible inner text of an element as a formatted LocalDate.
      *
      * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
      * @param expectation The expectation for the text to be shown in the element.
      *
      * @return The Condition.
      */
-    public static Condition textOfElementAsDate(final Locator locator, final Expectation<Date> expectation) {
+    public static Condition textOfElementAsDate(final Locator locator, final DateTimeFormatter dateTimeFormatter,
+            final Expectation<Date> expectation) {
         
         return new Condition() {
             
             Boolean match;
-            String elementText;
+            LocalDate elementDate;
             
             @Override
             public String description() {
@@ -558,16 +563,95 @@ public class Conditions {
             @Override
             public Boolean result() {
                 WebInspector webInspector = new WebInspector(Conditions.class);
-                elementText = webInspector.getTextOfElement(locator);
+                elementDate = webInspector.getTextOfElementAsDate(locator, dateTimeFormatter);
                 
-                match = expectation.matcher().matches(elementText);
+                match = expectation.matcher().matches(elementDate);
                 
                 return match;
             }
             
             @Override
             public String output() {
-                return "Found [" + elementText + "].";
+                return "Found [" + elementDate + "].";
+            }
+        };
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element as a formatted LocalDateTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfElementAsDateTime(final Locator locator, final DateTimeFormatter dateTimeFormatter,
+            final Expectation<Date> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            LocalDateTime elementDateTime;
+            
+            @Override
+            public String description() {
+                return "DateTime-formatted text of element [" + locator.getName() + "] " +
+                        expectation.description() + ".";
+            }
+            
+            @Override
+            public Boolean result() {
+                WebInspector webInspector = new WebInspector(Conditions.class);
+                elementDateTime = webInspector.getTextOfElementAsDateTime(locator, dateTimeFormatter);
+                
+                match = expectation.matcher().matches(elementDateTime);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + elementDateTime + "].";
+            }
+        };
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element as a formatted LocalTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfElementAsTime(final Locator locator, final DateTimeFormatter dateTimeFormatter,
+            final Expectation<Date> expectation) {
+        
+        return new Condition() {
+            
+            Boolean match;
+            LocalDateTime elementTime;
+            
+            @Override
+            public String description() {
+                return "Time-formatted text of element [" + locator.getName() + "] " + expectation.description() + ".";
+            }
+            
+            @Override
+            public Boolean result() {
+                WebInspector webInspector = new WebInspector(Conditions.class);
+                elementTime = webInspector.getTextOfElementAsDateTime(locator, dateTimeFormatter);
+                
+                match = expectation.matcher().matches(elementTime);
+                
+                return match;
+            }
+            
+            @Override
+            public String output() {
+                return "Found [" + elementTime + "].";
             }
         };
     }
