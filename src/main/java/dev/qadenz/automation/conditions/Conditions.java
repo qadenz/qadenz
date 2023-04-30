@@ -548,7 +548,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition textOfElementAsDate(final Locator locator, final DateTimeFormatter dateTimeFormatter,
-            final Expectation<Date> expectation) {
+            final Expectation<LocalDate> expectation) {
         
         return new Condition() {
             
