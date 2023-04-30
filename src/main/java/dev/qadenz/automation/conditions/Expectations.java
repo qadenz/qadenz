@@ -233,7 +233,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be after the given LocalDate.
+     * An expectation for the text of an element, represented as a LocalDateTime, to be after the given LocalDateTime.
      *
      * @param date The formatted date value for comparison.
      *
@@ -304,7 +304,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be the same as the given Date.
+     * An expectation for the text of an element, represented as a LocalDate, to be the same as the given LocalDate.
      *
      * @param date The formatted date value for comparison.
      *
@@ -327,7 +327,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be the same as the given Date.
+     * An expectation for the text of an element, represented as a LocalDateTime, to be the same as the given
+     * LocalDateTime.
      *
      * @param date The formatted date value for comparison.
      *
@@ -350,7 +351,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be not the same as the given Date.
+     * An expectation for the text of an element, represented as a LocalDate, to be not the same as the given
+     * LocalDate.
      *
      * @param date The formatted date value for comparison.
      *
@@ -373,7 +375,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be not the same as the given Date.
+     * An expectation for the text of an element, represented as a LocalDateTime, to be not the same as the given
+     * LocalDateTime.
      *
      * @param date The formatted date value for comparison.
      *
@@ -396,7 +399,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be the same as or before the given Date.
+     * An expectation for the text of an element, represented as a LocalDate, to be the same as or before the given
+     * LocalDate.
      *
      * @param date The formatted date value for comparison.
      *
@@ -419,7 +423,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be the same as or before the given Date.
+     * An expectation for the text of an element, represented as a LocalDateTime, to be the same as or before the given
+     * LocalDateTime.
      *
      * @param date The formatted date value for comparison.
      *
@@ -442,7 +447,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be before the given Date.
+     * An expectation for the text of an element, represented as a LocalDate, to be before the given LocalDate.
      *
      * @param date The formatted date value for comparison.
      *
@@ -465,7 +470,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be before the given Date.
+     * An expectation for the text of an element, represented as a LocalDateTime, to be before the given LocalDateTime.
      *
      * @param date The formatted date value for comparison.
      *
@@ -488,7 +493,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be within a timeframe of the given Date.
+     * An expectation for the text of an element, represented as a LocalDate, to be within a timeframe of the given
+     * LocalDate.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -513,7 +519,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be within a timeframe of the given Date.
+     * An expectation for the text of an element, represented as a LocalDateTime, to be within a timeframe of the given
+     * LocalDateTime.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -539,8 +546,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to not be within a timeframe of the given
-     * Date.
+     * An expectation for the text of an element, represented as a LocalDate, to not be within a timeframe of the given
+     * LocalDate.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -565,8 +572,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to not be within a timeframe of the given
-     * Date.
+     * An expectation for the text of an element, represented as a LocalDateTime, to not be within a timeframe of the
+     * given LocalDateTime.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -592,7 +599,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be on the given day of the week.
+     * An expectation for the text of an element, represented as a LocalDate, to be on the given day of the week.
      *
      * @param dayOfWeek The formatted date value for comparison.
      *
@@ -615,7 +622,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to be on the given day of the week.
+     * An expectation for the text of an element, represented as a LocalDateTime, to be on the given day of the week.
      *
      * @param dayOfWeek The formatted date value for comparison.
      *
@@ -638,7 +645,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to not be on the given day of the week.
+     * An expectation for the text of an element, represented as a LocalDate, to not be on the given day of the week.
      *
      * @param dayOfWeek The formatted date value for comparison.
      *
@@ -661,7 +668,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a Date, to not be on the given day of the week.
+     * An expectation for the text of an element, represented as a LocalDateTime, to not be on the given day of the
+     * week.
      *
      * @param dayOfWeek The formatted date value for comparison.
      *
