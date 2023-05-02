@@ -7,8 +7,8 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
 
-This file is derived from the org.testng.reporters.EmailableReporter2.java source 
-file, available in the TestNG Library. 
+This file is derived from the org.testng.reporters.EmailableReporter2.java source
+file, available in the TestNG Library.
 
 The original work is Copyright Cedric Beust and the TestNG Team.
 
@@ -36,8 +36,8 @@ import java.util.stream.Collectors;
  * to this class to examine TestNG's "Failed" tests and re-classify as "Failed" or "Stopped" based on the type of
  * exception that was caught during execution. This involved adding two new class fields and a method variable
  * (identified by naming context referencing "stopped" tests) inside the constructor, and two new methods to contain the
- * logic for separating the test results; {@code getFailuresWithAssertionFailures()} and {@code
- * getFailuresWithOtherExceptions()}.
+ * logic for separating the test results; {@code getFailuresWithAssertionFailures()} and
+ * {@code getFailuresWithOtherExceptions()}.
  * <p>
  * TestNG JavaDoc: Groups {@link ClassResult}s by test, type (configuration or test), and status.
  *

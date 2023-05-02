@@ -9,8 +9,8 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.commands;
 
-import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.config.WebDriverProvider;
+import dev.qadenz.automation.reporter.Screenshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

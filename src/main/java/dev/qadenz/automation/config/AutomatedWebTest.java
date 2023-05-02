@@ -36,7 +36,7 @@ import java.util.Map;
  *
  * @author Tim Slifer
  */
-@Listeners ({TestReporter.class})
+@Listeners({TestReporter.class})
 public class AutomatedWebTest {
     
     private static final Logger LOG = Loggers.getSuiteLogger();
@@ -46,7 +46,7 @@ public class AutomatedWebTest {
      *
      * @param testContext The injected {@link ITestContext}.
      */
-    @BeforeSuite (alwaysRun = true)
+    @BeforeSuite(alwaysRun = true)
     public void captureStartDateTime(ITestContext testContext) {
         WebConfig.suiteStartDate = LocalDateTime.now();
     }
@@ -57,7 +57,7 @@ public class AutomatedWebTest {
      *
      * @param testContext The injected {@link ITestContext}.
      */
-    @BeforeSuite (alwaysRun = true, dependsOnMethods = "captureStartDateTime")
+    @BeforeSuite(alwaysRun = true, dependsOnMethods = "captureStartDateTime")
     public void processXmlSuiteParameters(ITestContext testContext) {
         LOG.info("Reading XML Suite Parameters.");
         
@@ -74,7 +74,7 @@ public class AutomatedWebTest {
      *
      * @param testContext The injected {@link ITestContext}.
      */
-    @BeforeTest (alwaysRun = true)
+    @BeforeTest(alwaysRun = true)
     public void processXmlTestParameters(ITestContext testContext) {
         LOG.info("Reading XML Test Parameters for Test [{}].", testContext.getCurrentXmlTest().getName());
         
@@ -98,7 +98,7 @@ public class AutomatedWebTest {
      *
      * @throws Exception on invalid Grid URL.
      */
-    @BeforeMethod (alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void startWebDriver(ITestResult testResult) throws Exception {
         LOG.info("Executing Method [{}].", testResult.getMethod().getMethodName());
         if (getParameters(testResult).length() > 0) {
@@ -136,7 +136,7 @@ public class AutomatedWebTest {
     /**
      * Concludes the test by stopping the WebDriver instance.
      */
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
         WebDriverProvider.getWebDriver().quit();
@@ -145,7 +145,7 @@ public class AutomatedWebTest {
     /**
      * Captures the date/time when the Suite is completed.
      */
-    @AfterSuite (alwaysRun = true)
+    @AfterSuite(alwaysRun = true)
     public void captureEndDateTime() {
         WebConfig.suiteEndDate = LocalDateTime.now();
     }

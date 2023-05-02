@@ -9,12 +9,12 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.commands;
 
-import dev.qadenz.automation.reporter.Screenshot;
-import dev.qadenz.automation.ui.Locator;
-import dev.qadenz.automation.ui.WebFinder;
 import dev.qadenz.automation.conditions.Condition;
 import dev.qadenz.automation.config.WebConfig;
 import dev.qadenz.automation.config.WebDriverProvider;
+import dev.qadenz.automation.reporter.Screenshot;
+import dev.qadenz.automation.ui.Locator;
+import dev.qadenz.automation.ui.WebFinder;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;

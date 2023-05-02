@@ -9,8 +9,8 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.commands;
 
-import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.conditions.Condition;
+import dev.qadenz.automation.reporter.Screenshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -38,9 +38,9 @@ public abstract class Commands {
      * Evaluates each of the given {@link Condition}s as a group. Execution will be allowed to continue after the final
      * Condition is evaluated, even if one or more Conditions results in a failure. A call to {@link Assertions} will
      * flush the failures and abort the test at a user designated point in the test. If a call to {@code verify()}
-     * exists after a call to Check and before a call to {@code flush()}, the test will still be aborted if {@code
-     * verify()} produces a failure. Execution will be stopped immediately if an error is encountered during the {@code
-     * check()}. A screenshot will be captured for each failed Condition.
+     * exists after a call to Check and before a call to {@code flush()}, the test will still be aborted if
+     * {@code verify()} produces a failure. Execution will be stopped immediately if an error is encountered during the
+     * {@code check()}. A screenshot will be captured for each failed Condition.
      *
      * @param conditions The Conditions to be evaluated.
      */
