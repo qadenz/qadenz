@@ -753,7 +753,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isDayOfWeek(final DayOfWeek dayOfWeek) {
+    public static Expectation<LocalDate> isDayOfWeekAsLocalDate(final DayOfWeek dayOfWeek) {
         
         return new Expectation<LocalDate>() {
             
@@ -776,7 +776,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isDayOfWeek(final DayOfWeek dayOfWeek) {
+    public static Expectation<LocalDateTime> isDayOfWeekAsLocalDateTime(final DayOfWeek dayOfWeek) {
         
         return new Expectation<LocalDateTime>() {
             
@@ -799,7 +799,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isNotDayOfWeek(final DayOfWeek dayOfWeek) {
+    public static Expectation<LocalDate> isNotDayOfWeekAsLocalDate(final DayOfWeek dayOfWeek) {
         
         return new Expectation<LocalDate>() {
             
@@ -823,7 +823,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isNotDayOfWeek(final DayOfWeek dayOfWeek) {
+    public static Expectation<LocalDateTime> isNotDayOfWeekAsLocalDateTime(final DayOfWeek dayOfWeek) {
         
         return new Expectation<LocalDateTime>() {
             
