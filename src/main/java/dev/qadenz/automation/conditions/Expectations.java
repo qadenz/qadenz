@@ -220,7 +220,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isAfter(final LocalDate date) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -243,7 +243,7 @@ public class Expectations {
      */
     public static Expectation<LocalDateTime> isAfter(final LocalDateTime date) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
@@ -266,7 +266,7 @@ public class Expectations {
      */
     public static Expectation<LocalTime> isAfter(final LocalTime date) {
         
-        return new Expectation<LocalTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalTime> matcher() {
@@ -290,7 +290,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isSameAsOrAfter(final LocalDate date) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -314,7 +314,7 @@ public class Expectations {
      */
     public static Expectation<LocalDateTime> isSameAsOrAfter(final LocalDateTime date) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
@@ -338,7 +338,7 @@ public class Expectations {
      */
     public static Expectation<LocalTime> isSameAsOrAfter(final LocalTime date) {
         
-        return new Expectation<LocalTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalTime> matcher() {
@@ -361,7 +361,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isSameAs(final LocalDate date) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -385,7 +385,7 @@ public class Expectations {
      */
     public static Expectation<LocalDateTime> isSameAs(final LocalDateTime date) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
@@ -409,7 +409,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isNotSameAs(final LocalDate date) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -433,7 +433,7 @@ public class Expectations {
      */
     public static Expectation<LocalDateTime> isNotSameAs(final LocalDateTime date) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
@@ -457,7 +457,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isSameAsOrBefore(final LocalDate date) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -481,7 +481,7 @@ public class Expectations {
      */
     public static Expectation<LocalDateTime> isSameAsOrBefore(final LocalDateTime date) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
@@ -505,7 +505,7 @@ public class Expectations {
      */
     public static Expectation<LocalTime> isSameAsOrBefore(final LocalTime date) {
         
-        return new Expectation<LocalTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalTime> matcher() {
@@ -528,7 +528,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isBefore(final LocalDate date) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -551,7 +551,7 @@ public class Expectations {
      */
     public static Expectation<LocalDateTime> isBefore(final LocalDateTime date) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
@@ -574,7 +574,7 @@ public class Expectations {
      */
     public static Expectation<LocalTime> isBefore(final LocalTime date) {
         
-        return new Expectation<LocalTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalTime> matcher() {
@@ -600,7 +600,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isWithin(final Long period, final ChronoUnit unit, final LocalDate date) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -627,7 +627,7 @@ public class Expectations {
     public static Expectation<LocalDateTime> isWithin(final Long period, final ChronoUnit unit,
             final LocalDateTime date) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
@@ -653,7 +653,7 @@ public class Expectations {
      */
     public static Expectation<LocalTime> isWithin(final Long period, final ChronoUnit unit, final LocalTime date) {
         
-        return new Expectation<LocalTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalTime> matcher() {
@@ -679,7 +679,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isNotWithin(final Long period, final ChronoUnit unit, final LocalDate date) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -706,7 +706,7 @@ public class Expectations {
     public static Expectation<LocalDateTime> isNotWithin(final Long period, final ChronoUnit unit,
             final LocalDateTime date) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
@@ -732,7 +732,7 @@ public class Expectations {
      */
     public static Expectation<LocalTime> isNotWithin(final Long period, final ChronoUnit unit, final LocalTime date) {
         
-        return new Expectation<LocalTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalTime> matcher() {
@@ -755,7 +755,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isDayOfWeekAsLocalDate(final DayOfWeek dayOfWeek) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -778,7 +778,7 @@ public class Expectations {
      */
     public static Expectation<LocalDateTime> isDayOfWeekAsLocalDateTime(final DayOfWeek dayOfWeek) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
@@ -801,7 +801,7 @@ public class Expectations {
      */
     public static Expectation<LocalDate> isNotDayOfWeekAsLocalDate(final DayOfWeek dayOfWeek) {
         
-        return new Expectation<LocalDate>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDate> matcher() {
@@ -825,7 +825,7 @@ public class Expectations {
      */
     public static Expectation<LocalDateTime> isNotDayOfWeekAsLocalDateTime(final DayOfWeek dayOfWeek) {
         
-        return new Expectation<LocalDateTime>() {
+        return new Expectation<>() {
             
             @Override
             public Matcher<LocalDateTime> matcher() {
