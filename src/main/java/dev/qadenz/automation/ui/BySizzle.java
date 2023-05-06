@@ -92,7 +92,7 @@ public abstract class BySizzle extends By {
         }
         
         @Override
-        @SuppressWarnings ({"unchecked"}) // Yeah, I don't like this either.
+        @SuppressWarnings({"unchecked"}) // Yeah, I don't like this either.
         public List<WebElement> findElements(SearchContext context) {
             WebDriver driver = getWebDriver(context);
             injectSizzleIfNeeded(driver);

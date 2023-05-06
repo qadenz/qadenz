@@ -9,12 +9,22 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions;
 
+import org.exparity.hamcrest.date.LocalDateMatchers;
+import org.exparity.hamcrest.date.LocalDateTimeMatchers;
+import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.not;
@@ -197,6 +207,634 @@ public class Expectations {
             @Override
             public String description() {
                 return "is less than [" + value + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be after the given LocalDate.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isAfter(final LocalDate date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return LocalDateMatchers.after(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is after [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to be after the given LocalDateTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isAfter(final LocalDateTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return LocalDateTimeMatchers.after(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is after [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be after the given LocalTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isAfter(final LocalTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.after(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is after [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be the same as or after the given
+     * LocalDate.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isSameAsOrAfter(final LocalDate date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return LocalDateMatchers.sameOrAfter(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as or after [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to be the same as or after the given
+     * LocalDateTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isSameAsOrAfter(final LocalDateTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return LocalDateTimeMatchers.sameOrAfter(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as or after [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same as or after the given
+     * LocalTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameAsOrAfter(final LocalTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.sameOrAfter(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as or after [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be the same as the given LocalDate.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isSameAs(final LocalDate date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return LocalDateMatchers.sameDay(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to be the same as the given
+     * LocalDateTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isSameAs(final LocalDateTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return LocalDateTimeMatchers.sameDay(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be not the same as the given
+     * LocalDate.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isNotSameAs(final LocalDate date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return not(LocalDateMatchers.sameDay(date));
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to be not the same as the given
+     * LocalDateTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isNotSameAs(final LocalDateTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return not(LocalDateTimeMatchers.sameDay(date));
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be the same as or before the given
+     * LocalDate.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isSameAsOrBefore(final LocalDate date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return LocalDateMatchers.sameOrBefore(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as or before [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to be the same as or before the given
+     * LocalDateTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isSameAsOrBefore(final LocalDateTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return LocalDateTimeMatchers.sameOrBefore(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as or before [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same as or before the given
+     * LocalTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameAsOrBefore(final LocalTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.sameOrBefore(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is the same as or before [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be before the given LocalDate.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isBefore(final LocalDate date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return LocalDateMatchers.before(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is before [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to be before the given LocalDateTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isBefore(final LocalDateTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return LocalDateTimeMatchers.before(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is before [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be before the given LocalTime.
+     *
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isBefore(final LocalTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.before(date);
+            }
+            
+            @Override
+            public String description() {
+                return "is before [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be within a timeframe of the given
+     * LocalDate.
+     *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isWithin(final Long period, final ChronoUnit unit, final LocalDate date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return LocalDateMatchers.within(period, unit, date);
+            }
+            
+            @Override
+            public String description() {
+                return "is within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to be within a timeframe of the given
+     * LocalDateTime.
+     *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isWithin(final Long period, final ChronoUnit unit,
+            final LocalDateTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return LocalDateTimeMatchers.within(period, unit, date);
+            }
+            
+            @Override
+            public String description() {
+                return "is within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be within a timeframe of the given
+     * LocalTime.
+     *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isWithin(final Long period, final ChronoUnit unit, final LocalTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return LocalTimeMatchers.within(period, unit, date);
+            }
+            
+            @Override
+            public String description() {
+                return "is within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to not be within a timeframe of the given
+     * LocalDate.
+     *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isNotWithin(final Long period, final ChronoUnit unit, final LocalDate date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return Matchers.not(LocalDateMatchers.within(period, unit, date));
+            }
+            
+            @Override
+            public String description() {
+                return "is not within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to not be within a timeframe of the
+     * given LocalDateTime.
+     *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isNotWithin(final Long period, final ChronoUnit unit,
+            final LocalDateTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return Matchers.not(LocalDateTimeMatchers.within(period, unit, date));
+            }
+            
+            @Override
+            public String description() {
+                return "is not within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to not be within a timeframe of the given
+     * LocalTime.
+     *
+     * @param period The number of ChronoUnits within the allowable range.
+     * @param unit The unit of time.
+     * @param date The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isNotWithin(final Long period, final ChronoUnit unit, final LocalTime date) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalTime> matcher() {
+                return Matchers.not(LocalTimeMatchers.within(period, unit, date));
+            }
+            
+            @Override
+            public String description() {
+                return "is not within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be on the given day of the week.
+     *
+     * @param dayOfWeek The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isDayOfWeekAsLocalDate(final DayOfWeek dayOfWeek) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return LocalDateMatchers.isDayOfWeek(dayOfWeek);
+            }
+            
+            @Override
+            public String description() {
+                return "is day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to be on the given day of the week.
+     *
+     * @param dayOfWeek The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isDayOfWeekAsLocalDateTime(final DayOfWeek dayOfWeek) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return LocalDateTimeMatchers.isDayOfWeek(dayOfWeek);
+            }
+            
+            @Override
+            public String description() {
+                return "is day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to not be on the given day of the week.
+     *
+     * @param dayOfWeek The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDate> isNotDayOfWeekAsLocalDate(final DayOfWeek dayOfWeek) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDate> matcher() {
+                return Matchers.not(LocalDateMatchers.isDayOfWeek(dayOfWeek));
+            }
+            
+            @Override
+            public String description() {
+                return "is not day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
+            }
+        };
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDateTime, to not be on the given day of the
+     * week.
+     *
+     * @param dayOfWeek The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalDateTime> isNotDayOfWeekAsLocalDateTime(final DayOfWeek dayOfWeek) {
+        
+        return new Expectation<>() {
+            
+            @Override
+            public Matcher<LocalDateTime> matcher() {
+                return Matchers.not(LocalDateTimeMatchers.isDayOfWeek(dayOfWeek));
+            }
+            
+            @Override
+            public String description() {
+                return "is not day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
             }
         };
     }
