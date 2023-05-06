@@ -22,6 +22,8 @@ public class IsNotWithin implements Expectation<LocalDate> {
     private LocalDate localDate;
     
     public IsNotWithin(Long period, ChronoUnit chronoUnit, LocalDate localDate) {
+        this.period = period;
+        this.chronoUnit = chronoUnit;
         this.localDate = localDate;
     }
     

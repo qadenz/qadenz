@@ -20,6 +20,8 @@ public class IsWithin implements Expectation<LocalDate> {
     private LocalDate localDate;
     
     public IsWithin(Long period, ChronoUnit chronoUnit, LocalDate localDate) {
+        this.period = period;
+        this.chronoUnit = chronoUnit;
         this.localDate = localDate;
     }
     
