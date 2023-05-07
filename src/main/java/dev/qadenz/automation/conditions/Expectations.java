@@ -52,9 +52,15 @@ import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.Loca
 import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsWithin;
 import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsAfter;
 import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsBefore;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsNotSameHourOfDay;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsNotSameMinuteOfHour;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsNotSameSecondOfMinute;
 import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsNotWithin;
 import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameAsOrAfter;
 import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameAsOrBefore;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameHourOfDay;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameMinuteOfHour;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameSecondOfMinute;
 import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsWithin;
 
 import java.time.DayOfWeek;
@@ -464,6 +470,78 @@ public class Expectations {
     }
     
     /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same hour as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameHourOfDay(LocalTime time) {
+        return new LocalTimeIsSameHourOfDay(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be not the same hour as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isNotSameHourOfDay(LocalTime time) {
+        return new LocalTimeIsNotSameHourOfDay(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same minute as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameMinuteOfHour(LocalTime time) {
+        return new LocalTimeIsSameMinuteOfHour(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be not the same minute as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isNotSameMinuteOfHour(LocalTime time) {
+        return new LocalTimeIsNotSameMinuteOfHour(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same second as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameSecondOfMinute(LocalTime time) {
+        return new LocalTimeIsSameSecondOfMinute(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be not the same second as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isNotSameSecondOfMinute(LocalTime time) {
+        return new LocalTimeIsNotSameSecondOfMinute(time);
+    }
+    
+    /**
      * An Expectation for a String value to be equal to the given value.
      *
      * @param text The value for comparison.
@@ -602,4 +680,3 @@ public class Expectations {
         return new IsNotEmptyOrNull();
     }
 }
-//1142
