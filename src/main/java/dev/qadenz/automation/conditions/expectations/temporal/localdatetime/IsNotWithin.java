@@ -3,10 +3,11 @@ package dev.qadenz.automation.conditions.expectations.temporal.localdatetime;
 import dev.qadenz.automation.conditions.Expectation;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+
+import static org.hamcrest.Matchers.not;
 
 /**
  * An expectation for the text of an element, represented as a LocalDateTime, to not be within a timeframe of the given
@@ -28,7 +29,7 @@ public class IsNotWithin implements Expectation<LocalDateTime> {
     
     @Override
     public Matcher<LocalDateTime> matcher() {
-        return Matchers.not(LocalDateTimeMatchers.within(period, chronoUnit, localDateTime));
+        return not(LocalDateTimeMatchers.within(period, chronoUnit, localDateTime));
     }
     
     @Override
