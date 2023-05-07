@@ -13,12 +13,6 @@ import static org.hamcrest.Matchers.emptyOrNullString;
  */
 public class IsEmptyOrNull implements Expectation<String> {
     
-    private String text;
-    
-    public IsEmptyOrNull(String text) {
-        this.text = text;
-    }
-    
     @Override
     public Matcher<String> matcher() {
         return Matchers.is(emptyOrNullString());
