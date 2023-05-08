@@ -11,12 +11,12 @@ import org.openqa.selenium.WebDriver;
  */
 public class TextOfAlert implements Condition {
     
-    private Expectation<Boolean> expectation;
+    private Expectation<String> expectation;
     
     private Boolean match;
     private String alertText;
     
-    public TextOfAlert(Expectation<Boolean> expectation) {
+    public TextOfAlert(Expectation<String> expectation) {
         this.expectation = expectation;
     }
     
