@@ -1,6 +1,5 @@
 package dev.qadenz.automation.conditions;
 
-import dev.qadenz.automation.expectations.Expectation;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.LocatorGroup;
 import dev.qadenz.automation.ui.WebFinder;

@@ -1,7 +1,6 @@
 package dev.qadenz.automation.conditions;
 
 import dev.qadenz.automation.config.WebDriverProvider;
-import dev.qadenz.automation.expectations.Expectation;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 

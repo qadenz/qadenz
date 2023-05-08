@@ -1,7 +1,6 @@
 package dev.qadenz.automation.conditions;
 
 import dev.qadenz.automation.commands.WebInspector;
-import dev.qadenz.automation.expectations.Expectation;
 import dev.qadenz.automation.ui.Locator;
 
 import java.util.List;
