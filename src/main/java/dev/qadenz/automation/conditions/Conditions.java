@@ -11,6 +11,7 @@ package dev.qadenz.automation.conditions;
 
 import dev.qadenz.automation.commands.WebInspector;
 import dev.qadenz.automation.config.WebDriverProvider;
+import dev.qadenz.automation.expectations.Expectation;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.LocatorGroup;
 import dev.qadenz.automation.ui.WebFinder;
