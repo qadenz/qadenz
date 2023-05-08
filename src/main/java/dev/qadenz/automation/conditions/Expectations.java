@@ -9,25 +9,65 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions;
 
-import org.exparity.hamcrest.date.LocalDateMatchers;
-import org.exparity.hamcrest.date.LocalDateTimeMatchers;
-import org.exparity.hamcrest.date.LocalTimeMatchers;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import dev.qadenz.automation.conditions.expectations.bool.IsFalse;
+import dev.qadenz.automation.conditions.expectations.bool.IsTrue;
+import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsEqualTo;
+import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsGreaterThan;
+import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsGreaterThanOrEqualTo;
+import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsLessThan;
+import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsLessThanOrEqualTo;
+import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsNotEqualTo;
+import dev.qadenz.automation.conditions.expectations.string.Contains;
+import dev.qadenz.automation.conditions.expectations.string.ContainsIgnoreCase;
+import dev.qadenz.automation.conditions.expectations.string.DoesNotContain;
+import dev.qadenz.automation.conditions.expectations.string.DoesNotEndWith;
+import dev.qadenz.automation.conditions.expectations.string.DoesNotStartWith;
+import dev.qadenz.automation.conditions.expectations.string.EndsWith;
+import dev.qadenz.automation.conditions.expectations.string.EqualsIgnoreCase;
+import dev.qadenz.automation.conditions.expectations.string.IsEmptyOrNull;
+import dev.qadenz.automation.conditions.expectations.string.IsEqualTo;
+import dev.qadenz.automation.conditions.expectations.string.IsEqualToOneOf;
+import dev.qadenz.automation.conditions.expectations.string.IsNotEmptyOrNull;
+import dev.qadenz.automation.conditions.expectations.string.IsNotEqualTo;
+import dev.qadenz.automation.conditions.expectations.string.StartsWith;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsAfter;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsBefore;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsDayOfWeek;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsNotDayOfWeek;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsNotSameAs;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsNotWithin;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsSameAs;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsSameAsOrAfter;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsSameAsOrBefore;
+import dev.qadenz.automation.conditions.expectations.temporal.localdate.LocalDateIsWithin;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsAfter;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsBefore;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsDayOfWeek;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsNotDayOfWeek;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsNotSameAs;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsNotWithin;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsSameAs;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsSameAsOrAfter;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsSameAsOrBefore;
+import dev.qadenz.automation.conditions.expectations.temporal.localdatetime.LocalDateTimeIsWithin;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsAfter;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsBefore;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsNotSameHourOfDay;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsNotSameMinuteOfHour;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsNotSameSecondOfMinute;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsNotWithin;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameAsOrAfter;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameAsOrBefore;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameHourOfDay;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameMinuteOfHour;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsSameSecondOfMinute;
+import dev.qadenz.automation.conditions.expectations.temporal.localtime.LocalTimeIsWithin;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-
-import static org.hamcrest.Matchers.emptyOrNullString;
-import static org.hamcrest.Matchers.not;
 
 public class Expectations {
     
@@ -37,19 +77,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<Boolean> isTrue() {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Boolean> matcher() {
-                return Matchers.is(true);
-            }
-            
-            @Override
-            public String description() {
-                return "is TRUE";
-            }
-        };
+        return new IsTrue();
     }
     
     /**
@@ -58,19 +86,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<Boolean> isFalse() {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Boolean> matcher() {
-                return Matchers.is(false);
-            }
-            
-            @Override
-            public String description() {
-                return "is FALSE";
-            }
-        };
+        return new IsFalse();
     }
     
     /**
@@ -80,20 +96,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isGreaterThan(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.greaterThan(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is greater than [" + value + "]";
-            }
-        };
+    public static Expectation<Integer> isGreaterThan(int value) {
+        return new IntegerIsGreaterThan(value);
     }
     
     /**
@@ -103,20 +107,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isGreaterThanOrEqualTo(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.greaterThanOrEqualTo(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is greater than or equal to [" + value + "]";
-            }
-        };
+    public static Expectation<Integer> isGreaterThanOrEqualTo(int value) {
+        return new IntegerIsGreaterThanOrEqualTo(value);
     }
     
     /**
@@ -126,20 +118,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isEqualTo(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.equalTo(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is equal to [" + value + "]";
-            }
-        };
+    public static Expectation<Integer> isEqualTo(int value) {
+        return new IntegerIsEqualTo(value);
     }
     
     /**
@@ -149,20 +129,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isNotEqualTo(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return not(Matchers.equalTo(value));
-            }
-            
-            @Override
-            public String description() {
-                return "is not equal to [" + value + "]";
-            }
-        };
+    public static Expectation<Integer> isNotEqualTo(int value) {
+        return new IntegerIsNotEqualTo(value);
     }
     
     /**
@@ -172,20 +140,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isLessThanOrEqualTo(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.lessThanOrEqualTo(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is less than or equal to [" + value + "]";
-            }
-        };
+    public static Expectation<Integer> isLessThanOrEqualTo(int value) {
+        return new IntegerIsLessThanOrEqualTo(value);
     }
     
     /**
@@ -195,20 +151,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isLessThan(final int value) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<Integer> matcher() {
-                return Matchers.lessThan(value);
-            }
-            
-            @Override
-            public String description() {
-                return "is less than [" + value + "]";
-            }
-        };
+    public static Expectation<Integer> isLessThan(int value) {
+        return new IntegerIsLessThan(value);
     }
     
     /**
@@ -218,20 +162,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isAfter(final LocalDate date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return LocalDateMatchers.after(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is after [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDate> isAfter(LocalDate date) {
+        return new LocalDateIsAfter(date);
     }
     
     /**
@@ -241,20 +173,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isAfter(final LocalDateTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return LocalDateTimeMatchers.after(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is after [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isAfter(LocalDateTime date) {
+        return new LocalDateTimeIsAfter(date);
     }
     
     /**
@@ -264,20 +184,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isAfter(final LocalTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalTime> matcher() {
-                return LocalTimeMatchers.after(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is after [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalTime> isAfter(LocalTime date) {
+        return new LocalTimeIsAfter(date);
     }
     
     /**
@@ -288,20 +196,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isSameAsOrAfter(final LocalDate date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return LocalDateMatchers.sameOrAfter(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as or after [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDate> isSameAsOrAfter(LocalDate date) {
+        return new LocalDateIsSameAsOrAfter(date);
     }
     
     /**
@@ -312,20 +208,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isSameAsOrAfter(final LocalDateTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return LocalDateTimeMatchers.sameOrAfter(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as or after [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isSameAsOrAfter(LocalDateTime date) {
+        return new LocalDateTimeIsSameAsOrAfter(date);
     }
     
     /**
@@ -336,20 +220,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isSameAsOrAfter(final LocalTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalTime> matcher() {
-                return LocalTimeMatchers.sameOrAfter(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as or after [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalTime> isSameAsOrAfter(LocalTime date) {
+        return new LocalTimeIsSameAsOrAfter(date);
     }
     
     /**
@@ -359,20 +231,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isSameAs(final LocalDate date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return LocalDateMatchers.sameDay(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDate> isSameAs(LocalDate date) {
+        return new LocalDateIsSameAs(date);
     }
     
     /**
@@ -383,20 +243,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isSameAs(final LocalDateTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return LocalDateTimeMatchers.sameDay(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isSameAs(LocalDateTime date) {
+        return new LocalDateTimeIsSameAs(date);
     }
     
     /**
@@ -407,20 +255,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isNotSameAs(final LocalDate date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return not(LocalDateMatchers.sameDay(date));
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDate> isNotSameAs(LocalDate date) {
+        return new LocalDateIsNotSameAs(date);
     }
     
     /**
@@ -431,20 +267,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isNotSameAs(final LocalDateTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return not(LocalDateTimeMatchers.sameDay(date));
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isNotSameAs(LocalDateTime date) {
+        return new LocalDateTimeIsNotSameAs(date);
     }
     
     /**
@@ -455,20 +279,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isSameAsOrBefore(final LocalDate date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return LocalDateMatchers.sameOrBefore(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as or before [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDate> isSameAsOrBefore(LocalDate date) {
+        return new LocalDateIsSameAsOrBefore(date);
     }
     
     /**
@@ -479,20 +291,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isSameAsOrBefore(final LocalDateTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return LocalDateTimeMatchers.sameOrBefore(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as or before [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isSameAsOrBefore(LocalDateTime date) {
+        return new LocalDateTimeIsSameAsOrBefore(date);
     }
     
     /**
@@ -503,20 +303,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isSameAsOrBefore(final LocalTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalTime> matcher() {
-                return LocalTimeMatchers.sameOrBefore(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is the same as or before [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalTime> isSameAsOrBefore(LocalTime date) {
+        return new LocalTimeIsSameAsOrBefore(date);
     }
     
     /**
@@ -526,20 +314,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isBefore(final LocalDate date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return LocalDateMatchers.before(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is before [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDate> isBefore(LocalDate date) {
+        return new LocalDateIsBefore(date);
     }
     
     /**
@@ -549,20 +325,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isBefore(final LocalDateTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return LocalDateTimeMatchers.before(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is before [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isBefore(LocalDateTime date) {
+        return new LocalDateTimeIsBefore(date);
     }
     
     /**
@@ -572,20 +336,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isBefore(final LocalTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalTime> matcher() {
-                return LocalTimeMatchers.before(date);
-            }
-            
-            @Override
-            public String description() {
-                return "is before [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalTime> isBefore(LocalTime date) {
+        return new LocalTimeIsBefore(date);
     }
     
     /**
@@ -598,20 +350,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isWithin(final Long period, final ChronoUnit unit, final LocalDate date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return LocalDateMatchers.within(period, unit, date);
-            }
-            
-            @Override
-            public String description() {
-                return "is within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDate> isWithin(Long period, ChronoUnit unit, LocalDate date) {
+        return new LocalDateIsWithin(period, unit, date);
     }
     
     /**
@@ -624,21 +364,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isWithin(final Long period, final ChronoUnit unit,
-            final LocalDateTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return LocalDateTimeMatchers.within(period, unit, date);
-            }
-            
-            @Override
-            public String description() {
-                return "is within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isWithin(Long period, ChronoUnit unit, LocalDateTime date) {
+        return new LocalDateTimeIsWithin(period, unit, date);
     }
     
     /**
@@ -651,20 +378,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isWithin(final Long period, final ChronoUnit unit, final LocalTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalTime> matcher() {
-                return LocalTimeMatchers.within(period, unit, date);
-            }
-            
-            @Override
-            public String description() {
-                return "is within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalTime> isWithin(Long period, ChronoUnit unit, LocalTime date) {
+        return new LocalTimeIsWithin(period, unit, date);
     }
     
     /**
@@ -677,20 +392,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isNotWithin(final Long period, final ChronoUnit unit, final LocalDate date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return Matchers.not(LocalDateMatchers.within(period, unit, date));
-            }
-            
-            @Override
-            public String description() {
-                return "is not within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDate> isNotWithin(Long period, ChronoUnit unit, LocalDate date) {
+        return new LocalDateIsNotWithin(period, unit, date);
     }
     
     /**
@@ -703,21 +406,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isNotWithin(final Long period, final ChronoUnit unit,
-            final LocalDateTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return Matchers.not(LocalDateTimeMatchers.within(period, unit, date));
-            }
-            
-            @Override
-            public String description() {
-                return "is not within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isNotWithin(Long period, ChronoUnit unit, LocalDateTime date) {
+        return new LocalDateTimeIsNotWithin(period, unit, date);
     }
     
     /**
@@ -730,20 +420,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isNotWithin(final Long period, final ChronoUnit unit, final LocalTime date) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalTime> matcher() {
-                return Matchers.not(LocalTimeMatchers.within(period, unit, date));
-            }
-            
-            @Override
-            public String description() {
-                return "is not within [" + period + " " + unit.toString() + "] of [" + date.toString() + "]";
-            }
-        };
+    public static Expectation<LocalTime> isNotWithin(Long period, ChronoUnit unit, LocalTime date) {
+        return new LocalTimeIsNotWithin(period, unit, date);
     }
     
     /**
@@ -753,20 +431,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isDayOfWeekAsLocalDate(final DayOfWeek dayOfWeek) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return LocalDateMatchers.isDayOfWeek(dayOfWeek);
-            }
-            
-            @Override
-            public String description() {
-                return "is day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
-            }
-        };
+    public static Expectation<LocalDate> isDayOfWeekAsLocalDate(DayOfWeek dayOfWeek) {
+        return new LocalDateIsDayOfWeek(dayOfWeek);
     }
     
     /**
@@ -776,20 +442,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isDayOfWeekAsLocalDateTime(final DayOfWeek dayOfWeek) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return LocalDateTimeMatchers.isDayOfWeek(dayOfWeek);
-            }
-            
-            @Override
-            public String description() {
-                return "is day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isDayOfWeekAsLocalDateTime(DayOfWeek dayOfWeek) {
+        return new LocalDateTimeIsDayOfWeek(dayOfWeek);
     }
     
     /**
@@ -799,20 +453,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isNotDayOfWeekAsLocalDate(final DayOfWeek dayOfWeek) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDate> matcher() {
-                return Matchers.not(LocalDateMatchers.isDayOfWeek(dayOfWeek));
-            }
-            
-            @Override
-            public String description() {
-                return "is not day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
-            }
-        };
+    public static Expectation<LocalDate> isNotDayOfWeekAsLocalDate(DayOfWeek dayOfWeek) {
+        return new LocalDateIsNotDayOfWeek(dayOfWeek);
     }
     
     /**
@@ -823,20 +465,80 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isNotDayOfWeekAsLocalDateTime(final DayOfWeek dayOfWeek) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<LocalDateTime> matcher() {
-                return Matchers.not(LocalDateTimeMatchers.isDayOfWeek(dayOfWeek));
-            }
-            
-            @Override
-            public String description() {
-                return "is not day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
-            }
-        };
+    public static Expectation<LocalDateTime> isNotDayOfWeekAsLocalDateTime(DayOfWeek dayOfWeek) {
+        return new LocalDateTimeIsNotDayOfWeek(dayOfWeek);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same hour as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameHourOfDay(LocalTime time) {
+        return new LocalTimeIsSameHourOfDay(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be not the same hour as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isNotSameHourOfDay(LocalTime time) {
+        return new LocalTimeIsNotSameHourOfDay(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same minute as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameMinuteOfHour(LocalTime time) {
+        return new LocalTimeIsSameMinuteOfHour(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be not the same minute as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isNotSameMinuteOfHour(LocalTime time) {
+        return new LocalTimeIsNotSameMinuteOfHour(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be the same second as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isSameSecondOfMinute(LocalTime time) {
+        return new LocalTimeIsSameSecondOfMinute(time);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalTime, to be not the same second as the given
+     * LocalTime.
+     *
+     * @param time The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static Expectation<LocalTime> isNotSameSecondOfMinute(LocalTime time) {
+        return new LocalTimeIsNotSameSecondOfMinute(time);
     }
     
     /**
@@ -846,20 +548,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> isEqualTo(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return Matchers.is(text);
-            }
-            
-            @Override
-            public String description() {
-                return "is equal to [" + text + "]";
-            }
-        };
+    public static Expectation<String> isEqualTo(String text) {
+        return new IsEqualTo(text);
     }
     
     /**
@@ -869,20 +559,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> equalsIgnoreCase(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return Matchers.equalToIgnoringCase(text);
-            }
-            
-            @Override
-            public String description() {
-                return "is, ignoring case, equal to [" + text + "]";
-            }
-        };
+    public static Expectation<String> equalsIgnoreCase(String text) {
+        return new EqualsIgnoreCase(text);
     }
     
     /**
@@ -892,20 +570,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> isNotEqualTo(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return Matchers.not(text);
-            }
-            
-            @Override
-            public String description() {
-                return "is not equal to [" + text + "]";
-            }
-        };
+    public static Expectation<String> isNotEqualTo(String text) {
+        return new IsNotEqualTo(text);
     }
     
     /**
@@ -915,20 +581,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> contains(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return Matchers.containsString(text);
-            }
-            
-            @Override
-            public String description() {
-                return "contains [" + text + "]";
-            }
-        };
+    public static Expectation<String> contains(String text) {
+        return new Contains(text);
     }
     
     /**
@@ -938,20 +592,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> containsIgnoreCase(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return Matchers.containsStringIgnoringCase(text);
-            }
-            
-            @Override
-            public String description() {
-                return "ignoring case, contains [" + text + "]";
-            }
-        };
+    public static Expectation<String> containsIgnoreCase(String text) {
+        return new ContainsIgnoreCase(text);
     }
     
     /**
@@ -961,20 +603,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> doesNotContain(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return not(Matchers.containsString(text));
-            }
-            
-            @Override
-            public String description() {
-                return "does not contain [" + text + "]";
-            }
-        };
+    public static Expectation<String> doesNotContain(String text) {
+        return new DoesNotContain(text);
     }
     
     /**
@@ -984,20 +614,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> startsWith(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return Matchers.startsWith(text);
-            }
-            
-            @Override
-            public String description() {
-                return "starts with [" + text + "]";
-            }
-        };
+    public static Expectation<String> startsWith(String text) {
+        return new StartsWith(text);
     }
     
     /**
@@ -1007,20 +625,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> doesNotStartWith(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return not(Matchers.startsWith(text));
-            }
-            
-            @Override
-            public String description() {
-                return "does not start with [" + text + "]";
-            }
-        };
+    public static Expectation<String> doesNotStartWith(String text) {
+        return new DoesNotStartWith(text);
     }
     
     /**
@@ -1030,20 +636,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> endsWith(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return Matchers.endsWith(text);
-            }
-            
-            @Override
-            public String description() {
-                return "ends with [" + text + "]";
-            }
-        };
+    public static Expectation<String> endsWith(String text) {
+        return new EndsWith(text);
     }
     
     /**
@@ -1053,20 +647,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> doesNotEndWith(final String text) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return not(Matchers.endsWith(text));
-            }
-            
-            @Override
-            public String description() {
-                return "does not end with [" + text + "]";
-            }
-        };
+    public static Expectation<String> doesNotEndWith(String text) {
+        return new DoesNotEndWith(text);
     }
     
     /**
@@ -1076,25 +658,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<String> isEqualToOneOf(final String... options) {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                List<Matcher<String>> matchers = new ArrayList<>();
-                for (String option : options) {
-                    matchers.add(Matchers.is(option));
-                }
-                
-                return Matchers.anyOf(matchers.toArray(new Matcher[matchers.size()]));
-            }
-            
-            @Override
-            public String description() {
-                return "is equal to one of [" + Arrays.toString(options) + "]";
-            }
-        };
+    public static Expectation<String> isEqualToOneOf(String... options) {
+        return new IsEqualToOneOf(options);
     }
     
     /**
@@ -1103,19 +668,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> isEmptyOrNull() {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return Matchers.is(emptyOrNullString());
-            }
-            
-            @Override
-            public String description() {
-                return "is null or empty";
-            }
-        };
+        return new IsEmptyOrNull();
     }
     
     /**
@@ -1124,18 +677,6 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> isNotEmptyOrNull() {
-        
-        return new Expectation<>() {
-            
-            @Override
-            public Matcher<String> matcher() {
-                return Matchers.not(emptyOrNullString());
-            }
-            
-            @Override
-            public String description() {
-                return "is neither null nor empty";
-            }
-        };
+        return new IsNotEmptyOrNull();
     }
 }

@@ -9,13 +9,8 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions;
 
-import dev.qadenz.automation.commands.WebInspector;
-import dev.qadenz.automation.config.WebDriverProvider;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.LocatorGroup;
-import dev.qadenz.automation.ui.WebFinder;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,35 +34,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition attributeOfElement(final Locator locator, final String attributeName,
-            final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String attributeValue;
-            
-            @Override
-            public String description() {
-                return "Attribute [" + attributeName + "] of element [" + locator.getName() + "] " +
-                        expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                attributeValue = webInspector.getAttributeOfElement(locator, attributeName);
-                
-                match = expectation.matcher().matches(attributeValue);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + attributeValue + "].";
-            }
-        };
+    public static Condition attributeOfElement(Locator locator, String attributeName, Expectation<String> expectation) {
+        return new AttributeOfElement(locator, attributeName, expectation);
     }
     
     /**
@@ -78,33 +46,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition countOfElement(final Locator locator, final Expectation<Integer> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            int elementCount;
-            
-            @Override
-            public String description() {
-                return "Count of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementCount = webInspector.getCountOfElement(locator);
-                
-                match = expectation.matcher().matches(elementCount);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementCount + "].";
-            }
-        };
+    public static Condition countOfElement(Locator locator, Expectation<Integer> expectation) {
+        return new CountOfElement(locator, expectation);
     }
     
     /**
@@ -116,35 +59,9 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition cssPropertyOfElement(final Locator locator, final String cssPropertyName,
-            final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String cssPropertyValue;
-            
-            @Override
-            public String description() {
-                return "CSS Property [" + cssPropertyName + "] of element [" + locator.getName() + "] " +
-                        expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                cssPropertyValue = webInspector.getCssPropertyOfElement(locator, cssPropertyName);
-                
-                match = expectation.matcher().matches(cssPropertyName);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + cssPropertyValue + "].";
-            }
-        };
+    public static Condition cssPropertyOfElement(Locator locator, String cssPropertyName,
+            Expectation<String> expectation) {
+        return new CssPropertyOfElement(locator, cssPropertyName, expectation);
     }
     
     /**
@@ -156,33 +73,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition directTextOfElement(final Locator locator, final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String elementText;
-            
-            @Override
-            public String description() {
-                return "Direct text of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementText = webInspector.getDirectTextOfElement(locator);
-                
-                match = expectation.matcher().matches(elementText);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementText + "].";
-            }
-        };
+    public static Condition directTextOfElement(Locator locator, Expectation<String> expectation) {
+        return new DirectTextOfElement(locator, expectation);
     }
     
     /**
@@ -193,33 +85,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition enabledStateOfElement(final Locator locator, final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean enabled;
-            
-            @Override
-            public String description() {
-                return "Enabled state of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                enabled = webInspector.getEnabledStateOfElement(locator);
-                
-                match = expectation.matcher().matches(enabled);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + enabled + "].";
-            }
-        };
+    public static Condition enabledStateOfElement(Locator locator, Expectation<Boolean> expectation) {
+        return new EnabledStateOfElement(locator, expectation);
     }
     
     /**
@@ -230,45 +97,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition enabledStateOfElements(final LocatorGroup locatorGroup,
-            final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            StringBuilder failures = new StringBuilder();
-            
-            @Override
-            public String description() {
-                return "Enabled state of elements [" + locatorGroup.getName() + "] " +
-                        expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                
-                for (Locator locator : locatorGroup) {
-                    boolean enabled = webInspector.getEnabledStateOfElement(locator);
-                    Boolean instanceMatch = expectation.matcher().matches(enabled);
-                    
-                    if (!instanceMatch) {
-                        failures.append("--> Element [" + locator.getName() + "] was [" + enabled + "].\n");
-                    }
-                    
-                    if (match == null || match) {
-                        match = instanceMatch;
-                    }
-                }
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Discrepancies: \n" + failures.toString();
-            }
-        };
+    public static Condition enabledStateOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
+        return new EnabledStateOfElements(locatorGroup, expectation);
     }
     
     /**
@@ -278,35 +108,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfAlert(final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean present;
-            
-            public String description() {
-                return "Presence of Alert " + expectation.description() + ".";
-            }
-            
-            public Boolean result() {
-                try {
-                    WebDriver webDriver = WebDriverProvider.getWebDriver();
-                    webDriver.switchTo().alert();
-                    present = true;
-                }
-                catch (NoAlertPresentException exception) {
-                    present = false;
-                }
-                
-                match = expectation.matcher().matches(present);
-                return match;
-            }
-            
-            public String output() {
-                return "Found [" + present + "].";
-            }
-        };
+    public static Condition presenceOfAlert(Expectation<Boolean> expectation) {
+        return new PresenceOfAlert(expectation);
     }
     
     /**
@@ -318,33 +121,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfElement(final Locator locator, final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean present;
-            
-            @Override
-            public String description() {
-                return "Presence of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebFinder webFinder = new WebFinder();
-                present = webFinder.findAll(locator).size() > 0;
-                
-                match = expectation.matcher().matches(present);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + present + "].";
-            }
-        };
+    public static Condition presenceOfElement(Locator locator, Expectation<Boolean> expectation) {
+        return new PresenceOfElement(locator, expectation);
     }
     
     /**
@@ -356,44 +134,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfElements(final LocatorGroup locatorGroup,
-            final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            StringBuilder failures = new StringBuilder();
-            
-            @Override
-            public String description() {
-                return "Presence of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebFinder webFinder = new WebFinder();
-                
-                for (Locator locator : locatorGroup) {
-                    boolean present = webFinder.findAll(locator).size() > 0;
-                    Boolean instanceMatch = expectation.matcher().matches(present);
-                    
-                    if (!instanceMatch) {
-                        failures.append("--> Element [" + locator.getName() + "] was [" + present + "].\n");
-                    }
-                    
-                    if (match == null || match) {
-                        match = instanceMatch;
-                    }
-                }
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Discrepancies: \n" + failures.toString();
-            }
-        };
+    public static Condition presenceOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
+        return new PresenceOfElements(locatorGroup, expectation);
     }
     
     /**
@@ -404,30 +146,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition selectedMenuOption(final Locator locator, final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String selectedOption;
-            
-            public String description() {
-                return "Selected option of menu element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                selectedOption = webInspector.getSelectedMenuOption(locator);
-                
-                match = expectation.matcher().matches(selectedOption);
-                
-                return match;
-            }
-            
-            public String output() {
-                return "Found [" + selectedOption + "].";
-            }
-        };
+    public static Condition selectedMenuOption(Locator locator, Expectation<String> expectation) {
+        return new SelectedMenuOption(locator, expectation);
     }
     
     /**
@@ -439,33 +159,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition selectedStateOfElement(final Locator locator, final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean selected;
-            
-            @Override
-            public String description() {
-                return "Selected state of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                selected = webInspector.getSelectedStateOfElement(locator);
-                
-                match = expectation.matcher().matches(selected);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + selected + "].";
-            }
-        };
+    public static Condition selectedStateOfElement(Locator locator, Expectation<Boolean> expectation) {
+        return new SelectedStateOfElement(locator, expectation);
     }
     
     /**
@@ -475,30 +170,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfAlert(final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String alertText;
-            
-            public String description() {
-                return "Text of Alert " + expectation.description() + ".";
-            }
-            
-            public Boolean result() {
-                WebDriver webDriver = WebDriverProvider.getWebDriver();
-                alertText = webDriver.switchTo().alert().getText();
-                
-                match = expectation.matcher().matches(alertText);
-                
-                return match;
-            }
-            
-            public String output() {
-                return "Found [" + alertText + "].";
-            }
-        };
+    public static Condition textOfAlert(Expectation<String> expectation) {
+        return new TextOfAlert(expectation);
     }
     
     /**
@@ -509,33 +182,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElement(final Locator locator, final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String elementText;
-            
-            @Override
-            public String description() {
-                return "Text of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementText = webInspector.getTextOfElement(locator);
-                
-                match = expectation.matcher().matches(elementText);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementText + "].";
-            }
-        };
+    public static Condition textOfElement(Locator locator, Expectation<String> expectation) {
+        return new TextOfElement(locator, expectation);
     }
     
     /**
@@ -547,34 +195,9 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElementAsDate(final Locator locator, final DateTimeFormatter dateTimeFormatter,
-            final Expectation<LocalDate> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            LocalDate elementDate;
-            
-            @Override
-            public String description() {
-                return "Date-formatted text of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementDate = webInspector.getTextOfElementAsDate(locator, dateTimeFormatter);
-                
-                match = expectation.matcher().matches(elementDate);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementDate + "].";
-            }
-        };
+    public static Condition textOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter,
+            Expectation<LocalDate> expectation) {
+        return new TextOfElementAsDate(locator, dateTimeFormatter, expectation);
     }
     
     /**
@@ -586,35 +209,9 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElementAsDateTime(final Locator locator, final DateTimeFormatter dateTimeFormatter,
-            final Expectation<LocalDateTime> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            LocalDateTime elementDateTime;
-            
-            @Override
-            public String description() {
-                return "DateTime-formatted text of element [" + locator.getName() + "] " +
-                        expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementDateTime = webInspector.getTextOfElementAsDateTime(locator, dateTimeFormatter);
-                
-                match = expectation.matcher().matches(elementDateTime);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementDateTime + "].";
-            }
-        };
+    public static Condition textOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+            Expectation<LocalDateTime> expectation) {
+        return new TextOfElementAsDateTime(locator, dateTimeFormatter, expectation);
     }
     
     /**
@@ -626,34 +223,9 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElementAsTime(final Locator locator, final DateTimeFormatter dateTimeFormatter,
-            final Expectation<LocalTime> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            LocalDateTime elementTime;
-            
-            @Override
-            public String description() {
-                return "Time-formatted text of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementTime = webInspector.getTextOfElementAsDateTime(locator, dateTimeFormatter);
-                
-                match = expectation.matcher().matches(elementTime);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementTime + "].";
-            }
-        };
+    public static Condition textOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+            Expectation<LocalTime> expectation) {
+        return new TextOfElementAsTime(locator, dateTimeFormatter, expectation);
     }
     
     /**
@@ -664,46 +236,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElements(final Locator locator, final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            List<String> elementValues;
-            StringBuilder failures = new StringBuilder();
-            
-            @Override
-            public String description() {
-                return "Text of each instance of element [" + locator.getName() + "] " +
-                        expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementValues = webInspector.getTextOfElements(locator);
-                
-                for (int i = 0; i < elementValues.size(); i++) {
-                    String instanceValue = elementValues.get(i);
-                    Boolean instanceMatch = expectation.matcher().matches(instanceValue);
-                    
-                    if (!instanceMatch) {
-                        failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
-                    }
-                    
-                    if (match == null || match) {
-                        match = instanceMatch;
-                    }
-                }
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Discrepancies: \n" + failures.toString();
-            }
-        };
+    public static Condition textOfElements(Locator locator, Expectation<String> expectation) {
+        return new TextOfElements(locator, expectation);
     }
     
     /**
@@ -714,33 +248,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfInputElement(final Locator locator, final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String elementText;
-            
-            @Override
-            public String description() {
-                return "Text of input element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementText = webInspector.getAttributeOfElement(locator, "value");
-                
-                match = expectation.matcher().matches(elementText);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementText + "].";
-            }
-        };
+    public static Condition textOfInputElement(Locator locator, Expectation<String> expectation) {
+        return new TextOfInputElement(locator, expectation);
     }
     
     /**
@@ -752,33 +261,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition visibilityOfElement(final Locator locator, final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean visible;
-            
-            @Override
-            public String description() {
-                return "Visibility of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                visible = webInspector.getVisibilityOfElement(locator);
-                
-                match = expectation.matcher().matches(visible);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + visible + "].";
-            }
-        };
+    public static Condition visibilityOfElement(Locator locator, Expectation<Boolean> expectation) {
+        return new VisibilityOfElement(locator, expectation);
     }
     
     /**
@@ -790,44 +274,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition visibilityOfElements(final LocatorGroup locatorGroup,
-            final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            StringBuilder failures = new StringBuilder();
-            
-            @Override
-            public String description() {
-                return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                
-                for (Locator locator : locatorGroup) {
-                    boolean visible = webInspector.getVisibilityOfElement(locator);
-                    Boolean instanceMatch = expectation.matcher().matches(visible);
-                    
-                    if (!instanceMatch) {
-                        failures.append("--> Element [" + locator.getName() + "] was [" + visible + "].\n");
-                    }
-                    
-                    if (match == null || match) {
-                        match = instanceMatch;
-                    }
-                }
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Discrepancies: \n" + failures.toString();
-            }
-        };
+    public static Condition visibilityOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
+        return new VisibilityOfElements(locatorGroup, expectation);
     }
     
     /**
