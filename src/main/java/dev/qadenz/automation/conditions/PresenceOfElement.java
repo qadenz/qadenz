@@ -1,0 +1,45 @@
+package dev.qadenz.automation.conditions;
+
+import dev.qadenz.automation.expectations.Expectation;
+import dev.qadenz.automation.ui.Locator;
+import dev.qadenz.automation.ui.WebFinder;
+
+/**
+ * A Condition for evaluating whether an element is present on the DOM, regardless of if the element is visible on the
+ * page.
+ *
+ * @author Tim Slifer
+ */
+public class PresenceOfElement implements Condition {
+    
+    private Locator locator;
+    private Expectation<Boolean> expectation;
+    
+    private Boolean match;
+    private boolean present;
+    
+    public PresenceOfElement(Locator locator, Expectation<Boolean> expectation) {
+        this.locator = locator;
+        this.expectation = expectation;
+    }
+    
+    @Override
+    public String description() {
+        return "Presence of element [" + locator.getName() + "] " + expectation.description() + ".";
+    }
+    
+    @Override
+    public Boolean result() {
+        WebFinder webFinder = new WebFinder();
+        present = webFinder.findAll(locator).size() > 0;
+        
+        match = expectation.matcher().matches(present);
+        
+        return match;
+    }
+    
+    @Override
+    public String output() {
+        return "Found [" + present + "].";
+    }
+}
