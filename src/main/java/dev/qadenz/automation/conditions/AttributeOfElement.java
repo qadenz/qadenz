@@ -15,7 +15,6 @@ public class AttributeOfElement implements Condition {
     private String attributeName;
     private Expectation<String> expectation;
     
-    private Boolean match;
     private String attributeValue;
     
     public AttributeOfElement(Locator locator, String attributeName, Expectation<String> expectation) {
@@ -35,9 +34,7 @@ public class AttributeOfElement implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         attributeValue = webInspector.getAttributeOfElement(locator, attributeName);
         
-        match = expectation.matcher().matches(attributeValue);
-        
-        return match;
+        return expectation.matcher().matches(attributeValue);
     }
     
     @Override

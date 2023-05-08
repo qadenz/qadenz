@@ -15,7 +15,6 @@ public class VisibilityOfElement implements Condition {
     private Locator locator;
     private Expectation<Boolean> expectation;
     
-    private Boolean match;
     private boolean visible;
     
     public VisibilityOfElement(Locator locator, Expectation<Boolean> expectation) {
@@ -33,9 +32,7 @@ public class VisibilityOfElement implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         visible = webInspector.getVisibilityOfElement(locator);
         
-        match = expectation.matcher().matches(visible);
-        
-        return match;
+        return expectation.matcher().matches(visible);
     }
     
     @Override

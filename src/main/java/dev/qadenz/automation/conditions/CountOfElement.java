@@ -14,7 +14,6 @@ public class CountOfElement implements Condition {
     private Locator locator;
     private Expectation<Integer> expectation;
     
-    private Boolean match;
     private int elementCount;
     
     public CountOfElement(Locator locator, Expectation<Integer> expectation) {
@@ -32,9 +31,7 @@ public class CountOfElement implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementCount = webInspector.getCountOfElement(locator);
         
-        match = expectation.matcher().matches(elementCount);
-        
-        return match;
+        return expectation.matcher().matches(elementCount);
     }
     
     @Override

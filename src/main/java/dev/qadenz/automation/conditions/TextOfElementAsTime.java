@@ -18,7 +18,6 @@ public class TextOfElementAsTime implements Condition {
     private DateTimeFormatter dateTimeFormatter;
     private Expectation<LocalTime> expectation;
     
-    private Boolean match;
     private LocalTime elementTime;
     
     public TextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
@@ -38,9 +37,7 @@ public class TextOfElementAsTime implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementTime = webInspector.getTextOfElementAsTime(locator, dateTimeFormatter);
         
-        match = expectation.matcher().matches(elementTime);
-        
-        return match;
+        return expectation.matcher().matches(elementTime);
     }
     
     @Override

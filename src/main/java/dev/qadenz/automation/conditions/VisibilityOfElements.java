@@ -16,7 +16,6 @@ public class VisibilityOfElements implements Condition {
     private LocatorGroup locatorGroup;
     private Expectation<Boolean> expectation;
     
-    private Boolean match;
     private StringBuilder failures = new StringBuilder();
     
     public VisibilityOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
@@ -31,11 +30,12 @@ public class VisibilityOfElements implements Condition {
     
     @Override
     public Boolean result() {
+        Boolean match = null;
         WebInspector webInspector = new WebInspector(Conditions.class);
         
         for (Locator locator : locatorGroup) {
             boolean visible = webInspector.getVisibilityOfElement(locator);
-            Boolean instanceMatch = expectation.matcher().matches(visible);
+            boolean instanceMatch = expectation.matcher().matches(visible);
             
             if (!instanceMatch) {
                 failures.append("--> Element [" + locator.getName() + "] was [" + visible + "].\n");

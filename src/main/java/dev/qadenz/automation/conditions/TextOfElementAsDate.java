@@ -18,7 +18,6 @@ public class TextOfElementAsDate implements Condition {
     private DateTimeFormatter dateTimeFormatter;
     private Expectation<LocalDate> expectation;
     
-    private Boolean match;
     private LocalDate elementDate;
     
     public TextOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter,
@@ -38,9 +37,7 @@ public class TextOfElementAsDate implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementDate = webInspector.getTextOfElementAsDate(locator, dateTimeFormatter);
         
-        match = expectation.matcher().matches(elementDate);
-        
-        return match;
+        return expectation.matcher().matches(elementDate);
     }
     
     @Override

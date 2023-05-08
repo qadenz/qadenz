@@ -14,7 +14,6 @@ public class SelectedMenuOption implements Condition {
     private Locator locator;
     private Expectation<String> expectation;
     
-    private Boolean match;
     private String selectedOption;
     
     public SelectedMenuOption(Locator locator, Expectation<String> expectation) {
@@ -32,9 +31,7 @@ public class SelectedMenuOption implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         selectedOption = webInspector.getSelectedMenuOption(locator);
         
-        match = expectation.matcher().matches(selectedOption);
-        
-        return match;
+        return expectation.matcher().matches(selectedOption);
     }
     
     @Override

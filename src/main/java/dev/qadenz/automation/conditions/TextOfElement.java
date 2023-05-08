@@ -14,7 +14,6 @@ public class TextOfElement implements Condition {
     private Locator locator;
     private Expectation<String> expectation;
     
-    private Boolean match;
     private String elementText;
     
     public TextOfElement(Locator locator, Expectation<String> expectation) {
@@ -32,9 +31,7 @@ public class TextOfElement implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementText = webInspector.getTextOfElement(locator);
         
-        match = expectation.matcher().matches(elementText);
-        
-        return match;
+        return expectation.matcher().matches(elementText);
     }
     
     @Override

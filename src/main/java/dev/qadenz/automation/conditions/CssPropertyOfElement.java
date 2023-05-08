@@ -15,7 +15,6 @@ public class CssPropertyOfElement implements Condition {
     private String cssPropertyName;
     private Expectation<String> expectation;
     
-    private Boolean match;
     private String cssPropertyValue;
     
     public CssPropertyOfElement(Locator locator, String cssPropertyName, Expectation<String> expectation) {
@@ -35,9 +34,7 @@ public class CssPropertyOfElement implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         cssPropertyValue = webInspector.getCssPropertyOfElement(locator, cssPropertyName);
         
-        match = expectation.matcher().matches(cssPropertyName);
-        
-        return match;
+        return expectation.matcher().matches(cssPropertyName);
     }
     
     @Override

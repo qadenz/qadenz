@@ -14,7 +14,6 @@ public class EnabledStateOfElement implements Condition {
     private Locator locator;
     private Expectation<Boolean> expectation;
     
-    private Boolean match;
     private boolean enabled;
     
     public EnabledStateOfElement(Locator locator, Expectation<Boolean> expectation) {
@@ -32,9 +31,7 @@ public class EnabledStateOfElement implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         enabled = webInspector.getEnabledStateOfElement(locator);
         
-        match = expectation.matcher().matches(enabled);
-        
-        return match;
+        return expectation.matcher().matches(enabled);
     }
     
     @Override

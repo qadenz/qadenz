@@ -15,7 +15,6 @@ public class SelectedStateOfElement implements Condition {
     private Locator locator;
     private Expectation<Boolean> expectation;
     
-    private Boolean match;
     private boolean selected;
     
     public SelectedStateOfElement(Locator locator, Expectation<Boolean> expectation) {
@@ -33,9 +32,7 @@ public class SelectedStateOfElement implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         selected = webInspector.getSelectedStateOfElement(locator);
         
-        match = expectation.matcher().matches(selected);
-        
-        return match;
+        return expectation.matcher().matches(selected);
     }
     
     @Override

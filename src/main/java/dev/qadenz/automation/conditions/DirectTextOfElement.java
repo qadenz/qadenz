@@ -15,7 +15,6 @@ public class DirectTextOfElement implements Condition {
     private Locator locator;
     private Expectation<String> expectation;
     
-    private Boolean match;
     private String elementText;
     
     public DirectTextOfElement(Locator locator, Expectation<String> expectation) {
@@ -33,9 +32,7 @@ public class DirectTextOfElement implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementText = webInspector.getDirectTextOfElement(locator);
         
-        match = expectation.matcher().matches(elementText);
-        
-        return match;
+        return expectation.matcher().matches(elementText);
     }
     
     @Override

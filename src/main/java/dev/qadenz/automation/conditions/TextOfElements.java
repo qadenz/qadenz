@@ -16,7 +16,6 @@ public class TextOfElements implements Condition {
     private Locator locator;
     private Expectation<String> expectation;
     
-    private Boolean match;
     private List<String> elementValues;
     private StringBuilder failures = new StringBuilder();
     
@@ -32,12 +31,13 @@ public class TextOfElements implements Condition {
     
     @Override
     public Boolean result() {
+        Boolean match = null;
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementValues = webInspector.getTextOfElements(locator);
         
         for (int i = 0; i < elementValues.size(); i++) {
             String instanceValue = elementValues.get(i);
-            Boolean instanceMatch = expectation.matcher().matches(instanceValue);
+            boolean instanceMatch = expectation.matcher().matches(instanceValue);
             
             if (!instanceMatch) {
                 failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");

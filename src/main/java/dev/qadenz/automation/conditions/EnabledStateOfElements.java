@@ -15,7 +15,6 @@ public class EnabledStateOfElements implements Condition {
     private LocatorGroup locatorGroup;
     private Expectation<Boolean> expectation;
     
-    private Boolean match;
     private StringBuilder failures = new StringBuilder();
     
     public EnabledStateOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
@@ -25,17 +24,17 @@ public class EnabledStateOfElements implements Condition {
     
     @Override
     public String description() {
-        return "Enabled state of elements [" + locatorGroup.getName() + "] " +
-                expectation.description() + ".";
+        return "Enabled state of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
     }
     
     @Override
     public Boolean result() {
+        Boolean match = null;
         WebInspector webInspector = new WebInspector(Conditions.class);
         
         for (Locator locator : locatorGroup) {
             boolean enabled = webInspector.getEnabledStateOfElement(locator);
-            Boolean instanceMatch = expectation.matcher().matches(enabled);
+            boolean instanceMatch = expectation.matcher().matches(enabled);
             
             if (!instanceMatch) {
                 failures.append("--> Element [" + locator.getName() + "] was [" + enabled + "].\n");

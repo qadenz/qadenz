@@ -16,7 +16,6 @@ public class PresenceOfElements implements Condition {
     private LocatorGroup locatorGroup;
     private Expectation<Boolean> expectation;
     
-    private Boolean match;
     private StringBuilder failures = new StringBuilder();
     
     public PresenceOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
@@ -31,11 +30,12 @@ public class PresenceOfElements implements Condition {
     
     @Override
     public Boolean result() {
+        Boolean match = null;
         WebFinder webFinder = new WebFinder();
         
         for (Locator locator : locatorGroup) {
             boolean present = webFinder.findAll(locator).size() > 0;
-            Boolean instanceMatch = expectation.matcher().matches(present);
+            boolean instanceMatch = expectation.matcher().matches(present);
             
             if (!instanceMatch) {
                 failures.append("--> Element [" + locator.getName() + "] was [" + present + "].\n");

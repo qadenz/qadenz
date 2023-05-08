@@ -13,7 +13,6 @@ public class TextOfAlert implements Condition {
     
     private Expectation<String> expectation;
     
-    private Boolean match;
     private String alertText;
     
     public TextOfAlert(Expectation<String> expectation) {
@@ -30,9 +29,7 @@ public class TextOfAlert implements Condition {
         WebDriver webDriver = WebDriverProvider.getWebDriver();
         alertText = webDriver.switchTo().alert().getText();
         
-        match = expectation.matcher().matches(alertText);
-        
-        return match;
+        return expectation.matcher().matches(alertText);
     }
     
     @Override

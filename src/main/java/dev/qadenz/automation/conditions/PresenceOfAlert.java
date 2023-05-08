@@ -14,7 +14,6 @@ public class PresenceOfAlert implements Condition {
     
     private Expectation<Boolean> expectation;
     
-    private Boolean match;
     private boolean present;
     
     public PresenceOfAlert(Expectation<Boolean> expectation) {
@@ -35,8 +34,7 @@ public class PresenceOfAlert implements Condition {
             present = false;
         }
         
-        match = expectation.matcher().matches(present);
-        return match;
+        return expectation.matcher().matches(present);
     }
     
     public String output() {
