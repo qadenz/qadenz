@@ -16,11 +16,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A Condition to evaluate the visible inner text of an element as a formatted LocalDateTime.
+ * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on the
+ * DOM, as a formatted LocalDateTime.
  *
  * @author Tim Slifer
  */
-public class TextOfElementAsDateTime implements Condition {
+public class DirectTextOfElementAsDateTime implements Condition {
     
     private Locator locator;
     private DateTimeFormatter dateTimeFormatter;
@@ -28,7 +29,7 @@ public class TextOfElementAsDateTime implements Condition {
     
     private LocalDateTime elementDateTime;
     
-    public TextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+    public DirectTextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
             Expectation<LocalDateTime> expectation) {
         this.locator = locator;
         this.dateTimeFormatter = dateTimeFormatter;
@@ -37,13 +38,13 @@ public class TextOfElementAsDateTime implements Condition {
     
     @Override
     public String description() {
-        return "Text of element [" + locator.getName() + "] as LocalDateTime " + expectation.description() + ".";
+        return "Direct text of element [" + locator.getName() + "] as LocalDateTime" + expectation.description() + ".";
     }
     
     @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
-        elementDateTime = webInspector.getTextOfElementAsDateTime(locator, dateTimeFormatter);
+        elementDateTime = webInspector.getDirectTextOfElementAsDateTime(locator, dateTimeFormatter);
         
         return expectation.matcher().matches(elementDateTime);
     }

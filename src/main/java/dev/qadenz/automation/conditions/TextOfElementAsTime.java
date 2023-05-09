@@ -37,7 +37,7 @@ public class TextOfElementAsTime implements Condition {
     
     @Override
     public String description() {
-        return "Time-formatted text of element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Text of element [" + locator.getName() + "] as LocalTime " + expectation.description() + ".";
     }
     
     @Override

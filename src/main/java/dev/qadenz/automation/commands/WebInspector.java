@@ -154,19 +154,104 @@ public class WebInspector {
         LOG.info("Retrieving direct text of element [{}].", locator.getName());
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
-            String elementText = webElement.getText();
-            List<String> childElementValues = getTextValuesFromElements(webElement.findElements(By.xpath("./*")));
-            for (String child : childElementValues) {
-                int lastIndex = elementText.lastIndexOf(child);
-                if (lastIndex != -1) {
-                    String start = elementText.substring(0, lastIndex);
-                    String end = elementText.substring(lastIndex + child.length());
-                    
-                    elementText = (start + end).trim();
-                }
-            }
             
-            return elementText;
+            return removeChildElementTextValues(webElement);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, formatted as a
+     * LocalDate.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     *
+     * @return The formatted LocalDate representation of the element text.
+     */
+    public LocalDate getDirectTextOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter) {
+        LOG.info("Retrieving direct text of element [{}] as LocalDate.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return LocalDate.parse(elementText, dateTimeFormatter);
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            LOG.error("Error parsing LocalDate from element text :: {}: {}",
+                    dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
+            screenshot.capture();
+            
+            throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, formatted as a
+     * LocalDateTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     *
+     * @return The formatted LocalDateTime representation of the element text.
+     */
+    public LocalDateTime getDirectTextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter) {
+        LOG.info("Retrieving direct text of element [{}] as LocalDateTime.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return LocalDateTime.parse(elementText, dateTimeFormatter);
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            LOG.error("Error parsing LocalDateTime from element text :: {}: {}",
+                    dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
+            screenshot.capture();
+            
+            throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, formatted as a
+     * LocalTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     *
+     * @return The formatted LocalTime representation of the element text.
+     */
+    public LocalTime getDirectTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter) {
+        LOG.info("Retrieving direct text of element [{}] as LocalTime.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return LocalTime.parse(elementText, dateTimeFormatter);
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            LOG.error("Error parsing LocalTime from element text :: {}: {}",
+                    dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
+            screenshot.capture();
+            
+            throw dateTimeParseException;
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -344,7 +429,7 @@ public class WebInspector {
      * @return The formatted LocalDate representation of the element text.
      */
     public LocalDate getTextOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter) {
-        LOG.info("Retrieving text of element as date [{}].", locator.getName());
+        LOG.info("Retrieving text of element [{}] as LocalDate.", locator.getName());
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
             String elementText = webElement.getText();
@@ -352,7 +437,7 @@ public class WebInspector {
             return LocalDate.parse(elementText, dateTimeFormatter);
         }
         catch (DateTimeParseException dateTimeParseException) {
-            LOG.error("Error parsing date from element text :: {}: {}",
+            LOG.error("Error parsing LocalDate from element text :: {}: {}",
                     dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
             screenshot.capture();
             
@@ -375,7 +460,7 @@ public class WebInspector {
      * @return The formatted LocalDate representation of the element text.
      */
     public LocalDateTime getTextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter) {
-        LOG.info("Retrieving text of element as date/time [{}].", locator.getName());
+        LOG.info("Retrieving text of element [{}] as LocalDateTime.", locator.getName());
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
             String elementText = webElement.getText();
@@ -383,7 +468,7 @@ public class WebInspector {
             return LocalDateTime.parse(elementText, dateTimeFormatter);
         }
         catch (DateTimeParseException dateTimeParseException) {
-            LOG.error("Error parsing date/time from element text :: {}: {}",
+            LOG.error("Error parsing LocalDateTime from element text :: {}: {}",
                     dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
             screenshot.capture();
             
@@ -406,7 +491,7 @@ public class WebInspector {
      * @return The formatted LocalDate representation of the element text.
      */
     public LocalTime getTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter) {
-        LOG.info("Retrieving text of element as time [{}].", locator.getName());
+        LOG.info("Retrieving text of element [{}] as LocalTime.", locator.getName());
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
             String elementText = webElement.getText();
@@ -414,7 +499,7 @@ public class WebInspector {
             return LocalTime.parse(elementText, dateTimeFormatter);
         }
         catch (DateTimeParseException dateTimeParseException) {
-            LOG.error("Error parsing time from element text :: {}: {}",
+            LOG.error("Error parsing LocalTime from element text :: {}: {}",
                     dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
             screenshot.capture();
             
@@ -539,6 +624,22 @@ public class WebInspector {
         }
         
         return values;
+    }
+    
+    private String removeChildElementTextValues(WebElement webElement) {
+        String elementText = webElement.getText();
+        List<String> childElementValues = getTextValuesFromElements(webElement.findElements(By.xpath("./*")));
+        for (String child : childElementValues) {
+            int lastIndex = elementText.lastIndexOf(child);
+            if (lastIndex != -1) {
+                String start = elementText.substring(0, lastIndex);
+                String end = elementText.substring(lastIndex + child.length());
+                
+                elementText = (start + end).trim();
+            }
+        }
+        
+        return elementText;
     }
     
     private List<String> getTextValuesFromElements(List<WebElement> webElements) {

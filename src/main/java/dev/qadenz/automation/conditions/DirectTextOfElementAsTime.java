@@ -12,24 +12,25 @@ package dev.qadenz.automation.conditions;
 import dev.qadenz.automation.commands.WebInspector;
 import dev.qadenz.automation.ui.Locator;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A Condition to evaluate the visible inner text of an element as a formatted LocalDateTime.
+ * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on the
+ * DOM, as a formatted LocalTime.
  *
  * @author Tim Slifer
  */
-public class TextOfElementAsDateTime implements Condition {
+public class DirectTextOfElementAsTime implements Condition {
     
     private Locator locator;
     private DateTimeFormatter dateTimeFormatter;
-    private Expectation<LocalDateTime> expectation;
+    private Expectation<LocalTime> expectation;
     
-    private LocalDateTime elementDateTime;
+    private LocalTime elementTime;
     
-    public TextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
-            Expectation<LocalDateTime> expectation) {
+    public DirectTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+            Expectation<LocalTime> expectation) {
         this.locator = locator;
         this.dateTimeFormatter = dateTimeFormatter;
         this.expectation = expectation;
@@ -37,19 +38,19 @@ public class TextOfElementAsDateTime implements Condition {
     
     @Override
     public String description() {
-        return "Text of element [" + locator.getName() + "] as LocalDateTime " + expectation.description() + ".";
+        return "Direct text of element [" + locator.getName() + "] as LocalTime " + expectation.description() + ".";
     }
     
     @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
-        elementDateTime = webInspector.getTextOfElementAsDateTime(locator, dateTimeFormatter);
+        elementTime = webInspector.getDirectTextOfElementAsTime(locator, dateTimeFormatter);
         
-        return expectation.matcher().matches(elementDateTime);
+        return expectation.matcher().matches(elementTime);
     }
     
     @Override
     public String output() {
-        return "Found [" + elementDateTime + "].";
+        return "Found [" + elementTime + "].";
     }
 }
