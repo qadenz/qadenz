@@ -78,6 +78,51 @@ public class Conditions {
     }
     
     /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted LocalDate.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter,
+            Expectation<LocalDate> expectation) {
+        return new DirectTextOfElementAsDate(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted LocalDateTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+            Expectation<LocalDateTime> expectation) {
+        return new DirectTextOfElementAsDateTime(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted LocalTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+            Expectation<LocalTime> expectation) {
+        return new DirectTextOfElementAsTime(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
      * A Condition for evaluating element to be enabled.
      *
      * @param locator The mapped UI element.
