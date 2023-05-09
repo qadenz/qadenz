@@ -37,7 +37,7 @@ public class TextOfElementAsDate implements Condition {
     
     @Override
     public String description() {
-        return "Date-formatted text of element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Text of element [" + locator.getName() + "] as LocalDate " + expectation.description() + ".";
     }
     
     @Override
