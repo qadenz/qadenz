@@ -9,20 +9,22 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions.expectations.temporal.localtime;
 
-import dev.qadenz.automation.conditions.Expectation;
+import dev.qadenz.automation.conditions.TemporalExpectation;
 import org.exparity.hamcrest.date.LocalTimeMatchers;
 import org.hamcrest.Matcher;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * An expectation for the text of an element, represented as a LocalTime, to be before the given LocalTime.
  *
  * @author Tim Slifer
  */
-public class LocalTimeIsBefore implements Expectation<LocalTime> {
+public class LocalTimeIsBefore implements TemporalExpectation<LocalTime> {
     
     private LocalTime localTime;
+    private DateTimeFormatter dateTimeFormatter;
     
     public LocalTimeIsBefore(LocalTime localTime) {
         this.localTime = localTime;
@@ -35,6 +37,11 @@ public class LocalTimeIsBefore implements Expectation<LocalTime> {
     
     @Override
     public String description() {
-        return "is before [" + localTime.toString() + "]";
+        return "is before [" + localTime.format(dateTimeFormatter) + "]";
+    }
+    
+    @Override
+    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 }
