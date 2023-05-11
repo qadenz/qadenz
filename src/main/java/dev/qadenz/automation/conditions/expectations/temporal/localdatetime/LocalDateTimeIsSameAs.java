@@ -9,11 +9,12 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions.expectations.temporal.localdatetime;
 
-import dev.qadenz.automation.conditions.Expectation;
+import dev.qadenz.automation.conditions.TemporalExpectation;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.hamcrest.Matcher;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * An expectation for the text of an element, represented as a LocalDateTime, to be the same as the given
@@ -21,9 +22,10 @@ import java.time.LocalDateTime;
  *
  * @author Tim Slifer
  */
-public class LocalDateTimeIsSameAs implements Expectation<LocalDateTime> {
+public class LocalDateTimeIsSameAs implements TemporalExpectation<LocalDateTime> {
     
     private LocalDateTime localDateTime;
+    private DateTimeFormatter dateTimeFormatter;
     
     public LocalDateTimeIsSameAs(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
@@ -36,6 +38,11 @@ public class LocalDateTimeIsSameAs implements Expectation<LocalDateTime> {
     
     @Override
     public String description() {
-        return "is the same as [" + localDateTime.toString() + "]";
+        return "is the same as [" + localDateTime.format(dateTimeFormatter) + "]";
+    }
+    
+    @Override
+    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 }

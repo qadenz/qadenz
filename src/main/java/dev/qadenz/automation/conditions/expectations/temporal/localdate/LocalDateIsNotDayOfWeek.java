@@ -9,13 +9,12 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions.expectations.temporal.localdate;
 
-import dev.qadenz.automation.conditions.TemporalExpectation;
+import dev.qadenz.automation.conditions.Expectation;
 import org.exparity.hamcrest.date.LocalDateMatchers;
 import org.hamcrest.Matcher;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
@@ -26,10 +25,9 @@ import static org.hamcrest.Matchers.not;
  *
  * @author Tim Slifer
  */
-public class LocalDateIsNotDayOfWeek implements TemporalExpectation<LocalDate> {
+public class LocalDateIsNotDayOfWeek implements Expectation<LocalDate> {
     
     private DayOfWeek dayOfWeek;
-    private DateTimeFormatter dateTimeFormatter;
     
     public LocalDateIsNotDayOfWeek(DayOfWeek dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
@@ -43,10 +41,5 @@ public class LocalDateIsNotDayOfWeek implements TemporalExpectation<LocalDate> {
     @Override
     public String description() {
         return "is not day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
-    }
-    
-    @Override
-    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
     }
 }
