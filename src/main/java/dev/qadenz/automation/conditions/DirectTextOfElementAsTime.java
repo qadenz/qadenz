@@ -25,15 +25,17 @@ public class DirectTextOfElementAsTime implements Condition {
     
     private Locator locator;
     private DateTimeFormatter dateTimeFormatter;
-    private Expectation<LocalTime> expectation;
+    private TemporalExpectation<LocalTime> expectation;
     
     private LocalTime elementTime;
     
     public DirectTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
-            Expectation<LocalTime> expectation) {
+            TemporalExpectation<LocalTime> expectation) {
         this.locator = locator;
         this.dateTimeFormatter = dateTimeFormatter;
         this.expectation = expectation;
+        
+        this.expectation.setDateTimeFormatter(dateTimeFormatter);
     }
     
     @Override
