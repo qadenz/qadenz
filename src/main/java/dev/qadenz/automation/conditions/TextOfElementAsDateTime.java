@@ -24,15 +24,17 @@ public class TextOfElementAsDateTime implements Condition {
     
     private Locator locator;
     private DateTimeFormatter dateTimeFormatter;
-    private Expectation<LocalDateTime> expectation;
+    private TemporalExpectation<LocalDateTime> expectation;
     
     private LocalDateTime elementDateTime;
     
     public TextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
-            Expectation<LocalDateTime> expectation) {
+            TemporalExpectation<LocalDateTime> expectation) {
         this.locator = locator;
         this.dateTimeFormatter = dateTimeFormatter;
         this.expectation = expectation;
+        
+        this.expectation.setDateTimeFormatter(dateTimeFormatter);
     }
     
     @Override

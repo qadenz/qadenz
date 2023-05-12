@@ -9,11 +9,12 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions.expectations.temporal.localdatetime;
 
-import dev.qadenz.automation.conditions.Expectation;
+import dev.qadenz.automation.conditions.TemporalExpectation;
 import org.exparity.hamcrest.date.LocalDateTimeMatchers;
 import org.hamcrest.Matcher;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 /**
@@ -22,11 +23,12 @@ import java.time.temporal.ChronoUnit;
  *
  * @author Tim Slifer
  */
-public class LocalDateTimeIsWithin implements Expectation<LocalDateTime> {
+public class LocalDateTimeIsWithin implements TemporalExpectation<LocalDateTime> {
     
     private Long period;
     private ChronoUnit chronoUnit;
     private LocalDateTime localDateTime;
+    private DateTimeFormatter dateTimeFormatter;
     
     public LocalDateTimeIsWithin(Long period, ChronoUnit chronoUnit, LocalDateTime localDateTime) {
         this.period = period;
@@ -41,6 +43,12 @@ public class LocalDateTimeIsWithin implements Expectation<LocalDateTime> {
     
     @Override
     public String description() {
-        return "is within [" + period + " " + chronoUnit.toString() + "] of [" + localDateTime.toString() + "]";
+        return "is within [" + period + " " + chronoUnit.toString() + "] of [" +
+                localDateTime.format(dateTimeFormatter) + "]";
+    }
+    
+    @Override
+    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 }
