@@ -12,6 +12,8 @@ package dev.qadenz.automation.test;
 import dev.qadenz.automation.commands.Assertions;
 import dev.qadenz.automation.conditions.Condition;
 import dev.qadenz.automation.reporter.Screenshot;
+import dev.qadenz.automation.util.TestCommander;
+import dev.qadenz.automation.util.TestConditions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
