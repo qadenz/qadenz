@@ -179,7 +179,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isAfter(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isAfter(LocalDateTime localDateTime) {
         return new TemporalIsAfter<>(localDateTime, LOCALDATETIME_AS_LOCALDATETIME, localDateTime(localDateTime),
                 LOCALDATETIME);
     }
@@ -191,7 +191,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isAfter(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isAfter(LocalTime localTime) {
         return new TemporalIsAfter<>(localTime, LOCALTIME_AS_LOCALTIME, localTime(localTime), LOCALTIME);
     }
     
@@ -203,7 +203,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isSameAsOrAfter(LocalDate date) {
+    public static TemporalExpectation<LocalDate> isSameAsOrAfter(LocalDate date) {
         return new TemporalIsSameAsOrAfter<>(date, LOCALDATE_AS_LOCALDATE, localDate(date), LOCALDATE);
     }
     
@@ -215,7 +215,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isSameAsOrAfter(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isSameAsOrAfter(LocalDateTime localDateTime) {
         return new TemporalIsSameAsOrAfter<>(localDateTime, LOCALDATETIME_AS_LOCALDATETIME,
                 localDateTime(localDateTime), LOCALDATETIME);
     }
@@ -228,7 +228,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isSameAsOrAfter(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isSameAsOrAfter(LocalTime localTime) {
         return new TemporalIsSameAsOrAfter<>(localTime, LOCALTIME_AS_LOCALTIME, localTime(localTime), LOCALTIME);
     }
     
@@ -239,7 +239,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isSameAs(LocalDate localDate) {
+    public static TemporalExpectation<LocalDate> isSameAs(LocalDate localDate) {
         return new TemporalIsSameAs<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate));
     }
     
@@ -251,7 +251,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isSameAs(LocalDateTime date) {
+    public static TemporalExpectation<LocalDateTime> isSameAs(LocalDateTime date) {
         return new TemporalIsSameAs<>(date, LOCALDATETIME_AS_LOCALDATE, localDate(date));
     }
     
@@ -263,7 +263,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isNotSameAs(LocalDate localDate) {
+    public static TemporalExpectation<LocalDate> isNotSameAs(LocalDate localDate) {
         return new TemporalIsNotSameAs<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate));
     }
     
@@ -275,7 +275,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isNotSameAs(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isNotSameAs(LocalDateTime localDateTime) {
         return new TemporalIsNotSameAs<>(localDateTime, LOCALDATETIME_AS_LOCALDATE, localDate(localDateTime));
     }
     
@@ -287,7 +287,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isSameAsOrBefore(LocalDate localDate) {
+    public static TemporalExpectation<LocalDate> isSameAsOrBefore(LocalDate localDate) {
         return new TemporalIsSameAsOrBefore<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate), LOCALDATE);
     }
     
@@ -299,7 +299,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isSameAsOrBefore(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isSameAsOrBefore(LocalDateTime localDateTime) {
         return new TemporalIsSameAsOrBefore<>(localDateTime, LOCALDATETIME_AS_LOCALDATETIME,
                 localDateTime(localDateTime), LOCALDATETIME);
     }
@@ -312,7 +312,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isSameAsOrBefore(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isSameAsOrBefore(LocalTime localTime) {
         return new TemporalIsSameAsOrBefore<>(localTime, LOCALTIME_AS_LOCALTIME, localTime(localTime), LOCALTIME);
     }
     
@@ -323,7 +323,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isBefore(LocalDate localDate) {
+    public static TemporalExpectation<LocalDate> isBefore(LocalDate localDate) {
         return new TemporalIsAfter<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate), LOCALDATE);
     }
     
@@ -334,7 +334,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isBefore(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isBefore(LocalDateTime localDateTime) {
         return new TemporalIsAfter<>(localDateTime, LOCALDATETIME_AS_LOCALDATETIME, localDateTime(localDateTime),
                 LOCALDATETIME);
     }
@@ -346,7 +346,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isBefore(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isBefore(LocalTime localTime) {
         return new TemporalIsAfter<>(localTime, LOCALTIME_AS_LOCALTIME, localTime(localTime), LOCALTIME);
     }
     
@@ -360,7 +360,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isWithin(Long period, ChronoUnit unit, LocalDate localDate) {
+    public static TemporalExpectation<LocalDate> isWithin(Long period, ChronoUnit unit, LocalDate localDate) {
         return new TemporalIsWithin<>(localDate, period, unit, LOCALDATE_AS_LOCALDATE, localDate(localDate), LOCALDATE);
     }
     
@@ -374,7 +374,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isWithin(Long period, ChronoUnit unit, LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isWithin(Long period, ChronoUnit unit,
+            LocalDateTime localDateTime) {
         return new TemporalIsWithin<>(localDateTime, period, unit, LOCALDATETIME_AS_LOCALDATETIME,
                 localDateTime(localDateTime), LOCALDATETIME);
     }
@@ -389,7 +390,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isWithin(Long period, ChronoUnit unit, LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isWithin(Long period, ChronoUnit unit, LocalTime localTime) {
         return new TemporalIsWithin<>(localTime, period, unit, LOCALTIME_AS_LOCALTIME, localTime(localTime), LOCALTIME);
     }
     
@@ -403,7 +404,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDate> isNotWithin(Long period, ChronoUnit unit, LocalDate localDate) {
+    public static TemporalExpectation<LocalDate> isNotWithin(Long period, ChronoUnit unit, LocalDate localDate) {
         return new TemporalIsNotWithin<>(localDate, period, unit, LOCALDATE_AS_LOCALDATE, localDate(localDate),
                 LOCALDATE);
     }
@@ -418,7 +419,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isNotWithin(Long period, ChronoUnit unit, LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isNotWithin(Long period, ChronoUnit unit,
+            LocalDateTime localDateTime) {
         return new TemporalIsNotWithin<>(localDateTime, period, unit, LOCALDATETIME_AS_LOCALDATETIME,
                 localDateTime(localDateTime), LOCALDATETIME);
     }
@@ -433,7 +435,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isNotWithin(Long period, ChronoUnit unit, LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isNotWithin(Long period, ChronoUnit unit, LocalTime localTime) {
         return new TemporalIsNotWithin<>(localTime, period, unit, LOCALTIME_AS_LOCALTIME, localTime(localTime),
                 LOCALTIME);
     }
@@ -491,7 +493,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isSameHourOfDay(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isSameHourOfDay(LocalDateTime localDateTime) {
         return new TemporalIsSameHourOfDay<>(localDateTime, LOCALDATETIME_AS_HOUR, hour(localDateTime));
     }
     
@@ -503,7 +505,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isSameHourOfDay(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isSameHourOfDay(LocalTime localTime) {
         return new TemporalIsSameHourOfDay<>(localTime, LOCALTIME_AS_HOUR, hour(localTime));
     }
     
@@ -515,7 +517,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isNotSameHourOfDay(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isNotSameHourOfDay(LocalDateTime localDateTime) {
         return new TemporalIsNotSameHourOfDay<>(localDateTime, LOCALDATETIME_AS_HOUR, hour(localDateTime));
     }
     
@@ -527,7 +529,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isNotSameHourOfDay(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isNotSameHourOfDay(LocalTime localTime) {
         return new TemporalIsNotSameHourOfDay<>(localTime, LOCALTIME_AS_HOUR, hour(localTime));
     }
     
@@ -539,7 +541,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isSameMinuteOfHour(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isSameMinuteOfHour(LocalDateTime localDateTime) {
         return new TemporalIsSameMinuteOfHour<>(localDateTime, LOCALDATETIME_AS_MINUTE, minute(localDateTime));
     }
     
@@ -551,7 +553,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isSameMinuteOfHour(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isSameMinuteOfHour(LocalTime localTime) {
         return new TemporalIsSameMinuteOfHour<>(localTime, LOCALTIME_AS_MINUTE, minute(localTime));
     }
     
@@ -563,7 +565,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isNotSameMinuteOfHour(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isNotSameMinuteOfHour(LocalDateTime localDateTime) {
         return new TemporalIsNotSameMinuteOfHour<>(localDateTime, LOCALDATETIME_AS_MINUTE, minute(localDateTime));
     }
     
@@ -575,7 +577,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isNotSameMinuteOfHour(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isNotSameMinuteOfHour(LocalTime localTime) {
         return new TemporalIsNotSameMinuteOfHour<>(localTime, LOCALTIME_AS_MINUTE, minute(localTime));
     }
     
@@ -587,7 +589,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isSameSecondOfMinute(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isSameSecondOfMinute(LocalDateTime localDateTime) {
         return new TemporalIsSameSecondOfMinute<>(localDateTime, LOCALDATETIME_AS_SECOND, second(localDateTime));
     }
     
@@ -599,7 +601,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isSameSecondOfMinute(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isSameSecondOfMinute(LocalTime localTime) {
         return new TemporalIsSameSecondOfMinute<>(localTime, LOCALTIME_AS_SECOND, second(localTime));
     }
     
@@ -611,7 +613,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalDateTime> isNotSameSecondOfMinute(LocalDateTime localDateTime) {
+    public static TemporalExpectation<LocalDateTime> isNotSameSecondOfMinute(LocalDateTime localDateTime) {
         return new TemporalIsNotSameSecondOfMinute<>(localDateTime, LOCALDATETIME_AS_SECOND, second(localDateTime));
     }
     
@@ -623,7 +625,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<LocalTime> isNotSameSecondOfMinute(LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isNotSameSecondOfMinute(LocalTime localTime) {
         return new TemporalIsNotSameSecondOfMinute<>(localTime, LOCALTIME_AS_SECOND, second(localTime));
     }
     
