@@ -31,6 +31,7 @@ import dev.qadenz.automation.conditions.expectations.string.IsNotEmptyOrNull;
 import dev.qadenz.automation.conditions.expectations.string.IsNotEqualTo;
 import dev.qadenz.automation.conditions.expectations.string.StartsWith;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsAfter;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsBefore;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsDayOfWeek;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotDayOfWeek;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameAs;
@@ -324,7 +325,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static TemporalExpectation<LocalDate> isBefore(LocalDate localDate) {
-        return new TemporalIsAfter<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate), LOCALDATE);
+        return new TemporalIsBefore<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate), LOCALDATE);
     }
     
     /**
@@ -335,7 +336,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static TemporalExpectation<LocalDateTime> isBefore(LocalDateTime localDateTime) {
-        return new TemporalIsAfter<>(localDateTime, LOCALDATETIME_AS_LOCALDATETIME, localDateTime(localDateTime),
+        return new TemporalIsBefore<>(localDateTime, LOCALDATETIME_AS_LOCALDATETIME, localDateTime(localDateTime),
                 LOCALDATETIME);
     }
     
@@ -347,7 +348,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static TemporalExpectation<LocalTime> isBefore(LocalTime localTime) {
-        return new TemporalIsAfter<>(localTime, LOCALTIME_AS_LOCALTIME, localTime(localTime), LOCALTIME);
+        return new TemporalIsBefore<>(localTime, LOCALTIME_AS_LOCALTIME, localTime(localTime), LOCALTIME);
     }
     
     /**
