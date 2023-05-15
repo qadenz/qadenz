@@ -7,7 +7,7 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
  */
-package dev.qadenz.automation.test;
+package dev.qadenz.automation.test.expectations;
 
 import dev.qadenz.automation.conditions.Expectations;
 import dev.qadenz.automation.conditions.TemporalExpectation;
