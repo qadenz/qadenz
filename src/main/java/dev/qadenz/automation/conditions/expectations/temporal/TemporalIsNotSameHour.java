@@ -25,7 +25,7 @@ import java.time.temporal.Temporal;
  *
  * @author Tim Slifer
  */
-public class TemporalIsNotSameHourOfDay<T> implements TemporalExpectation<T> {
+public class TemporalIsNotSameHour<T> implements TemporalExpectation<T> {
     
     private Temporal temporal;
     private TemporalConverter<T, Hour> converter;
@@ -33,7 +33,7 @@ public class TemporalIsNotSameHourOfDay<T> implements TemporalExpectation<T> {
     
     private DateTimeFormatter dateTimeFormatter;
     
-    public TemporalIsNotSameHourOfDay(Temporal temporal, TemporalConverter<T, Hour> converter,
+    public TemporalIsNotSameHour(Temporal temporal, TemporalConverter<T, Hour> converter,
             TemporalProvider<Hour> provider) {
         this.temporal = temporal;
         this.converter = converter;

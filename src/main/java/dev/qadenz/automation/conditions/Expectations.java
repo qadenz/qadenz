@@ -34,17 +34,17 @@ import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsAfter;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsBefore;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsDayOfWeek;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotDayOfWeek;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameAs;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameHourOfDay;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameMinuteOfHour;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameSecondOfMinute;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameDay;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameHour;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameMinute;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameSecond;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotWithin;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameAs;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameAsOrAfter;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameAsOrBefore;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameHourOfDay;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameMinuteOfHour;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameSecondOfMinute;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameDay;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameHour;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameMinute;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameSecond;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsWithin;
 
 import java.time.DayOfWeek;
@@ -240,8 +240,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDate> isSameAs(LocalDate localDate) {
-        return new TemporalIsSameAs<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate));
+    public static TemporalExpectation<LocalDate> isSameDay(LocalDate localDate) {
+        return new TemporalIsSameDay<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate));
     }
     
     /**
@@ -252,8 +252,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isSameAs(LocalDateTime date) {
-        return new TemporalIsSameAs<>(date, LOCALDATETIME_AS_LOCALDATE, localDate(date));
+    public static TemporalExpectation<LocalDateTime> isSameDay(LocalDateTime date) {
+        return new TemporalIsSameDay<>(date, LOCALDATETIME_AS_LOCALDATE, localDate(date));
     }
     
     /**
@@ -264,8 +264,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDate> isNotSameAs(LocalDate localDate) {
-        return new TemporalIsNotSameAs<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate));
+    public static TemporalExpectation<LocalDate> isNotSameDay(LocalDate localDate) {
+        return new TemporalIsNotSameDay<>(localDate, LOCALDATE_AS_LOCALDATE, localDate(localDate));
     }
     
     /**
@@ -276,8 +276,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isNotSameAs(LocalDateTime localDateTime) {
-        return new TemporalIsNotSameAs<>(localDateTime, LOCALDATETIME_AS_LOCALDATE, localDate(localDateTime));
+    public static TemporalExpectation<LocalDateTime> isNotSameDay(LocalDateTime localDateTime) {
+        return new TemporalIsNotSameDay<>(localDateTime, LOCALDATETIME_AS_LOCALDATE, localDate(localDateTime));
     }
     
     /**
@@ -494,8 +494,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isSameHourOfDay(LocalDateTime localDateTime) {
-        return new TemporalIsSameHourOfDay<>(localDateTime, LOCALDATETIME_AS_HOUR, hour(localDateTime));
+    public static TemporalExpectation<LocalDateTime> isSameHour(LocalDateTime localDateTime) {
+        return new TemporalIsSameHour<>(localDateTime, LOCALDATETIME_AS_HOUR, hour(localDateTime));
     }
     
     /**
@@ -506,8 +506,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isSameHourOfDay(LocalTime localTime) {
-        return new TemporalIsSameHourOfDay<>(localTime, LOCALTIME_AS_HOUR, hour(localTime));
+    public static TemporalExpectation<LocalTime> isSameHour(LocalTime localTime) {
+        return new TemporalIsSameHour<>(localTime, LOCALTIME_AS_HOUR, hour(localTime));
     }
     
     /**
@@ -518,8 +518,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isNotSameHourOfDay(LocalDateTime localDateTime) {
-        return new TemporalIsNotSameHourOfDay<>(localDateTime, LOCALDATETIME_AS_HOUR, hour(localDateTime));
+    public static TemporalExpectation<LocalDateTime> isNotSameHour(LocalDateTime localDateTime) {
+        return new TemporalIsNotSameHour<>(localDateTime, LOCALDATETIME_AS_HOUR, hour(localDateTime));
     }
     
     /**
@@ -530,8 +530,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isNotSameHourOfDay(LocalTime localTime) {
-        return new TemporalIsNotSameHourOfDay<>(localTime, LOCALTIME_AS_HOUR, hour(localTime));
+    public static TemporalExpectation<LocalTime> isNotSameHour(LocalTime localTime) {
+        return new TemporalIsNotSameHour<>(localTime, LOCALTIME_AS_HOUR, hour(localTime));
     }
     
     /**
@@ -542,8 +542,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isSameMinuteOfHour(LocalDateTime localDateTime) {
-        return new TemporalIsSameMinuteOfHour<>(localDateTime, LOCALDATETIME_AS_MINUTE, minute(localDateTime));
+    public static TemporalExpectation<LocalDateTime> isSameMinute(LocalDateTime localDateTime) {
+        return new TemporalIsSameMinute<>(localDateTime, LOCALDATETIME_AS_MINUTE, minute(localDateTime));
     }
     
     /**
@@ -554,8 +554,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isSameMinuteOfHour(LocalTime localTime) {
-        return new TemporalIsSameMinuteOfHour<>(localTime, LOCALTIME_AS_MINUTE, minute(localTime));
+    public static TemporalExpectation<LocalTime> isSameMinute(LocalTime localTime) {
+        return new TemporalIsSameMinute<>(localTime, LOCALTIME_AS_MINUTE, minute(localTime));
     }
     
     /**
@@ -566,8 +566,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isNotSameMinuteOfHour(LocalDateTime localDateTime) {
-        return new TemporalIsNotSameMinuteOfHour<>(localDateTime, LOCALDATETIME_AS_MINUTE, minute(localDateTime));
+    public static TemporalExpectation<LocalDateTime> isNotSameMinute(LocalDateTime localDateTime) {
+        return new TemporalIsNotSameMinute<>(localDateTime, LOCALDATETIME_AS_MINUTE, minute(localDateTime));
     }
     
     /**
@@ -578,8 +578,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isNotSameMinuteOfHour(LocalTime localTime) {
-        return new TemporalIsNotSameMinuteOfHour<>(localTime, LOCALTIME_AS_MINUTE, minute(localTime));
+    public static TemporalExpectation<LocalTime> isNotSameMinute(LocalTime localTime) {
+        return new TemporalIsNotSameMinute<>(localTime, LOCALTIME_AS_MINUTE, minute(localTime));
     }
     
     /**
@@ -590,8 +590,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isSameSecondOfMinute(LocalDateTime localDateTime) {
-        return new TemporalIsSameSecondOfMinute<>(localDateTime, LOCALDATETIME_AS_SECOND, second(localDateTime));
+    public static TemporalExpectation<LocalDateTime> isSameSecond(LocalDateTime localDateTime) {
+        return new TemporalIsSameSecond<>(localDateTime, LOCALDATETIME_AS_SECOND, second(localDateTime));
     }
     
     /**
@@ -602,8 +602,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isSameSecondOfMinute(LocalTime localTime) {
-        return new TemporalIsSameSecondOfMinute<>(localTime, LOCALTIME_AS_SECOND, second(localTime));
+    public static TemporalExpectation<LocalTime> isSameSecond(LocalTime localTime) {
+        return new TemporalIsSameSecond<>(localTime, LOCALTIME_AS_SECOND, second(localTime));
     }
     
     /**
@@ -614,8 +614,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isNotSameSecondOfMinute(LocalDateTime localDateTime) {
-        return new TemporalIsNotSameSecondOfMinute<>(localDateTime, LOCALDATETIME_AS_SECOND, second(localDateTime));
+    public static TemporalExpectation<LocalDateTime> isNotSameSecond(LocalDateTime localDateTime) {
+        return new TemporalIsNotSameSecond<>(localDateTime, LOCALDATETIME_AS_SECOND, second(localDateTime));
     }
     
     /**
@@ -626,8 +626,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isNotSameSecondOfMinute(LocalTime localTime) {
-        return new TemporalIsNotSameSecondOfMinute<>(localTime, LOCALTIME_AS_SECOND, second(localTime));
+    public static TemporalExpectation<LocalTime> isNotSameSecond(LocalTime localTime) {
+        return new TemporalIsNotSameSecond<>(localTime, LOCALTIME_AS_SECOND, second(localTime));
     }
     
     /**

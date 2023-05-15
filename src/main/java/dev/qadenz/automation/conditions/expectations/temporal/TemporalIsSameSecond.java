@@ -10,32 +10,30 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package dev.qadenz.automation.conditions.expectations.temporal;
 
 import dev.qadenz.automation.conditions.TemporalExpectation;
-import org.exparity.hamcrest.date.core.IsMinute;
+import org.exparity.hamcrest.date.core.IsSecond;
 import org.exparity.hamcrest.date.core.TemporalConverter;
 import org.exparity.hamcrest.date.core.TemporalProvider;
-import org.exparity.hamcrest.date.core.types.Minute;
+import org.exparity.hamcrest.date.core.types.Second;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 
 /**
- * An expectation for the text of an element, represented as a Temporal, to be not the same minute as the given
- * Temporal.
+ * An expectation for the text of an element, represented as a Temporal, to be the same second as the given Temporal.
  *
  * @author Tim Slifer
  */
-public class TemporalIsNotSameMinuteOfHour<T> implements TemporalExpectation<T> {
+public class TemporalIsSameSecond<T> implements TemporalExpectation<T> {
     
     private Temporal temporal;
-    private TemporalConverter<T, Minute> converter;
-    private TemporalProvider<Minute> provider;
+    private TemporalConverter<T, Second> converter;
+    private TemporalProvider<Second> provider;
     
     private DateTimeFormatter dateTimeFormatter;
     
-    public TemporalIsNotSameMinuteOfHour(Temporal temporal, TemporalConverter<T, Minute> converter,
-            TemporalProvider<Minute> provider) {
+    public TemporalIsSameSecond(Temporal temporal, TemporalConverter<T, Second> converter,
+            TemporalProvider<Second> provider) {
         this.temporal = temporal;
         this.converter = converter;
         this.provider = provider;
@@ -43,12 +41,12 @@ public class TemporalIsNotSameMinuteOfHour<T> implements TemporalExpectation<T> 
     
     @Override
     public Matcher<T> matcher() {
-        return Matchers.not(new IsMinute<>(converter, provider));
+        return new IsSecond<>(converter, provider);
     }
     
     @Override
     public String description() {
-        return "is not same minute as [" + dateTimeFormatter.format(temporal) + "]";
+        return "is same second as [" + dateTimeFormatter.format(temporal) + "]";
     }
     
     @Override
