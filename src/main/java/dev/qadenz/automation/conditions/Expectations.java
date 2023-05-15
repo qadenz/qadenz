@@ -361,7 +361,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDate> isWithin(Long period, ChronoUnit unit, LocalDate localDate) {
+    public static TemporalExpectation<LocalDate> isWithin(long period, ChronoUnit unit, LocalDate localDate) {
         return new TemporalIsWithin<>(localDate, period, unit, LOCALDATE_AS_LOCALDATE, localDate(localDate), LOCALDATE);
     }
     
@@ -375,7 +375,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isWithin(Long period, ChronoUnit unit,
+    public static TemporalExpectation<LocalDateTime> isWithin(long period, ChronoUnit unit,
             LocalDateTime localDateTime) {
         return new TemporalIsWithin<>(localDateTime, period, unit, LOCALDATETIME_AS_LOCALDATETIME,
                 localDateTime(localDateTime), LOCALDATETIME);
@@ -391,7 +391,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isWithin(Long period, ChronoUnit unit, LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isWithin(long period, ChronoUnit unit, LocalTime localTime) {
         return new TemporalIsWithin<>(localTime, period, unit, LOCALTIME_AS_LOCALTIME, localTime(localTime), LOCALTIME);
     }
     
@@ -405,7 +405,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDate> isNotWithin(Long period, ChronoUnit unit, LocalDate localDate) {
+    public static TemporalExpectation<LocalDate> isNotWithin(long period, ChronoUnit unit, LocalDate localDate) {
         return new TemporalIsNotWithin<>(localDate, period, unit, LOCALDATE_AS_LOCALDATE, localDate(localDate),
                 LOCALDATE);
     }
@@ -420,7 +420,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isNotWithin(Long period, ChronoUnit unit,
+    public static TemporalExpectation<LocalDateTime> isNotWithin(long period, ChronoUnit unit,
             LocalDateTime localDateTime) {
         return new TemporalIsNotWithin<>(localDateTime, period, unit, LOCALDATETIME_AS_LOCALDATETIME,
                 localDateTime(localDateTime), LOCALDATETIME);
@@ -436,7 +436,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isNotWithin(Long period, ChronoUnit unit, LocalTime localTime) {
+    public static TemporalExpectation<LocalTime> isNotWithin(long period, ChronoUnit unit, LocalTime localTime) {
         return new TemporalIsNotWithin<>(localTime, period, unit, LOCALTIME_AS_LOCALTIME, localTime(localTime),
                 LOCALTIME);
     }
