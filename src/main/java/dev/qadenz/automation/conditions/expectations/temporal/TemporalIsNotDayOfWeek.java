@@ -14,6 +14,7 @@ import org.exparity.hamcrest.date.core.IsDayOfWeek;
 import org.exparity.hamcrest.date.core.TemporalConverter;
 import org.exparity.hamcrest.date.core.TemporalProvider;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;
@@ -40,7 +41,7 @@ public class TemporalIsNotDayOfWeek<T> implements Expectation<T> {
     
     @Override
     public Matcher<T> matcher() {
-        return new IsDayOfWeek<>(converter, provider);
+        return Matchers.not(new IsDayOfWeek<>(converter, provider));
     }
     
     @Override
