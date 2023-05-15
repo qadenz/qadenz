@@ -25,7 +25,7 @@ import java.time.temporal.Temporal;
  *
  * @author Tim Slifer
  */
-public class TemporalIsNotSameAs<T, E> implements TemporalExpectation<T> {
+public class TemporalIsNotSameAs<T> implements TemporalExpectation<T> {
     
     private Temporal temporal;
     private TemporalConverter<T, LocalDate> converter;
