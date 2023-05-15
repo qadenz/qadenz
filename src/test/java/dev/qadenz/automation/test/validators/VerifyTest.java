@@ -9,8 +9,8 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.test.validators;
 
-import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.conditions.Condition;
+import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.util.TestCommander;
 import dev.qadenz.automation.util.TestConditions;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@ExtendWith (MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class VerifyTest {
     
     @Mock
