@@ -88,7 +88,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition directTextOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter,
-            Expectation<LocalDate> expectation) {
+            TemporalExpectation<LocalDate> expectation) {
         return new DirectTextOfElementAsDate(locator, dateTimeFormatter, expectation);
     }
     
@@ -103,7 +103,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition directTextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
-            Expectation<LocalDateTime> expectation) {
+            TemporalExpectation<LocalDateTime> expectation) {
         return new DirectTextOfElementAsDateTime(locator, dateTimeFormatter, expectation);
     }
     
@@ -118,7 +118,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition directTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
-            Expectation<LocalTime> expectation) {
+            TemporalExpectation<LocalTime> expectation) {
         return new DirectTextOfElementAsTime(locator, dateTimeFormatter, expectation);
     }
     
@@ -241,7 +241,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition textOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter,
-            Expectation<LocalDate> expectation) {
+            TemporalExpectation<LocalDate> expectation) {
         return new TextOfElementAsDate(locator, dateTimeFormatter, expectation);
     }
     
@@ -255,7 +255,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition textOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
-            Expectation<LocalDateTime> expectation) {
+            TemporalExpectation<LocalDateTime> expectation) {
         return new TextOfElementAsDateTime(locator, dateTimeFormatter, expectation);
     }
     
@@ -269,7 +269,7 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition textOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
-            Expectation<LocalTime> expectation) {
+            TemporalExpectation<LocalTime> expectation) {
         return new TextOfElementAsTime(locator, dateTimeFormatter, expectation);
     }
     
