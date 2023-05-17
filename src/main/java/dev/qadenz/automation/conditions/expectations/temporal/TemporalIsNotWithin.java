@@ -62,6 +62,6 @@ public class TemporalIsNotWithin<T, E> implements TemporalExpectation<T> {
     
     @Override
     public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-    
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 }
