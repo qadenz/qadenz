@@ -15,7 +15,7 @@ import org.exparity.hamcrest.date.core.TemporalConverter;
 import org.exparity.hamcrest.date.core.TemporalProvider;
 import org.exparity.hamcrest.date.core.types.Second;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNot;
 
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
@@ -43,7 +43,7 @@ public class TemporalIsNotSameSecond<T> implements TemporalExpectation<T> {
     
     @Override
     public Matcher<T> matcher() {
-        return Matchers.not(new IsSecond<>(converter, provider));
+        return new IsNot<>(new IsSecond<>(converter, provider));
     }
     
     @Override
