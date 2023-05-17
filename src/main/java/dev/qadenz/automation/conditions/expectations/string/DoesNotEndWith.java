@@ -11,9 +11,8 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.conditions.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-
-import static org.hamcrest.Matchers.not;
+import org.hamcrest.core.IsNot;
+import org.hamcrest.core.StringEndsWith;
 
 /**
  * An Expectation for a String value to not end with the given value.
@@ -30,7 +29,7 @@ public class DoesNotEndWith implements Expectation<String> {
     
     @Override
     public Matcher<String> matcher() {
-        return not(Matchers.endsWith(text));
+        return new IsNot<>(new StringEndsWith(false, text));
     }
     
     @Override

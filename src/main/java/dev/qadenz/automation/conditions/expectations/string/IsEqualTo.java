@@ -11,7 +11,7 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.conditions.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 
 /**
  * An Expectation for a String value to be equal to the given value.
@@ -28,7 +28,7 @@ public class IsEqualTo implements Expectation<String> {
     
     @Override
     public Matcher<String> matcher() {
-        return Matchers.is(text);
+        return new IsEqual<>(text);
     }
     
     @Override

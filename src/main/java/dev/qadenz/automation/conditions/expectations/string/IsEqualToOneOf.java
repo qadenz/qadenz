@@ -11,7 +11,8 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.conditions.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.AnyOf;
+import org.hamcrest.core.IsEqual;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,10 +35,10 @@ public class IsEqualToOneOf implements Expectation<String> {
     public Matcher<String> matcher() {
         List<Matcher<String>> matchers = new ArrayList<>();
         for (String option : options) {
-            matchers.add(Matchers.is(option));
+            matchers.add(new IsEqual<>(option));
         }
         
-        return Matchers.anyOf(matchers.toArray(new Matcher[matchers.size()]));
+        return new AnyOf<>(matchers);
     }
     
     @Override

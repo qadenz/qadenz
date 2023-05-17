@@ -11,9 +11,8 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.conditions.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-
-import static org.hamcrest.Matchers.emptyOrNullString;
+import org.hamcrest.core.IsNot;
+import org.hamcrest.text.IsEmptyString;
 
 /**
  * An Expectation for a String value to be neither empty nor null.
@@ -24,7 +23,7 @@ public class IsNotEmptyOrNull implements Expectation<String> {
     
     @Override
     public Matcher<String> matcher() {
-        return Matchers.not(emptyOrNullString());
+        return new IsNot<>(IsEmptyString.emptyOrNullString());
     }
     
     @Override
