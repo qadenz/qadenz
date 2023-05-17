@@ -11,7 +11,7 @@ package dev.qadenz.automation.conditions.expectations.bool;
 
 import dev.qadenz.automation.conditions.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 
 /**
  * An Expectation for a boolean outcome to be true.
@@ -22,7 +22,7 @@ public class IsTrue implements Expectation<Boolean> {
     
     @Override
     public Matcher<Boolean> matcher() {
-        return Matchers.is(true);
+        return new IsEqual<>(true);
     }
     
     @Override
