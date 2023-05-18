@@ -38,7 +38,7 @@ public class IsEqualToOneOf implements Expectation<String> {
             matchers.add(new IsEqual<>(option));
         }
         
-        return new AnyOf<>(matchers);
+        return new AnyOf<>(matchers.toArray(new Matcher[matchers.size()]));
     }
     
     @Override
