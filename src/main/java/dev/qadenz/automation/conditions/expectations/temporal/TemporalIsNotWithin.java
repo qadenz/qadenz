@@ -16,7 +16,7 @@ import org.exparity.hamcrest.date.core.TemporalFunction;
 import org.exparity.hamcrest.date.core.TemporalProvider;
 import org.exparity.hamcrest.date.core.types.Interval;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNot;
 
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -51,7 +51,7 @@ public class TemporalIsNotWithin<T, E> implements TemporalExpectation<T> {
     
     @Override
     public Matcher<T> matcher() {
-        return Matchers.not(new IsWithin<>(Interval.of(period, chronoUnit), converter, provider, function));
+        return new IsNot<>(new IsWithin<>(Interval.of(period, chronoUnit), converter, provider, function));
     }
     
     @Override
@@ -62,6 +62,6 @@ public class TemporalIsNotWithin<T, E> implements TemporalExpectation<T> {
     
     @Override
     public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-    
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 }

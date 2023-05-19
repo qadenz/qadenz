@@ -11,8 +11,8 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.conditions.Expectation;
 import org.hamcrest.Matcher;
-
-import static org.hamcrest.Matchers.not;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsNot;
 
 /**
  * An Expectation for a String value to be not equal to the given value.
@@ -29,7 +29,7 @@ public class IsNotEqualTo implements Expectation<String> {
     
     @Override
     public Matcher<String> matcher() {
-        return not(text);
+        return new IsNot<>(new IsEqual<>(text));
     }
     
     @Override

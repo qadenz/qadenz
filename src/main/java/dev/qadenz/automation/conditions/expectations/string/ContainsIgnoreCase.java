@@ -11,7 +11,7 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.conditions.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.StringContains;
 
 /**
  * An Expectation for a String value to contain the given value, ignoring case.
@@ -28,7 +28,7 @@ public class ContainsIgnoreCase implements Expectation<String> {
     
     @Override
     public Matcher<String> matcher() {
-        return Matchers.containsStringIgnoringCase(text);
+        return new StringContains(true, text);
     }
     
     @Override
