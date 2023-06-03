@@ -11,12 +11,12 @@ package dev.qadenz.automation.conditions;
 
 import dev.qadenz.automation.conditions.expectations.bool.IsFalse;
 import dev.qadenz.automation.conditions.expectations.bool.IsTrue;
-import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsEqualTo;
-import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsGreaterThan;
-import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsGreaterThanOrEqualTo;
-import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsLessThan;
-import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsLessThanOrEqualTo;
-import dev.qadenz.automation.conditions.expectations.numeric.integer.IntegerIsNotEqualTo;
+import dev.qadenz.automation.conditions.expectations.numeric.NumberIsEqualTo;
+import dev.qadenz.automation.conditions.expectations.numeric.NumberIsGreaterThan;
+import dev.qadenz.automation.conditions.expectations.numeric.NumberIsGreaterThanOrEqualTo;
+import dev.qadenz.automation.conditions.expectations.numeric.NumberIsLessThan;
+import dev.qadenz.automation.conditions.expectations.numeric.NumberIsLessThanOrEqualTo;
+import dev.qadenz.automation.conditions.expectations.numeric.NumberIsNotEqualTo;
 import dev.qadenz.automation.conditions.expectations.string.Contains;
 import dev.qadenz.automation.conditions.expectations.string.ContainsIgnoreCase;
 import dev.qadenz.automation.conditions.expectations.string.DoesNotContain;
@@ -99,23 +99,23 @@ public class Expectations {
     /**
      * An Expectation for an integer value to be greater than the given value.
      *
-     * @param value The value for comparison.
+     * @param expectedValue The value for comparison.
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isGreaterThan(int value) {
-        return new IntegerIsGreaterThan(value);
+    public static NumericExpectation<Integer> isGreaterThan(Integer expectedValue) {
+        return new NumberIsGreaterThan<>(expectedValue);
     }
     
     /**
      * An Expectation for an integer value to be greater than or equal to the given value.
      *
-     * @param value The value for comparison.
+     * @param expectedValue The value for comparison.
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isGreaterThanOrEqualTo(int value) {
-        return new IntegerIsGreaterThanOrEqualTo(value);
+    public static NumericExpectation<Integer> isGreaterThanOrEqualTo(Integer expectedValue) {
+        return new NumberIsGreaterThanOrEqualTo<>(expectedValue);
     }
     
     /**
@@ -125,41 +125,41 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isEqualTo(int value) {
-        return new IntegerIsEqualTo(value);
+    public static NumericExpectation<Integer> isEqualTo(Integer expectedValue) {
+        return new NumberIsEqualTo<>(expectedValue);
     }
     
     /**
      * An Expectation for an integer value to be not equal to the given value.
      *
-     * @param value The value for comparison.
+     * @param expectedValue The value for comparison.
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isNotEqualTo(int value) {
-        return new IntegerIsNotEqualTo(value);
+    public static NumericExpectation<Integer> isNotEqualTo(Integer expectedValue) {
+        return new NumberIsNotEqualTo<>(expectedValue);
     }
     
     /**
      * An Expectation for an integer value to be less than or equal to the given value.
      *
-     * @param value The value for comparison.
+     * @param expectedValue The value for comparison.
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isLessThanOrEqualTo(int value) {
-        return new IntegerIsLessThanOrEqualTo(value);
+    public static NumericExpectation<Integer> isLessThanOrEqualTo(Integer expectedValue) {
+        return new NumberIsLessThanOrEqualTo<>(expectedValue);
     }
     
     /**
      * An Expectation for an integer value to be less than the given value.
      *
-     * @param value The value for comparison.
+     * @param expectedValue The value for comparison.
      *
      * @return The Expectation.
      */
-    public static Expectation<Integer> isLessThan(int value) {
-        return new IntegerIsLessThan(value);
+    public static NumericExpectation<Integer> isLessThan(Integer expectedValue) {
+        return new NumberIsLessThan<>(expectedValue);
     }
     
     /**
