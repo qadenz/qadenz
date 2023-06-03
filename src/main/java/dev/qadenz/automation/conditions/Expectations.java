@@ -97,6 +97,17 @@ public class Expectations {
     }
     
     /**
+     * An Expectation for a double value to be greater than the given value.
+     *
+     * @param expectedValue The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static NumericExpectation<Double> isGreaterThan(Double expectedValue) {
+        return new NumberIsGreaterThan<>(expectedValue);
+    }
+    
+    /**
      * An Expectation for an integer value to be greater than the given value.
      *
      * @param expectedValue The value for comparison.
@@ -105,6 +116,17 @@ public class Expectations {
      */
     public static NumericExpectation<Integer> isGreaterThan(Integer expectedValue) {
         return new NumberIsGreaterThan<>(expectedValue);
+    }
+    
+    /**
+     * An Expectation for a double value to be greater than or equal to the given value.
+     *
+     * @param expectedValue The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static NumericExpectation<Double> isGreaterThanOrEqualTo(Double expectedValue) {
+        return new NumberIsGreaterThanOrEqualTo<>(expectedValue);
     }
     
     /**
@@ -119,14 +141,36 @@ public class Expectations {
     }
     
     /**
+     * An Expectation for a double value to be equal to the given value.
+     *
+     * @param expectedValue The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static NumericExpectation<Double> isEqualTo(Double expectedValue) {
+        return new NumberIsEqualTo<>(expectedValue);
+    }
+    
+    /**
      * An Expectation for an integer value to be equal to the given value.
      *
-     * @param value The value for comparison.
+     * @param expectedValue The value for comparison.
      *
      * @return The Expectation.
      */
     public static NumericExpectation<Integer> isEqualTo(Integer expectedValue) {
         return new NumberIsEqualTo<>(expectedValue);
+    }
+    
+    /**
+     * An Expectation for a double value to be not equal to the given value.
+     *
+     * @param expectedValue The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static NumericExpectation<Double> isNotEqualTo(Double expectedValue) {
+        return new NumberIsNotEqualTo<>(expectedValue);
     }
     
     /**
@@ -141,6 +185,17 @@ public class Expectations {
     }
     
     /**
+     * An Expectation for a double value to be less than or equal to the given value.
+     *
+     * @param expectedValue The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static NumericExpectation<Double> isLessThanOrEqualTo(Double expectedValue) {
+        return new NumberIsLessThanOrEqualTo<>(expectedValue);
+    }
+    
+    /**
      * An Expectation for an integer value to be less than or equal to the given value.
      *
      * @param expectedValue The value for comparison.
@@ -149,6 +204,17 @@ public class Expectations {
      */
     public static NumericExpectation<Integer> isLessThanOrEqualTo(Integer expectedValue) {
         return new NumberIsLessThanOrEqualTo<>(expectedValue);
+    }
+    
+    /**
+     * An Expectation for a double value to be less than the given value.
+     *
+     * @param expectedValue The value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static NumericExpectation<Double> isLessThan(Double expectedValue) {
+        return new NumberIsLessThan<>(expectedValue);
     }
     
     /**
