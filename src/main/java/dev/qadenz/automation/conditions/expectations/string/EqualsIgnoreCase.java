@@ -20,19 +20,19 @@ import org.hamcrest.text.IsEqualIgnoringCase;
  */
 public class EqualsIgnoreCase implements Expectation<String> {
     
-    private String text;
+    private String expectedText;
     
-    public EqualsIgnoreCase(String text) {
-        this.text = text;
+    public EqualsIgnoreCase(String expectedText) {
+        this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new IsEqualIgnoringCase(text);
+        return new IsEqualIgnoringCase(expectedText);
     }
     
     @Override
     public String description() {
-        return "is, ignoring case, equal to [" + text + "]";
+        return "is, ignoring case, equal to [" + expectedText + "]";
     }
 }

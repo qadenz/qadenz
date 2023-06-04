@@ -20,19 +20,19 @@ import org.hamcrest.core.StringEndsWith;
  */
 public class EndsWith implements Expectation<String> {
     
-    private String text;
+    private String expectedText;
     
-    public EndsWith(String text) {
-        this.text = text;
+    public EndsWith(String expectedText) {
+        this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new StringEndsWith(false, text);
+        return new StringEndsWith(false, expectedText);
     }
     
     @Override
     public String description() {
-        return "ends with [" + text + "]";
+        return "ends with [" + expectedText + "]";
     }
 }

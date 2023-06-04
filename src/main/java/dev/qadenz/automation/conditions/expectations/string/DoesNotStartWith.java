@@ -21,19 +21,19 @@ import org.hamcrest.core.StringStartsWith;
  */
 public class DoesNotStartWith implements Expectation<String> {
     
-    private String text;
+    private String string;
     
-    public DoesNotStartWith(String text) {
-        this.text = text;
+    public DoesNotStartWith(String string) {
+        this.string = string;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new IsNot<>(new StringStartsWith(false, text));
+        return new IsNot<>(new StringStartsWith(false, string));
     }
     
     @Override
     public String description() {
-        return "does not start with [" + text + "]";
+        return "does not start with [" + string + "]";
     }
 }

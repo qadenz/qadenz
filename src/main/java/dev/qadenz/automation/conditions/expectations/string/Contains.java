@@ -20,19 +20,19 @@ import org.hamcrest.core.StringContains;
  */
 public class Contains implements Expectation<String> {
     
-    private String text;
+    private String expectedText;
     
-    public Contains(String text) {
-        this.text = text;
+    public Contains(String expectedText) {
+        this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new StringContains(false, text);
+        return new StringContains(false, expectedText);
     }
     
     @Override
     public String description() {
-        return "contains [" + text + "]";
+        return "contains [" + expectedText + "]";
     }
 }
