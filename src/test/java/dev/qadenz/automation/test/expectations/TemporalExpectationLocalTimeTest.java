@@ -9,6 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.test.expectations;
 
+import dev.qadenz.automation.conditions.Expectation;
 import dev.qadenz.automation.conditions.Expectations;
 import dev.qadenz.automation.conditions.TemporalExpectation;
 import org.junit.jupiter.api.Test;
@@ -66,6 +67,38 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected;
         TemporalExpectation<LocalTime> expectation = Expectations.isBefore(expected);
+        assertFalse(expectation.matcher().matches(actual));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualTo_ReturnsTrueWhenActualIsEqualToExpected() {
+        LocalTime expected = LocalTime.now();
+        LocalTime actual = expected;
+        Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
+        assertTrue(expectation.matcher().matches(actual));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsNotEqualToExpected() {
+        LocalTime expected = LocalTime.now();
+        LocalTime actual = expected.plusHours(1);
+        Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
+        assertFalse(expectation.matcher().matches(actual));
+    }
+    
+    @Test
+    public void testLocalDateIsNotEqualTo_ReturnsTrueWhenActualIsNotEqualToExpected() {
+        LocalTime expected = LocalTime.now();
+        LocalTime actual = expected.plusHours(1);
+        Expectation<LocalTime> expectation = Expectations.isNotEqualTo(expected);
+        assertTrue(expectation.matcher().matches(actual));
+    }
+    
+    @Test
+    public void testLocalDateIsNotEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
+        LocalTime expected = LocalTime.now();
+        LocalTime actual = expected;
+        Expectation<LocalTime> expectation = Expectations.isNotEqualTo(expected);
         assertFalse(expectation.matcher().matches(actual));
     }
     

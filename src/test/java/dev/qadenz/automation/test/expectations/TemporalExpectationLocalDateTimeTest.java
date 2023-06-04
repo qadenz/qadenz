@@ -66,6 +66,18 @@ public class TemporalExpectationLocalDateTimeTest extends TemporalExpectationTes
     }
     
     @Test
+    public void testLocalDateIsEqualTo_ReturnsTrueWhenActualIsEqualToExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_07_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_07_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsNotEqualToExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_07_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_06_2015_NOON));
+    }
+    
+    @Test
     public void testLocalDateTimeIsNotDayOfWeek_ReturnsTrueWhenActualIsNotSameDayOfWeek() {
         Expectation<LocalDateTime> expectation = Expectations.isDayOfWeekAsLocalDateTime(DayOfWeek.MONDAY);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
@@ -81,6 +93,18 @@ public class TemporalExpectationLocalDateTimeTest extends TemporalExpectationTes
     public void testLocalDateTimeIsDayOfWeek_ReturnsFalseWhenActualIsNotSameDayOfWeek() {
         Expectation<LocalDateTime> expectation = Expectations.isNotDayOfWeekAsLocalDateTime(DayOfWeek.TUESDAY);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsNotEqualTo_ReturnsTrueWhenActualIsNotEqualToExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isNotEqualTo(AUG_07_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_06_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsNotEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isNotEqualTo(AUG_07_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_07_2015_NOON));
     }
     
     @Test
