@@ -12,7 +12,7 @@ package dev.qadenz.automation.conditions;
 import dev.qadenz.automation.commands.WebInspector;
 import dev.qadenz.automation.ui.Locator;
 
-import java.text.NumberFormat;
+import java.text.DecimalFormat;
 
 /**
  * A Condition to evaluate the visible inner text of an element as a formatted Double.
@@ -22,13 +22,13 @@ import java.text.NumberFormat;
 public class TextOfElementAsDouble implements Condition {
     
     private Locator locator;
-    private NumberFormat numberFormat;
+    private DecimalFormat numberFormat;
     private NumericExpectation<Double> expectation;
     
     private String elementText;
     private Double elementValue;
     
-    public TextOfElementAsDouble(Locator locator, NumberFormat numberFormat,
+    public TextOfElementAsDouble(Locator locator, DecimalFormat numberFormat,
             NumericExpectation<Double> expectation) {
         this.locator = locator;
         this.numberFormat = numberFormat;
