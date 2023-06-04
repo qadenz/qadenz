@@ -23,19 +23,19 @@ import java.text.DecimalFormat;
 public class DirectTextOfElementAsDouble implements Condition {
     
     private Locator locator;
-    private DecimalFormat numberFormat;
+    private DecimalFormat decimalFormat;
     private NumericExpectation<Double> expectation;
     
     private String elementText;
     private Double elementValue;
     
-    public DirectTextOfElementAsDouble(Locator locator, DecimalFormat numberFormat,
+    public DirectTextOfElementAsDouble(Locator locator, DecimalFormat decimalFormat,
             NumericExpectation<Double> expectation) {
         this.locator = locator;
-        this.numberFormat = numberFormat;
+        this.decimalFormat = decimalFormat;
         this.expectation = expectation;
         
-        this.expectation.setNumberFormat(numberFormat);
+        this.expectation.setNumberFormat(decimalFormat);
     }
     
     @Override
@@ -47,13 +47,13 @@ public class DirectTextOfElementAsDouble implements Condition {
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementText = webInspector.getDirectTextOfElement(locator);
-        elementValue = webInspector.getDirectTextOfElementAsDouble(locator, numberFormat);
+        elementValue = webInspector.getDirectTextOfElementAsDouble(locator, decimalFormat);
         
         return expectation.matcher().matches(elementValue);
     }
     
     @Override
     public String output() {
-        return "Found [" + elementText + "] formatted as [" + numberFormat.format(elementValue) + "].";
+        return "Found [" + elementText + "] formatted as [" + decimalFormat.format(elementValue) + "].";
     }
 }
