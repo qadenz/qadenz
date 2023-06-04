@@ -36,17 +36,9 @@ import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsDayOfWee
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsEqualTo;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotDayOfWeek;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotEqualTo;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameDay;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameHour;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameMinute;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameSecond;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotWithin;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameAsOrAfter;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameAsOrBefore;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameDay;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameHour;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameMinute;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameSecond;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsWithin;
 
 import java.time.DayOfWeek;
@@ -56,27 +48,17 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATETIME_AS_DAYOFWEEK;
-import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATETIME_AS_HOUR;
-import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATETIME_AS_LOCALDATE;
 import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATETIME_AS_LOCALDATETIME;
-import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATETIME_AS_MINUTE;
-import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATETIME_AS_SECOND;
 import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATE_AS_DAYOFWEEK;
 import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATE_AS_LOCALDATE;
-import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALTIME_AS_HOUR;
 import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALTIME_AS_LOCALTIME;
-import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALTIME_AS_MINUTE;
-import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALTIME_AS_SECOND;
 import static org.exparity.hamcrest.date.core.TemporalFunctions.LOCALDATE;
 import static org.exparity.hamcrest.date.core.TemporalFunctions.LOCALDATETIME;
 import static org.exparity.hamcrest.date.core.TemporalFunctions.LOCALTIME;
 import static org.exparity.hamcrest.date.core.TemporalProviders.daysOfWeek;
-import static org.exparity.hamcrest.date.core.TemporalProviders.hour;
 import static org.exparity.hamcrest.date.core.TemporalProviders.localDate;
 import static org.exparity.hamcrest.date.core.TemporalProviders.localDateTime;
 import static org.exparity.hamcrest.date.core.TemporalProviders.localTime;
-import static org.exparity.hamcrest.date.core.TemporalProviders.minute;
-import static org.exparity.hamcrest.date.core.TemporalProviders.second;
 
 public class Expectations {
     
@@ -372,55 +354,6 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be the same as the given LocalDate.
-     *
-     * @param expectedLocalDate The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDate> isSameDay(LocalDate expectedLocalDate) {
-        return new TemporalIsSameDay<>(expectedLocalDate, LOCALDATE_AS_LOCALDATE, localDate(expectedLocalDate));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be the same as the given
-     * LocalDateTime.
-     *
-     * @param expectedLocalDateTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDateTime> isSameDay(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsSameDay<>(expectedLocalDateTime, LOCALDATETIME_AS_LOCALDATE,
-                localDate(expectedLocalDateTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalDate, to be not the same as the given
-     * LocalDate.
-     *
-     * @param expectedLocalDate The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDate> isNotSameDay(LocalDate expectedLocalDate) {
-        return new TemporalIsNotSameDay<>(expectedLocalDate, LOCALDATE_AS_LOCALDATE, localDate(expectedLocalDate));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be not the same as the given
-     * LocalDateTime.
-     *
-     * @param expectedLocalDateTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDateTime> isNotSameDay(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsNotSameDay<>(expectedLocalDateTime, LOCALDATETIME_AS_LOCALDATE,
-                localDate(expectedLocalDateTime));
-    }
-    
-    /**
      * An expectation for the text of an element, represented as a LocalDate, to be the same as or before the given
      * LocalDate.
      *
@@ -633,154 +566,6 @@ public class Expectations {
     public static Expectation<LocalDateTime> isNotDayOfWeekAsLocalDateTime(DayOfWeek expectedDayOfWeek) {
         return new TemporalIsNotDayOfWeek<>(expectedDayOfWeek, LOCALDATETIME_AS_DAYOFWEEK,
                 daysOfWeek(expectedDayOfWeek));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be the same hour as the given
-     * LocalDateTime.
-     *
-     * @param expectedLocalDateTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDateTime> isSameHour(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsSameHour<>(expectedLocalDateTime, LOCALDATETIME_AS_HOUR, hour(expectedLocalDateTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalTime, to be the same hour as the given
-     * LocalTime.
-     *
-     * @param expectedLocalTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalTime> isSameHour(LocalTime expectedLocalTime) {
-        return new TemporalIsSameHour<>(expectedLocalTime, LOCALTIME_AS_HOUR, hour(expectedLocalTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be not the same hour as the given
-     * LocalDateTime.
-     *
-     * @param expectedLocalDateTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDateTime> isNotSameHour(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsNotSameHour<>(expectedLocalDateTime, LOCALDATETIME_AS_HOUR, hour(expectedLocalDateTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalTime, to be not the same hour as the given
-     * LocalTime.
-     *
-     * @param expectedLocalTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalTime> isNotSameHour(LocalTime expectedLocalTime) {
-        return new TemporalIsNotSameHour<>(expectedLocalTime, LOCALTIME_AS_HOUR, hour(expectedLocalTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be the same minute as the given
-     * LocalDateTime.
-     *
-     * @param expectedLocalDateTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDateTime> isSameMinute(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsSameMinute<>(expectedLocalDateTime, LOCALDATETIME_AS_MINUTE,
-                minute(expectedLocalDateTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalTime, to be the same minute as the given
-     * LocalTime.
-     *
-     * @param expectedLocalTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalTime> isSameMinute(LocalTime expectedLocalTime) {
-        return new TemporalIsSameMinute<>(expectedLocalTime, LOCALTIME_AS_MINUTE, minute(expectedLocalTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be not the same minute as the given
-     * LocalDateTime.
-     *
-     * @param expectedLocalDateTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDateTime> isNotSameMinute(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsNotSameMinute<>(expectedLocalDateTime, LOCALDATETIME_AS_MINUTE,
-                minute(expectedLocalDateTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalTime, to be not the same minute as the given
-     * LocalTime.
-     *
-     * @param expectedLocalTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalTime> isNotSameMinute(LocalTime expectedLocalTime) {
-        return new TemporalIsNotSameMinute<>(expectedLocalTime, LOCALTIME_AS_MINUTE, minute(expectedLocalTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be the same second as the given
-     * LocalDateTime.
-     *
-     * @param expectedLocalDateTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDateTime> isSameSecond(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsSameSecond<>(expectedLocalDateTime, LOCALDATETIME_AS_SECOND,
-                second(expectedLocalDateTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalTime, to be the same second as the given
-     * LocalTime.
-     *
-     * @param expectedLocalTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalTime> isSameSecond(LocalTime expectedLocalTime) {
-        return new TemporalIsSameSecond<>(expectedLocalTime, LOCALTIME_AS_SECOND, second(expectedLocalTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be not the same second as the given
-     * LocalDateTime.
-     *
-     * @param expectedLocalDateTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalDateTime> isNotSameSecond(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsNotSameSecond<>(expectedLocalDateTime, LOCALDATETIME_AS_SECOND,
-                second(expectedLocalDateTime));
-    }
-    
-    /**
-     * An expectation for the text of an element, represented as a LocalTime, to be not the same second as the given
-     * LocalTime.
-     *
-     * @param expectedLocalTime The formatted date value for comparison.
-     *
-     * @return The Expectation.
-     */
-    public static TemporalExpectation<LocalTime> isNotSameSecond(LocalTime expectedLocalTime) {
-        return new TemporalIsNotSameSecond<>(expectedLocalTime, LOCALTIME_AS_SECOND, second(expectedLocalTime));
     }
     
     /**
