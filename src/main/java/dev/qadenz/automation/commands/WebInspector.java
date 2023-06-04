@@ -21,6 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.internal.collections.Pair;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -252,6 +254,68 @@ public class WebInspector {
             screenshot.capture();
             
             throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, as a Double.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The format used for parsing.
+     *
+     * @return The Double representation of the element text.
+     */
+    public Double getDirectTextOfElementAsDouble(Locator locator, NumberFormat numberFormat) {
+        LOG.info("Retrieving direct text of element [{}] as Double.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return numberFormat.parse(elementText).doubleValue();
+        }
+        catch (ParseException parseException) {
+            LOG.error("Error parsing Double from element text :: {}: {}",
+                    parseException.getClass().getSimpleName(), parseException.getMessage());
+            screenshot.capture();
+            
+            throw new RuntimeException();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, as an Integer.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The format used for parsing.
+     *
+     * @return The Integer representation of the element text.
+     */
+    public Integer getDirectTextOfElementAsInteger(Locator locator, NumberFormat numberFormat) {
+        LOG.info("Retrieving direct text of element [{}] as Integer.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return numberFormat.parse(elementText).intValue();
+        }
+        catch (ParseException parseException) {
+            LOG.error("Error parsing Integer from element text :: {}: {}",
+                    parseException.getClass().getSimpleName(), parseException.getMessage());
+            screenshot.capture();
+            
+            throw new RuntimeException();
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -504,6 +568,68 @@ public class WebInspector {
             screenshot.capture();
             
             throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element and any descendants on the DOM, as a Double.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The format used for parsing.
+     *
+     * @return The Double representation of the element text.
+     */
+    public Double getTextOfElementAsDouble(Locator locator, NumberFormat numberFormat) {
+        LOG.info("Retrieving text of element [{}] as Double.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = webElement.getText();
+            
+            return numberFormat.parse(elementText).doubleValue();
+        }
+        catch (ParseException parseException) {
+            LOG.error("Error parsing Double from element text :: {}: {}",
+                    parseException.getClass().getSimpleName(), parseException.getMessage());
+            screenshot.capture();
+            
+            throw new RuntimeException();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element and any descendants on the DOM, as an Integer.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The format used for parsing.
+     *
+     * @return The Integer representation of the element text.
+     */
+    public Integer getTextOfElementAsInteger(Locator locator, NumberFormat numberFormat) {
+        LOG.info("Retrieving text of element [{}] as Integer.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = webElement.getText();
+            
+            return numberFormat.parse(elementText).intValue();
+        }
+        catch (ParseException parseException) {
+            LOG.error("Error parsing Integer from element text :: {}: {}",
+                    parseException.getClass().getSimpleName(), parseException.getMessage());
+            screenshot.capture();
+            
+            throw new RuntimeException();
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());

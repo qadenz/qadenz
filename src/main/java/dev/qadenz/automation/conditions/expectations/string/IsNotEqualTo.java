@@ -21,19 +21,19 @@ import org.hamcrest.core.IsNot;
  */
 public class IsNotEqualTo implements Expectation<String> {
     
-    private String text;
+    private String expectedText;
     
-    public IsNotEqualTo(String text) {
-        this.text = text;
+    public IsNotEqualTo(String expectedText) {
+        this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new IsNot<>(new IsEqual<>(text));
+        return new IsNot<>(new IsEqual<>(expectedText));
     }
     
     @Override
     public String description() {
-        return "is not equal to [" + text + "]";
+        return "is not equal to [" + expectedText + "]";
     }
 }

@@ -20,19 +20,19 @@ import org.hamcrest.core.StringContains;
  */
 public class ContainsIgnoreCase implements Expectation<String> {
     
-    private String text;
+    private String expectedText;
     
-    public ContainsIgnoreCase(String text) {
-        this.text = text;
+    public ContainsIgnoreCase(String expectedText) {
+        this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new StringContains(true, text);
+        return new StringContains(true, expectedText);
     }
     
     @Override
     public String description() {
-        return "ignoring case, contains [" + text + "]";
+        return "ignoring case, contains [" + expectedText + "]";
     }
 }

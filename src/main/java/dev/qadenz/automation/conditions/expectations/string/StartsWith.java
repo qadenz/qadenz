@@ -20,19 +20,19 @@ import org.hamcrest.core.StringStartsWith;
  */
 public class StartsWith implements Expectation<String> {
     
-    private String text;
+    private String expectedText;
     
-    public StartsWith(String text) {
-        this.text = text;
+    public StartsWith(String expectedText) {
+        this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new StringStartsWith(false, text);
+        return new StringStartsWith(false, expectedText);
     }
     
     @Override
     public String description() {
-        return "starts with [" + text + "]";
+        return "starts with [" + expectedText + "]";
     }
 }

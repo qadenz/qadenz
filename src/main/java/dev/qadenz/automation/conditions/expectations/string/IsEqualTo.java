@@ -20,19 +20,19 @@ import org.hamcrest.core.IsEqual;
  */
 public class IsEqualTo implements Expectation<String> {
     
-    private String text;
+    private String expectedText;
     
-    public IsEqualTo(String text) {
-        this.text = text;
+    public IsEqualTo(String expectedText) {
+        this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new IsEqual<>(text);
+        return new IsEqual<>(expectedText);
     }
     
     @Override
     public String description() {
-        return "is equal to [" + text + "]";
+        return "is equal to [" + expectedText + "]";
     }
 }

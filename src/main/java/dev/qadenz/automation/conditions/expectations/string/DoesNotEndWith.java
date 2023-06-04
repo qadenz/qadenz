@@ -21,19 +21,19 @@ import org.hamcrest.core.StringEndsWith;
  */
 public class DoesNotEndWith implements Expectation<String> {
     
-    private String text;
+    private String expectedText;
     
-    public DoesNotEndWith(String text) {
-        this.text = text;
+    public DoesNotEndWith(String expectedText) {
+        this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new IsNot<>(new StringEndsWith(false, text));
+        return new IsNot<>(new StringEndsWith(false, expectedText));
     }
     
     @Override
     public String description() {
-        return "does not end with [" + text + "]";
+        return "does not end with [" + expectedText + "]";
     }
 }

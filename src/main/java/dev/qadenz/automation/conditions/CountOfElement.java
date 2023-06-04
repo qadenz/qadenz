@@ -20,13 +20,15 @@ import dev.qadenz.automation.ui.Locator;
 public class CountOfElement implements Condition {
     
     private Locator locator;
-    private Expectation<Integer> expectation;
+    private NumericExpectation<Integer> expectation;
     
     private int elementCount;
     
-    public CountOfElement(Locator locator, Expectation<Integer> expectation) {
+    public CountOfElement(Locator locator, NumericExpectation<Integer> expectation) {
         this.locator = locator;
         this.expectation = expectation;
+        
+        this.expectation.setNumberFormat(NumberFormatters.nonGroupedNumber());
     }
     
     @Override

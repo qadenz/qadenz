@@ -12,6 +12,8 @@ package dev.qadenz.automation.conditions;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.LocatorGroup;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -46,7 +48,7 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition countOfElement(Locator locator, Expectation<Integer> expectation) {
+    public static Condition countOfElement(Locator locator, NumericExpectation<Integer> expectation) {
         return new CountOfElement(locator, expectation);
     }
     
@@ -120,6 +122,36 @@ public class Conditions {
     public static Condition directTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
             TemporalExpectation<LocalTime> expectation) {
         return new DirectTextOfElementAsTime(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted Double.
+     *
+     * @param locator The mapped UI element.
+     * @param decimalFormat The expected numeric format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsDouble(Locator locator, DecimalFormat decimalFormat,
+            NumericExpectation<Double> expectation) {
+        return new DirectTextOfElementAsDouble(locator, decimalFormat, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted Integer.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The expected numeric format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsInteger(Locator locator, NumberFormat numberFormat,
+            NumericExpectation<Integer> expectation) {
+        return new DirectTextOfElementAsInteger(locator, numberFormat, expectation);
     }
     
     /**
@@ -271,6 +303,34 @@ public class Conditions {
     public static Condition textOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
             TemporalExpectation<LocalTime> expectation) {
         return new TextOfElementAsTime(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element as a formatted Double.
+     *
+     * @param locator The mapped UI element.
+     * @param decimalFormat The expected numeric format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfElementAsDouble(Locator locator, DecimalFormat decimalFormat,
+            NumericExpectation<Double> expectation) {
+        return new TextOfElementAsDouble(locator, decimalFormat, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element as a formatted Integer.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The expected numeric format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfElementAsInteger(Locator locator, NumberFormat numberFormat,
+            NumericExpectation<Integer> expectation) {
+        return new TextOfElementAsInteger(locator, numberFormat, expectation);
     }
     
     /**

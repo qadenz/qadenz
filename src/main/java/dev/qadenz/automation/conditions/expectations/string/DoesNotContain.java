@@ -21,19 +21,19 @@ import org.hamcrest.core.StringContains;
  */
 public class DoesNotContain implements Expectation<String> {
     
-    private String text;
+    private String expectedText;
     
-    public DoesNotContain(String text) {
-        this.text = text;
+    public DoesNotContain(String expectedText) {
+        this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new IsNot<>(new StringContains(false, text));
+        return new IsNot<>(new StringContains(false, expectedText));
     }
     
     @Override
     public String description() {
-        return "does not contain [" + text + "]";
+        return "does not contain [" + expectedText + "]";
     }
 }
