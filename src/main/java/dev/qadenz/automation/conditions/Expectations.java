@@ -33,7 +33,9 @@ import dev.qadenz.automation.conditions.expectations.string.StartsWith;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsAfter;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsBefore;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsDayOfWeek;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsEqualTo;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotDayOfWeek;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotEqualTo;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameDay;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameHour;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotSameMinute;
@@ -301,6 +303,72 @@ public class Expectations {
     public static TemporalExpectation<LocalTime> isSameAsOrAfter(LocalTime expectedLocalTime) {
         return new TemporalIsSameAsOrAfter<>(expectedLocalTime, LOCALTIME_AS_LOCALTIME, localTime(expectedLocalTime),
                 LOCALTIME);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be equal to the given LocalDate.
+     *
+     * @param expectedLocalDate The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static TemporalExpectation<LocalDate> isEqualTo(LocalDate expectedLocalDate) {
+        return new TemporalIsEqualTo<>(expectedLocalDate);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be equal to the given LocalDate.
+     *
+     * @param expectedLocalDateTime The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static TemporalExpectation<LocalDateTime> isEqualTo(LocalDateTime expectedLocalDateTime) {
+        return new TemporalIsEqualTo<>(expectedLocalDateTime);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be equal to the given LocalDate.
+     *
+     * @param expectedLocalTime The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static TemporalExpectation<LocalTime> isEqualTo(LocalTime expectedLocalTime) {
+        return new TemporalIsEqualTo<>(expectedLocalTime);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be not equal to the given LocalDate.
+     *
+     * @param expectedLocalDate The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static TemporalExpectation<LocalDate> isNotEqualTo(LocalDate expectedLocalDate) {
+        return new TemporalIsNotEqualTo<>(expectedLocalDate);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be not equal to the given LocalDate.
+     *
+     * @param expectedLocalDateTime The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static TemporalExpectation<LocalDateTime> isNotEqualTo(LocalDateTime expectedLocalDateTime) {
+        return new TemporalIsNotEqualTo<>(expectedLocalDateTime);
+    }
+    
+    /**
+     * An expectation for the text of an element, represented as a LocalDate, to be not equal to the given LocalDate.
+     *
+     * @param expectedLocalTime The formatted date value for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static TemporalExpectation<LocalTime> isNotEqualTo(LocalTime expectedLocalTime) {
+        return new TemporalIsNotEqualTo<>(expectedLocalTime);
     }
     
     /**
