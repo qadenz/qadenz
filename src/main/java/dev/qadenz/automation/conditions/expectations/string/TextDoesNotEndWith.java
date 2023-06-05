@@ -19,11 +19,11 @@ import org.hamcrest.core.StringEndsWith;
  *
  * @author Tim Slifer
  */
-public class DoesNotEndWith implements Expectation<String> {
+public class TextDoesNotEndWith implements Expectation<String> {
     
     private String expectedText;
     
-    public DoesNotEndWith(String expectedText) {
+    public TextDoesNotEndWith(String expectedText) {
         this.expectedText = expectedText;
     }
     

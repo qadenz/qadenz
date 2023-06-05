@@ -11,28 +11,28 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.expectations.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.StringStartsWith;
+import org.hamcrest.core.StringContains;
 
 /**
- * An Expectation for a String value to start with the given value.
+ * An Expectation for a String value to contain the given value.
  *
  * @author Tim Slifer
  */
-public class StartsWith implements Expectation<String> {
+public class TextContains implements Expectation<String> {
     
     private String expectedText;
     
-    public StartsWith(String expectedText) {
+    public TextContains(String expectedText) {
         this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new StringStartsWith(false, expectedText);
+        return new StringContains(false, expectedText);
     }
     
     @Override
     public String description() {
-        return "starts with [" + expectedText + "]";
+        return "contains [" + expectedText + "]";
     }
 }

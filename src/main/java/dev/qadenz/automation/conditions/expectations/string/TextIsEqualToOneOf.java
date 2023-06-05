@@ -23,11 +23,11 @@ import java.util.List;
  *
  * @author Tim Slifer
  */
-public class IsEqualToOneOf implements Expectation<String> {
+public class TextIsEqualToOneOf implements Expectation<String> {
     
     private String[] options;
     
-    public IsEqualToOneOf(String... options) {
+    public TextIsEqualToOneOf(String... options) {
         this.options = options;
     }
     

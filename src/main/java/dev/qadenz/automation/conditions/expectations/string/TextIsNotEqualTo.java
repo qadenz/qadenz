@@ -11,22 +11,29 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.expectations.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.text.IsEmptyString;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsNot;
 
 /**
- * An Expectation for a String value to be either empty or null.
+ * An Expectation for a String value to be not equal to the given value.
  *
  * @author Tim Slifer
  */
-public class IsEmptyOrNull implements Expectation<String> {
+public class TextIsNotEqualTo implements Expectation<String> {
+    
+    private String expectedText;
+    
+    public TextIsNotEqualTo(String expectedText) {
+        this.expectedText = expectedText;
+    }
     
     @Override
     public Matcher<String> matcher() {
-        return IsEmptyString.emptyOrNullString();
+        return new IsNot<>(new IsEqual<>(expectedText));
     }
     
     @Override
     public String description() {
-        return "is null or empty";
+        return "is not equal to [" + expectedText + "]";
     }
 }

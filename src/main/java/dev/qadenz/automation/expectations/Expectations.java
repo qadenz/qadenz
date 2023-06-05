@@ -17,19 +17,19 @@ import dev.qadenz.automation.conditions.expectations.numeric.NumberIsGreaterThan
 import dev.qadenz.automation.conditions.expectations.numeric.NumberIsLessThan;
 import dev.qadenz.automation.conditions.expectations.numeric.NumberIsLessThanOrEqualTo;
 import dev.qadenz.automation.conditions.expectations.numeric.NumberIsNotEqualTo;
-import dev.qadenz.automation.conditions.expectations.string.Contains;
-import dev.qadenz.automation.conditions.expectations.string.ContainsIgnoreCase;
-import dev.qadenz.automation.conditions.expectations.string.DoesNotContain;
-import dev.qadenz.automation.conditions.expectations.string.DoesNotEndWith;
-import dev.qadenz.automation.conditions.expectations.string.DoesNotStartWith;
-import dev.qadenz.automation.conditions.expectations.string.EndsWith;
-import dev.qadenz.automation.conditions.expectations.string.EqualsIgnoreCase;
-import dev.qadenz.automation.conditions.expectations.string.IsEmptyOrNull;
-import dev.qadenz.automation.conditions.expectations.string.IsEqualTo;
-import dev.qadenz.automation.conditions.expectations.string.IsEqualToOneOf;
-import dev.qadenz.automation.conditions.expectations.string.IsNotEmptyOrNull;
-import dev.qadenz.automation.conditions.expectations.string.IsNotEqualTo;
-import dev.qadenz.automation.conditions.expectations.string.StartsWith;
+import dev.qadenz.automation.conditions.expectations.string.TextContains;
+import dev.qadenz.automation.conditions.expectations.string.TextContainsIgnoreCase;
+import dev.qadenz.automation.conditions.expectations.string.TextDoesNotContain;
+import dev.qadenz.automation.conditions.expectations.string.TextDoesNotEndWith;
+import dev.qadenz.automation.conditions.expectations.string.TextDoesNotStartWith;
+import dev.qadenz.automation.conditions.expectations.string.TextEndsWith;
+import dev.qadenz.automation.conditions.expectations.string.TextEqualsIgnoreCase;
+import dev.qadenz.automation.conditions.expectations.string.TextIsEmptyOrNull;
+import dev.qadenz.automation.conditions.expectations.string.TextIsEqualTo;
+import dev.qadenz.automation.conditions.expectations.string.TextIsEqualToOneOf;
+import dev.qadenz.automation.conditions.expectations.string.TextIsNotEmptyOrNull;
+import dev.qadenz.automation.conditions.expectations.string.TextIsNotEqualTo;
+import dev.qadenz.automation.conditions.expectations.string.TextStartsWith;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsAfter;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsBefore;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsDayOfWeek;
@@ -576,7 +576,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> isEqualTo(String expectedText) {
-        return new IsEqualTo(expectedText);
+        return new TextIsEqualTo(expectedText);
     }
     
     /**
@@ -587,7 +587,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> equalsIgnoreCase(String expectedText) {
-        return new EqualsIgnoreCase(expectedText);
+        return new TextEqualsIgnoreCase(expectedText);
     }
     
     /**
@@ -598,7 +598,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> isNotEqualTo(String expectedText) {
-        return new IsNotEqualTo(expectedText);
+        return new TextIsNotEqualTo(expectedText);
     }
     
     /**
@@ -609,7 +609,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> contains(String expectedText) {
-        return new Contains(expectedText);
+        return new TextContains(expectedText);
     }
     
     /**
@@ -620,7 +620,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> containsIgnoreCase(String expectedText) {
-        return new ContainsIgnoreCase(expectedText);
+        return new TextContainsIgnoreCase(expectedText);
     }
     
     /**
@@ -631,7 +631,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> doesNotContain(String expectedText) {
-        return new DoesNotContain(expectedText);
+        return new TextDoesNotContain(expectedText);
     }
     
     /**
@@ -642,7 +642,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> startsWith(String expectedText) {
-        return new StartsWith(expectedText);
+        return new TextStartsWith(expectedText);
     }
     
     /**
@@ -653,7 +653,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> doesNotStartWith(String expectedText) {
-        return new DoesNotStartWith(expectedText);
+        return new TextDoesNotStartWith(expectedText);
     }
     
     /**
@@ -664,7 +664,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> endsWith(String expectedText) {
-        return new EndsWith(expectedText);
+        return new TextEndsWith(expectedText);
     }
     
     /**
@@ -675,7 +675,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> doesNotEndWith(String expectedText) {
-        return new DoesNotEndWith(expectedText);
+        return new TextDoesNotEndWith(expectedText);
     }
     
     /**
@@ -686,7 +686,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> isEqualToOneOf(String... options) {
-        return new IsEqualToOneOf(options);
+        return new TextIsEqualToOneOf(options);
     }
     
     /**
@@ -695,7 +695,7 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> isEmptyOrNull() {
-        return new IsEmptyOrNull();
+        return new TextIsEmptyOrNull();
     }
     
     /**
@@ -704,6 +704,6 @@ public class Expectations {
      * @return The Expectation.
      */
     public static Expectation<String> isNotEmptyOrNull() {
-        return new IsNotEmptyOrNull();
+        return new TextIsNotEmptyOrNull();
     }
 }

@@ -11,29 +11,29 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.expectations.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNot;
+import org.hamcrest.core.StringContains;
 
 /**
- * An Expectation for a String value to be not equal to the given value.
+ * An Expectation for a String value to not contain the given value.
  *
  * @author Tim Slifer
  */
-public class IsNotEqualTo implements Expectation<String> {
+public class TextDoesNotContain implements Expectation<String> {
     
     private String expectedText;
     
-    public IsNotEqualTo(String expectedText) {
+    public TextDoesNotContain(String expectedText) {
         this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new IsNot<>(new IsEqual<>(expectedText));
+        return new IsNot<>(new StringContains(false, expectedText));
     }
     
     @Override
     public String description() {
-        return "is not equal to [" + expectedText + "]";
+        return "does not contain [" + expectedText + "]";
     }
 }

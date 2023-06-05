@@ -11,28 +11,28 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.expectations.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.StringEndsWith;
 
 /**
- * An Expectation for a String value to be equal to the given value.
+ * An Expectation for a String value to end with the given value.
  *
  * @author Tim Slifer
  */
-public class IsEqualTo implements Expectation<String> {
+public class TextEndsWith implements Expectation<String> {
     
     private String expectedText;
     
-    public IsEqualTo(String expectedText) {
+    public TextEndsWith(String expectedText) {
         this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new IsEqual<>(expectedText);
+        return new StringEndsWith(false, expectedText);
     }
     
     @Override
     public String description() {
-        return "is equal to [" + expectedText + "]";
+        return "ends with [" + expectedText + "]";
     }
 }

@@ -11,28 +11,29 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.expectations.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.StringContains;
+import org.hamcrest.core.IsNot;
+import org.hamcrest.core.StringStartsWith;
 
 /**
- * An Expectation for a String value to contain the given value, ignoring case.
+ * An Expectation for a String value to not start with the given value.
  *
  * @author Tim Slifer
  */
-public class ContainsIgnoreCase implements Expectation<String> {
+public class TextDoesNotStartWith implements Expectation<String> {
     
-    private String expectedText;
+    private String string;
     
-    public ContainsIgnoreCase(String expectedText) {
-        this.expectedText = expectedText;
+    public TextDoesNotStartWith(String string) {
+        this.string = string;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new StringContains(true, expectedText);
+        return new IsNot<>(new StringStartsWith(false, string));
     }
     
     @Override
     public String description() {
-        return "ignoring case, contains [" + expectedText + "]";
+        return "does not start with [" + string + "]";
     }
 }

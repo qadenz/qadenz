@@ -11,28 +11,23 @@ package dev.qadenz.automation.conditions.expectations.string;
 
 import dev.qadenz.automation.expectations.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.StringEndsWith;
+import org.hamcrest.core.IsNot;
+import org.hamcrest.text.IsEmptyString;
 
 /**
- * An Expectation for a String value to end with the given value.
+ * An Expectation for a String value to be neither empty nor null.
  *
  * @author Tim Slifer
  */
-public class EndsWith implements Expectation<String> {
-    
-    private String expectedText;
-    
-    public EndsWith(String expectedText) {
-        this.expectedText = expectedText;
-    }
+public class TextIsNotEmptyOrNull implements Expectation<String> {
     
     @Override
     public Matcher<String> matcher() {
-        return new StringEndsWith(false, expectedText);
+        return new IsNot<>(IsEmptyString.emptyOrNullString());
     }
     
     @Override
     public String description() {
-        return "ends with [" + expectedText + "]";
+        return "is neither null nor empty";
     }
 }
