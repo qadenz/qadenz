@@ -7,20 +7,22 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
  */
-package dev.qadenz.automation.conditions;
+package dev.qadenz.automation.conditions.impl;
 
 import dev.qadenz.automation.commands.WebInspector;
+import dev.qadenz.automation.conditions.Condition;
+import dev.qadenz.automation.conditions.Conditions;
+import dev.qadenz.automation.conditions.NumericExpectation;
 import dev.qadenz.automation.ui.Locator;
 
 import java.text.NumberFormat;
 
 /**
- * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on the
- * DOM, as a formatted Integer.
+ * A Condition to evaluate the visible inner text of an element as a formatted Integer.
  *
  * @author Tim Slifer
  */
-public class DirectTextOfElementAsInteger implements Condition {
+public class TextOfElementAsInteger implements Condition {
     
     private Locator locator;
     private NumberFormat numberFormat;
@@ -29,7 +31,7 @@ public class DirectTextOfElementAsInteger implements Condition {
     private String elementText;
     private Integer elementValue;
     
-    public DirectTextOfElementAsInteger(Locator locator, NumberFormat numberFormat,
+    public TextOfElementAsInteger(Locator locator, NumberFormat numberFormat,
             NumericExpectation<Integer> expectation) {
         this.locator = locator;
         this.numberFormat = numberFormat;
@@ -46,8 +48,8 @@ public class DirectTextOfElementAsInteger implements Condition {
     @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
-        elementText = webInspector.getDirectTextOfElement(locator);
-        elementValue = webInspector.getDirectTextOfElementAsInteger(locator, numberFormat);
+        elementText = webInspector.getTextOfElement(locator);
+        elementValue = webInspector.getTextOfElementAsInteger(locator, numberFormat);
         
         return expectation.matcher().matches(elementValue);
     }

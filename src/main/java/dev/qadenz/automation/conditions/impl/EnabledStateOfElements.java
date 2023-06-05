@@ -7,46 +7,48 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
  */
-package dev.qadenz.automation.conditions;
+package dev.qadenz.automation.conditions.impl;
 
+import dev.qadenz.automation.commands.WebInspector;
+import dev.qadenz.automation.conditions.Condition;
+import dev.qadenz.automation.conditions.Conditions;
+import dev.qadenz.automation.conditions.Expectation;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.LocatorGroup;
-import dev.qadenz.automation.ui.WebFinder;
 
 /**
- * A Condition for evaluating whether a group of elements is present on the DOM, regardless of if the elements are
- * visible on the page.
+ * A Condition for evaluating whether a group of elements is enabled.
  *
  * @author Tim Slifer
  */
-public class PresenceOfElements implements Condition {
+public class EnabledStateOfElements implements Condition {
     
     private LocatorGroup locatorGroup;
     private Expectation<Boolean> expectation;
     
     private StringBuilder failures = new StringBuilder();
     
-    public PresenceOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
+    public EnabledStateOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
         this.locatorGroup = locatorGroup;
         this.expectation = expectation;
     }
     
     @Override
     public String description() {
-        return "Presence of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
+        return "Enabled state of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
     }
     
     @Override
     public Boolean result() {
         Boolean match = null;
-        WebFinder webFinder = new WebFinder();
+        WebInspector webInspector = new WebInspector(Conditions.class);
         
         for (Locator locator : locatorGroup) {
-            boolean present = webFinder.findAll(locator).size() > 0;
-            boolean instanceMatch = expectation.matcher().matches(present);
+            boolean enabled = webInspector.getEnabledStateOfElement(locator);
+            boolean instanceMatch = expectation.matcher().matches(enabled);
             
             if (!instanceMatch) {
-                failures.append("--> Element [" + locator.getName() + "] was [" + present + "].\n");
+                failures.append("--> Element [" + locator.getName() + "] was [" + enabled + "].\n");
             }
             
             if (match == null || match) {

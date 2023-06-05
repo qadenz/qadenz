@@ -9,6 +9,33 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions;
 
+import dev.qadenz.automation.conditions.impl.AttributeOfElement;
+import dev.qadenz.automation.conditions.impl.CountOfElement;
+import dev.qadenz.automation.conditions.impl.CssPropertyOfElement;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElement;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsDate;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsDateTime;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsDouble;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsInteger;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsTime;
+import dev.qadenz.automation.conditions.impl.EnabledStateOfElement;
+import dev.qadenz.automation.conditions.impl.EnabledStateOfElements;
+import dev.qadenz.automation.conditions.impl.PresenceOfAlert;
+import dev.qadenz.automation.conditions.impl.PresenceOfElement;
+import dev.qadenz.automation.conditions.impl.PresenceOfElements;
+import dev.qadenz.automation.conditions.impl.SelectedMenuOption;
+import dev.qadenz.automation.conditions.impl.SelectedStateOfElement;
+import dev.qadenz.automation.conditions.impl.TextOfAlert;
+import dev.qadenz.automation.conditions.impl.TextOfElement;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsDate;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsDateTime;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsDouble;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsInteger;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsTime;
+import dev.qadenz.automation.conditions.impl.TextOfElements;
+import dev.qadenz.automation.conditions.impl.TextOfInputElement;
+import dev.qadenz.automation.conditions.impl.VisibilityOfElement;
+import dev.qadenz.automation.conditions.impl.VisibilityOfElements;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.LocatorGroup;
 

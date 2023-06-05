@@ -7,44 +7,46 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
  */
-package dev.qadenz.automation.conditions;
+package dev.qadenz.automation.conditions.impl;
 
 import dev.qadenz.automation.commands.WebInspector;
+import dev.qadenz.automation.conditions.Condition;
+import dev.qadenz.automation.conditions.Conditions;
+import dev.qadenz.automation.conditions.Expectation;
 import dev.qadenz.automation.ui.Locator;
 
 /**
- * A Condition for evaluating the visibility of an element. An element determined to be visible is present on the DOM,
- * has a height and width greater than zero, and is not styled to be hidden.
+ * A Condition to evaluate the text shown inside an {@code <input>} element.
  *
  * @author Tim Slifer
  */
-public class VisibilityOfElement implements Condition {
+public class TextOfInputElement implements Condition {
     
     private Locator locator;
-    private Expectation<Boolean> expectation;
+    private Expectation<String> expectation;
     
-    private boolean visible;
+    private String elementText;
     
-    public VisibilityOfElement(Locator locator, Expectation<Boolean> expectation) {
+    public TextOfInputElement(Locator locator, Expectation<String> expectation) {
         this.locator = locator;
         this.expectation = expectation;
     }
     
     @Override
     public String description() {
-        return "Visibility of element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Text of input element [" + locator.getName() + "] " + expectation.description() + ".";
     }
     
     @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
-        visible = webInspector.getVisibilityOfElement(locator);
+        elementText = webInspector.getAttributeOfElement(locator, "value");
         
-        return expectation.matcher().matches(visible);
+        return expectation.matcher().matches(elementText);
     }
     
     @Override
     public String output() {
-        return "Found [" + visible + "].";
+        return "Found [" + elementText + "].";
     }
 }

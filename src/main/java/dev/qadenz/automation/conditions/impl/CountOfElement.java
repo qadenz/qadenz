@@ -7,9 +7,13 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
  */
-package dev.qadenz.automation.conditions;
+package dev.qadenz.automation.conditions.impl;
 
 import dev.qadenz.automation.commands.WebInspector;
+import dev.qadenz.automation.conditions.Condition;
+import dev.qadenz.automation.conditions.Conditions;
+import dev.qadenz.automation.conditions.NumberFormatters;
+import dev.qadenz.automation.conditions.NumericExpectation;
 import dev.qadenz.automation.ui.Locator;
 
 /**
