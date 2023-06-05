@@ -1,7 +1,7 @@
 package dev.qadenz.automation.test.expectations;
 
-import dev.qadenz.automation.conditions.Expectation;
-import dev.qadenz.automation.conditions.Expectations;
+import dev.qadenz.automation.expectations.Expectation;
+import dev.qadenz.automation.expectations.Expectations;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
