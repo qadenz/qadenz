@@ -27,6 +27,7 @@ public class DirectTextOfElementAsDateTime implements Condition {
     private DateTimeFormatter dateTimeFormatter;
     private TemporalExpectation<LocalDateTime> expectation;
     
+    private String elementText;
     private LocalDateTime elementDateTime;
     
     public DirectTextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
@@ -46,6 +47,7 @@ public class DirectTextOfElementAsDateTime implements Condition {
     @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
+        elementText = webInspector.getDirectTextOfElement(locator);
         elementDateTime = webInspector.getDirectTextOfElementAsDateTime(locator, dateTimeFormatter);
         
         return expectation.matcher().matches(elementDateTime);
@@ -53,6 +55,6 @@ public class DirectTextOfElementAsDateTime implements Condition {
     
     @Override
     public String output() {
-        return "Found [" + dateTimeFormatter.format(elementDateTime) + "].";
+        return "Found [" + elementText + "] formatted as [" + dateTimeFormatter.format(elementDateTime) + "].";
     }
 }
