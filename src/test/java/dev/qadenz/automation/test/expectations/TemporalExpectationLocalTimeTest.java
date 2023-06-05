@@ -9,6 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.test.expectations;
 
+import dev.qadenz.automation.conditions.Expectation;
 import dev.qadenz.automation.conditions.Expectations;
 import dev.qadenz.automation.conditions.TemporalExpectation;
 import org.junit.jupiter.api.Test;
@@ -70,66 +71,34 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalTimeIsNotSameHour_ReturnsFalseWhenActualIsSameHourAsExpected() {
+    public void testLocalDateIsEqualTo_ReturnsTrueWhenActualIsEqualToExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected;
-        TemporalExpectation<LocalTime> expectation = Expectations.isNotSameHour(expected);
-        assertFalse(expectation.matcher().matches(actual));
+        Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
+        assertTrue(expectation.matcher().matches(actual));
     }
     
     @Test
-    public void testLocalTimeIsNotSameHour_ReturnsTrueWhenActualIsNotSameHourAsExpected() {
+    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsNotEqualToExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.plusHours(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isNotSameHour(expected);
-        assertTrue(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsNotSameMinute_ReturnsFalseWhenActualIsSameMinuteAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected;
-        TemporalExpectation<LocalTime> expectation = Expectations.isNotSameMinute(expected);
+        Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
         assertFalse(expectation.matcher().matches(actual));
     }
     
     @Test
-    public void testLocalTimeIsNotSameMinute_ReturnsTrueWhenActualIsNotSameMinuteAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected.plusMinutes(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isNotSameMinute(expected);
-        assertTrue(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsNotSameMinute_ReturnsFalseWhenActualIsSameMinuteOfDifferentHour() {
+    public void testLocalDateIsNotEqualTo_ReturnsTrueWhenActualIsNotEqualToExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.plusHours(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isNotSameMinute(expected);
-        assertFalse(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsNotSameSecond_ReturnsFalseWhenActualIsSameSecondAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected;
-        TemporalExpectation<LocalTime> expectation = Expectations.isNotSameSecond(expected);
-        assertFalse(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsNotSameSecond_ReturnsTrueWhenActualIsNotSameSecondAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected.plusSeconds(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isNotSameSecond(expected);
+        Expectation<LocalTime> expectation = Expectations.isNotEqualTo(expected);
         assertTrue(expectation.matcher().matches(actual));
     }
     
     @Test
-    public void testLocalTimeIsNotSameSecond_ReturnsFalseWhenActualIsSameSecondOfDifferentMinute() {
+    public void testLocalDateIsNotEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
         LocalTime expected = LocalTime.now();
-        LocalTime actual = expected.plusMinutes(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isNotSameSecond(expected);
+        LocalTime actual = expected;
+        Expectation<LocalTime> expectation = Expectations.isNotEqualTo(expected);
         assertFalse(expectation.matcher().matches(actual));
     }
     
@@ -155,70 +124,6 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     public void testLocalTimeIsNotWithin_ReturnsFalseWhenActualIsSameAsExpected() {
         TemporalExpectation<LocalTime> expectation = Expectations.isNotWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
         assertFalse(expectation.matcher().matches(LocalTime.NOON));
-    }
-    
-    @Test
-    public void testLocalTimeIsSameHour_ReturnsTrueWhenActualIsSameHourAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected;
-        TemporalExpectation<LocalTime> expectation = Expectations.isSameHour(expected);
-        assertTrue(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsSameHour_ReturnsFalseWhenActualIsNotSameHourAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected.plusHours(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isSameHour(expected);
-        assertFalse(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsSameMinute_ReturnsTrueWhenActualIsSameMinuteAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected;
-        TemporalExpectation<LocalTime> expectation = Expectations.isSameMinute(expected);
-        assertTrue(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsSameMinute_ReturnsFalseWhenActualIsNotSameMinuteAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected.plusMinutes(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isSameMinute(expected);
-        assertFalse(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsSameMinute_ReturnsTrueWhenActualIsSameMinuteOfDifferentHour() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected.plusHours(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isSameMinute(expected);
-        assertTrue(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsSameSecond_ReturnsTrueWhenActualIsSameSecondAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected;
-        TemporalExpectation<LocalTime> expectation = Expectations.isSameSecond(expected);
-        assertTrue(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsSameSecond_ReturnsFalseWhenActualIsNotSameSecondAsExpected() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected.plusSeconds(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isSameSecond(expected);
-        assertFalse(expectation.matcher().matches(actual));
-    }
-    
-    @Test
-    public void testLocalTimeIsSameSecond_ReturnsTrueWhenActualIsSameSecondOfDifferentMinute() {
-        LocalTime expected = LocalTime.now();
-        LocalTime actual = expected.plusMinutes(1);
-        TemporalExpectation<LocalTime> expectation = Expectations.isSameSecond(expected);
-        assertTrue(expectation.matcher().matches(actual));
     }
     
     @Test

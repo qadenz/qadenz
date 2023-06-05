@@ -10,45 +10,46 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package dev.qadenz.automation.conditions.expectations.temporal;
 
 import dev.qadenz.automation.conditions.TemporalExpectation;
-import org.exparity.hamcrest.date.core.IsSecond;
+import org.exparity.hamcrest.date.core.IsSameOrBefore;
 import org.exparity.hamcrest.date.core.TemporalConverter;
+import org.exparity.hamcrest.date.core.TemporalFunction;
 import org.exparity.hamcrest.date.core.TemporalProvider;
-import org.exparity.hamcrest.date.core.types.Second;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.IsNot;
 
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 
 /**
- * An expectation for the text of an element, represented as a Temporal, to be not the same second as the given
+ * An expectation for the text of an element, represented as a Temporal, to be the same as or before the given
  * Temporal.
  *
  * @author Tim Slifer
  */
-public class TemporalIsNotSameSecond<T> implements TemporalExpectation<T> {
+public class TemporalIsEqualToOrBefore<T, E> implements TemporalExpectation<T> {
     
     private Temporal temporal;
-    private TemporalConverter<T, Second> converter;
-    private TemporalProvider<Second> provider;
+    private TemporalConverter<T, E> converter;
+    private TemporalProvider<E> provider;
+    private TemporalFunction<E> function;
     
     private DateTimeFormatter dateTimeFormatter;
     
-    public TemporalIsNotSameSecond(Temporal temporal, TemporalConverter<T, Second> converter,
-            TemporalProvider<Second> provider) {
+    public TemporalIsEqualToOrBefore(Temporal temporal, TemporalConverter<T, E> converter, TemporalProvider<E> provider,
+            TemporalFunction<E> function) {
         this.temporal = temporal;
         this.converter = converter;
         this.provider = provider;
+        this.function = function;
     }
     
     @Override
     public Matcher<T> matcher() {
-        return new IsNot<>(new IsSecond<>(converter, provider));
+        return new IsSameOrBefore<>(converter, provider, function);
     }
     
     @Override
     public String description() {
-        return "is not same second as [" + dateTimeFormatter.format(temporal) + "]";
+        return "iis the same as or before [" + dateTimeFormatter.format(temporal) + "]";
     }
     
     @Override

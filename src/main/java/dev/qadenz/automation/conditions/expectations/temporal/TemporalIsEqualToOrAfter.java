@@ -10,7 +10,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package dev.qadenz.automation.conditions.expectations.temporal;
 
 import dev.qadenz.automation.conditions.TemporalExpectation;
-import org.exparity.hamcrest.date.core.IsSameOrBefore;
+import org.exparity.hamcrest.date.core.IsSameOrAfter;
 import org.exparity.hamcrest.date.core.TemporalConverter;
 import org.exparity.hamcrest.date.core.TemporalFunction;
 import org.exparity.hamcrest.date.core.TemporalProvider;
@@ -20,12 +20,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 
 /**
- * An expectation for the text of an element, represented as a Temporal, to be the same as or before the given
- * Temporal.
+ * An expectation for the text of an element, represented as a Temporal, to be the same as or after the given Temporal.
  *
  * @author Tim Slifer
  */
-public class TemporalIsSameAsOrBefore<T, E> implements TemporalExpectation<T> {
+public class TemporalIsEqualToOrAfter<T, E> implements TemporalExpectation<T> {
     
     private Temporal temporal;
     private TemporalConverter<T, E> converter;
@@ -34,7 +33,7 @@ public class TemporalIsSameAsOrBefore<T, E> implements TemporalExpectation<T> {
     
     private DateTimeFormatter dateTimeFormatter;
     
-    public TemporalIsSameAsOrBefore(Temporal temporal, TemporalConverter<T, E> converter, TemporalProvider<E> provider,
+    public TemporalIsEqualToOrAfter(Temporal temporal, TemporalConverter<T, E> converter, TemporalProvider<E> provider,
             TemporalFunction<E> function) {
         this.temporal = temporal;
         this.converter = converter;
@@ -44,7 +43,7 @@ public class TemporalIsSameAsOrBefore<T, E> implements TemporalExpectation<T> {
     
     @Override
     public Matcher<T> matcher() {
-        return new IsSameOrBefore<>(converter, provider, function);
+        return new IsSameOrAfter<>(converter, provider, function);
     }
     
     @Override

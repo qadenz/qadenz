@@ -10,44 +10,35 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package dev.qadenz.automation.conditions.expectations.temporal;
 
 import dev.qadenz.automation.conditions.TemporalExpectation;
-import org.exparity.hamcrest.date.core.IsHour;
-import org.exparity.hamcrest.date.core.TemporalConverter;
-import org.exparity.hamcrest.date.core.TemporalProvider;
-import org.exparity.hamcrest.date.core.types.Hour;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.IsNot;
+import org.hamcrest.core.IsEqual;
 
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 
 /**
- * An expectation for the text of an element, represented as a Temporal, to be not the same hour as the given Temporal.
+ * An expectation for the text of an element, represented as a Temporal, to be equal to the given Temporal.
  *
  * @author Tim Slifer
  */
-public class TemporalIsNotSameHour<T> implements TemporalExpectation<T> {
+public class TemporalIsEqualTo<T extends Temporal> implements TemporalExpectation<T> {
     
-    private Temporal temporal;
-    private TemporalConverter<T, Hour> converter;
-    private TemporalProvider<Hour> provider;
+    private T temporal;
     
     private DateTimeFormatter dateTimeFormatter;
     
-    public TemporalIsNotSameHour(Temporal temporal, TemporalConverter<T, Hour> converter,
-            TemporalProvider<Hour> provider) {
+    public TemporalIsEqualTo(T temporal) {
         this.temporal = temporal;
-        this.converter = converter;
-        this.provider = provider;
     }
     
     @Override
     public Matcher<T> matcher() {
-        return new IsNot<>(new IsHour<>(converter, provider));
+        return new IsEqual<>(temporal);
     }
     
     @Override
     public String description() {
-        return "is not same hour as [" + dateTimeFormatter.format(temporal) + "]";
+        return "is equal to [" + dateTimeFormatter.format(temporal) + "]";
     }
     
     @Override
