@@ -25,7 +25,7 @@ import java.time.temporal.Temporal;
  *
  * @author Tim Slifer
  */
-public class TemporalIsSameAsOrBefore<T, E> implements TemporalExpectation<T> {
+public class TemporalIsEqualToOrBefore<T, E> implements TemporalExpectation<T> {
     
     private Temporal temporal;
     private TemporalConverter<T, E> converter;
@@ -34,7 +34,7 @@ public class TemporalIsSameAsOrBefore<T, E> implements TemporalExpectation<T> {
     
     private DateTimeFormatter dateTimeFormatter;
     
-    public TemporalIsSameAsOrBefore(Temporal temporal, TemporalConverter<T, E> converter, TemporalProvider<E> provider,
+    public TemporalIsEqualToOrBefore(Temporal temporal, TemporalConverter<T, E> converter, TemporalProvider<E> provider,
             TemporalFunction<E> function) {
         this.temporal = temporal;
         this.converter = converter;

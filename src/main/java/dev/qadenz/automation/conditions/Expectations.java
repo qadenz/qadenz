@@ -34,11 +34,11 @@ import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsAfter;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsBefore;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsDayOfWeek;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsEqualTo;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsEqualToOrAfter;
+import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsEqualToOrBefore;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotDayOfWeek;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotEqualTo;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsNotWithin;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameAsOrAfter;
-import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsSameAsOrBefore;
 import dev.qadenz.automation.conditions.expectations.temporal.TemporalIsWithin;
 
 import java.time.DayOfWeek;
@@ -256,8 +256,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDate> isSameAsOrAfter(LocalDate expectedLocaldate) {
-        return new TemporalIsSameAsOrAfter<>(expectedLocaldate, LOCALDATE_AS_LOCALDATE, localDate(expectedLocaldate),
+    public static TemporalExpectation<LocalDate> isEqualToOrAfter(LocalDate expectedLocaldate) {
+        return new TemporalIsEqualToOrAfter<>(expectedLocaldate, LOCALDATE_AS_LOCALDATE, localDate(expectedLocaldate),
                 LOCALDATE);
     }
     
@@ -269,8 +269,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isSameAsOrAfter(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsSameAsOrAfter<>(expectedLocalDateTime, LOCALDATETIME_AS_LOCALDATETIME,
+    public static TemporalExpectation<LocalDateTime> isEqualToOrAfter(LocalDateTime expectedLocalDateTime) {
+        return new TemporalIsEqualToOrAfter<>(expectedLocalDateTime, LOCALDATETIME_AS_LOCALDATETIME,
                 localDateTime(expectedLocalDateTime), LOCALDATETIME);
     }
     
@@ -282,8 +282,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isSameAsOrAfter(LocalTime expectedLocalTime) {
-        return new TemporalIsSameAsOrAfter<>(expectedLocalTime, LOCALTIME_AS_LOCALTIME, localTime(expectedLocalTime),
+    public static TemporalExpectation<LocalTime> isEqualToOrAfter(LocalTime expectedLocalTime) {
+        return new TemporalIsEqualToOrAfter<>(expectedLocalTime, LOCALTIME_AS_LOCALTIME, localTime(expectedLocalTime),
                 LOCALTIME);
     }
     
@@ -361,8 +361,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDate> isSameAsOrBefore(LocalDate expectedLocalDate) {
-        return new TemporalIsSameAsOrBefore<>(expectedLocalDate, LOCALDATE_AS_LOCALDATE, localDate(expectedLocalDate),
+    public static TemporalExpectation<LocalDate> isEqualToOrBefore(LocalDate expectedLocalDate) {
+        return new TemporalIsEqualToOrBefore<>(expectedLocalDate, LOCALDATE_AS_LOCALDATE, localDate(expectedLocalDate),
                 LOCALDATE);
     }
     
@@ -374,8 +374,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDateTime> isSameAsOrBefore(LocalDateTime expectedLocalDateTime) {
-        return new TemporalIsSameAsOrBefore<>(expectedLocalDateTime, LOCALDATETIME_AS_LOCALDATETIME,
+    public static TemporalExpectation<LocalDateTime> isEqualToOrBefore(LocalDateTime expectedLocalDateTime) {
+        return new TemporalIsEqualToOrBefore<>(expectedLocalDateTime, LOCALDATETIME_AS_LOCALDATETIME,
                 localDateTime(expectedLocalDateTime), LOCALDATETIME);
     }
     
@@ -387,8 +387,8 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isSameAsOrBefore(LocalTime expectedLocalTime) {
-        return new TemporalIsSameAsOrBefore<>(expectedLocalTime, LOCALTIME_AS_LOCALTIME, localTime(expectedLocalTime),
+    public static TemporalExpectation<LocalTime> isEqualTosOrBefore(LocalTime expectedLocalTime) {
+        return new TemporalIsEqualToOrBefore<>(expectedLocalTime, LOCALTIME_AS_LOCALTIME, localTime(expectedLocalTime),
                 LOCALTIME);
     }
     
