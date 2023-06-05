@@ -69,15 +69,11 @@ public class CapabilityProvider {
         }
         
         if (WebConfig.browserVersion != null) {
-            capabilities.setCapability("version", WebConfig.browserVersion);
+            capabilities.setCapability("browserVersion", WebConfig.browserVersion);
         }
         
         if (WebConfig.platform != null) {
-            capabilities.setCapability("platform", WebConfig.platform);
-        }
-        
-        if (WebConfig.applicationName != null) {
-            capabilities.setCapability("applicationName", WebConfig.applicationName);
+            capabilities.setCapability("platformName", WebConfig.platform);
         }
         
         return capabilities;
