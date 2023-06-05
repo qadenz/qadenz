@@ -11,28 +11,28 @@ package dev.qadenz.automation.expectations.impl;
 
 import dev.qadenz.automation.expectations.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.StringContains;
+import org.hamcrest.text.IsEqualIgnoringCase;
 
 /**
- * An Expectation for a String value to contain the given value, ignoring case.
+ * An Expectation for a String value to be equal to the given value, ignoring case.
  *
  * @author Tim Slifer
  */
-public class TextContainsIgnoreCase implements Expectation<String> {
+public class TextEqualsIgnoringCase implements Expectation<String> {
     
     private String expectedText;
     
-    public TextContainsIgnoreCase(String expectedText) {
+    public TextEqualsIgnoringCase(String expectedText) {
         this.expectedText = expectedText;
     }
     
     @Override
     public Matcher<String> matcher() {
-        return new StringContains(true, expectedText);
+        return new IsEqualIgnoringCase(expectedText);
     }
     
     @Override
     public String description() {
-        return "ignoring case, contains [" + expectedText + "]";
+        return "is, ignoring case, equal to [" + expectedText + "]";
     }
 }

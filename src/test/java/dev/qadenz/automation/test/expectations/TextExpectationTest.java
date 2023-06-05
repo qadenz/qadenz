@@ -62,31 +62,31 @@ public class TextExpectationTest {
     
     @Test
     public void testContainsIgnoreCase_ReturnsTrueWhenActualContainsExpected_IsSameCase() {
-        Expectation<String> expectation = Expectations.containsIgnoreCase(OOBA);
+        Expectation<String> expectation = Expectations.containsIgnoringCase(OOBA);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
     public void testContainsIgnoreCase_ReturnsTrueWhenActualContainsExpected_IsDifferentCase() {
-        Expectation<String> expectation = Expectations.containsIgnoreCase(OOBA_LOWER_CASE);
+        Expectation<String> expectation = Expectations.containsIgnoringCase(OOBA_LOWER_CASE);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
     public void testContainsIgnoreCase_ReturnsTrueWhenActualIsSameAsExpected_IsSameCase() {
-        Expectation<String> expectation = Expectations.containsIgnoreCase(FOOBAR);
+        Expectation<String> expectation = Expectations.containsIgnoringCase(FOOBAR);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
     public void testContainsIgnoreCase_ReturnsTrueWhenActualIsSameAsExpected_IsDifferentCase() {
-        Expectation<String> expectation = Expectations.containsIgnoreCase(FOOBAR_LOWER_CASE);
+        Expectation<String> expectation = Expectations.containsIgnoringCase(FOOBAR_LOWER_CASE);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
     public void testContainsIgnoreCase_ReturnsFalseWhenActualDoesNotContainExpected() {
-        Expectation<String> expectation = Expectations.containsIgnoreCase(BAZ);
+        Expectation<String> expectation = Expectations.containsIgnoringCase(BAZ);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
     
@@ -212,19 +212,19 @@ public class TextExpectationTest {
     
     @Test
     public void testEqualsIgnoreCase_ReturnsTrueWhenActualIsSameAsExpected_IsSameCase() {
-        Expectation<String> expectation = Expectations.equalsIgnoreCase(FOOBAR);
+        Expectation<String> expectation = Expectations.equalsIgnoringCase(FOOBAR);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
     public void testEqualsIgnoreCase_ReturnsTrueWhenActualIsSameAsExpected_IsDifferentCase() {
-        Expectation<String> expectation = Expectations.equalsIgnoreCase(FOOBAR_LOWER_CASE);
+        Expectation<String> expectation = Expectations.equalsIgnoringCase(FOOBAR_LOWER_CASE);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
     public void testEqualsIgnoreCase_ReturnsFalseWhenActualIsNotSameAsExpected() {
-        Expectation<String> expectation = Expectations.equalsIgnoreCase(OOBA);
+        Expectation<String> expectation = Expectations.equalsIgnoringCase(OOBA);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
     
