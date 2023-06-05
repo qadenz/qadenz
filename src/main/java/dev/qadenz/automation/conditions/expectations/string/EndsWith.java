@@ -9,7 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions.expectations.string;
 
-import dev.qadenz.automation.conditions.Expectation;
+import dev.qadenz.automation.expectations.Expectation;
 import org.hamcrest.Matcher;
 import org.hamcrest.core.StringEndsWith;
 

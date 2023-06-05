@@ -9,7 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions.expectations.numeric;
 
-import dev.qadenz.automation.conditions.NumericExpectation;
+import dev.qadenz.automation.expectations.NumericExpectation;
 import org.hamcrest.Matcher;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNot;

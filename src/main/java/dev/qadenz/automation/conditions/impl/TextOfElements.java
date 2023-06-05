@@ -12,7 +12,7 @@ package dev.qadenz.automation.conditions.impl;
 import dev.qadenz.automation.commands.WebInspector;
 import dev.qadenz.automation.conditions.Condition;
 import dev.qadenz.automation.conditions.Conditions;
-import dev.qadenz.automation.conditions.Expectation;
+import dev.qadenz.automation.expectations.Expectation;
 import dev.qadenz.automation.ui.Locator;
 
 import java.util.List;

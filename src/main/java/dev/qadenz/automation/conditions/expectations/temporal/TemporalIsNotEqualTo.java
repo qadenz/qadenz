@@ -9,7 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions.expectations.temporal;
 
-import dev.qadenz.automation.conditions.TemporalExpectation;
+import dev.qadenz.automation.expectations.TemporalExpectation;
 import org.hamcrest.Matcher;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNot;

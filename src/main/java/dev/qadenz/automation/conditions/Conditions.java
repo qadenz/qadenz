@@ -36,6 +36,9 @@ import dev.qadenz.automation.conditions.impl.TextOfElements;
 import dev.qadenz.automation.conditions.impl.TextOfInputElement;
 import dev.qadenz.automation.conditions.impl.VisibilityOfElement;
 import dev.qadenz.automation.conditions.impl.VisibilityOfElements;
+import dev.qadenz.automation.expectations.Expectation;
+import dev.qadenz.automation.expectations.NumericExpectation;
+import dev.qadenz.automation.expectations.TemporalExpectation;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.LocatorGroup;
 

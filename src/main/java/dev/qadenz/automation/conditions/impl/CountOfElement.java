@@ -13,7 +13,7 @@ import dev.qadenz.automation.commands.WebInspector;
 import dev.qadenz.automation.conditions.Condition;
 import dev.qadenz.automation.conditions.Conditions;
 import dev.qadenz.automation.conditions.NumberFormatters;
-import dev.qadenz.automation.conditions.NumericExpectation;
+import dev.qadenz.automation.expectations.NumericExpectation;
 import dev.qadenz.automation.ui.Locator;
 
 /**

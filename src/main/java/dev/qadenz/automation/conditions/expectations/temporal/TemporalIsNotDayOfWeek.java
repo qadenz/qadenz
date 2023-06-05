@@ -9,7 +9,7 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions.expectations.temporal;
 
-import dev.qadenz.automation.conditions.Expectation;
+import dev.qadenz.automation.expectations.Expectation;
 import org.exparity.hamcrest.date.core.IsDayOfWeek;
 import org.exparity.hamcrest.date.core.TemporalConverter;
 import org.exparity.hamcrest.date.core.TemporalProvider;

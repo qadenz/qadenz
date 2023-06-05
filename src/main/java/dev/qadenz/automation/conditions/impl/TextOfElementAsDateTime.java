@@ -12,7 +12,7 @@ package dev.qadenz.automation.conditions.impl;
 import dev.qadenz.automation.commands.WebInspector;
 import dev.qadenz.automation.conditions.Condition;
 import dev.qadenz.automation.conditions.Conditions;
-import dev.qadenz.automation.conditions.TemporalExpectation;
+import dev.qadenz.automation.expectations.TemporalExpectation;
 import dev.qadenz.automation.ui.Locator;
 
 import java.time.LocalDateTime;
