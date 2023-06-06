@@ -17,6 +17,9 @@ import static java.time.LocalTime.NOON;
 
 public class TemporalExpectationTest {
     
+    public static final LocalDate AUG_01_2015 = LocalDate.of(2015, Month.AUGUST, 1);
+    public static final LocalDate AUG_02_2015 = LocalDate.of(2015, Month.AUGUST, 2);
+    public static final LocalDate AUG_03_2015 = LocalDate.of(2015, Month.AUGUST, 3);
     public static final LocalDate AUG_04_2015 = LocalDate.of(2015, Month.AUGUST, 4);
     public static final LocalDate AUG_05_2015 = LocalDate.of(2015, Month.AUGUST, 5);
     public static final LocalDate AUG_06_2015 = LocalDate.of(2015, Month.AUGUST, 6);
