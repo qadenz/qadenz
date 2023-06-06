@@ -117,7 +117,6 @@ public class AutomatedWebTest {
             throw exception;
         }
         
-        WebDriverProvider.getWebDriver().manage().window().maximize();
         WebDriverProvider.getWebDriver().get(WebConfig.appUrl);
     }
     
