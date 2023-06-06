@@ -15,6 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Common commands for all test types.
  *
@@ -45,7 +48,7 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void check(Condition... conditions) {
-        check(true, conditions);
+        check(true, Arrays.asList(conditions));
     }
     
     /**
@@ -56,6 +59,31 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void check(boolean captureScreen, Condition... conditions) {
+        check(captureScreen, Arrays.asList(conditions));
+    }
+    
+    /**
+     * Evaluates each of the given {@link Condition}s as a group. Execution will be allowed to continue after the final
+     * Condition is evaluated, even if one or more Conditions results in a failure. A call to {@link Assertions} will
+     * flush the failures and abort the test at a user designated point in the test. If a call to {@code verify()}
+     * exists after a call to Check and before a call to {@code flush()}, the test will still be aborted if
+     * {@code verify()} produces a failure. Execution will be stopped immediately if an error is encountered during the
+     * {@code check()}. A screenshot will be captured for each failed Condition.
+     *
+     * @param conditions The Conditions to be evaluated.
+     */
+    public void check(List<Condition> conditions) {
+        check(true, conditions);
+    }
+    
+    /**
+     * An overloaded implementation of {@code check()} that allows the user to disable the screenshot for failures
+     * encountered by this validation. This overload only need to called if screenshots are to be disabled.
+     *
+     * @param captureScreen False to disable screenshots.
+     * @param conditions The Conditions to be evaluated.
+     */
+    public void check(boolean captureScreen, List<Condition> conditions) {
         for (Condition condition : conditions) {
             LOG.info("Checking Condition - {}", condition.description());
             try {
@@ -89,7 +117,7 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void verify(Condition... conditions) {
-        verify(true, conditions);
+        verify(true, Arrays.asList(conditions));
     }
     
     /**
@@ -100,6 +128,28 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void verify(boolean captureScreen, Condition... conditions) {
+        verify(captureScreen, Arrays.asList(conditions));
+    }
+    
+    /**
+     * Evaluates each of the given {@link Condition}s as a group. If one or more Conditions results in a failure,
+     * execution will be aborted after the final Condition is evaluated. Execution will be stopped immediately if an
+     * error is encountered. A screenshot will be captured for each failed Condition.
+     *
+     * @param conditions The Conditions to be evaluated.
+     */
+    public void verify(List<Condition> conditions) {
+        verify(true, conditions);
+    }
+    
+    /**
+     * An overloaded implementation of {@code verify()} that allows the user to disable the screenshot for failures
+     * encountered by this validation. This overload only need to called if screenshots are to be disabled.
+     *
+     * @param captureScreen False to disable screenshots.
+     * @param conditions The Conditions to be evaluated.
+     */
+    public void verify(boolean captureScreen, List<Condition> conditions) {
         boolean failed = false;
         
         for (Condition condition : conditions) {
