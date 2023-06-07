@@ -43,13 +43,13 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testContains_ReturnsTrueWhenActualIsSameAsExpected_IsSameCase() {
+    public void testContains_ReturnsTrueWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.contains(FOOBAR);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testContains_ReturnsFalseWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testContains_ReturnsFalseWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.contains(FOOBAR_LOWER_CASE);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
@@ -73,13 +73,13 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testContainsIgnoreCase_ReturnsTrueWhenActualIsSameAsExpected_IsSameCase() {
+    public void testContainsIgnoreCase_ReturnsTrueWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.containsIgnoringCase(FOOBAR);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testContainsIgnoreCase_ReturnsTrueWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testContainsIgnoreCase_ReturnsTrueWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.containsIgnoringCase(FOOBAR_LOWER_CASE);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
@@ -88,12 +88,6 @@ public class TextExpectationTest {
     public void testContainsIgnoreCase_ReturnsFalseWhenActualDoesNotContainExpected() {
         Expectation<String> expectation = Expectations.containsIgnoringCase(BAZ);
         assertFalse(expectation.matcher().matches(FOOBAR));
-    }
-    
-    @Test
-    public void testDoesNotContain_ReturnsTrueWhenActualDoesNotContainExpected() {
-        Expectation<String> expectation = Expectations.doesNotContain(BAZ);
-        assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
@@ -109,14 +103,20 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testDoesNotContain_ReturnsFalseWhenActualIsSameAsExpected_IsSameCase() {
+    public void testDoesNotContain_ReturnsFalseWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.doesNotContain(FOOBAR);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testDoesNotContain_ReturnsTrueWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testDoesNotContain_ReturnsTrueWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.doesNotContain(FOOBAR_LOWER_CASE);
+        assertTrue(expectation.matcher().matches(FOOBAR));
+    }
+    
+    @Test
+    public void testDoesNotContain_ReturnsTrueWhenActualDoesNotContainExpected() {
+        Expectation<String> expectation = Expectations.doesNotContain(BAZ);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
@@ -133,13 +133,13 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testDoesNotEndWith_ReturnsFalseWhenActualIsSameAsExpected_IsSameCase() {
+    public void testDoesNotEndWith_ReturnsFalseWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.doesNotEndWith(FOOBAR);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testDoesNotEndWith_ReturnsTrueWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testDoesNotEndWith_ReturnsTrueWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.doesNotEndWith(FOOBAR_LOWER_CASE);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
@@ -163,13 +163,13 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testDoesNotStartWith_ReturnsFalseWhenActualIsSameAsExpected_IsSameCase() {
+    public void testDoesNotStartWith_ReturnsFalseWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.doesNotStartWith(FOOBAR);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testDoesNotStartWith_ReturnsTrueWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testDoesNotStartWith_ReturnsTrueWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.doesNotStartWith(FOOBAR_LOWER_CASE);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
@@ -193,13 +193,13 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testEndsWith_ReturnsTrueWhenActualIsSameAsExpected_IsSameCase() {
+    public void testEndsWith_ReturnsTrueWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.endsWith(FOOBAR);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testEndsWith_ReturnsFalseWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testEndsWith_ReturnsFalseWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.endsWith(FOOBAR_LOWER_CASE);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
@@ -211,13 +211,13 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testEqualsIgnoreCase_ReturnsTrueWhenActualIsSameAsExpected_IsSameCase() {
+    public void testEqualsIgnoreCase_ReturnsTrueWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.equalsIgnoringCase(FOOBAR);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testEqualsIgnoreCase_ReturnsTrueWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testEqualsIgnoreCase_ReturnsTrueWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.equalsIgnoringCase(FOOBAR_LOWER_CASE);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
@@ -247,13 +247,13 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testIsEqualTo_ReturnsTrueWhenActualIsSameAsExpected_IsSameCase() {
+    public void testIsEqualTo_ReturnsTrueWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.isEqualTo(FOOBAR);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testIsEqualTo_ReturnsFalseWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testIsEqualTo_ReturnsFalseWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.isEqualTo(FOOBAR_LOWER_CASE);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
@@ -337,13 +337,13 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testIsNotEqualTo_ReturnsFalseWhenActualIsSameAsExpected_IsSameCase() {
+    public void testIsNotEqualTo_ReturnsFalseWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.isNotEqualTo(FOOBAR);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testIsNotEqualTo_ReturnsTrueWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testIsNotEqualTo_ReturnsTrueWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.isNotEqualTo(FOOBAR_LOWER_CASE);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
@@ -367,13 +367,13 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testStartsWith_ReturnsTrueWhenActualIsSameAsExpected_IsSameCase() {
+    public void testStartsWith_ReturnsTrueWhenActualIsEqualToExpected_IsSameCase() {
         Expectation<String> expectation = Expectations.startsWith(FOOBAR);
         assertTrue(expectation.matcher().matches(FOOBAR));
     }
     
     @Test
-    public void testStartsWith_ReturnsFalseWhenActualIsSameAsExpected_IsDifferentCase() {
+    public void testStartsWith_ReturnsFalseWhenActualIsEqualToExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.startsWith(FOOBAR_LOWER_CASE);
         assertFalse(expectation.matcher().matches(FOOBAR));
     }
