@@ -39,10 +39,18 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalTimeIsAfter_ReturnsFalseWhenActualIsSameAsExpected() {
+    public void testLocalTimeIsAfter_ReturnsFalseWhenActualIsEqualToExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected;
         TemporalExpectation<LocalTime> expectation = Expectations.isAfter(expected);
+        assertFalse(expectation.matcher().matches(actual));
+    }
+    
+    @Test
+    public void testLocalTimeIsBefore_ReturnsFalseWhenActualIsAfterExpected() {
+        LocalTime expected = LocalTime.now();
+        LocalTime actual = expected.plusHours(1);
+        TemporalExpectation<LocalTime> expectation = Expectations.isBefore(expected);
         assertFalse(expectation.matcher().matches(actual));
     }
     
@@ -55,18 +63,26 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalTimeIsBefore_ReturnsFalseWhenActualIsAfterExpected() {
+    public void testLocalTimeIsBefore_ReturnsFalseWhenActualIsEqualToExpected() {
         LocalTime expected = LocalTime.now();
-        LocalTime actual = expected.plusHours(1);
+        LocalTime actual = expected;
         TemporalExpectation<LocalTime> expectation = Expectations.isBefore(expected);
         assertFalse(expectation.matcher().matches(actual));
     }
     
     @Test
-    public void testLocalTimeIsBefore_ReturnsFalseWhenActualIsSameAsExpected() {
+    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsAfterExpected() {
         LocalTime expected = LocalTime.now();
-        LocalTime actual = expected;
-        TemporalExpectation<LocalTime> expectation = Expectations.isBefore(expected);
+        LocalTime actual = expected.plusHours(1);
+        Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
+        assertFalse(expectation.matcher().matches(actual));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsBeforeExpected() {
+        LocalTime expected = LocalTime.now();
+        LocalTime actual = expected.plusHours(1);
+        Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
         assertFalse(expectation.matcher().matches(actual));
     }
     
@@ -79,15 +95,15 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsNotEqualToExpected() {
+    public void testLocalDateIsNotEqualTo_ReturnsTrueWhenActualIsAfterExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.plusHours(1);
-        Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
-        assertFalse(expectation.matcher().matches(actual));
+        Expectation<LocalTime> expectation = Expectations.isNotEqualTo(expected);
+        assertTrue(expectation.matcher().matches(actual));
     }
     
     @Test
-    public void testLocalDateIsNotEqualTo_ReturnsTrueWhenActualIsNotEqualToExpected() {
+    public void testLocalDateIsNotEqualTo_ReturnsTrueWhenActualIsBeforeExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.plusHours(1);
         Expectation<LocalTime> expectation = Expectations.isNotEqualTo(expected);
@@ -103,49 +119,86 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalTimeIsNotWithin_ReturnsTrueWhenActualIsNotInRangeOfExpected() {
+    public void testLocalTimeIsNotWithin_ReturnsTrueWhenActualIsAfterExpectedAndOutsideRange() {
         TemporalExpectation<LocalTime> expectation = Expectations.isNotWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
-        assertTrue(expectation.matcher().matches(LocalTime.NOON.minusSeconds(3)));
+        assertTrue(expectation.matcher().matches(LocalTime.NOON.plusSeconds(3)));
     }
     
     @Test
-    public void testLocalTimeIsNotWithin_ReturnsFalseWhenActualIsOuterRangeOfExpected() {
+    public void testLocalTimeIsNotWithin_ReturnsFalseWhenActualIsAfterExpectedAndAtRange() {
         TemporalExpectation<LocalTime> expectation = Expectations.isNotWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
-        assertFalse(expectation.matcher().matches(LocalTime.NOON.minusSeconds(2)));
+        assertFalse(expectation.matcher().matches(LocalTime.NOON.plusSeconds(2)));
     }
     
     @Test
-    public void testLocalTimeIsNotWithin_ReturnsFalseWhenActualIsWithinRangeOfExpected() {
+    public void testLocalTimeIsNotWithin_ReturnsFalseWhenActualIsAfterExpectedAndWithinRange() {
         TemporalExpectation<LocalTime> expectation = Expectations.isNotWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
-        assertFalse(expectation.matcher().matches(LocalTime.NOON.minusSeconds(1)));
+        assertFalse(expectation.matcher().matches(LocalTime.NOON.plusSeconds(1)));
     }
     
     @Test
-    public void testLocalTimeIsNotWithin_ReturnsFalseWhenActualIsSameAsExpected() {
+    public void testLocalTimeIsNotWithin_ReturnsFalseWhenActualIsEqualToExpected() {
         TemporalExpectation<LocalTime> expectation = Expectations.isNotWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
         assertFalse(expectation.matcher().matches(LocalTime.NOON));
     }
     
     @Test
-    public void testLocalTimeIsWithin_ReturnsTrueWhenActualIsSameAsExpected() {
-        TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
-        assertTrue(expectation.matcher().matches(LocalTime.NOON));
+    public void testLocalTimeIsNotWithin_ReturnsFalseWhenActualIsBeforeExpectedAndWithinRange() {
+        TemporalExpectation<LocalTime> expectation = Expectations.isNotWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
+        assertFalse(expectation.matcher().matches(LocalTime.NOON.minusSeconds(1)));
     }
     
     @Test
-    public void testLocalTimeIsWithin_ReturnsTrueWhenActualIsInRangeOfExpected() {
-        TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
-        assertTrue(expectation.matcher().matches(LocalTime.NOON.minusSeconds(1)));
+    public void testLocalTimeIsNotWithin_ReturnsFalseWhenActualIsBeforeExpectedAndAtRange() {
+        TemporalExpectation<LocalTime> expectation = Expectations.isNotWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
+        assertFalse(expectation.matcher().matches(LocalTime.NOON.minusSeconds(2)));
     }
     
     @Test
-    public void testLocalTimeIsWithin_ReturnsTrueWhenActualIsOuterRangeOfExpected() {
+    public void testLocalTimeIsNotWithin_ReturnsTrueWhenActualIsBeforeExpectedAndOutsideRange() {
+        TemporalExpectation<LocalTime> expectation = Expectations.isNotWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
+        assertTrue(expectation.matcher().matches(LocalTime.NOON.minusSeconds(3)));
+    }
+    
+    //
+    @Test
+    public void testLocalTimeIsWithin_ReturnsFalseWhenActualIsAfterExpectedAndOutsideRange() {
+        TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
+        assertFalse(expectation.matcher().matches(LocalTime.NOON.minusSeconds(3)));
+    }
+    
+    @Test
+    public void testLocalTimeIsWithin_ReturnsTrueWhenActualIsAfterExpectedAndAtRange() {
         TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
         assertTrue(expectation.matcher().matches(LocalTime.NOON.minusSeconds(2)));
     }
     
     @Test
-    public void testLocalTimeIsWithin_ReturnsFalseWhenActualIsNotWithinRangeOfExpected() {
+    public void testLocalTimeIsWithin_ReturnsTrueWhenActualIsAfterExpectedAndWithinRange() {
+        TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
+        assertTrue(expectation.matcher().matches(LocalTime.NOON.minusSeconds(1)));
+    }
+    
+    @Test
+    public void testLocalTimeIsWithin_ReturnsTrueWhenActualIsEqualToExpected() {
+        TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
+        assertTrue(expectation.matcher().matches(LocalTime.NOON));
+    }
+    
+    @Test
+    public void testLocalTimeIsWithin_ReturnsTrueWhenActualIsBeforeExpectedAndWithinRange() {
+        TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
+        assertTrue(expectation.matcher().matches(LocalTime.NOON.minusSeconds(1)));
+    }
+    
+    @Test
+    public void testLocalTimeIsWithin_ReturnsTrueWhenActualIsBeforeExpectedAndAtRange() {
+        TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
+        assertTrue(expectation.matcher().matches(LocalTime.NOON.minusSeconds(2)));
+    }
+    
+    @Test
+    public void testLocalTimeIsWithin_ReturnsFalseWhenActualIsBeforeExpectedAndOutsideRange() {
         TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);
         assertFalse(expectation.matcher().matches(LocalTime.NOON.minusSeconds(3)));
     }
