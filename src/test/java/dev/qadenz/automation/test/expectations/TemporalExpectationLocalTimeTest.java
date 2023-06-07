@@ -71,7 +71,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsAfterExpected() {
+    public void testLocalTimeIsEqualTo_ReturnsFalseWhenActualIsAfterExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.plusHours(1);
         Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
@@ -79,7 +79,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsBeforeExpected() {
+    public void testLocalTimeIsEqualTo_ReturnsFalseWhenActualIsBeforeExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.minusHours(1);
         Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
@@ -87,7 +87,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualTo_ReturnsTrueWhenActualIsEqualToExpected() {
+    public void testLocalTimeIsEqualTo_ReturnsTrueWhenActualIsEqualToExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected;
         Expectation<LocalTime> expectation = Expectations.isEqualTo(expected);
@@ -95,7 +95,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualToOrAfter_ReturnsTrueWhenActualIsAfterExpected() {
+    public void testLocalTimeIsEqualToOrAfter_ReturnsTrueWhenActualIsAfterExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.plusHours(1);
         Expectation<LocalTime> expectation = Expectations.isEqualToOrAfter(expected);
@@ -103,7 +103,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualToOrAfter_ReturnsFalseWhenActualIsBeforeExpected() {
+    public void testLocalTimeIsEqualToOrAfter_ReturnsFalseWhenActualIsBeforeExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.minusHours(1);
         Expectation<LocalTime> expectation = Expectations.isEqualToOrAfter(expected);
@@ -111,7 +111,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualToOrAfter_ReturnsTrueWhenActualIsEqualToExpected() {
+    public void testLocalTimeIsEqualToOrAfter_ReturnsTrueWhenActualIsEqualToExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected;
         Expectation<LocalTime> expectation = Expectations.isEqualToOrAfter(expected);
@@ -119,7 +119,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualToOrBefore_ReturnsFalseWhenActualIsAfterExpected() {
+    public void testLocalTimeIsEqualToOrBefore_ReturnsFalseWhenActualIsAfterExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.plusHours(1);
         Expectation<LocalTime> expectation = Expectations.isEqualTosOrBefore(expected);
@@ -127,7 +127,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualToOrBefore_ReturnsTrueWhenActualIsBeforeExpected() {
+    public void testLocalTimeIsEqualToOrBefore_ReturnsTrueWhenActualIsBeforeExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.minusHours(1);
         Expectation<LocalTime> expectation = Expectations.isEqualTosOrBefore(expected);
@@ -135,7 +135,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsEqualToOrBefore_ReturnsTrueWhenActualIsEqualToExpected() {
+    public void testLocalTimeIsEqualToOrBefore_ReturnsTrueWhenActualIsEqualToExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected;
         Expectation<LocalTime> expectation = Expectations.isEqualTosOrBefore(expected);
@@ -143,7 +143,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsNotEqualTo_ReturnsTrueWhenActualIsAfterExpected() {
+    public void testLocalTimeIsNotEqualTo_ReturnsTrueWhenActualIsAfterExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.plusHours(1);
         Expectation<LocalTime> expectation = Expectations.isNotEqualTo(expected);
@@ -151,7 +151,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsNotEqualTo_ReturnsTrueWhenActualIsBeforeExpected() {
+    public void testLocalTimeIsNotEqualTo_ReturnsTrueWhenActualIsBeforeExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.minusHours(1);
         Expectation<LocalTime> expectation = Expectations.isNotEqualTo(expected);
@@ -159,7 +159,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalDateIsNotEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
+    public void testLocalTimeIsNotEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected;
         Expectation<LocalTime> expectation = Expectations.isNotEqualTo(expected);
