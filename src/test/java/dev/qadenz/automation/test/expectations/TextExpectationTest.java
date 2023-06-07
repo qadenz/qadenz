@@ -301,7 +301,7 @@ public class TextExpectationTest {
     }
     
     @Test
-    public void testIsEqualToOneOf_ReturnsTrueWhenActualIsEqualToAllExpected_IsDifferentCase() {
+    public void testIsEqualToOneOf_ReturnsFalseWhenActualIsEqualToAllExpected_IsDifferentCase() {
         Expectation<String> expectation = Expectations.isEqualToOneOf(FOO_LOWER_CASE, FOO_LOWER_CASE, FOO_LOWER_CASE);
         assertFalse(expectation.matcher().matches(FOO));
     }

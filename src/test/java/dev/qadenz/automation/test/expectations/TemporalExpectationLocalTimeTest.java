@@ -31,7 +31,7 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
     }
     
     @Test
-    public void testLocalTimeIsAfter_ReturnsTrueWhenActualIsBeforeExpected() {
+    public void testLocalTimeIsAfter_ReturnsFalseWhenActualIsBeforeExpected() {
         LocalTime expected = LocalTime.now();
         LocalTime actual = expected.minusHours(1);
         TemporalExpectation<LocalTime> expectation = Expectations.isAfter(expected);
@@ -208,7 +208,6 @@ public class TemporalExpectationLocalTimeTest extends TemporalExpectationTest {
         assertTrue(expectation.matcher().matches(LocalTime.NOON.minusSeconds(3)));
     }
     
-    //
     @Test
     public void testLocalTimeIsWithin_ReturnsFalseWhenActualIsAfterExpectedAndOutsideRange() {
         TemporalExpectation<LocalTime> expectation = Expectations.isWithin(2, ChronoUnit.SECONDS, LocalTime.NOON);

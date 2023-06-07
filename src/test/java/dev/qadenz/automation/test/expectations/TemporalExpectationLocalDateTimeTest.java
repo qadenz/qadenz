@@ -30,7 +30,7 @@ public class TemporalExpectationLocalDateTimeTest extends TemporalExpectationTes
     }
     
     @Test
-    public void testLocalDateTimeIsAfter_ReturnsTrueWhenActualIsBeforeExpected() {
+    public void testLocalDateTimeIsAfter_ReturnsFalseWhenActualIsBeforeExpected() {
         TemporalExpectation<LocalDateTime> expectation = Expectations.isAfter(AUG_05_2015_NOON);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
     }
@@ -84,7 +84,7 @@ public class TemporalExpectationLocalDateTimeTest extends TemporalExpectationTes
     }
     
     @Test
-    public void testLocalDateTimeIsEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
+    public void testLocalDateTimeIsEqualTo_ReturnsTrueWhenActualIsEqualToExpected() {
         Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_05_2015_NOON);
         assertTrue(expectation.matcher().matches(AUG_05_2015_NOON));
     }
