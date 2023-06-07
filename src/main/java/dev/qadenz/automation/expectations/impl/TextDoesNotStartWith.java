@@ -15,7 +15,7 @@ import org.hamcrest.core.IsNot;
 import org.hamcrest.core.StringStartsWith;
 
 /**
- * An Expectation for a String value to not start with the given value.
+ * An Expectation for a String 'actual' value to not start with the given 'expected' value.
  *
  * @author Tim Slifer
  */

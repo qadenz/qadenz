@@ -17,7 +17,7 @@ import org.hamcrest.core.IsNot;
 import java.text.NumberFormat;
 
 /**
- * An Expectation for a number value to be not equal to the given value.
+ * An Expectation for a numeric 'actual' value to be not equal to the given 'expected' value.
  *
  * @author Tim Slifer
  */

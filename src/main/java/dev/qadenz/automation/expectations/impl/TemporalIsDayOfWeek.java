@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * An expectation for the text of an element, represented as a Temporal, to be on the given day of the week.
+ * An expectation for the text of an element, represented as a Temporal value, to be on the given day of the week.
  *
  * @author Tim Slifer
  */

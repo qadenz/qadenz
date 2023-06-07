@@ -14,7 +14,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.text.IsEqualIgnoringCase;
 
 /**
- * An Expectation for a String value to be equal to the given value, ignoring case.
+ * An Expectation for a String 'actual' value to be equal to the given 'expected' value, ignoring case.
  *
  * @author Tim Slifer
  */

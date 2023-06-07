@@ -23,8 +23,8 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 
 /**
- * An expectation for the text of an element, represented as a Temporal, to be not within a timeframe of the given
- * Temporal.
+ * An expectation for the text of an element, represented as a Temporal 'actual' value, to be not within a range of the
+ * given Temporal 'expected' value.
  *
  * @author Tim Slifer
  */

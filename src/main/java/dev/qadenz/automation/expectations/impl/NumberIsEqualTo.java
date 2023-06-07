@@ -16,7 +16,7 @@ import org.hamcrest.core.IsEqual;
 import java.text.NumberFormat;
 
 /**
- * An Expectation for a number value to be equal to the given value.
+ * An Expectation for a numeric 'actual' value to be equal to the given 'expected' value.
  *
  * @author Tim Slifer
  */

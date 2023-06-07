@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * An Expectation for a String value to be equal to one of several possible options.
+ * An Expectation for a String 'actual' value to be equal to one of several possible 'expected' options.
  *
  * @author Tim Slifer
  */

@@ -15,7 +15,7 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNot;
 
 /**
- * An Expectation for a String value to be not equal to the given value.
+ * An Expectation for a String 'actual' value to be not equal to the given 'expected' value.
  *
  * @author Tim Slifer
  */

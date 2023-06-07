@@ -14,7 +14,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.core.StringContains;
 
 /**
- * An Expectation for a String value to contain the given value.
+ * An Expectation for a String 'actual' value to contain the given 'expected' value.
  *
  * @author Tim Slifer
  */

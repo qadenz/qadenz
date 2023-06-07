@@ -15,7 +15,7 @@ import org.hamcrest.core.IsNot;
 import org.hamcrest.core.StringEndsWith;
 
 /**
- * An Expectation for a String value to not end with the given value.
+ * An Expectation for a String 'actual' value to not end with the given 'expected' value.
  *
  * @author Tim Slifer
  */

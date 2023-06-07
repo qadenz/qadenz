@@ -14,7 +14,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.core.IsEqual;
 
 /**
- * An Expectation for a String value to be equal to the given value.
+ * An Expectation for a String 'actual' value to be equal to the given 'expected' value.
  *
  * @author Tim Slifer
  */

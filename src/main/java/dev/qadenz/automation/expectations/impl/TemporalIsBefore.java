@@ -20,7 +20,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 
 /**
- * An expectation for the text of an element, represented as a Temporal, to be before the given Temporal.
+ * An expectation for the text of an element, represented as a Temporal 'actual' value, to be before the given Temporal
+ * 'expected' value.
  *
  * @author Tim Slifer
  */

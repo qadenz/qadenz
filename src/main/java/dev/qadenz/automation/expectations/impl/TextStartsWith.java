@@ -14,7 +14,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.core.StringStartsWith;
 
 /**
- * An Expectation for a String value to start with the given value.
+ * An Expectation for a String 'actual' value to start with the given 'expected' value.
  *
  * @author Tim Slifer
  */

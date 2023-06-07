@@ -81,7 +81,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a double value to be equal to the given value.
+     * An Expectation for a numeric 'actual' value to be equal to the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -92,7 +92,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be equal to the given value.
+     * An Expectation for a numeric 'actual' value to be equal to the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -103,7 +103,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a double value to be greater than the given value.
+     * An Expectation for a numeric 'actual' value to be greater than the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -114,7 +114,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be greater than the given value.
+     * An Expectation for a numeric 'actual' value to be greater than the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -125,7 +125,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a double value to be greater than or equal to the given value.
+     * An Expectation for a numeric 'actual' value to be greater than or equal to the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -136,7 +136,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be greater than or equal to the given value.
+     * An Expectation for a numeric 'actual' value to be greater than or equal to the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -147,7 +147,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a double value to be less than the given value.
+     * An Expectation for a numeric 'actual' value to be less than the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -158,7 +158,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be less than the given value.
+     * An Expectation for a numeric 'actual' value to be less than the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -169,7 +169,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a double value to be less than or equal to the given value.
+     * An Expectation for a numeric 'actual' value to be less than or equal to the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -180,7 +180,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be less than or equal to the given value.
+     * An Expectation for a numeric 'actual' value to be less than or equal to the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -191,7 +191,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a double value to be not equal to the given value.
+     * An Expectation for a numeric 'actual' value to be not equal to the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -202,7 +202,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for an integer value to be not equal to the given value.
+     * An Expectation for a numeric 'actual' value to be not equal to the given 'expected' value.
      *
      * @param expectedValue The value for comparison.
      *
@@ -213,7 +213,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be after the given LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be after the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalDate The formatted date value for comparison.
      *
@@ -225,7 +226,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be after the given LocalDateTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be after the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalDateTime The formatted date value for comparison.
      *
@@ -237,7 +239,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalTime, to be after the given LocalTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be after the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalTime The formatted date value for comparison.
      *
@@ -249,7 +252,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be before the given LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be before the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalDate The formatted date value for comparison.
      *
@@ -261,7 +265,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be before the given LocalDateTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be before the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalDateTime The formatted date value for comparison.
      *
@@ -273,7 +278,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalTime, to be before the given LocalTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be before the given
+     * Temporal 'expected' value.     *
      *
      * @param expectedLocalTime The formatted date value for comparison.
      *
@@ -285,7 +291,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be on the given day of the week.
+     * An expectation for the text of an element, represented as a Temporal value, to be on the given day of the week.
      *
      * @param expectedDayOfWeek The formatted date value for comparison.
      *
@@ -296,7 +302,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be on the given day of the week.
+     * An expectation for the text of an element, represented as a Temporal value, to be on the given day of the week.
      *
      * @param expectedDayOfWeek The formatted date value for comparison.
      *
@@ -307,7 +313,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be equal to the given LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be equal to the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalDate The formatted date value for comparison.
      *
@@ -318,7 +325,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be equal to the given LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be equal to the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalDateTime The formatted date value for comparison.
      *
@@ -329,7 +337,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be equal to the given LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be equal to the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalTime The formatted date value for comparison.
      *
@@ -340,21 +349,21 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be the same as or after the given
-     * LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be the same as or after
+     * the given Temporal 'expected' value.
      *
-     * @param expectedLocaldate The formatted date value for comparison.
+     * @param expectedLocalDate The formatted date value for comparison.
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalDate> isEqualToOrAfter(LocalDate expectedLocaldate) {
-        return new TemporalIsEqualToOrAfter<>(expectedLocaldate, LOCALDATE_AS_LOCALDATE, localDate(expectedLocaldate),
+    public static TemporalExpectation<LocalDate> isEqualToOrAfter(LocalDate expectedLocalDate) {
+        return new TemporalIsEqualToOrAfter<>(expectedLocalDate, LOCALDATE_AS_LOCALDATE, localDate(expectedLocalDate),
                 LOCALDATE);
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be the same as or after the given
-     * LocalDateTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be the same as or after
+     * the given Temporal 'expected' value.
      *
      * @param expectedLocalDateTime The formatted date value for comparison.
      *
@@ -366,8 +375,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalTime, to be the same as or after the given
-     * LocalTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be the same as or after
+     * the given Temporal 'expected' value.
      *
      * @param expectedLocalTime The formatted date value for comparison.
      *
@@ -379,8 +388,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be the same as or before the given
-     * LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be the same as or before
+     * the given Temporal 'expected' value.
      *
      * @param expectedLocalDate The formatted date value for comparison.
      *
@@ -392,8 +401,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be the same as or before the given
-     * LocalDateTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be the same as or before
+     * the given Temporal 'expected' value.
      *
      * @param expectedLocalDateTime The formatted date value for comparison.
      *
@@ -405,8 +414,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalTime, to be the same as or before the given
-     * LocalTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be the same as or before
+     * the given Temporal 'expected' value.
      *
      * @param expectedLocalTime The formatted date value for comparison.
      *
@@ -418,7 +427,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to not be on the given day of the week.
+     * An expectation for the text of an element, represented as a Temporal value, to be not on the given day of the
+     * week.
      *
      * @param expectedDayOfWeek The formatted date value for comparison.
      *
@@ -429,7 +439,7 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to not be on the given day of the
+     * An expectation for the text of an element, represented as a Temporal value, to be not on the given day of the
      * week.
      *
      * @param expectedDayOfWeek The formatted date value for comparison.
@@ -442,7 +452,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be not equal to the given LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be not equal to the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalDate The formatted date value for comparison.
      *
@@ -453,7 +464,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be not equal to the given LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be not equal to the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalDateTime The formatted date value for comparison.
      *
@@ -464,7 +476,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be not equal to the given LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be not equal to the given
+     * Temporal 'expected' value.
      *
      * @param expectedLocalTime The formatted date value for comparison.
      *
@@ -475,8 +488,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to not be within a timeframe of the given
-     * LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be not within a range of
+     * the given Temporal 'expected' value.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -491,8 +504,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to not be within a timeframe of the
-     * given LocalDateTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be not within a range of
+     * the given Temporal 'expected' value.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -507,8 +520,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalTime, to not be within a timeframe of the given
-     * LocalTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be not within a range of
+     * the given Temporal 'expected' value.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -523,8 +536,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDate, to be within a timeframe of the given
-     * LocalDate.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be within a range of the
+     * given Temporal 'expected' value.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -538,8 +551,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalDateTime, to be within a timeframe of the given
-     * LocalDateTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be within a range of the
+     * given Temporal 'expected' value.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -554,8 +567,8 @@ public class Expectations {
     }
     
     /**
-     * An expectation for the text of an element, represented as a LocalTime, to be within a timeframe of the given
-     * LocalTime.
+     * An expectation for the text of an element, represented as a Temporal 'actual' value, to be within a range of the
+     * given Temporal 'expected' value.
      *
      * @param period The number of ChronoUnits within the allowable range.
      * @param unit The unit of time.
@@ -569,7 +582,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to contain the given value.
+     * An Expectation for a String 'actual' value to contain the given 'expected' value.
      *
      * @param expectedText The value for comparison.
      *
@@ -580,7 +593,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to contain the given value, ignoring case.
+     * An Expectation for a String 'actual' value to contain the given 'expected' value, ignoring case.
      *
      * @param expectedText The value for comparison.
      *
@@ -591,7 +604,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to not contain the given value.
+     * An Expectation for a String 'actual' value to not contain the given 'expected' value.
      *
      * @param expectedText The value for comparison.
      *
@@ -602,7 +615,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to not end with the given value.
+     * An Expectation for a String 'actual' value to not end with the given 'expected' value.
      *
      * @param expectedText The value for comparison.
      *
@@ -613,7 +626,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to not start with the given value.
+     * An Expectation for a String 'actual' value to not start with the given 'expected' value.
      *
      * @param expectedText The value for comparison.
      *
@@ -624,7 +637,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to end with the given value.
+     * An Expectation for a String 'actual' value to end with the given 'expected' value.
      *
      * @param expectedText The value for comparison.
      *
@@ -635,7 +648,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to be equal to the given value, ignoring case.
+     * An Expectation for a String 'actual' value to be equal to the given 'expected' value, ignoring case.
      *
      * @param expectedText The value for comparison.
      *
@@ -655,7 +668,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to be equal to the given value.
+     * An Expectation for a String 'actual' value to be equal to the given 'expected' value.
      *
      * @param expectedText The value for comparison.
      *
@@ -666,7 +679,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to be equal to one of several possible options.
+     * An Expectation for a String 'actual' value to be equal to one of several possible 'expected' options.
      *
      * @param options The group of possible options.
      *
@@ -686,7 +699,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to be not equal to the given value.
+     * An Expectation for a String 'actual' value to be not equal to the given 'expected' value.
      *
      * @param expectedText The value for comparison.
      *
@@ -697,7 +710,7 @@ public class Expectations {
     }
     
     /**
-     * An Expectation for a String value to start with the given value.
+     * An Expectation for a String 'actual' value to start with the given 'expected' value.
      *
      * @param expectedText The value for comparison.
      *

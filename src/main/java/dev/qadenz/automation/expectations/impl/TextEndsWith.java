@@ -14,7 +14,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.core.StringEndsWith;
 
 /**
- * An Expectation for a String value to end with the given value.
+ * An Expectation for a String 'actual' value to end with the given 'expected' value.
  *
  * @author Tim Slifer
  */

@@ -15,7 +15,7 @@ import org.hamcrest.core.IsNot;
 import org.hamcrest.core.StringContains;
 
 /**
- * An Expectation for a String value to not contain the given value.
+ * An Expectation for a String 'actual' value to not contain the given 'expected' value.
  *
  * @author Tim Slifer
  */
