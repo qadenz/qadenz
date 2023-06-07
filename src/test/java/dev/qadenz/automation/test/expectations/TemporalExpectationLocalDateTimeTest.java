@@ -36,8 +36,14 @@ public class TemporalExpectationLocalDateTimeTest extends TemporalExpectationTes
     }
     
     @Test
-    public void testLocalDateTimeIsAfter_ReturnsFalseWhenActualIsSameAsExpected() {
+    public void testLocalDateTimeIsAfter_ReturnsFalseWhenActualIsEqualToExpected() {
         TemporalExpectation<LocalDateTime> expectation = Expectations.isAfter(AUG_05_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_05_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsBefore_ReturnsFalseWhenActualIsAfterExpected() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isBefore(AUG_04_2015_NOON);
         assertFalse(expectation.matcher().matches(AUG_05_2015_NOON));
     }
     
@@ -48,13 +54,7 @@ public class TemporalExpectationLocalDateTimeTest extends TemporalExpectationTes
     }
     
     @Test
-    public void testLocalDateTimeIsBefore_ReturnsFalseWhenActualIsAfterExpected() {
-        TemporalExpectation<LocalDateTime> expectation = Expectations.isBefore(AUG_04_2015_NOON);
-        assertFalse(expectation.matcher().matches(AUG_05_2015_NOON));
-    }
-    
-    @Test
-    public void testLocalDateTimeIsBefore_ReturnsFalseWhenActualIsSameAsExpected() {
+    public void testLocalDateTimeIsBefore_ReturnsFalseWhenActualIsEqualToExpected() {
         TemporalExpectation<LocalDateTime> expectation = Expectations.isBefore(AUG_05_2015_NOON);
         assertFalse(expectation.matcher().matches(AUG_05_2015_NOON));
     }
@@ -66,91 +66,139 @@ public class TemporalExpectationLocalDateTimeTest extends TemporalExpectationTes
     }
     
     @Test
-    public void testLocalDateIsEqualTo_ReturnsTrueWhenActualIsEqualToExpected() {
-        Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_07_2015_NOON);
-        assertTrue(expectation.matcher().matches(AUG_07_2015_NOON));
-    }
-    
-    @Test
-    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsNotEqualToExpected() {
-        Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_07_2015_NOON);
-        assertFalse(expectation.matcher().matches(AUG_06_2015_NOON));
-    }
-    
-    @Test
-    public void testLocalDateTimeIsNotDayOfWeek_ReturnsTrueWhenActualIsNotSameDayOfWeek() {
+    public void testLocalDateTimeIsDayOfWeek_ReturnsFalseWhenActualIsNotSameDayOfWeek() {
         Expectation<LocalDateTime> expectation = Expectations.isDayOfWeekAsLocalDateTime(DayOfWeek.MONDAY);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
     }
     
     @Test
-    public void testLocalDateTimeIsNotDayOfWeek_ReturnsFalseWhenActualIsSameDayOfWeek() {
-        Expectation<LocalDateTime> expectation = Expectations.isNotDayOfWeekAsLocalDateTime(DayOfWeek.MONDAY);
-        assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
+    public void testLocalDateIsEqualTo_ReturnsTrueWhenActualIsAfterExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_04_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_05_2015_NOON));
     }
     
     @Test
-    public void testLocalDateTimeIsDayOfWeek_ReturnsFalseWhenActualIsNotSameDayOfWeek() {
+    public void testLocalDateIsEqualTo_ReturnsTrueWhenActualIsBeforeExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_05_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_05_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_05_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsNotDayOfWeek_ReturnsFalseWhenActualIsSameDayOfWeek() {
         Expectation<LocalDateTime> expectation = Expectations.isNotDayOfWeekAsLocalDateTime(DayOfWeek.TUESDAY);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
     }
     
     @Test
-    public void testLocalDateIsNotEqualTo_ReturnsTrueWhenActualIsNotEqualToExpected() {
-        Expectation<LocalDateTime> expectation = Expectations.isNotEqualTo(AUG_07_2015_NOON);
-        assertTrue(expectation.matcher().matches(AUG_06_2015_NOON));
-    }
-    
-    @Test
-    public void testLocalDateIsNotEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
-        Expectation<LocalDateTime> expectation = Expectations.isNotEqualTo(AUG_07_2015_NOON);
-        assertFalse(expectation.matcher().matches(AUG_07_2015_NOON));
-    }
-    
-    @Test
-    public void testLocalDateTimeIsNotWithin_ReturnsTrueWhenActualIsNotInRangeOfExpected() {
-        TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_07_2015_NOON);
+    public void testLocalDateTimeIsNotDayOfWeek_ReturnsTrueWhenActualIsNotSameDayOfWeek() {
+        Expectation<LocalDateTime> expectation = Expectations.isNotDayOfWeekAsLocalDateTime(DayOfWeek.MONDAY);
         assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
     }
     
     @Test
-    public void testLocalDateTimeIsNotWithin_ReturnsFalseWhenActualIsOuterRangeOfExpected() {
-        TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_06_2015_NOON);
+    public void testLocalDateTimeIsNotEqualTo_ReturnsTrueWhenActualIsAfterExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isNotEqualTo(AUG_04_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_05_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsNotEqualTo_ReturnsTrueWhenActualIsBeforeExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isNotEqualTo(AUG_05_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsNotEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isNotEqualTo(AUG_05_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_05_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsNotWithin_ReturnsTrueWhenActualIsAfterExpectedAndOutsideRange() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_01_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsNotWithin_ReturnsFalseWhenActualIsAfterExpectedAndAtRange() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_02_2015_NOON);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
     }
     
     @Test
-    public void testLocalDateTimeIsNotWithin_ReturnsFalseWhenActualIsWithinRangeOfExpected() {
-        TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_05_2015_NOON);
+    public void testLocalDateTimeIsNotWithin_ReturnsFalseWhenActualIsAfterExpectedAndWithinRange() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_03_2015_NOON);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
     }
     
     @Test
-    public void testLocalDateTimeIsNotWithin_ReturnsFalseWhenActualIsSameAsExpected() {
+    public void testLocalDateTimeIsNotWithin_ReturnsFalseWhenActualIsEqualToExpected() {
         TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_04_2015_NOON);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
     }
     
     @Test
-    public void testLocalDateTimeIsWithin_ReturnsTrueWhenActualIsSameAsExpected() {
+    public void testLocalDateTimeIsNotWithin_ReturnsFalseWhenActualIsBeforeExpectedAndWithinRange() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_05_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsNotWithin_ReturnsFalseWhenActualIsBeforeExpectedAndAtRange() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_06_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsNotWithin_ReturnsTrueWhenActualIsBeforeExpectedAndOutsideRange() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isNotWithin(2, ChronoUnit.DAYS, AUG_07_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsWithin_ReturnsFalseWhenActualIsAfterExpectedAndOutsideRange() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isWithin(2, ChronoUnit.DAYS, AUG_01_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsWithin_ReturnsTrueWhenActualIsAfterExpectedAndAtRange() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isWithin(2, ChronoUnit.DAYS, AUG_02_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsWithin_ReturnsTrueWhenActualIsAfterExpectedAndWithinRange() {
+        TemporalExpectation<LocalDateTime> expectation = Expectations.isWithin(2, ChronoUnit.DAYS, AUG_03_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateTimeIsWithin_ReturnsTrueWhenActualIsEqualToExpected() {
         TemporalExpectation<LocalDateTime> expectation = Expectations.isWithin(2, ChronoUnit.DAYS, AUG_04_2015_NOON);
         assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
     }
     
     @Test
-    public void testLocalDateTimeIsWithin_ReturnsTrueWhenActualIsInRangeOfExpected() {
+    public void testLocalDateTimeIsWithin_ReturnsTrueWhenActualIsBeforeExpectedAndWithinRange() {
         TemporalExpectation<LocalDateTime> expectation = Expectations.isWithin(2, ChronoUnit.DAYS, AUG_05_2015_NOON);
         assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
     }
     
     @Test
-    public void testLocalDateTimeIsWithin_ReturnsTrueWhenActualIsOuterRangeOfExpected() {
+    public void testLocalDateTimeIsWithin_ReturnsTrueWhenActualIsBeforeExpectedAndAtRange() {
         TemporalExpectation<LocalDateTime> expectation = Expectations.isWithin(2, ChronoUnit.DAYS, AUG_06_2015_NOON);
         assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
     }
     
     @Test
-    public void testLocalDateTimeIsWithin_ReturnsFalseWhenActualIsNotWithinRangeOfExpected() {
+    public void testLocalDateTimeIsWithin_ReturnsFalseWhenActualIsBeforeExpectedAndOutsideRange() {
         TemporalExpectation<LocalDateTime> expectation = Expectations.isWithin(2, ChronoUnit.DAYS, AUG_07_2015_NOON);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
     }

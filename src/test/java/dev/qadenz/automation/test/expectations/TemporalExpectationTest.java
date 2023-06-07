@@ -25,6 +25,9 @@ public class TemporalExpectationTest {
     public static final LocalDate AUG_06_2015 = LocalDate.of(2015, Month.AUGUST, 6);
     public static final LocalDate AUG_07_2015 = LocalDate.of(2015, Month.AUGUST, 7);
     
+    public static final LocalDateTime AUG_01_2015_NOON = LocalDateTime.of(AUG_01_2015, NOON);
+    public static final LocalDateTime AUG_02_2015_NOON = LocalDateTime.of(AUG_02_2015, NOON);
+    public static final LocalDateTime AUG_03_2015_NOON = LocalDateTime.of(AUG_03_2015, NOON);
     public static final LocalDateTime AUG_04_2015_NOON = LocalDateTime.of(AUG_04_2015, NOON);
     public static final LocalDateTime AUG_05_2015_NOON = LocalDateTime.of(AUG_05_2015, NOON);
     public static final LocalDateTime AUG_06_2015_NOON = LocalDateTime.of(AUG_06_2015, NOON);
