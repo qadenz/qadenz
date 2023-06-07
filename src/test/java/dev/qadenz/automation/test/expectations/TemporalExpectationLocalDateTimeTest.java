@@ -72,13 +72,13 @@ public class TemporalExpectationLocalDateTimeTest extends TemporalExpectationTes
     }
     
     @Test
-    public void testLocalDateIsEqualTo_ReturnsTrueWhenActualIsAfterExpected() {
+    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsAfterExpected() {
         Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_04_2015_NOON);
         assertFalse(expectation.matcher().matches(AUG_05_2015_NOON));
     }
     
     @Test
-    public void testLocalDateIsEqualTo_ReturnsTrueWhenActualIsBeforeExpected() {
+    public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsBeforeExpected() {
         Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_05_2015_NOON);
         assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
     }
@@ -86,6 +86,42 @@ public class TemporalExpectationLocalDateTimeTest extends TemporalExpectationTes
     @Test
     public void testLocalDateIsEqualTo_ReturnsFalseWhenActualIsEqualToExpected() {
         Expectation<LocalDateTime> expectation = Expectations.isEqualTo(AUG_05_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_05_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrAfter_ReturnsTrueWhenActualIsAfterExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualToOrAfter(AUG_04_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_05_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrAfter_ReturnsFalseWhenActualIsBeforeExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualToOrAfter(AUG_05_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrAfter_ReturnsTrueWhenActualIsEqualToExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualToOrAfter(AUG_05_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_05_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrBefore_ReturnsFalseWhenActualIsAfterExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualToOrBefore(AUG_04_2015_NOON);
+        assertFalse(expectation.matcher().matches(AUG_05_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrBefore_ReturnsTrueWhenActualIsBeforeExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualToOrBefore(AUG_05_2015_NOON);
+        assertTrue(expectation.matcher().matches(AUG_04_2015_NOON));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrBefore_ReturnsTrueWhenActualIsEqualToExpected() {
+        Expectation<LocalDateTime> expectation = Expectations.isEqualToOrBefore(AUG_05_2015_NOON);
         assertTrue(expectation.matcher().matches(AUG_05_2015_NOON));
     }
     

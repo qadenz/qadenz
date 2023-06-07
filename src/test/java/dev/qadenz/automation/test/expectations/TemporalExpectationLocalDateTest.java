@@ -90,6 +90,42 @@ public class TemporalExpectationLocalDateTest extends TemporalExpectationTest {
     }
     
     @Test
+    public void testLocalDateIsEqualToOrAfter_ReturnsTrueWhenActualIsAfterExpected() {
+        TemporalExpectation<LocalDate> expectation = Expectations.isEqualToOrAfter(AUG_04_2015);
+        assertTrue(expectation.matcher().matches(AUG_05_2015));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrAfter_ReturnsFalseWhenActualIsBeforeExpected() {
+        TemporalExpectation<LocalDate> expectation = Expectations.isEqualToOrAfter(AUG_05_2015);
+        assertFalse(expectation.matcher().matches(AUG_04_2015));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrAfter_ReturnsTrueWhenActualIsEqualToExpected() {
+        TemporalExpectation<LocalDate> expectation = Expectations.isEqualToOrAfter(AUG_05_2015);
+        assertTrue(expectation.matcher().matches(AUG_05_2015));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrBefore_ReturnsFalseWhenActualIsAfterExpected() {
+        TemporalExpectation<LocalDate> expectation = Expectations.isEqualToOrBefore(AUG_04_2015);
+        assertFalse(expectation.matcher().matches(AUG_05_2015));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrBefore_ReturnsTrueWhenActualIsBeforeExpected() {
+        TemporalExpectation<LocalDate> expectation = Expectations.isEqualToOrBefore(AUG_05_2015);
+        assertTrue(expectation.matcher().matches(AUG_04_2015));
+    }
+    
+    @Test
+    public void testLocalDateIsEqualToOrBefore_ReturnsTrueWhenActualIsEqualToExpected() {
+        TemporalExpectation<LocalDate> expectation = Expectations.isEqualToOrBefore(AUG_05_2015);
+        assertTrue(expectation.matcher().matches(AUG_05_2015));
+    }
+    
+    @Test
     public void testLocalDateIsNotDayOfWeek_ReturnsFalseWhenActualIsSameDayOfWeek() {
         Expectation<LocalDate> expectation = Expectations.isNotDayOfWeekAsLocalDate(DayOfWeek.TUESDAY);
         assertFalse(expectation.matcher().matches(AUG_04_2015));
