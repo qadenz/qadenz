@@ -412,7 +412,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static TemporalExpectation<LocalTime> isEqualTosOrBefore(LocalTime expectedLocalTime) {
+    public static TemporalExpectation<LocalTime> isEqualToOrBefore(LocalTime expectedLocalTime) {
         return new TemporalIsEqualToOrBefore<>(expectedLocalTime, LOCALTIME_AS_LOCALTIME, localTime(expectedLocalTime),
                 LOCALTIME);
     }
