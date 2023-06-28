@@ -40,8 +40,8 @@ public class WebInspector {
     
     private Logger LOG;
     
-    private WebFinder webFinder = new WebFinder();
-    private Screenshot screenshot = new Screenshot();
+    protected WebFinder webFinder = new WebFinder();
+    protected Screenshot screenshot = new Screenshot();
     
     public WebInspector() {
         LOG = LoggerFactory.getLogger(WebInspector.class);

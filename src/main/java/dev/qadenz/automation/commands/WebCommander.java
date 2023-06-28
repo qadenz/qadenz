@@ -44,8 +44,8 @@ public class WebCommander extends Commands {
     
     private Logger LOG;
     
-    private WebFinder webFinder = new WebFinder();
-    private Screenshot screenshot = new Screenshot();
+    protected WebFinder webFinder = new WebFinder();
+    protected Screenshot screenshot = new Screenshot();
     
     public WebCommander() {
         super();
