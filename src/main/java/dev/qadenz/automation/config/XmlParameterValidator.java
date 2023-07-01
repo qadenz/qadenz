@@ -193,7 +193,7 @@ public class XmlParameterValidator {
      * @return The retryInterceptedClicks value.
      */
     public boolean validateRetryInterceptedClicks() {
-        boolean xmlRetryInterceptedClicks = true;
+        boolean xmlRetryInterceptedClicks = false;
         if (xmlParameters.containsKey("retryInterceptedClicks")) {
             xmlRetryInterceptedClicks = Boolean.parseBoolean(xmlParameters.get("retryInterceptedClicks"));
         }
