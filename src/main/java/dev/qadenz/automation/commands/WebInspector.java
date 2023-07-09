@@ -353,16 +353,16 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the instance of an element with an attribute that contains the expected value.
+     * Retrieves the position of an element with an attribute that contains the expected value.
      *
      * @param locator The mapped UI element.
      * @param attributeName The attribute to be examined.
      * @param expectedValue The value to be identified.
      *
-     * @return The element instance.
+     * @return The element position.
      */
-    public int getInstanceOfElementAttribute(Locator locator, String attributeName, String expectedValue) {
-        LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].",
+    public int getPositionOfElementWithAttribute(Locator locator, String attributeName, String expectedValue) {
+        LOG.info("Finding position of element [{}] with attribute [{}] containing value [{}].",
                 locator.getName(), attributeName, expectedValue);
         
         List<String> attributeValues;
@@ -372,7 +372,7 @@ public class WebInspector {
             attributeValues = getAttributeValuesFromElements(webElements, attributeName);
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving instance :: {}: {}", exception.getClass().getSimpleName(),
+            LOG.error("Error retrieving position :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
             screenshot.capture();
             
@@ -383,15 +383,15 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the instance of an element that contains the expected text.
+     * Retrieves the position of an element that contains the expected text.
      *
      * @param locator The mapped UI element.
      * @param expectedText The value to be identified.
      *
-     * @return The element instance.
+     * @return The element position.
      */
-    public int getInstanceOfElementText(Locator locator, String expectedText) {
-        LOG.info("Finding instance of element [{}] with value [{}].", locator.getName(), expectedText);
+    public int getPositionOfElementWithText(Locator locator, String expectedText) {
+        LOG.info("Finding position of element [{}] with value [{}].", locator.getName(), expectedText);
         
         List<String> elementValues;
         try {
@@ -400,7 +400,7 @@ public class WebInspector {
             elementValues = getTextValuesFromElements(webElements);
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving instance :: {}: {}", exception.getClass().getSimpleName(),
+            LOG.error("Error retrieving position :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
             screenshot.capture();
             
