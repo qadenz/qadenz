@@ -65,7 +65,6 @@ public class AutomatedWebTest {
         XmlParameterValidator xmlParameterValidator = new XmlParameterValidator(xmlParameters);
         
         WebConfig.gridHost = xmlParameterValidator.validateGridHost();
-        WebConfig.applicationName = xmlParameterValidator.validateApplicationName();
     }
     
     /**
