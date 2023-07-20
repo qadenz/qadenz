@@ -11,45 +11,30 @@ package dev.qadenz.automation.config;
 
 import dev.qadenz.automation.commands.Assertions;
 import dev.qadenz.automation.logs.Loggers;
-import dev.qadenz.automation.reporter.TestReporter;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Listeners;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
 
 /**
- * The top-level class for all test classes. The AutomatedTest manages configuration and launch of the WebDriver and
- * other major Suite components.
+ * The AutomatedTest manages configuration and launch of the WebDriver and other major Suite components for web-oriented
+ * tests.
  *
  * @author Tim Slifer
  */
-@Listeners({TestReporter.class})
-public class AutomatedWebTest {
+public class AutomatedWebTest extends AutomatedTest {
     
     private static final Logger LOG = Loggers.getSuiteLogger();
-    
-    /**
-     * Captures a timestamp as the start time of the suite.
-     *
-     * @param testContext The injected {@link ITestContext}.
-     */
-    @BeforeSuite(alwaysRun = true)
-    public void captureStartDateTime(ITestContext testContext) {
-        WebConfig.suiteStartDate = LocalDateTime.now();
-    }
     
     /**
      * Begins the suite execution process by reading the Suite-level parameters given on the Suite XML file, validating,
@@ -138,13 +123,5 @@ public class AutomatedWebTest {
     public void stopWebDriver() {
         LOG.info("Stopping the WebDriver.");
         WebDriverProvider.getWebDriver().quit();
-    }
-    
-    /**
-     * Captures the date/time when the Suite is completed.
-     */
-    @AfterSuite(alwaysRun = true)
-    public void captureEndDateTime() {
-        WebConfig.suiteEndDate = LocalDateTime.now();
     }
 }
