@@ -24,6 +24,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.collections.Lists;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +48,9 @@ public class TestResult {
     
     protected static final Comparator<ITestResult> RESULT_COMPARATOR =
             Comparator.comparing((ITestResult o) -> o.getTestClass().getName())
-                      .thenComparing(o -> o.getMethod().getMethodName());
+                      .thenComparing(o -> o.getMethod().getMethodName())
+                      .thenComparing(o -> (o.getParameters().length > 0) ? Arrays.toString(o.getParameters()) :
+                              Arrays.toString(o.getFactoryParameters()));
     
     private final String testName;
     private final List<ClassResult> failedConfigurationResults;
