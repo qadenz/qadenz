@@ -359,7 +359,7 @@ public class WebCommander extends Commands {
      * @param condition The Condition to be satisfied during the wait.
      */
     public void pause(Condition condition) {
-        LOG.info("Waiting for condition :: {}", condition.description());
+        LOG.info("Waiting for condition :: {}", condition);
         WebDriverWait webDriverWait =
                 new WebDriverWait(WebDriverProvider.getWebDriver(), Duration.ofSeconds(WebConfig.timeout));
         
