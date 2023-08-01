@@ -85,14 +85,14 @@ public abstract class Commands {
      */
     public void check(boolean captureScreen, List<Condition> conditions) {
         for (Condition condition : conditions) {
-            LOG.info("Checking Condition - {}", condition.description());
+            LOG.info("Checking Condition - {}", condition);
             try {
                 boolean result = condition.result();
                 Assert.assertTrue(result);
                 LOG.info("Result - PASS");
             }
             catch (AssertionError error) {
-                LOG.info("Result - FAIL :: {}", condition.output());
+                LOG.info("Result - FAIL :: Found [{}].", condition.actual());
                 Assertions.setFailures(true);
                 if (captureScreen) {
                     screenshot.capture();
@@ -153,14 +153,14 @@ public abstract class Commands {
         boolean failed = false;
         
         for (Condition condition : conditions) {
-            LOG.info("Verifying Condition - {}", condition.description());
+            LOG.info("Verifying Condition - {}", condition);
             try {
                 boolean result = condition.result();
                 Assert.assertTrue(result);
                 LOG.info("Result - PASS");
             }
             catch (AssertionError error) {
-                LOG.info("Result - FAIL :: {}", condition.output());
+                LOG.info("Result - FAIL :: Found [{}]", condition.actual());
                 failed = true;
                 if (captureScreen) {
                     screenshot.capture();

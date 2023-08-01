@@ -42,8 +42,8 @@ public class SelectedStateOfElement implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + selected + "].";
+    public String actual() {
+        return String.valueOf(selected);
     }
     
     @Override

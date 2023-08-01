@@ -45,8 +45,8 @@ public class PresenceOfAlert implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + present + "].";
+    public String actual() {
+        return String.valueOf(present);
     }
     
     @Override

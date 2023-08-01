@@ -41,8 +41,8 @@ public class EnabledStateOfElement implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + enabled + "].";
+    public String actual() {
+        return String.valueOf(enabled);
     }
     
     @Override

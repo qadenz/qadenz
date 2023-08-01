@@ -38,8 +38,8 @@ public class TextOfAlert implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + alertText + "].";
+    public String actual() {
+        return alertText;
     }
     
     @Override

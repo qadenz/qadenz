@@ -52,8 +52,8 @@ public class DirectTextOfElementAsDate implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + elementText + "] formatted as [" + dateTimeFormatter.format(elementDate) + "].";
+    public String actual() {
+        return "[" + elementText + "] formatted as [" + dateTimeFormatter.format(elementDate) + "]";
     }
     
     @Override

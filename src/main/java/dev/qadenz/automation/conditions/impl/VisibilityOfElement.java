@@ -42,8 +42,8 @@ public class VisibilityOfElement implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + visible + "].";
+    public String actual() {
+        return String.valueOf(visible);
     }
     
     @Override

@@ -42,8 +42,8 @@ public class DirectTextOfElement implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + elementText + "].";
+    public String actual() {
+        return elementText;
     }
     
     @Override

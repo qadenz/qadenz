@@ -51,8 +51,8 @@ public class DirectTextOfElementAsDouble implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + elementText + "] formatted as [" + decimalFormat.format(elementValue) + "].";
+    public String actual() {
+        return "[" + elementText + "] formatted as [" + decimalFormat.format(elementValue) + "]";
     }
     
     @Override

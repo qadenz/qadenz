@@ -43,8 +43,8 @@ public class AttributeOfElement implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + attributeValue + "].";
+    public String actual() {
+        return attributeValue;
     }
     
     @Override

@@ -41,8 +41,8 @@ public class SelectedMenuOption implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + selectedOption + "].";
+    public String actual() {
+        return selectedOption;
     }
     
     @Override

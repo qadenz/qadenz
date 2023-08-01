@@ -43,8 +43,8 @@ public class CssPropertyOfElement implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + cssPropertyValue + "].";
+    public String actual() {
+        return cssPropertyValue;
     }
     
     @Override

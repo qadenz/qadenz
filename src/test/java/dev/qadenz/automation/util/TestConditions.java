@@ -33,7 +33,7 @@ public class TestConditions {
             }
             
             @Override
-            public String output() {
+            public String actual() {
                 return "Returned true.";
             }
         };
@@ -52,7 +52,7 @@ public class TestConditions {
             }
             
             @Override
-            public String output() {
+            public String actual() {
                 return "Returned false.";
             }
         };
@@ -71,7 +71,7 @@ public class TestConditions {
             }
             
             @Override
-            public String output() {
+            public String actual() {
                 return "Threw an error.";
             }
         };

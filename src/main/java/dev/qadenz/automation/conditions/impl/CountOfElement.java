@@ -44,8 +44,8 @@ public class CountOfElement implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + elementCount + "].";
+    public String actual() {
+        return String.valueOf(elementCount);
     }
     
     @Override

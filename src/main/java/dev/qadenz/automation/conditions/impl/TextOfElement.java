@@ -41,8 +41,8 @@ public class TextOfElement implements Condition {
     }
     
     @Override
-    public String output() {
-        return "Found [" + elementText + "].";
+    public String actual() {
+        return elementText;
     }
     
     @Override

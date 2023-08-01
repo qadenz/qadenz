@@ -24,5 +24,5 @@ public interface Condition {
     /**
      * @return A statement describing the actual value being evaluated by the Condition.
      */
-    String output();
+    String actual();
 }

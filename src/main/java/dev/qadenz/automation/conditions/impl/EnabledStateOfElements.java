@@ -55,7 +55,7 @@ public class EnabledStateOfElements implements Condition {
     }
     
     @Override
-    public String output() {
+    public String actual() {
         return "Discrepancies: \n" + failures.toString();
     }
     
