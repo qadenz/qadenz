@@ -23,11 +23,6 @@ public class TestConditions {
     public static Condition returnsTrue() {
         return new Condition() {
             @Override
-            public String description() {
-                return "Always returns true.";
-            }
-            
-            @Override
             public Boolean result() {
                 return true;
             }
@@ -36,16 +31,16 @@ public class TestConditions {
             public String actual() {
                 return "Returned true.";
             }
+            
+            @Override
+            public String toString() {
+                return "Always returns true.";
+            }
         };
     }
     
     public static Condition returnsFalse() {
         return new Condition() {
-            @Override
-            public String description() {
-                return "Always returns false.";
-            }
-            
             @Override
             public Boolean result() {
                 return false;
@@ -55,16 +50,16 @@ public class TestConditions {
             public String actual() {
                 return "Returned false.";
             }
+            
+            @Override
+            public String toString() {
+                return "Always returns false.";
+            }
         };
     }
     
     public static Condition throwsError() {
         return new Condition() {
-            @Override
-            public String description() {
-                return "Always throws an error.";
-            }
-            
             @Override
             public Boolean result() {
                 throw new IllegalStateException("Testing a validation that produces an error.");
@@ -73,6 +68,11 @@ public class TestConditions {
             @Override
             public String actual() {
                 return "Threw an error.";
+            }
+            
+            @Override
+            public String toString() {
+                return "Always throws an error.";
             }
         };
     }
