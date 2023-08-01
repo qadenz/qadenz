@@ -61,6 +61,6 @@ public class PresenceOfElements implements Condition {
     
     @Override
     public String toString() {
-        return "Presence of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
+        return "Presence of elements [" + locatorGroup.getName() + "] " + expectation + ".";
     }
 }

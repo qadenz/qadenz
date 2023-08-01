@@ -50,6 +50,6 @@ public class CountOfElement implements Condition {
     
     @Override
     public String toString() {
-        return "Count of element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Count of element [" + locator.getName() + "] " + expectation + ".";
     }
 }

@@ -56,6 +56,6 @@ public class TextOfElementAsInteger implements Condition {
     
     @Override
     public String toString() {
-        return "Text of element [" + locator.getName() + "] as Integer " + expectation.description() + ".";
+        return "Text of element [" + locator.getName() + "] as Integer " + expectation + ".";
     }
 }

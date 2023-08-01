@@ -57,6 +57,6 @@ public class TextOfElementAsDate implements Condition {
     
     @Override
     public String toString() {
-        return "Text of element [" + locator.getName() + "] as LocalDate " + expectation.description() + ".";
+        return "Text of element [" + locator.getName() + "] as LocalDate " + expectation + ".";
     }
 }

@@ -47,6 +47,6 @@ public class SelectedMenuOption implements Condition {
     
     @Override
     public String toString() {
-        return "Selected option of menu element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Selected option of menu element [" + locator.getName() + "] " + expectation + ".";
     }
 }

@@ -61,6 +61,6 @@ public class EnabledStateOfElements implements Condition {
     
     @Override
     public String toString() {
-        return "Enabled state of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
+        return "Enabled state of elements [" + locatorGroup.getName() + "] " + expectation + ".";
     }
 }

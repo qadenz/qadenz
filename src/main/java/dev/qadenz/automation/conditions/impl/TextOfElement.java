@@ -47,6 +47,6 @@ public class TextOfElement implements Condition {
     
     @Override
     public String toString() {
-        return "Text of element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Text of element [" + locator.getName() + "] " + expectation + ".";
     }
 }

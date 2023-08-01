@@ -64,6 +64,6 @@ public class TextOfElements implements Condition {
     
     @Override
     public String toString() {
-        return "Text of each instance of element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Text of each instance of element [" + locator.getName() + "] " + expectation + ".";
     }
 }

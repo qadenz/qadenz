@@ -62,6 +62,6 @@ public class VisibilityOfElements implements Condition {
     
     @Override
     public String toString() {
-        return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
+        return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation + ".";
     }
 }

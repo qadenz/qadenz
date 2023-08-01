@@ -48,6 +48,6 @@ public class SelectedStateOfElement implements Condition {
     
     @Override
     public String toString() {
-        return "Selected state of element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Selected state of element [" + locator.getName() + "] " + expectation + ".";
     }
 }

@@ -48,6 +48,6 @@ public class DirectTextOfElement implements Condition {
     
     @Override
     public String toString() {
-        return "Direct text of element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Direct text of element [" + locator.getName() + "] " + expectation + ".";
     }
 }

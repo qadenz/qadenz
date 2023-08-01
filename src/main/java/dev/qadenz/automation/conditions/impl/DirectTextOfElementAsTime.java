@@ -58,6 +58,6 @@ public class DirectTextOfElementAsTime implements Condition {
     
     @Override
     public String toString() {
-        return "Direct text of element [" + locator.getName() + "] as LocalTime " + expectation.description() + ".";
+        return "Direct text of element [" + locator.getName() + "] as LocalTime " + expectation + ".";
     }
 }

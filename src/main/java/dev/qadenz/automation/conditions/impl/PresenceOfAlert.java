@@ -51,6 +51,6 @@ public class PresenceOfAlert implements Condition {
     
     @Override
     public String toString() {
-        return "Presence of Alert " + expectation.description() + ".";
+        return "Presence of Alert " + expectation + ".";
     }
 }

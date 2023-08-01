@@ -44,6 +44,6 @@ public class TextOfAlert implements Condition {
     
     @Override
     public String toString() {
-        return "Text of Alert " + expectation.description() + ".";
+        return "Text of Alert " + expectation + ".";
     }
 }

@@ -49,7 +49,6 @@ public class AttributeOfElement implements Condition {
     
     @Override
     public String toString() {
-        return "Attribute [" + attributeName + "] of element [" + locator.getName() + "] " +
-                expectation.description() + ".";
+        return "Attribute [" + attributeName + "] of element [" + locator.getName() + "] " + expectation + ".";
     }
 }

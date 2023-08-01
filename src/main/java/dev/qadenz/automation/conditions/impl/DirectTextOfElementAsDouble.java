@@ -57,6 +57,6 @@ public class DirectTextOfElementAsDouble implements Condition {
     
     @Override
     public String toString() {
-        return "Text of element [" + locator.getName() + "] as Double " + expectation.description() + ".";
+        return "Text of element [" + locator.getName() + "] as Double " + expectation + ".";
     }
 }

@@ -48,6 +48,6 @@ public class VisibilityOfElement implements Condition {
     
     @Override
     public String toString() {
-        return "Visibility of element [" + locator.getName() + "] " + expectation.description() + ".";
+        return "Visibility of element [" + locator.getName() + "] " + expectation + ".";
     }
 }

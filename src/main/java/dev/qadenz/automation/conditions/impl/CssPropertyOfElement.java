@@ -50,6 +50,6 @@ public class CssPropertyOfElement implements Condition {
     @Override
     public String toString() {
         return "CSS Property [" + cssPropertyName + "] of element [" + locator.getName() + "] " +
-                expectation.description() + ".";
+                expectation + ".";
     }
 }
