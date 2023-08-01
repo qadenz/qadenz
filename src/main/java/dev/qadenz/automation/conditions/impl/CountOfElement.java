@@ -36,11 +36,6 @@ public class CountOfElement implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Count of element [" + locator.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementCount = webInspector.getCountOfElement(locator);
@@ -51,5 +46,10 @@ public class CountOfElement implements Condition {
     @Override
     public String output() {
         return "Found [" + elementCount + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Count of element [" + locator.getName() + "] " + expectation.description() + ".";
     }
 }

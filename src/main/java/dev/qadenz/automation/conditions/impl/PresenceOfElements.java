@@ -34,11 +34,6 @@ public class PresenceOfElements implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Presence of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         Boolean match = null;
         WebFinder webFinder = new WebFinder();
@@ -62,5 +57,10 @@ public class PresenceOfElements implements Condition {
     @Override
     public String output() {
         return "Discrepancies: \n" + failures.toString();
+    }
+    
+    @Override
+    public String toString() {
+        return "Presence of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
     }
 }

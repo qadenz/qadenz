@@ -30,11 +30,6 @@ public class TextOfAlert implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Text of Alert " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebDriver webDriver = WebDriverProvider.getWebDriver();
         alertText = webDriver.switchTo().alert().getText();
@@ -45,5 +40,10 @@ public class TextOfAlert implements Condition {
     @Override
     public String output() {
         return "Found [" + alertText + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Text of Alert " + expectation.description() + ".";
     }
 }

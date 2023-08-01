@@ -35,11 +35,6 @@ public class VisibilityOfElements implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         Boolean match = null;
         WebInspector webInspector = new WebInspector(Conditions.class);
@@ -63,5 +58,10 @@ public class VisibilityOfElements implements Condition {
     @Override
     public String output() {
         return "Discrepancies: \n" + failures.toString();
+    }
+    
+    @Override
+    public String toString() {
+        return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
     }
 }

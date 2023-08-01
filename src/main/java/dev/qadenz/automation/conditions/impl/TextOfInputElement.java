@@ -33,11 +33,6 @@ public class TextOfInputElement implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Text of input element [" + locator.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementText = webInspector.getAttributeOfElement(locator, "value");
@@ -48,5 +43,10 @@ public class TextOfInputElement implements Condition {
     @Override
     public String output() {
         return "Found [" + elementText + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Text of input element [" + locator.getName() + "] " + expectation.description() + ".";
     }
 }

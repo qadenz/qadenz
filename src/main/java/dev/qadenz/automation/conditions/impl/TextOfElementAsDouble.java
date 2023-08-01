@@ -41,11 +41,6 @@ public class TextOfElementAsDouble implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Text of element [" + locator.getName() + "] as Double " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementText = webInspector.getTextOfElement(locator);
@@ -57,5 +52,10 @@ public class TextOfElementAsDouble implements Condition {
     @Override
     public String output() {
         return "Found [" + elementText + "] formatted as [" + decimalFormat.format(elementValue) + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Text of element [" + locator.getName() + "] as Double " + expectation.description() + ".";
     }
 }

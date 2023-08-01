@@ -34,11 +34,6 @@ public class VisibilityOfElement implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Visibility of element [" + locator.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         visible = webInspector.getVisibilityOfElement(locator);
@@ -49,5 +44,10 @@ public class VisibilityOfElement implements Condition {
     @Override
     public String output() {
         return "Found [" + visible + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Visibility of element [" + locator.getName() + "] " + expectation.description() + ".";
     }
 }

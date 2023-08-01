@@ -33,11 +33,6 @@ public class PresenceOfElement implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Presence of element [" + locator.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebFinder webFinder = new WebFinder();
         present = webFinder.findAll(locator).size() > 0;
@@ -48,5 +43,10 @@ public class PresenceOfElement implements Condition {
     @Override
     public String output() {
         return "Found [" + present + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Presence of element [" + locator.getName() + "] " + expectation.description() + ".";
     }
 }

@@ -36,11 +36,6 @@ public class TextOfElements implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Text of each instance of element [" + locator.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         Boolean match = null;
         WebInspector webInspector = new WebInspector(Conditions.class);
@@ -65,5 +60,10 @@ public class TextOfElements implements Condition {
     @Override
     public String output() {
         return "Discrepancies: \n" + failures.toString();
+    }
+    
+    @Override
+    public String toString() {
+        return "Text of each instance of element [" + locator.getName() + "] " + expectation.description() + ".";
     }
 }

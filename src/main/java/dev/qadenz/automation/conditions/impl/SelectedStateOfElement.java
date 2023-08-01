@@ -34,11 +34,6 @@ public class SelectedStateOfElement implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Selected state of element [" + locator.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         selected = webInspector.getSelectedStateOfElement(locator);
@@ -49,5 +44,10 @@ public class SelectedStateOfElement implements Condition {
     @Override
     public String output() {
         return "Found [" + selected + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Selected state of element [" + locator.getName() + "] " + expectation.description() + ".";
     }
 }

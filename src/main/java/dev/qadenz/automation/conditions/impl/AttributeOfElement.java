@@ -35,12 +35,6 @@ public class AttributeOfElement implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Attribute [" + attributeName + "] of element [" + locator.getName() + "] " +
-                expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         attributeValue = webInspector.getAttributeOfElement(locator, attributeName);
@@ -51,5 +45,11 @@ public class AttributeOfElement implements Condition {
     @Override
     public String output() {
         return "Found [" + attributeValue + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Attribute [" + attributeName + "] of element [" + locator.getName() + "] " +
+                expectation.description() + ".";
     }
 }

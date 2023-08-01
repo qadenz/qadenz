@@ -33,11 +33,6 @@ public class SelectedMenuOption implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Selected option of menu element [" + locator.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         selectedOption = webInspector.getSelectedMenuOption(locator);
@@ -48,5 +43,10 @@ public class SelectedMenuOption implements Condition {
     @Override
     public String output() {
         return "Found [" + selectedOption + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Selected option of menu element [" + locator.getName() + "] " + expectation.description() + ".";
     }
 }

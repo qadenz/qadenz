@@ -35,12 +35,6 @@ public class CssPropertyOfElement implements Condition {
     }
     
     @Override
-    public String description() {
-        return "CSS Property [" + cssPropertyName + "] of element [" + locator.getName() + "] " +
-                expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         cssPropertyValue = webInspector.getCssPropertyOfElement(locator, cssPropertyName);
@@ -51,5 +45,11 @@ public class CssPropertyOfElement implements Condition {
     @Override
     public String output() {
         return "Found [" + cssPropertyValue + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "CSS Property [" + cssPropertyName + "] of element [" + locator.getName() + "] " +
+                expectation.description() + ".";
     }
 }

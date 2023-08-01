@@ -30,10 +30,7 @@ public class PresenceOfAlert implements Condition {
         this.expectation = expectation;
     }
     
-    public String description() {
-        return "Presence of Alert " + expectation.description() + ".";
-    }
-    
+    @Override
     public Boolean result() {
         try {
             WebDriver webDriver = WebDriverProvider.getWebDriver();
@@ -47,7 +44,13 @@ public class PresenceOfAlert implements Condition {
         return expectation.matcher().matches(present);
     }
     
+    @Override
     public String output() {
         return "Found [" + present + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Presence of Alert " + expectation.description() + ".";
     }
 }

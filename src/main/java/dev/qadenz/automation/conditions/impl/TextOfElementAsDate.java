@@ -42,11 +42,6 @@ public class TextOfElementAsDate implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Text of element [" + locator.getName() + "] as LocalDate " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementText = webInspector.getTextOfElement(locator);
@@ -58,5 +53,10 @@ public class TextOfElementAsDate implements Condition {
     @Override
     public String output() {
         return "Found [" + elementText + "] formatted as [" + dateTimeFormatter.format(elementDate) + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Text of element [" + locator.getName() + "] as LocalDate " + expectation.description() + ".";
     }
 }

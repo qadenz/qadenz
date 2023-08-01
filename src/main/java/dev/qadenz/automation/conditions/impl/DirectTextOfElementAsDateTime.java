@@ -43,11 +43,6 @@ public class DirectTextOfElementAsDateTime implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Direct text of element [" + locator.getName() + "] as LocalDateTime" + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementText = webInspector.getDirectTextOfElement(locator);
@@ -59,5 +54,10 @@ public class DirectTextOfElementAsDateTime implements Condition {
     @Override
     public String output() {
         return "Found [" + elementText + "] formatted as [" + dateTimeFormatter.format(elementDateTime) + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Direct text of element [" + locator.getName() + "] as LocalDateTime" + expectation.description() + ".";
     }
 }

@@ -34,11 +34,6 @@ public class DirectTextOfElement implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Direct text of element [" + locator.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementText = webInspector.getDirectTextOfElement(locator);
@@ -49,5 +44,10 @@ public class DirectTextOfElement implements Condition {
     @Override
     public String output() {
         return "Found [" + elementText + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Direct text of element [" + locator.getName() + "] " + expectation.description() + ".";
     }
 }

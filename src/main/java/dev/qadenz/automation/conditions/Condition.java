@@ -17,11 +17,6 @@ package dev.qadenz.automation.conditions;
 public interface Condition {
     
     /**
-     * @return A statement describing the condition and criteria being evaluated.
-     */
-    String description();
-    
-    /**
      * @return A result based on the expected and actual values of the Condition.
      */
     Boolean result();

@@ -33,11 +33,6 @@ public class EnabledStateOfElement implements Condition {
     }
     
     @Override
-    public String description() {
-        return "Enabled state of element [" + locator.getName() + "] " + expectation.description() + ".";
-    }
-    
-    @Override
     public Boolean result() {
         WebInspector webInspector = new WebInspector(Conditions.class);
         enabled = webInspector.getEnabledStateOfElement(locator);
@@ -48,5 +43,10 @@ public class EnabledStateOfElement implements Condition {
     @Override
     public String output() {
         return "Found [" + enabled + "].";
+    }
+    
+    @Override
+    public String toString() {
+        return "Enabled state of element [" + locator.getName() + "] " + expectation.description() + ".";
     }
 }
