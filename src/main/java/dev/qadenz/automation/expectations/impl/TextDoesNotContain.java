@@ -33,7 +33,7 @@ public class TextDoesNotContain implements Expectation<String> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "does not contain [" + expectedText + "]";
     }
 }

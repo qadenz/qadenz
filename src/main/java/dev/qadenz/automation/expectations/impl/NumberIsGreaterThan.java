@@ -36,12 +36,12 @@ public class NumberIsGreaterThan<T extends Comparable<T>> implements NumericExpe
     }
     
     @Override
-    public String description() {
-        return "is greater than [" + numberFormat.format(expectedValue) + "]";
+    public void setNumberFormat(NumberFormat numberFormat) {
+        this.numberFormat = numberFormat;
     }
     
     @Override
-    public void setNumberFormat(NumberFormat numberFormat) {
-        this.numberFormat = numberFormat;
+    public String toString() {
+        return "is greater than [" + numberFormat.format(expectedValue) + "]";
     }
 }

@@ -33,7 +33,7 @@ public class TextIsNotEqualTo implements Expectation<String> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "is not equal to [" + expectedText + "]";
     }
 }

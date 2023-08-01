@@ -32,7 +32,7 @@ public class TextStartsWith implements Expectation<String> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "starts with [" + expectedText + "]";
     }
 }

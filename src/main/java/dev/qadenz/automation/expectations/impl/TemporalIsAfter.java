@@ -48,12 +48,12 @@ public class TemporalIsAfter<T, E> implements TemporalExpectation<T> {
     }
     
     @Override
-    public String description() {
-        return "is after [" + dateTimeFormatter.format(temporal) + "]";
+    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
+        this.dateTimeFormatter = dateTimeFormatter;
     }
     
     @Override
-    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
+    public String toString() {
+        return "is after [" + dateTimeFormatter.format(temporal) + "]";
     }
 }

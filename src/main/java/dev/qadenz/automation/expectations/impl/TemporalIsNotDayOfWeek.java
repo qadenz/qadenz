@@ -45,7 +45,7 @@ public class TemporalIsNotDayOfWeek<T> implements Expectation<T> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "is not day of week [" + dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH) + "]";
     }
 }

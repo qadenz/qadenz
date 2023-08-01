@@ -32,7 +32,7 @@ public class TextEndsWith implements Expectation<String> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "ends with [" + expectedText + "]";
     }
 }

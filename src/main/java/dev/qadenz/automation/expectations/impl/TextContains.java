@@ -32,7 +32,7 @@ public class TextContains implements Expectation<String> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "contains [" + expectedText + "]";
     }
 }

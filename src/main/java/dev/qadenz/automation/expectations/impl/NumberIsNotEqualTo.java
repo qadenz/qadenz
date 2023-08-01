@@ -37,12 +37,12 @@ public class NumberIsNotEqualTo<T extends Comparable<T>> implements NumericExpec
     }
     
     @Override
-    public String description() {
-        return "is not equal to [" + numberFormat.format(expectedValue) + "]";
+    public void setNumberFormat(NumberFormat numberFormat) {
+        this.numberFormat = numberFormat;
     }
     
     @Override
-    public void setNumberFormat(NumberFormat numberFormat) {
-        this.numberFormat = numberFormat;
+    public String toString() {
+        return "is not equal to [" + numberFormat.format(expectedValue) + "]";
     }
 }

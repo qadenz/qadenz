@@ -36,12 +36,12 @@ public class NumberIsLessThan<T extends Comparable<T>> implements NumericExpecta
     }
     
     @Override
-    public String description() {
-        return "is less than [" + numberFormat.format(expectedValue) + "]";
+    public void setNumberFormat(NumberFormat numberFormat) {
+        this.numberFormat = numberFormat;
     }
     
     @Override
-    public void setNumberFormat(NumberFormat numberFormat) {
-        this.numberFormat = numberFormat;
+    public String toString() {
+        return "is less than [" + numberFormat.format(expectedValue) + "]";
     }
 }

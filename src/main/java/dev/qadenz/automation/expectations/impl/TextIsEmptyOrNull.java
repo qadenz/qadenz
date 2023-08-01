@@ -26,7 +26,7 @@ public class TextIsEmptyOrNull implements Expectation<String> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "is null or empty";
     }
 }

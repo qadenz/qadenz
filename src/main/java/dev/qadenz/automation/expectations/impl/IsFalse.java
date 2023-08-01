@@ -26,7 +26,7 @@ public class IsFalse implements Expectation<Boolean> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "is FALSE";
     }
 }

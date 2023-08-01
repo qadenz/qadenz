@@ -32,7 +32,7 @@ public class TextIsEqualTo implements Expectation<String> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "is equal to [" + expectedText + "]";
     }
 }

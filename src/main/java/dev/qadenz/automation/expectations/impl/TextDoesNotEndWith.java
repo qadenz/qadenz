@@ -33,7 +33,7 @@ public class TextDoesNotEndWith implements Expectation<String> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "does not end with [" + expectedText + "]";
     }
 }

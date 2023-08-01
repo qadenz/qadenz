@@ -36,12 +36,12 @@ public class NumberIsLessThanOrEqualTo<T extends Comparable<T>> implements Numer
     }
     
     @Override
-    public String description() {
-        return "is less than or equal to [" + numberFormat.format(expectedValue) + "]";
+    public void setNumberFormat(NumberFormat numberFormat) {
+        this.numberFormat = numberFormat;
     }
     
     @Override
-    public void setNumberFormat(NumberFormat numberFormat) {
-        this.numberFormat = numberFormat;
+    public String toString() {
+        return "is less than or equal to [" + numberFormat.format(expectedValue) + "]";
     }
 }

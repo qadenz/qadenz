@@ -36,12 +36,12 @@ public class NumberIsGreaterThanOrEqualTo<T extends Comparable<T>> implements Nu
     }
     
     @Override
-    public String description() {
-        return "is greater than or equal to [" + numberFormat.format(expectedValue) + "]";
+    public void setNumberFormat(NumberFormat numberFormat) {
+        this.numberFormat = numberFormat;
     }
     
     @Override
-    public void setNumberFormat(NumberFormat numberFormat) {
-        this.numberFormat = numberFormat;
+    public String toString() {
+        return "is greater than or equal to [" + numberFormat.format(expectedValue) + "]";
     }
 }

@@ -32,7 +32,7 @@ public class TextEqualsIgnoringCase implements Expectation<String> {
     }
     
     @Override
-    public String description() {
+    public String toString() {
         return "is, ignoring case, equal to [" + expectedText + "]";
     }
 }

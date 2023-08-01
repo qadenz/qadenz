@@ -48,12 +48,12 @@ public class TemporalIsEqualToOrBefore<T, E> implements TemporalExpectation<T> {
     }
     
     @Override
-    public String description() {
-        return "iis the same as or before [" + dateTimeFormatter.format(temporal) + "]";
+    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
+        this.dateTimeFormatter = dateTimeFormatter;
     }
     
     @Override
-    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
+    public String toString() {
+        return "iis the same as or before [" + dateTimeFormatter.format(temporal) + "]";
     }
 }

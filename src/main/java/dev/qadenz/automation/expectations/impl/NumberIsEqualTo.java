@@ -36,12 +36,12 @@ public class NumberIsEqualTo<T> implements NumericExpectation<T> {
     }
     
     @Override
-    public String description() {
-        return "is equal to [" + numberFormat.format(expectedValue) + "]";
+    public void setNumberFormat(NumberFormat numberFormat) {
+        this.numberFormat = numberFormat;
     }
     
     @Override
-    public void setNumberFormat(NumberFormat numberFormat) {
-        this.numberFormat = numberFormat;
+    public String toString() {
+        return "is equal to [" + numberFormat.format(expectedValue) + "]";
     }
 }

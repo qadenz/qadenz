@@ -38,12 +38,12 @@ public class TemporalIsEqualTo<T extends Temporal> implements TemporalExpectatio
     }
     
     @Override
-    public String description() {
-        return "is equal to [" + dateTimeFormatter.format(temporal) + "]";
+    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
+        this.dateTimeFormatter = dateTimeFormatter;
     }
     
     @Override
-    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
+    public String toString() {
+        return "is equal to [" + dateTimeFormatter.format(temporal) + "]";
     }
 }

@@ -55,13 +55,13 @@ public class TemporalIsNotWithin<T, E> implements TemporalExpectation<T> {
     }
     
     @Override
-    public String description() {
-        return "is within [" + period + " " + chronoUnit.toString() + "] of [" +
-                dateTimeFormatter.format(temporal) + "]";
+    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
+        this.dateTimeFormatter = dateTimeFormatter;
     }
     
     @Override
-    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
+    public String toString() {
+        return "is within [" + period + " " + chronoUnit.toString() + "] of [" +
+                dateTimeFormatter.format(temporal) + "]";
     }
 }
