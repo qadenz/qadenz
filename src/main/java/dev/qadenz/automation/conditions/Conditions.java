@@ -419,7 +419,10 @@ public class Conditions {
      * @param conditions The List of Conditions.
      *
      * @return The converted Array.
+     *
+     * @deprecated The {@code check()} and {@code verify()} methods now accept a {@code List<Condition>} directly.
      */
+    @Deprecated
     public static Condition[] toArray(List<Condition> conditions) {
         return conditions.toArray(new Condition[conditions.size()]);
     }
