@@ -1,5 +1,5 @@
 /*
-Copyright 2021 Tim Slifer
+Copyright Tim Slifer
 
 Licensed under the PolyForm Internal Use License, Version 1.0.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -148,25 +148,6 @@ public class XmlParameterValidator {
     }
     
     /**
-     * Reads and returns the value of the {@code application-name} parameter, if one is provided.
-     *
-     * @return The Application Name value.
-     */
-    public String validateApplicationName() {
-        if (xmlParameters.containsKey("applicationName")) {
-            String xmlApplicationName = xmlParameters.get("applicationName");
-            LOG.info("Using Application Name [{}].", xmlApplicationName);
-            
-            return xmlApplicationName;
-        }
-        else {
-            LOG.info("No Application Name given.");
-            
-            return null;
-        }
-    }
-    
-    /**
      * Reads and returns the {@code timeout} parameter, if one is provided, otherwise a default value is set.
      *
      * @return The Timeout limit.
@@ -212,7 +193,7 @@ public class XmlParameterValidator {
      * @return The retryInterceptedClicks value.
      */
     public boolean validateRetryInterceptedClicks() {
-        boolean xmlRetryInterceptedClicks = true;
+        boolean xmlRetryInterceptedClicks = false;
         if (xmlParameters.containsKey("retryInterceptedClicks")) {
             xmlRetryInterceptedClicks = Boolean.parseBoolean(xmlParameters.get("retryInterceptedClicks"));
         }

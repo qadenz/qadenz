@@ -1,5 +1,5 @@
 /*
-Copyright 2021 Tim Slifer
+Copyright Tim Slifer
 
 Licensed under the PolyForm Internal Use License, Version 1.0.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,11 +17,6 @@ package dev.qadenz.automation.conditions;
 public interface Condition {
     
     /**
-     * @return A statement describing the condition and criteria being evaluated.
-     */
-    String description();
-    
-    /**
      * @return A result based on the expected and actual values of the Condition.
      */
     Boolean result();
@@ -29,5 +24,5 @@ public interface Condition {
     /**
      * @return A statement describing the actual value being evaluated by the Condition.
      */
-    String output();
+    String actual();
 }

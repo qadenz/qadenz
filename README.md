@@ -21,7 +21,7 @@ Qadenz is also extensible and stands ready to support custom functionality based
 automated. The design patterns that Qadenz provides can quickly and easily be followed for seamless integration of
 team-specific features.
 
-Read more about the Qadenz [philosophy of use](https://qadenz.dev/docs/qadenz/philosophy-of-use).
+Read more about the Qadenz [philosophy of use](https://qadenz.dev/overview/philosophy-of-use/).
 
 # License
 
@@ -29,7 +29,7 @@ The Qadenz Library is made available under
 the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a "Source Available"
 library. Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as
 needed, but are prohibited from re-distributing the library or marketing/selling Qadenz (and derivative works of Qadenz)
-as a product for their customers. Please see the [FAQ](https://qadenz.dev/docs/faq/licensing) for more detail on
+as a product for their customers. Please see the [FAQ](https://qadenz.dev/faq/) for more detail on
 licensing.
 
 # Getting Started
@@ -41,7 +41,7 @@ the `<dependencies>` section:
 <dependency>
     <groupId>dev.qadenz</groupId>
     <artifactId>qadenz</artifactId>
-    <version>1.0.4</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 

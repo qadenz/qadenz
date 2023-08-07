@@ -1,5 +1,5 @@
 /*
-Copyright 2021 Tim Slifer
+Copyright Tim Slifer
 
 Licensed under the PolyForm Internal Use License, Version 1.0.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -9,14 +9,45 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.conditions;
 
-import dev.qadenz.automation.config.WebDriverProvider;
+import dev.qadenz.automation.conditions.impl.AttributeOfElement;
+import dev.qadenz.automation.conditions.impl.CountOfElement;
+import dev.qadenz.automation.conditions.impl.CssPropertyOfElement;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElement;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsDate;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsDateTime;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsDouble;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsInteger;
+import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsTime;
+import dev.qadenz.automation.conditions.impl.EnabledStateOfElement;
+import dev.qadenz.automation.conditions.impl.EnabledStateOfElements;
+import dev.qadenz.automation.conditions.impl.PresenceOfAlert;
+import dev.qadenz.automation.conditions.impl.PresenceOfElement;
+import dev.qadenz.automation.conditions.impl.PresenceOfElements;
+import dev.qadenz.automation.conditions.impl.SelectedMenuOption;
+import dev.qadenz.automation.conditions.impl.SelectedStateOfElement;
+import dev.qadenz.automation.conditions.impl.TextOfAlert;
+import dev.qadenz.automation.conditions.impl.TextOfElement;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsDate;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsDateTime;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsDouble;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsInteger;
+import dev.qadenz.automation.conditions.impl.TextOfElementAsTime;
+import dev.qadenz.automation.conditions.impl.TextOfElements;
+import dev.qadenz.automation.conditions.impl.TextOfInputElement;
+import dev.qadenz.automation.conditions.impl.VisibilityOfElement;
+import dev.qadenz.automation.conditions.impl.VisibilityOfElements;
+import dev.qadenz.automation.expectations.Expectation;
+import dev.qadenz.automation.expectations.NumericExpectation;
+import dev.qadenz.automation.expectations.TemporalExpectation;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.LocatorGroup;
-import dev.qadenz.automation.ui.WebFinder;
-import dev.qadenz.automation.commands.WebInspector;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -35,35 +66,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition attributeOfElement(final Locator locator, final String attributeName,
-            final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String attributeValue;
-            
-            @Override
-            public String description() {
-                return "Attribute [" + attributeName + "] of element [" + locator.getName() + "] " +
-                        expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                attributeValue = webInspector.getAttributeOfElement(locator, attributeName);
-                
-                match = expectation.matcher().matches(attributeValue);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + attributeValue + "].";
-            }
-        };
+    public static Condition attributeOfElement(Locator locator, String attributeName, Expectation<String> expectation) {
+        return new AttributeOfElement(locator, attributeName, expectation);
     }
     
     /**
@@ -74,33 +78,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition countOfElement(final Locator locator, final Expectation<Integer> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            int elementCount;
-            
-            @Override
-            public String description() {
-                return "Count of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementCount = webInspector.getCountOfElement(locator);
-                
-                match = expectation.matcher().matches(elementCount);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementCount + "].";
-            }
-        };
+    public static Condition countOfElement(Locator locator, NumericExpectation<Integer> expectation) {
+        return new CountOfElement(locator, expectation);
     }
     
     /**
@@ -112,35 +91,97 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition cssPropertyOfElement(final Locator locator, final String cssPropertyName,
-            final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String cssPropertyValue;
-            
-            @Override
-            public String description() {
-                return "CSS Property [" + cssPropertyName + "] of element [" + locator.getName() + "] " +
-                        expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                cssPropertyValue = webInspector.getCssPropertyOfElement(locator, cssPropertyName);
-                
-                match = expectation.matcher().matches(cssPropertyName);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + cssPropertyValue + "].";
-            }
-        };
+    public static Condition cssPropertyOfElement(Locator locator, String cssPropertyName,
+            Expectation<String> expectation) {
+        return new CssPropertyOfElement(locator, cssPropertyName, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElement(Locator locator, Expectation<String> expectation) {
+        return new DirectTextOfElement(locator, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted LocalDate.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter,
+            TemporalExpectation<LocalDate> expectation) {
+        return new DirectTextOfElementAsDate(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted LocalDateTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+            TemporalExpectation<LocalDateTime> expectation) {
+        return new DirectTextOfElementAsDateTime(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted LocalTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+            TemporalExpectation<LocalTime> expectation) {
+        return new DirectTextOfElementAsTime(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted Double.
+     *
+     * @param locator The mapped UI element.
+     * @param decimalFormat The expected numeric format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsDouble(Locator locator, DecimalFormat decimalFormat,
+            NumericExpectation<Double> expectation) {
+        return new DirectTextOfElementAsDouble(locator, decimalFormat, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element, excluding the text of any descendant elements on
+     * the DOM, as a formatted Integer.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The expected numeric format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfElementAsInteger(Locator locator, NumberFormat numberFormat,
+            NumericExpectation<Integer> expectation) {
+        return new DirectTextOfElementAsInteger(locator, numberFormat, expectation);
     }
     
     /**
@@ -151,33 +192,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition enabledStateOfElement(final Locator locator, final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean enabled;
-            
-            @Override
-            public String description() {
-                return "Enabled state of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                enabled = webInspector.getEnabledStateOfElement(locator);
-                
-                match = expectation.matcher().matches(enabled);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + enabled + "].";
-            }
-        };
+    public static Condition enabledStateOfElement(Locator locator, Expectation<Boolean> expectation) {
+        return new EnabledStateOfElement(locator, expectation);
     }
     
     /**
@@ -188,45 +204,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition enabledStateOfElements(final LocatorGroup locatorGroup,
-            final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            StringBuilder failures = new StringBuilder();
-            
-            @Override
-            public String description() {
-                return "Enabled state of elements [" + locatorGroup.getName() + "] " +
-                        expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                
-                for (Locator locator : locatorGroup) {
-                    boolean enabled = webInspector.getEnabledStateOfElement(locator);
-                    Boolean instanceMatch = expectation.matcher().matches(enabled);
-                    
-                    if (!instanceMatch) {
-                        failures.append("--> Element [" + locator.getName() + "] was [" + enabled + "].\n");
-                    }
-                    
-                    if (match == null || match) {
-                        match = instanceMatch;
-                    }
-                }
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Discrepancies: \n" + failures.toString();
-            }
-        };
+    public static Condition enabledStateOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
+        return new EnabledStateOfElements(locatorGroup, expectation);
     }
     
     /**
@@ -236,35 +215,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfAlert(final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean present;
-            
-            public String description() {
-                return "Presence of Alert " + expectation.description() + ".";
-            }
-            
-            public Boolean result() {
-                try {
-                    WebDriver webDriver = WebDriverProvider.getWebDriver();
-                    webDriver.switchTo().alert();
-                    present = true;
-                }
-                catch (NoAlertPresentException exception) {
-                    present = false;
-                }
-                
-                match = expectation.matcher().matches(present);
-                return match;
-            }
-            
-            public String output() {
-                return "Found [" + present + "].";
-            }
-        };
+    public static Condition presenceOfAlert(Expectation<Boolean> expectation) {
+        return new PresenceOfAlert(expectation);
     }
     
     /**
@@ -276,33 +228,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfElement(final Locator locator, final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean present;
-            
-            @Override
-            public String description() {
-                return "Presence of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebFinder webFinder = new WebFinder();
-                present = webFinder.findAll(locator).size() > 0;
-                
-                match = expectation.matcher().matches(present);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + present + "].";
-            }
-        };
+    public static Condition presenceOfElement(Locator locator, Expectation<Boolean> expectation) {
+        return new PresenceOfElement(locator, expectation);
     }
     
     /**
@@ -314,44 +241,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition presenceOfElements(final LocatorGroup locatorGroup,
-            final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            StringBuilder failures = new StringBuilder();
-            
-            @Override
-            public String description() {
-                return "Presence of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebFinder webFinder = new WebFinder();
-                
-                for (Locator locator : locatorGroup) {
-                    boolean present = webFinder.findAll(locator).size() > 0;
-                    Boolean instanceMatch = expectation.matcher().matches(present);
-                    
-                    if (!instanceMatch) {
-                        failures.append("--> Element [" + locator.getName() + "] was [" + present + "].\n");
-                    }
-                    
-                    if (match == null || match) {
-                        match = instanceMatch;
-                    }
-                }
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Discrepancies: \n" + failures.toString();
-            }
-        };
+    public static Condition presenceOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
+        return new PresenceOfElements(locatorGroup, expectation);
     }
     
     /**
@@ -362,30 +253,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition selectedMenuOption(final Locator locator, final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String selectedOption;
-            
-            public String description() {
-                return "Selected option of menu element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                selectedOption = webInspector.getSelectedMenuOption(locator);
-                
-                match = expectation.matcher().matches(selectedOption);
-                
-                return match;
-            }
-            
-            public String output() {
-                return "Found [" + selectedOption + "].";
-            }
-        };
+    public static Condition selectedMenuOption(Locator locator, Expectation<String> expectation) {
+        return new SelectedMenuOption(locator, expectation);
     }
     
     /**
@@ -397,33 +266,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition selectedStateOfElement(final Locator locator, final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean selected;
-            
-            @Override
-            public String description() {
-                return "Selected state of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                selected = webInspector.getSelectedStateOfElement(locator);
-                
-                match = expectation.matcher().matches(selected);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + selected + "].";
-            }
-        };
+    public static Condition selectedStateOfElement(Locator locator, Expectation<Boolean> expectation) {
+        return new SelectedStateOfElement(locator, expectation);
     }
     
     /**
@@ -433,30 +277,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfAlert(final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String alertText;
-            
-            public String description() {
-                return "Text of Alert " + expectation.description() + ".";
-            }
-            
-            public Boolean result() {
-                WebDriver webDriver = WebDriverProvider.getWebDriver();
-                alertText = webDriver.switchTo().alert().getText();
-                
-                match = expectation.matcher().matches(alertText);
-                
-                return match;
-            }
-            
-            public String output() {
-                return "Found [" + alertText + "].";
-            }
-        };
+    public static Condition textOfAlert(Expectation<String> expectation) {
+        return new TextOfAlert(expectation);
     }
     
     /**
@@ -467,33 +289,78 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElement(final Locator locator, final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String elementText;
-            
-            @Override
-            public String description() {
-                return "Text of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementText = webInspector.getTextOfElement(locator);
-                
-                match = expectation.matcher().matches(elementText);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementText + "].";
-            }
-        };
+    public static Condition textOfElement(Locator locator, Expectation<String> expectation) {
+        return new TextOfElement(locator, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element as a formatted LocalDate.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter,
+            TemporalExpectation<LocalDate> expectation) {
+        return new TextOfElementAsDate(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element as a formatted LocalDateTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+            TemporalExpectation<LocalDateTime> expectation) {
+        return new TextOfElementAsDateTime(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element as a formatted LocalTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter,
+            TemporalExpectation<LocalTime> expectation) {
+        return new TextOfElementAsTime(locator, dateTimeFormatter, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element as a formatted Double.
+     *
+     * @param locator The mapped UI element.
+     * @param decimalFormat The expected numeric format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfElementAsDouble(Locator locator, DecimalFormat decimalFormat,
+            NumericExpectation<Double> expectation) {
+        return new TextOfElementAsDouble(locator, decimalFormat, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of an element as a formatted Integer.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The expected numeric format.
+     * @param expectation The expectation for the text to be shown in the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfElementAsInteger(Locator locator, NumberFormat numberFormat,
+            NumericExpectation<Integer> expectation) {
+        return new TextOfElementAsInteger(locator, numberFormat, expectation);
     }
     
     /**
@@ -504,46 +371,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfElements(final Locator locator, final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            List<String> elementValues;
-            StringBuilder failures = new StringBuilder();
-            
-            @Override
-            public String description() {
-                return "Text of each instance of element [" + locator.getName() + "] " +
-                        expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementValues = webInspector.getTextOfElements(locator);
-                
-                for (int i = 0; i < elementValues.size(); i++) {
-                    String instanceValue = elementValues.get(i);
-                    Boolean instanceMatch = expectation.matcher().matches(instanceValue);
-                    
-                    if (!instanceMatch) {
-                        failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
-                    }
-                    
-                    if (match == null || match) {
-                        match = instanceMatch;
-                    }
-                }
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Discrepancies: \n" + failures.toString();
-            }
-        };
+    public static Condition textOfElements(Locator locator, Expectation<String> expectation) {
+        return new TextOfElements(locator, expectation);
     }
     
     /**
@@ -554,33 +383,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition textOfInputElement(final Locator locator, final Expectation<String> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            String elementText;
-            
-            @Override
-            public String description() {
-                return "Text of input element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                elementText = webInspector.getAttributeOfElement(locator, "value");
-                
-                match = expectation.matcher().matches(elementText);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + elementText + "].";
-            }
-        };
+    public static Condition textOfInputElement(Locator locator, Expectation<String> expectation) {
+        return new TextOfInputElement(locator, expectation);
     }
     
     /**
@@ -592,33 +396,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition visibilityOfElement(final Locator locator, final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            boolean visible;
-            
-            @Override
-            public String description() {
-                return "Visibility of element [" + locator.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                visible = webInspector.getVisibilityOfElement(locator);
-                
-                match = expectation.matcher().matches(visible);
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Found [" + visible + "].";
-            }
-        };
+    public static Condition visibilityOfElement(Locator locator, Expectation<Boolean> expectation) {
+        return new VisibilityOfElement(locator, expectation);
     }
     
     /**
@@ -630,44 +409,8 @@ public class Conditions {
      *
      * @return The Condition.
      */
-    public static Condition visibilityOfElements(final LocatorGroup locatorGroup,
-            final Expectation<Boolean> expectation) {
-        
-        return new Condition() {
-            
-            Boolean match;
-            StringBuilder failures = new StringBuilder();
-            
-            @Override
-            public String description() {
-                return "Visibility of elements [" + locatorGroup.getName() + "] " + expectation.description() + ".";
-            }
-            
-            @Override
-            public Boolean result() {
-                WebInspector webInspector = new WebInspector(Conditions.class);
-                
-                for (Locator locator : locatorGroup) {
-                    boolean visible = webInspector.getVisibilityOfElement(locator);
-                    Boolean instanceMatch = expectation.matcher().matches(visible);
-                    
-                    if (!instanceMatch) {
-                        failures.append("--> Element [" + locator.getName() + "] was [" + visible + "].\n");
-                    }
-                    
-                    if (match == null || match) {
-                        match = instanceMatch;
-                    }
-                }
-                
-                return match;
-            }
-            
-            @Override
-            public String output() {
-                return "Discrepancies: \n" + failures.toString();
-            }
-        };
+    public static Condition visibilityOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
+        return new VisibilityOfElements(locatorGroup, expectation);
     }
     
     /**
@@ -676,7 +419,10 @@ public class Conditions {
      * @param conditions The List of Conditions.
      *
      * @return The converted Array.
+     *
+     * @deprecated The {@code check()} and {@code verify()} methods now accept a {@code List<Condition>} directly.
      */
+    @Deprecated
     public static Condition[] toArray(List<Condition> conditions) {
         return conditions.toArray(new Condition[conditions.size()]);
     }

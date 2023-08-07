@@ -1,5 +1,5 @@
 /*
-Copyright 2021 Tim Slifer
+Copyright Tim Slifer
 
 Licensed under the PolyForm Internal Use License, Version 1.0.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -9,12 +9,12 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
  */
 package dev.qadenz.automation.commands;
 
-import dev.qadenz.automation.reporter.Screenshot;
-import dev.qadenz.automation.ui.Locator;
-import dev.qadenz.automation.ui.WebFinder;
 import dev.qadenz.automation.conditions.Condition;
 import dev.qadenz.automation.config.WebConfig;
 import dev.qadenz.automation.config.WebDriverProvider;
+import dev.qadenz.automation.reporter.Screenshot;
+import dev.qadenz.automation.ui.Locator;
+import dev.qadenz.automation.ui.WebFinder;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -44,8 +44,8 @@ public class WebCommander extends Commands {
     
     private Logger LOG;
     
-    private WebFinder webFinder = new WebFinder();
-    private Screenshot screenshot = new Screenshot();
+    protected WebFinder webFinder = new WebFinder();
+    protected Screenshot screenshot = new Screenshot();
     
     public WebCommander() {
         super();
@@ -359,7 +359,7 @@ public class WebCommander extends Commands {
      * @param condition The Condition to be satisfied during the wait.
      */
     public void pause(Condition condition) {
-        LOG.info("Waiting for condition :: {}", condition.description());
+        LOG.info("Waiting for condition :: {}", condition);
         WebDriverWait webDriverWait =
                 new WebDriverWait(WebDriverProvider.getWebDriver(), Duration.ofSeconds(WebConfig.timeout));
         

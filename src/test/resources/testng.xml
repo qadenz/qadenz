@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
-<suite name="Qadenz Unit Tests">
-    <test name="Qadenz Unit Tests">
-        <packages>
-            <package name="dev.qadenz.automation.test"/>
-        </packages>
-    </test>
-</suite>

@@ -1,5 +1,5 @@
 /*
-Copyright 2021 Tim Slifer
+Copyright Tim Slifer
 
 Licensed under the PolyForm Internal Use License, Version 1.0.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -10,15 +10,15 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package dev.qadenz.automation.reporter;
 
 import dev.qadenz.automation.config.WebConfig;
-import dev.qadenz.automation.reporter.testng.ClassResult;
-import dev.qadenz.automation.reporter.testng.TestResult;
 import dev.qadenz.automation.reporter.model.JsonClass;
 import dev.qadenz.automation.reporter.model.JsonLogEvent;
 import dev.qadenz.automation.reporter.model.JsonMethod;
 import dev.qadenz.automation.reporter.model.JsonReport;
 import dev.qadenz.automation.reporter.model.JsonTest;
+import dev.qadenz.automation.reporter.testng.ClassResult;
 import dev.qadenz.automation.reporter.testng.MethodResult;
 import dev.qadenz.automation.reporter.testng.SuiteResult;
+import dev.qadenz.automation.reporter.testng.TestResult;
 import org.testng.ISuite;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -88,7 +88,7 @@ public class JsonReporter {
         // TODO uncomment these when report shows suite config params
         // jsonReport.setBrowser(RunContext.browser.name());
         // jsonReport.setBrowserVersion(RunContext.browserVersion);
-        // jsonReport.setPlatform(RunContext.platform.name()); 
+        // jsonReport.setPlatform(RunContext.platform.name());
         // jsonReport.setAppUrl(RunContext.appUrl);
     }
     

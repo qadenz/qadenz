@@ -1,5 +1,5 @@
 /*
-Copyright 2021 Tim Slifer
+Copyright Tim Slifer
 
 Licensed under the PolyForm Internal Use License, Version 1.0.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -12,6 +12,7 @@ package dev.qadenz.automation.commands;
 import dev.qadenz.automation.reporter.Screenshot;
 import dev.qadenz.automation.ui.Locator;
 import dev.qadenz.automation.ui.WebFinder;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.internal.collections.Pair;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +40,8 @@ public class WebInspector {
     
     private Logger LOG;
     
-    private WebFinder webFinder = new WebFinder();
-    private Screenshot screenshot = new Screenshot();
+    protected WebFinder webFinder = new WebFinder();
+    protected Screenshot screenshot = new Screenshot();
     
     public WebInspector() {
         LOG = LoggerFactory.getLogger(WebInspector.class);
@@ -138,6 +146,186 @@ public class WebInspector {
     }
     
     /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The text value.
+     */
+    public String getDirectTextOfElement(Locator locator) {
+        LOG.info("Retrieving direct text of element [{}].", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            
+            return removeChildElementTextValues(webElement);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, formatted as a
+     * LocalDate.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     *
+     * @return The formatted LocalDate representation of the element text.
+     */
+    public LocalDate getDirectTextOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter) {
+        LOG.info("Retrieving direct text of element [{}] as LocalDate.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return LocalDate.parse(elementText, dateTimeFormatter);
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            LOG.error("Error parsing LocalDate from element text :: {}: {}",
+                    dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
+            screenshot.capture();
+            
+            throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, formatted as a
+     * LocalDateTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     *
+     * @return The formatted LocalDateTime representation of the element text.
+     */
+    public LocalDateTime getDirectTextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter) {
+        LOG.info("Retrieving direct text of element [{}] as LocalDateTime.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return LocalDateTime.parse(elementText, dateTimeFormatter);
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            LOG.error("Error parsing LocalDateTime from element text :: {}: {}",
+                    dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
+            screenshot.capture();
+            
+            throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, formatted as a
+     * LocalTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     *
+     * @return The formatted LocalTime representation of the element text.
+     */
+    public LocalTime getDirectTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter) {
+        LOG.info("Retrieving direct text of element [{}] as LocalTime.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return LocalTime.parse(elementText, dateTimeFormatter);
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            LOG.error("Error parsing LocalTime from element text :: {}: {}",
+                    dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
+            screenshot.capture();
+            
+            throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, as a Double.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The format used for parsing.
+     *
+     * @return The Double representation of the element text.
+     */
+    public Double getDirectTextOfElementAsDouble(Locator locator, NumberFormat numberFormat) {
+        LOG.info("Retrieving direct text of element [{}] as Double.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return numberFormat.parse(elementText).doubleValue();
+        }
+        catch (ParseException parseException) {
+            LOG.error("Error parsing Double from element text :: {}: {}",
+                    parseException.getClass().getSimpleName(), parseException.getMessage());
+            screenshot.capture();
+            
+            throw new RuntimeException();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, as an Integer.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The format used for parsing.
+     *
+     * @return The Integer representation of the element text.
+     */
+    public Integer getDirectTextOfElementAsInteger(Locator locator, NumberFormat numberFormat) {
+        LOG.info("Retrieving direct text of element [{}] as Integer.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = removeChildElementTextValues(webElement);
+            
+            return numberFormat.parse(elementText).intValue();
+        }
+        catch (ParseException parseException) {
+            LOG.error("Error parsing Integer from element text :: {}: {}",
+                    parseException.getClass().getSimpleName(), parseException.getMessage());
+            screenshot.capture();
+            
+            throw new RuntimeException();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
      * Determines whether an element is enabled.
      *
      * @param locator The mapped UI element.
@@ -165,16 +353,16 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the instance of an element with an attribute that contains the expected value.
+     * Retrieves the position of an element with an attribute that contains the expected value.
      *
      * @param locator The mapped UI element.
      * @param attributeName The attribute to be examined.
      * @param expectedValue The value to be identified.
      *
-     * @return The element instance.
+     * @return The element position.
      */
-    public int getInstanceOfElementAttribute(Locator locator, String attributeName, String expectedValue) {
-        LOG.info("Finding instance of element [{}] with attribute [{}] containing value [{}].",
+    public int getPositionOfElementWithAttribute(Locator locator, String attributeName, String expectedValue) {
+        LOG.info("Finding position of element [{}] with attribute [{}] containing value [{}].",
                 locator.getName(), attributeName, expectedValue);
         
         List<String> attributeValues;
@@ -184,7 +372,7 @@ public class WebInspector {
             attributeValues = getAttributeValuesFromElements(webElements, attributeName);
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving instance :: {}: {}", exception.getClass().getSimpleName(),
+            LOG.error("Error retrieving position :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
             screenshot.capture();
             
@@ -195,15 +383,15 @@ public class WebInspector {
     }
     
     /**
-     * Retrieves the instance of an element that contains the expected text.
+     * Retrieves the position of an element that contains the expected text.
      *
      * @param locator The mapped UI element.
      * @param expectedText The value to be identified.
      *
-     * @return The element instance.
+     * @return The element position.
      */
-    public int getInstanceOfElementText(Locator locator, String expectedText) {
-        LOG.info("Finding instance of element [{}] with value [{}].", locator.getName(), expectedText);
+    public int getPositionOfElementWithText(Locator locator, String expectedText) {
+        LOG.info("Finding position of element [{}] with value [{}].", locator.getName(), expectedText);
         
         List<String> elementValues;
         try {
@@ -212,7 +400,7 @@ public class WebInspector {
             elementValues = getTextValuesFromElements(webElements);
         }
         catch (Exception exception) {
-            LOG.error("Error retrieving instance :: {}: {}", exception.getClass().getSimpleName(),
+            LOG.error("Error retrieving position :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
             screenshot.capture();
             
@@ -287,6 +475,161 @@ public class WebInspector {
             WebElement webElement = webFinder.findWhenVisible(locator);
             
             return webElement.getText();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element and any descendants on the DOM, formatted as a LocalDate.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     *
+     * @return The formatted LocalDate representation of the element text.
+     */
+    public LocalDate getTextOfElementAsDate(Locator locator, DateTimeFormatter dateTimeFormatter) {
+        LOG.info("Retrieving text of element [{}] as LocalDate.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = webElement.getText();
+            
+            return LocalDate.parse(elementText, dateTimeFormatter);
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            LOG.error("Error parsing LocalDate from element text :: {}: {}",
+                    dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
+            screenshot.capture();
+            
+            throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element and any descendants on the DOM, formatted as a LocalDateTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     *
+     * @return The formatted LocalDate representation of the element text.
+     */
+    public LocalDateTime getTextOfElementAsDateTime(Locator locator, DateTimeFormatter dateTimeFormatter) {
+        LOG.info("Retrieving text of element [{}] as LocalDateTime.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = webElement.getText();
+            
+            return LocalDateTime.parse(elementText, dateTimeFormatter);
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            LOG.error("Error parsing LocalDateTime from element text :: {}: {}",
+                    dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
+            screenshot.capture();
+            
+            throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element and any descendants on the DOM, formatted as a LocalTime.
+     *
+     * @param locator The mapped UI element.
+     * @param dateTimeFormatter The expected date format.
+     *
+     * @return The formatted LocalDate representation of the element text.
+     */
+    public LocalTime getTextOfElementAsTime(Locator locator, DateTimeFormatter dateTimeFormatter) {
+        LOG.info("Retrieving text of element [{}] as LocalTime.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = webElement.getText();
+            
+            return LocalTime.parse(elementText, dateTimeFormatter);
+        }
+        catch (DateTimeParseException dateTimeParseException) {
+            LOG.error("Error parsing LocalTime from element text :: {}: {}",
+                    dateTimeParseException.getClass().getSimpleName(), dateTimeParseException.getMessage());
+            screenshot.capture();
+            
+            throw dateTimeParseException;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element and any descendants on the DOM, as a Double.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The format used for parsing.
+     *
+     * @return The Double representation of the element text.
+     */
+    public Double getTextOfElementAsDouble(Locator locator, NumberFormat numberFormat) {
+        LOG.info("Retrieving text of element [{}] as Double.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = webElement.getText();
+            
+            return numberFormat.parse(elementText).doubleValue();
+        }
+        catch (ParseException parseException) {
+            LOG.error("Error parsing Double from element text :: {}: {}",
+                    parseException.getClass().getSimpleName(), parseException.getMessage());
+            screenshot.capture();
+            
+            throw new RuntimeException();
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of an element and any descendants on the DOM, as an Integer.
+     *
+     * @param locator The mapped UI element.
+     * @param numberFormat The format used for parsing.
+     *
+     * @return The Integer representation of the element text.
+     */
+    public Integer getTextOfElementAsInteger(Locator locator, NumberFormat numberFormat) {
+        LOG.info("Retrieving text of element [{}] as Integer.", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            String elementText = webElement.getText();
+            
+            return numberFormat.parse(elementText).intValue();
+        }
+        catch (ParseException parseException) {
+            LOG.error("Error parsing Integer from element text :: {}: {}",
+                    parseException.getClass().getSimpleName(), parseException.getMessage());
+            screenshot.capture();
+            
+            throw new RuntimeException();
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -407,6 +750,22 @@ public class WebInspector {
         }
         
         return values;
+    }
+    
+    private String removeChildElementTextValues(WebElement webElement) {
+        String elementText = webElement.getText();
+        List<String> childElementValues = getTextValuesFromElements(webElement.findElements(By.xpath("./*")));
+        for (String child : childElementValues) {
+            int lastIndex = elementText.lastIndexOf(child);
+            if (lastIndex != -1) {
+                String start = elementText.substring(0, lastIndex);
+                String end = elementText.substring(lastIndex + child.length());
+                
+                elementText = (start + end).trim();
+            }
+        }
+        
+        return elementText;
     }
     
     private List<String> getTextValuesFromElements(List<WebElement> webElements) {

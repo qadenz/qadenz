@@ -1,5 +1,5 @@
 /*
-Copyright 2021 Tim Slifer
+Copyright Tim Slifer
 
 Licensed under the PolyForm Internal Use License, Version 1.0.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7,8 +7,8 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
 
-This file is derived from the org.testng.reporters.EmailableReporter2.java source 
-file, available in the TestNG Library. 
+This file is derived from the org.testng.reporters.EmailableReporter2.java source
+file, available in the TestNG Library.
 
 The original work is Copyright Cedric Beust and the TestNG Team.
 
@@ -24,6 +24,7 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.collections.Lists;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -36,8 +37,8 @@ import java.util.stream.Collectors;
  * to this class to examine TestNG's "Failed" tests and re-classify as "Failed" or "Stopped" based on the type of
  * exception that was caught during execution. This involved adding two new class fields and a method variable
  * (identified by naming context referencing "stopped" tests) inside the constructor, and two new methods to contain the
- * logic for separating the test results; {@code getFailuresWithAssertionFailures()} and {@code
- * getFailuresWithOtherExceptions()}.
+ * logic for separating the test results; {@code getFailuresWithAssertionFailures()} and
+ * {@code getFailuresWithOtherExceptions()}.
  * <p>
  * TestNG JavaDoc: Groups {@link ClassResult}s by test, type (configuration or test), and status.
  *
@@ -47,7 +48,9 @@ public class TestResult {
     
     protected static final Comparator<ITestResult> RESULT_COMPARATOR =
             Comparator.comparing((ITestResult o) -> o.getTestClass().getName())
-                      .thenComparing(o -> o.getMethod().getMethodName());
+                      .thenComparing(o -> o.getMethod().getMethodName())
+                      .thenComparing(o -> (o.getParameters().length > 0) ? Arrays.toString(o.getParameters()) :
+                              Arrays.toString(o.getFactoryParameters()));
     
     private final String testName;
     private final List<ClassResult> failedConfigurationResults;

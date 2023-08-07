@@ -1,5 +1,5 @@
 /*
-Copyright 2021 Tim Slifer
+Copyright Tim Slifer
 
 Licensed under the PolyForm Internal Use License, Version 1.0.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -92,7 +92,7 @@ public abstract class BySizzle extends By {
         }
         
         @Override
-        @SuppressWarnings ({"unchecked"}) // Yeah, I don't like this either.
+        @SuppressWarnings({"unchecked"}) // Yeah, I don't like this either.
         public List<WebElement> findElements(SearchContext context) {
             WebDriver driver = getWebDriver(context);
             injectSizzleIfNeeded(driver);
