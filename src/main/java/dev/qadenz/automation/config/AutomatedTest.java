@@ -10,7 +10,6 @@ https://polyformproject.org/licenses/internal-use/1.0.0/
 package dev.qadenz.automation.config;
 
 import dev.qadenz.automation.reporter.TestReporter;
-import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
@@ -28,11 +27,9 @@ public class AutomatedTest {
     
     /**
      * Captures a timestamp as the start time of the suite.
-     *
-     * @param testContext The injected {@link ITestContext}.
      */
     @BeforeSuite(alwaysRun = true)
-    public void captureStartDateTime(ITestContext testContext) {
+    public void captureStartDateTime() {
         WebConfig.suiteStartDate = LocalDateTime.now();
     }
     

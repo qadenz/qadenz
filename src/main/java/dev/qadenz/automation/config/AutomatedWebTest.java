@@ -18,7 +18,6 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
 import java.net.MalformedURLException;
@@ -37,24 +36,8 @@ public class AutomatedWebTest extends AutomatedTest {
     private static final Logger LOG = Loggers.getSuiteLogger();
     
     /**
-     * Begins the suite execution process by reading the Suite-level parameters given on the Suite XML file, validating,
-     * and assigning values on the {@link WebConfig}.
-     *
-     * @param testContext The injected {@link ITestContext}.
-     */
-    @BeforeSuite(alwaysRun = true, dependsOnMethods = "captureStartDateTime")
-    public void processXmlSuiteParameters(ITestContext testContext) {
-        LOG.info("Reading XML Suite Parameters.");
-        
-        Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
-        XmlParameterValidator xmlParameterValidator = new XmlParameterValidator(xmlParameters);
-        
-        WebConfig.gridHost = xmlParameterValidator.validateGridHost();
-    }
-    
-    /**
-     * Prior to each {@code <test>} on the Suite XML file, reads the given Test-level parameters, validates, and assigns
-     * values on the {@link WebConfig}.
+     * Prior to each {@code <test>} on the Suite XML file, reads the given parameters, validates, and assigns values on
+     * the {@link WebConfig}.
      *
      * @param testContext The injected {@link ITestContext}.
      */
@@ -65,6 +48,7 @@ public class AutomatedWebTest extends AutomatedTest {
         Map<String, String> xmlParameters = testContext.getCurrentXmlTest().getAllParameters();
         XmlParameterValidator xmlParameterValidator = new XmlParameterValidator(xmlParameters);
         
+        WebConfig.gridHost = xmlParameterValidator.validateGridHost();
         WebConfig.browser = xmlParameterValidator.validateBrowser();
         WebConfig.browserVersion = xmlParameterValidator.validateBrowserVersion();
         WebConfig.browserConfigProfile = xmlParameterValidator.validateBrowserConfigProfile();
