@@ -11,6 +11,7 @@ package dev.qadenz.automation.expectations;
 
 import dev.qadenz.automation.expectations.impl.IsFalse;
 import dev.qadenz.automation.expectations.impl.IsTrue;
+import dev.qadenz.automation.expectations.impl.ListInOrder;
 import dev.qadenz.automation.expectations.impl.NumberIsEqualTo;
 import dev.qadenz.automation.expectations.impl.NumberIsGreaterThan;
 import dev.qadenz.automation.expectations.impl.NumberIsGreaterThanOrEqualTo;
@@ -46,6 +47,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATETIME_AS_DAYOFWEEK;
 import static org.exparity.hamcrest.date.core.TemporalConverters.LOCALDATETIME_AS_LOCALDATETIME;
@@ -718,5 +720,17 @@ public class Expectations {
      */
     public static Expectation<String> startsWith(String expectedText) {
         return new TextStartsWith(expectedText);
+    }
+    
+    /**
+     * An Expectation for a List of String 'actual' values to be equal to the given List of 'expected' values, and in
+     * the same order.
+     *
+     * @param expectedValues The List of values for comparison.
+     *
+     * @return The Expectation.
+     */
+    public static ListExpectation<String> listInOrder(List<String> expectedValues) {
+        return new ListInOrder(expectedValues);
     }
 }
