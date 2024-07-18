@@ -192,6 +192,30 @@ public class WebCommander extends Commands {
     }
     
     /**
+     * Deselects multiple options from a dropdown menu implemented as a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     * @param options The options to be deselected.
+     */
+    public void deselect(Locator locator, String... options) {
+        LOG.info("Deselecting options [{}] from element [{}].", options, locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            for (String option : options) {
+                select.deselectByVisibleText(option);
+            }
+        }
+        catch (Exception exception) {
+            LOG.error("Error deselecting options :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
      * Double-clicks on the given element.
      *
      * @param locator The mapped UI element.
@@ -269,6 +293,30 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error selecting option :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Selects multiple options from a dropdown menu implemented as a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     * @param options The options to be selected.
+     */
+    public void select(Locator locator, String... options) {
+        LOG.info("Selecting options [{}] from element [{}].", options, locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            for (String option : options) {
+                select.selectByVisibleText(option);
+            }
+        }
+        catch (Exception exception) {
+            LOG.error("Error selecting options :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
             screenshot.capture();
             

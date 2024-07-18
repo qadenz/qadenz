@@ -435,6 +435,31 @@ public class WebInspector {
     }
     
     /**
+     * Retrieves the values of the currently selected options on a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The list of selected options.
+     */
+    public List<String> getSelectedMenuOptions(Locator locator) {
+        LOG.info("Retrieving the currently selected options of element [{}].", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            List<WebElement> selectedOptions = select.getAllSelectedOptions();
+            
+            return getTextValuesFromElements(selectedOptions);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving options :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
      * Determines whether an element is selected. This applies only elements such as checkboxes, radio options, and
      * {@code <option>} child of a {@code <select>} elements.
      *
