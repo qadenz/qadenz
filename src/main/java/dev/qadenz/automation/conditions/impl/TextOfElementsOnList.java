@@ -3,7 +3,7 @@ package dev.qadenz.automation.conditions.impl;
 import dev.qadenz.automation.commands.WebInspector;
 import dev.qadenz.automation.conditions.Condition;
 import dev.qadenz.automation.conditions.Conditions;
-import dev.qadenz.automation.expectations.ListExpectation;
+import dev.qadenz.automation.expectations.Expectation;
 import dev.qadenz.automation.ui.Locator;
 
 import java.util.List;
@@ -11,34 +11,33 @@ import java.util.List;
 public class TextOfElementsOnList implements Condition {
     
     private Locator locator;
-    private ListExpectation<String> expectation;
+    private Expectation<List<String>> expectation;
     
     private List<String> elementValues;
     private StringBuilder failures = new StringBuilder();
     
-    public TextOfElementsOnList(Locator locator, ListExpectation<String> expectation) {
+    public TextOfElementsOnList(Locator locator, Expectation<List<String>> expectation) {
         this.locator = locator;
         this.expectation = expectation;
     }
     
     @Override
     public Boolean result() {
-        Boolean match = null;
         WebInspector webInspector = new WebInspector(Conditions.class);
         elementValues = webInspector.getTextOfElements(locator);
+        Boolean match = expectation.matcher().matches(elementValues);
         
-        for (int i = 0; i < elementValues.size(); i++) {
-            String instanceValue = elementValues.get(i);
-            boolean instanceMatch = expectation.matchers().get(i).matches(instanceValue);
-            
-            if (!instanceMatch) {
-                failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
-            }
-            
-            if (match == null || match) {
-                match = instanceMatch;
-            }
-        }
+        //        if (!match) {
+        //            failures.append("Expected: \n");
+        //            for (String value : expectation.matcher().toString()) {
+        //                failures.append(value).append("\n");
+        //            }
+        //
+        //            failures.append("Actual: \n");
+        //            for (String value : elementValues) {
+        //                failures.append(value).append("\n");
+        //            }
+        //        }
         
         return match;
     }

@@ -13,6 +13,8 @@ import dev.qadenz.automation.expectations.Expectation;
 import dev.qadenz.automation.expectations.Expectations;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -382,5 +384,35 @@ public class TextExpectationTest {
     public void testStartsWith_ReturnsFalseWhenActualDoesNotStartWithExpected() {
         Expectation<String> expectation = Expectations.startsWith(BAR);
         assertFalse(expectation.matcher().matches(FOOBAR));
+    }
+    
+    @Test
+    public void testListInOrder_ReturnsTrueWhenActualIsEqualToExpectedInOrder() {
+        Expectation<Iterable<?>> expectation = Expectations.listInOrder(List.of(FOO, BAR, BAZ));
+        assertTrue(expectation.matcher().matches(List.of(FOO, BAR, BAZ)));
+    }
+    
+    @Test
+    public void testListInOrder_ReturnsFalseWhenActualIsEqualToExpectedNotInOrder() {
+        Expectation<Iterable<?>> expectation = Expectations.listInOrder(List.of(BAZ, BAR, FOO));
+        assertFalse(expectation.matcher().matches(List.of(FOO, BAR, BAZ)));
+    }
+    
+    @Test
+    public void testListInOrder_ReturnsFalseWhenActualIsNotEqualToExpected() {
+        Expectation<Iterable<?>> expectation = Expectations.listInOrder(List.of(FOO, BAR, BAZ));
+        assertFalse(expectation.matcher().matches(List.of(FOOBAR, FOO, BAR)));
+    }
+    
+    @Test
+    public void testListInOrder_ReturnsFalseWhenActualIsLongerThanExpected() {
+        Expectation<Iterable<?>> expectation = Expectations.listInOrder(List.of(FOO, BAR, BAZ));
+        assertFalse(expectation.matcher().matches(List.of(FOO, BAR)));
+    }
+    
+    @Test
+    public void testListInOrder_ReturnsFalseWhenExpectedIsLongerThanActual() {
+        Expectation<Iterable<?>> expectation = Expectations.listInOrder(List.of(FOO, BAR, BAZ));
+        assertFalse(expectation.matcher().matches(List.of(FOO, BAR)));
     }
 }

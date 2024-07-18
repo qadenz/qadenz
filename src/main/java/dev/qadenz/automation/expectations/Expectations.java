@@ -730,7 +730,7 @@ public class Expectations {
      *
      * @return The Expectation.
      */
-    public static ListExpectation<String> listInOrder(List<String> expectedValues) {
+    public static Expectation<Iterable<?>> listInOrder(List<String> expectedValues) {
         return new ListInOrder(expectedValues);
     }
 }

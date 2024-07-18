@@ -1,13 +1,12 @@
 package dev.qadenz.automation.expectations.impl;
 
-import dev.qadenz.automation.expectations.ListExpectation;
+import dev.qadenz.automation.expectations.Expectation;
 import org.hamcrest.Matcher;
-import org.hamcrest.core.IsEqual;
+import org.hamcrest.collection.IsIterableContainingInOrder;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ListInOrder implements ListExpectation<String> {
+public class ListInOrder implements Expectation<Iterable<?>> {
     
     private List<String> expectedValues;
     
@@ -16,13 +15,8 @@ public class ListInOrder implements ListExpectation<String> {
     }
     
     @Override
-    public List<Matcher<String>> matchers() {
-        List<Matcher<String>> matchers = new ArrayList<>();
-        for (String value : expectedValues) {
-            matchers.add(new IsEqual(value));
-        }
-        
-        return matchers;
+    public Matcher<Iterable<?>> matcher() {
+        return IsIterableContainingInOrder.contains(expectedValues.toArray());
     }
     
     @Override
