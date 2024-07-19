@@ -27,8 +27,8 @@ public class ListComparatorTest {
     
     @Test
     public void testListInOrder_ReturnsFalseWhenActualIsEqualToExpectedNotInOrder() {
-        ListExpectation expectation = Expectations.listContainsValues(List.of(BAZ, BAR, FOO));
-        List<String> actual = List.of(FOO, BAR, BAZ);
+        ListExpectation expectation = Expectations.listContainsValues(List.of(FOO, BAR, BAZ));
+        List<String> actual = List.of(BAZ, BAR, FOO);
         assertFalse(new ListComparator(expectation, actual).getResult());
     }
     
@@ -40,14 +40,28 @@ public class ListComparatorTest {
     }
     
     @Test
-    public void testListInOrder_ReturnsFalseWhenActualIsLongerThanExpected() {
+    public void testListInOrder_ReturnsFalseWhenNoMatchAndActualIsLongerThanExpected() {
         ListExpectation expectation = Expectations.listContainsValues(List.of(FOO, BAR, BAZ));
-        List<String> actual = List.of(FOO, BAR);
+        List<String> actual = List.of(FOOBAR, FOO, BAR, BAZ);
         assertFalse(new ListComparator(expectation, actual).getResult());
     }
     
     @Test
-    public void testListInOrder_ReturnsFalseWhenExpectedIsLongerThanActual() {
+    public void testListInOrder_ReturnsFalseWhenNoMatchAndExpectedIsLongerThanActual() {
+        ListExpectation expectation = Expectations.listContainsValues(List.of(FOO, BAR, BAZ));
+        List<String> actual = List.of(FOOBAR, FOO);
+        assertFalse(new ListComparator(expectation, actual).getResult());
+    }
+    
+    @Test
+    public void testListInOrder_ReturnsFalseWhenMatchButActualIsLongerThanExpected() {
+        ListExpectation expectation = Expectations.listContainsValues(List.of(FOO, BAR, BAZ));
+        List<String> actual = List.of(FOO, BAR, BAZ, FOOBAR);
+        assertFalse(new ListComparator(expectation, actual).getResult());
+    }
+    
+    @Test
+    public void testListInOrder_ReturnsFalseWhenMatchButExpectedIsLongerThanActual() {
         ListExpectation expectation = Expectations.listContainsValues(List.of(FOO, BAR, BAZ));
         List<String> actual = List.of(FOO, BAR);
         assertFalse(new ListComparator(expectation, actual).getResult());
