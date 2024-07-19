@@ -38,12 +38,14 @@ public class ListComparator {
                 failures.append(
                         "--> at index [" + i + "], expected [" + expectation.getExpectedValues().get(i) + "].\n");
             }
+            match = false;
         }
         else if (elementValues.size() > expectation.getExpectedValues().size()) {
             failures.append("--- Found more list values than were expected.\n");
             for (int i = expectation.getExpectedValues().size(); i < elementValues.size(); i++) {
                 failures.append("--> at index [" + i + "], found [" + elementValues.get(i) + "].\n");
             }
+            match = false;
         }
         
         return match;
