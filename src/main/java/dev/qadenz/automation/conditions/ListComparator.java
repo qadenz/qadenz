@@ -17,9 +17,9 @@ public class ListComparator {
     }
     
     public Boolean getResult() {
-        
         Boolean match = null;
-        for (int i = 0; i < expectation.matchers().size(); i++) {
+        int minSize = Math.min(expectation.matchers().size(), elementValues.size());
+        for (int i = 0; i < minSize; i++) {
             String instanceValue = elementValues.get(i);
             boolean instanceMatch = expectation.matchers().get(i).matches(instanceValue);
             
