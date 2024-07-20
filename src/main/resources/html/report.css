@@ -119,7 +119,6 @@ html {
 .log-entry {
     width: 1155px;
     word-wrap: break-word;
-    white-space: pre-wrap;
 }
 
 .screenshot {
