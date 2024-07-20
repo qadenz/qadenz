@@ -7,6 +7,11 @@ import org.hamcrest.core.IsEqual;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An Expectation for a List of String 'actual' values to contain the given 'expected' values.
+ *
+ * @author Tim Slifer
+ */
 public class ListContainsValues implements ListExpectation {
     
     private List<String> expectedValues;

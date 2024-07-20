@@ -3,12 +3,17 @@ package dev.qadenz.automation.conditions.impl;
 import dev.qadenz.automation.commands.WebInspector;
 import dev.qadenz.automation.conditions.Condition;
 import dev.qadenz.automation.conditions.Conditions;
-import dev.qadenz.automation.conditions.ListComparator;
+import dev.qadenz.automation.conditions.OrderedListComparator;
 import dev.qadenz.automation.expectations.ListExpectation;
 import dev.qadenz.automation.ui.Locator;
 
 import java.util.List;
 
+/**
+ * A Condition to evaluate the visible inner text of each instance of an element as an ordered list.
+ *
+ * @author Tim Slifer
+ */
 public class TextOfListElementsInOrder implements Condition {
     
     private Locator locator;
@@ -27,11 +32,11 @@ public class TextOfListElementsInOrder implements Condition {
         WebInspector webInspector = new WebInspector(Conditions.class);
         List<String> elementValues = webInspector.getTextOfElements(locator);
         
-        ListComparator listComparator = new ListComparator(expectation, elementValues);
-        match = listComparator.getResult();
+        OrderedListComparator orderedListComparator = new OrderedListComparator(expectation, elementValues);
+        match = orderedListComparator.getResult();
         
         if (!match) {
-            failures = listComparator.getFailures();
+            failures = orderedListComparator.getFailures();
         }
         
         return match;

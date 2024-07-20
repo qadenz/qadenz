@@ -4,13 +4,13 @@ import dev.qadenz.automation.expectations.ListExpectation;
 
 import java.util.List;
 
-public class ListComparator {
+public class OrderedListComparator {
     
     private ListExpectation expectation;
     private List<String> elementValues;
     private StringBuilder failures;
     
-    public ListComparator(ListExpectation expectation, List<String> elementValues) {
+    public OrderedListComparator(ListExpectation expectation, List<String> elementValues) {
         this.expectation = expectation;
         this.elementValues = elementValues;
         this.failures = new StringBuilder();
