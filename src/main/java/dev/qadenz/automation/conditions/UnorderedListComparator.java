@@ -64,8 +64,8 @@ public class UnorderedListComparator {
         int expectedSize = expectation.getExpectedValues().size();
         int actualSize = elementValues.size();
         if (expectedSize != actualSize) {
-            failures.append("--- Number of expected list values [" + expectedSize + "] differs from those found [" +
-                    actualSize + "].\n");
+            failures.append("--- Number of expected list values [" + expectedSize + "] " +
+                    "differs from those found [" + actualSize + "].");
             match = false;
         }
         
