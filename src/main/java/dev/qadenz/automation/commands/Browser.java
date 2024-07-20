@@ -232,6 +232,6 @@ public class Browser {
     
     private enum Window {
         NEXT,
-        PREVIOUS;
+        PREVIOUS
     }
 }
