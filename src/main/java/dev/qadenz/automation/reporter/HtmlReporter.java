@@ -97,22 +97,22 @@ public class HtmlReporter {
         Element section = document.body().getElementsByClass("test-section bordered").last();
         section.appendElement("div").addClass("test-name bordered").text(testName);
         
-        if (jsonTest.getFailedConfigurations().size() > 0) {
+        if (!jsonTest.getFailedConfigurations().isEmpty()) {
             writeResultsSection(section, jsonTest.getFailedConfigurations(), HtmlResult.FAILED_CONFIGS);
         }
-        if (jsonTest.getSkippedConfigurations().size() > 0) {
+        if (!jsonTest.getSkippedConfigurations().isEmpty()) {
             writeResultsSection(section, jsonTest.getSkippedConfigurations(), HtmlResult.SKIPPED_CONFIGS);
         }
-        if (jsonTest.getFailedTests().size() > 0) {
+        if (!jsonTest.getFailedTests().isEmpty()) {
             writeResultsSection(section, jsonTest.getFailedTests(), HtmlResult.FAILED_TESTS);
         }
-        if (jsonTest.getStoppedTests().size() > 0) {
+        if (!jsonTest.getStoppedTests().isEmpty()) {
             writeResultsSection(section, jsonTest.getStoppedTests(), HtmlResult.STOPPED_TESTS);
         }
-        if (jsonTest.getSkippedTests().size() > 0) {
+        if (!jsonTest.getSkippedTests().isEmpty()) {
             writeResultsSection(section, jsonTest.getSkippedTests(), HtmlResult.SKIPPED_TESTS);
         }
-        if (jsonTest.getPassedTests().size() > 0) {
+        if (!jsonTest.getPassedTests().isEmpty()) {
             writeResultsSection(section, jsonTest.getPassedTests(), HtmlResult.PASSED_TESTS);
         }
         

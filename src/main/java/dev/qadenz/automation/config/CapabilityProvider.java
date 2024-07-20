@@ -118,7 +118,7 @@ public class CapabilityProvider {
             }
         }
         
-        if (args.size() == 0) {
+        if (args.isEmpty()) {
             LOG.debug("No matching browser configuration profile for [{}].", WebConfig.browserConfigProfile);
         }
         

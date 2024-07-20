@@ -39,7 +39,7 @@ public class PresenceOfElements implements Condition {
         WebFinder webFinder = new WebFinder();
         
         for (Locator locator : locatorGroup) {
-            boolean present = webFinder.findAll(locator).size() > 0;
+            boolean present = !webFinder.findAll(locator).isEmpty();
             boolean instanceMatch = expectation.matcher().matches(present);
             
             if (!instanceMatch) {

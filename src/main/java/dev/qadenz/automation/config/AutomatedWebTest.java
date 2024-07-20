@@ -69,7 +69,7 @@ public class AutomatedWebTest extends AutomatedTest {
     @BeforeMethod(alwaysRun = true)
     public void startWebDriver(ITestResult testResult) throws Exception {
         LOG.info("Executing Method [{}].", testResult.getMethod().getMethodName());
-        if (getParameters(testResult).length() > 0) {
+        if (!getParameters(testResult).isEmpty()) {
             LOG.info("Parameters: {}", getParameters(testResult));
         }
         
