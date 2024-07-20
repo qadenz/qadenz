@@ -43,7 +43,11 @@ public class PresenceOfElements implements Condition {
             boolean instanceMatch = expectation.matcher().matches(present);
             
             if (!instanceMatch) {
-                failures.append("--> Element [" + locator.getName() + "] was [" + present + "].\n");
+                failures.append("--> Element [")
+                        .append(locator.getName())
+                        .append("] was [")
+                        .append(present)
+                        .append("].\n");
             }
             
             if (match == null || match) {

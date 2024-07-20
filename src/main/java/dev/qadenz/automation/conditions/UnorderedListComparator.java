@@ -46,7 +46,9 @@ public class UnorderedListComparator {
                 unmatchedValues.remove(instanceValue);
             }
             else {
-                failures.append("--> expected [" + instanceValue + "].\n");
+                failures.append("--> expected [")
+                        .append(instanceValue)
+                        .append("].\n");
             }
             
             if (match == null || match) {
@@ -57,15 +59,21 @@ public class UnorderedListComparator {
         if (!unmatchedValues.isEmpty()) {
             failures.append("--- Some element values were not matched.\n");
             for (String unmatchedValue : unmatchedValues) {
-                failures.append("--> found [" + unmatchedValue + "].\n");
+                failures.append("--> found [")
+                        .append(unmatchedValue)
+                        .append("].\n");
             }
         }
         
         int expectedSize = expectation.getExpectedValues().size();
         int actualSize = elementValues.size();
         if (expectedSize != actualSize) {
-            failures.append("--- Number of expected list values [" + expectedSize + "] " +
-                    "differs from those found [" + actualSize + "].");
+            failures.append("--- Number of expected list values [")
+                    .append(expectedSize)
+                    .append("] ")
+                    .append("differs from those found [")
+                    .append(actualSize)
+                    .append("].");
             match = false;
         }
         

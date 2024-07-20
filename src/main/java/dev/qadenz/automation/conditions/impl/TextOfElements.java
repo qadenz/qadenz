@@ -46,7 +46,11 @@ public class TextOfElements implements Condition {
             boolean instanceMatch = expectation.matcher().matches(instanceValue);
             
             if (!instanceMatch) {
-                failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
+                failures.append("--> at index [")
+                        .append(i)
+                        .append("], found [")
+                        .append(instanceValue)
+                        .append("].\n");
             }
             
             if (match == null || match) {

@@ -44,7 +44,11 @@ public class VisibilityOfElements implements Condition {
             boolean instanceMatch = expectation.matcher().matches(visible);
             
             if (!instanceMatch) {
-                failures.append("--> Element [" + locator.getName() + "] was [" + visible + "].\n");
+                failures.append("--> Element [")
+                        .append(locator.getName())
+                        .append("] was [")
+                        .append(visible)
+                        .append("].\n");
             }
             
             if (match == null || match) {

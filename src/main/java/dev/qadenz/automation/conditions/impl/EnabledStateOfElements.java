@@ -43,7 +43,11 @@ public class EnabledStateOfElements implements Condition {
             boolean instanceMatch = expectation.matcher().matches(enabled);
             
             if (!instanceMatch) {
-                failures.append("--> Element [" + locator.getName() + "] was [" + enabled + "].\n");
+                failures.append("--> Element [")
+                        .append(locator.getName())
+                        .append("] was [")
+                        .append(enabled)
+                        .append("].\n");
             }
             
             if (match == null || match) {

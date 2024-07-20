@@ -439,7 +439,8 @@ public class WebCommander extends Commands {
                 builder.append(charSequence);
             }
             else if (charSequence instanceof Keys) {
-                builder.append(((Keys) charSequence).name() + "-key");
+                builder.append(((Keys) charSequence).name())
+                       .append("-key");
             }
             separator = ", ";
         }
