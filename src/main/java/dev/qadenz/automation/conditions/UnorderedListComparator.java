@@ -54,20 +54,19 @@ public class UnorderedListComparator {
             }
         }
         
-        if (expectation.getExpectedValues().size() > elementValues.size()) {
-            failures.append("--- Expected more list values than were found.\n");
-            
-            match = false;
-        }
-        else if (elementValues.size() > expectation.getExpectedValues().size()) {
-            failures.append("--- Found more list values than were expected.\n");
-            match = false;
-        }
         if (!unmatchedValues.isEmpty()) {
             failures.append("--- Some element values were not matched.\n");
             for (String unmatchedValue : unmatchedValues) {
                 failures.append("--> found [" + unmatchedValue + "].\n");
             }
+        }
+        
+        int expectedSize = expectation.getExpectedValues().size();
+        int actualSize = elementValues.size();
+        if (expectedSize != actualSize) {
+            failures.append("--- Number of expected list values [" + expectedSize + "] differs from those found [" +
+                    actualSize + "].\n");
+            match = false;
         }
         
         return match;
