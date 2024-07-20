@@ -129,7 +129,7 @@ public class XmlParameterValidator {
             String xmlPlatform = xmlParameters.get("platform");
             try {
                 Platform platform = Platform.fromString(xmlPlatform);
-                LOG.info("Using Platform [" + platform.toString() + "].", platform.toString());
+                LOG.info("Using Platform [{}].", platform.toString());
                 
                 return platform;
             }
@@ -174,7 +174,7 @@ public class XmlParameterValidator {
     public String validateAppUrl() {
         if (xmlParameters.containsKey("appUrl")) {
             String url = xmlParameters.get("appUrl");
-            LOG.info("Using Application URL [" + url + "].");
+            LOG.info("Using Application URL [{}].", url);
             
             return url;
         }
