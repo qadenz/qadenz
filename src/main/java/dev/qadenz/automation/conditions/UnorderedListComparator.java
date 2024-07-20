@@ -36,9 +36,8 @@ public class UnorderedListComparator {
     
     public Boolean getResult() {
         Boolean match = null;
-        int minSize = Math.min(expectation.matchers().size(), elementValues.size());
         List<String> unmatchedValues = new ArrayList<>(elementValues);
-        for (int i = 0; i < minSize; i++) {
+        for (int i = 0; i < expectation.matchers().size(); i++) {
             String instanceValue = expectation.getExpectedValues().get(i);
             Matcher<String> matcher = expectation.matchers().get(i);
             boolean instanceMatch = elementValues.stream().anyMatch(matcher::matches);
@@ -57,9 +56,6 @@ public class UnorderedListComparator {
         
         if (expectation.getExpectedValues().size() > elementValues.size()) {
             failures.append("--- Expected more list values than were found.\n");
-            for (int i = elementValues.size(); i < expectation.matchers().size(); i++) {
-                failures.append("--> expected [" + expectation.getExpectedValues().get(i) + "].\n");
-            }
             
             match = false;
         }
