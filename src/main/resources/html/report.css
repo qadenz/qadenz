@@ -1,5 +1,5 @@
 html {
-    font-family: 'Source Sans Pro', sans-serif !important;
+    font-family: "Source Sans Pro", sans-serif !important;
     background-color: #ffffff;
 }
 
@@ -118,6 +118,8 @@ html {
 
 .log-entry {
     width: 1155px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .screenshot {
