@@ -25,7 +25,6 @@ public class UnorderedListComparatorTest {
     private static final String FOO = "FOO";
     private static final String BAR = "BAR";
     private static final String BAZ = "BAZ";
-    private static final String OOBA = "OOBA";
     
     @Test
     public void testListUnordered_ReturnsTrueWhenActualIsEqualToExpectedInOrder() {
@@ -33,7 +32,6 @@ public class UnorderedListComparatorTest {
         List<String> actual = List.of(FOO, BAR, BAZ);
         UnorderedListComparator comparator = new UnorderedListComparator(expectation, actual);
         assertTrue(comparator.getResult());
-        System.out.println(comparator.getFailures());
     }
     
     @Test
@@ -42,7 +40,6 @@ public class UnorderedListComparatorTest {
         List<String> actual = List.of(BAZ, BAR, FOO);
         UnorderedListComparator comparator = new UnorderedListComparator(expectation, actual);
         assertTrue(comparator.getResult());
-        System.out.println(comparator.getFailures());
     }
     
     @Test
@@ -51,7 +48,6 @@ public class UnorderedListComparatorTest {
         List<String> actual = List.of(FOOBAR, FOO, BAR);
         UnorderedListComparator comparator = new UnorderedListComparator(expectation, actual);
         assertFalse(comparator.getResult());
-        System.out.println(comparator.getFailures());
     }
     
     @Test
@@ -60,7 +56,6 @@ public class UnorderedListComparatorTest {
         List<String> actual = List.of(FOOBAR, FOO, BAR, BAZ);
         UnorderedListComparator comparator = new UnorderedListComparator(expectation, actual);
         assertFalse(comparator.getResult());
-        System.out.println(comparator.getFailures());
     }
     
     @Test
@@ -69,24 +64,21 @@ public class UnorderedListComparatorTest {
         List<String> actual = List.of(FOOBAR, FOO);
         UnorderedListComparator comparator = new UnorderedListComparator(expectation, actual);
         assertFalse(comparator.getResult());
-        System.out.println(comparator.getFailures());
     }
     
     @Test
-    public void testListUnordered_ReturnsFalseWhenMatchButActualIsLongerThanExpected() {
-        ListExpectation expectation = Expectations.listContainsValues(List.of(FOO, BAR, BAZ));
-        List<String> actual = List.of(FOO, BAR, BAZ, FOOBAR);
+    public void testListUnordered_ReturnsTrueWhenDuplicateEntriesAreEquallyMatched() {
+        ListExpectation expectation = Expectations.listContainsValues(List.of(FOO, BAR, FOO));
+        List<String> actual = List.of(FOO, BAR, FOO);
         UnorderedListComparator comparator = new UnorderedListComparator(expectation, actual);
-        assertFalse(comparator.getResult());
-        System.out.println(comparator.getFailures());
+        assertTrue(comparator.getResult());
     }
     
     @Test
-    public void testListUnordered_ReturnsFalseWhenMatchButExpectedIsLongerThanActual() {
+    public void testListUnordered_ReturnsFalseWhenDuplicateEntriesNotEquallyMatched() {
         ListExpectation expectation = Expectations.listContainsValues(List.of(FOO, BAR, BAZ));
-        List<String> actual = List.of(FOO, BAR);
+        List<String> actual = List.of(FOO, BAR, FOO);
         UnorderedListComparator comparator = new UnorderedListComparator(expectation, actual);
         assertFalse(comparator.getResult());
-        System.out.println(comparator.getFailures());
     }
 }
