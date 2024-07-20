@@ -19,18 +19,19 @@ import dev.qadenz.automation.ui.Locator;
 import java.util.List;
 
 /**
- * A Condition to evaluate the visible inner text of each instance of an element as an ordered list.
+ * A Condition to evaluate the visible inner text of each instance of an element, excluding the text of any descendant
+ * elements on the DOM, as an ordered list.
  *
  * @author Tim Slifer
  */
-public class TextOfListElementsInOrder implements Condition {
+public class DirectTextOfListElementsInOrder implements Condition {
     
     private Locator locator;
     private ListExpectation expectation;
     
     private String failures;
     
-    public TextOfListElementsInOrder(Locator locator, ListExpectation expectation) {
+    public DirectTextOfListElementsInOrder(Locator locator, ListExpectation expectation) {
         this.locator = locator;
         this.expectation = expectation;
     }
@@ -39,7 +40,7 @@ public class TextOfListElementsInOrder implements Condition {
     public Boolean result() {
         Boolean match = null;
         WebInspector webInspector = new WebInspector(Conditions.class);
-        List<String> elementValues = webInspector.getTextOfElements(locator);
+        List<String> elementValues = webInspector.getDirectTextOfElements(locator);
         
         OrderedListComparator orderedListComparator = new OrderedListComparator(expectation, elementValues);
         match = orderedListComparator.getResult();
@@ -58,6 +59,7 @@ public class TextOfListElementsInOrder implements Condition {
     
     @Override
     public String toString() {
-        return "Text of each instance of element [" + locator.getName() + "] are listed in order:\n" + expectation;
+        return "Direct text of each instance of element [" + locator.getName() + "] are listed in order:\n" +
+                expectation;
     }
 }

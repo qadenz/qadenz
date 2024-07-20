@@ -12,25 +12,25 @@ package dev.qadenz.automation.conditions.impl;
 import dev.qadenz.automation.commands.WebInspector;
 import dev.qadenz.automation.conditions.Condition;
 import dev.qadenz.automation.conditions.Conditions;
-import dev.qadenz.automation.conditions.OrderedListComparator;
+import dev.qadenz.automation.conditions.UnorderedListComparator;
 import dev.qadenz.automation.expectations.ListExpectation;
 import dev.qadenz.automation.ui.Locator;
 
 import java.util.List;
 
 /**
- * A Condition to evaluate the visible inner text of each instance of an element as an ordered list.
+ * A Condition to evaluate the visible inner text of each instance of an element, excluding the text of any descendant
+ * elements on the DOM, as an unordered list.
  *
  * @author Tim Slifer
  */
-public class TextOfListElementsInOrder implements Condition {
+public class DirectTextOfListElementsUnordered implements Condition {
     
     private Locator locator;
     private ListExpectation expectation;
-    
     private String failures;
     
-    public TextOfListElementsInOrder(Locator locator, ListExpectation expectation) {
+    public DirectTextOfListElementsUnordered(Locator locator, ListExpectation expectation) {
         this.locator = locator;
         this.expectation = expectation;
     }
@@ -39,13 +39,13 @@ public class TextOfListElementsInOrder implements Condition {
     public Boolean result() {
         Boolean match = null;
         WebInspector webInspector = new WebInspector(Conditions.class);
-        List<String> elementValues = webInspector.getTextOfElements(locator);
+        List<String> elementValues = webInspector.getDirectTextOfElements(locator);
         
-        OrderedListComparator orderedListComparator = new OrderedListComparator(expectation, elementValues);
-        match = orderedListComparator.getResult();
+        UnorderedListComparator unorderedListComparator = new UnorderedListComparator(expectation, elementValues);
+        match = unorderedListComparator.getResult();
         
         if (!match) {
-            failures = orderedListComparator.getFailures();
+            failures = unorderedListComparator.getFailures();
         }
         
         return match;
@@ -58,6 +58,7 @@ public class TextOfListElementsInOrder implements Condition {
     
     @Override
     public String toString() {
-        return "Text of each instance of element [" + locator.getName() + "] are listed in order:\n" + expectation;
+        return "Direct text of each instance of element [" + locator.getName() + "] are listed in any order:\n" +
+                expectation;
     }
 }
