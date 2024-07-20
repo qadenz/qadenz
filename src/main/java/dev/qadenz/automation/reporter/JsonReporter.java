@@ -23,7 +23,6 @@ import org.testng.ISuite;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.internal.Utils;
-import org.testng.xml.XmlSuite;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -45,7 +44,6 @@ import java.util.regex.Pattern;
  */
 public class JsonReporter {
     
-    private XmlSuite xmlSuite;
     private ISuite suite;
     private SuiteResult suiteResult;
     
@@ -54,8 +52,7 @@ public class JsonReporter {
     private static final Pattern UUID_PATTERN =
             Pattern.compile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$");
     
-    public JsonReporter(XmlSuite xmlSuite, ISuite suite) {
-        this.xmlSuite = xmlSuite;
+    public JsonReporter(ISuite suite) {
         this.suite = suite;
         this.suiteResult = new SuiteResult(suite);
         
