@@ -51,7 +51,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 /**
  * A collection of {@link Condition}s to be used for validation or synchronization operations.
@@ -466,19 +465,5 @@ public class Conditions {
      */
     public static Condition visibilityOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
         return new VisibilityOfElements(locatorGroup, expectation);
-    }
-    
-    /**
-     * Cleanly converts a List of Conditions into an Array, for passing to a verification.
-     *
-     * @param conditions The List of Conditions.
-     *
-     * @return The converted Array.
-     *
-     * @deprecated The {@code check()} and {@code verify()} methods now accept a {@code List<Condition>} directly.
-     */
-    @Deprecated
-    public static Condition[] toArray(List<Condition> conditions) {
-        return conditions.toArray(new Condition[conditions.size()]);
     }
 }
