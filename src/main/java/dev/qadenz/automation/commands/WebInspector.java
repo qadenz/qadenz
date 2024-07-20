@@ -168,6 +168,34 @@ public class WebInspector {
     }
     
     /**
+     * Retrieves the visible inner text of each instance of an element, excluding the text of any descendants on the
+     * DOM.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The list of values.
+     */
+    public List<String> getDirectTextOfElements(Locator locator) {
+        LOG.info("Retrieving direct text of elements [{}].", locator.getName());
+        try {
+            List<WebElement> webElements = webFinder.findAllWhenVisible(locator);
+            List<String> elementTexts = new ArrayList<>();
+            
+            for (WebElement webElement : webElements) {
+                elementTexts.add(removeChildElementTextValues(webElement));
+            }
+            
+            return elementTexts;
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
      * Retrieves the visible inner text of an element, excluding the text of any descendants on the DOM, formatted as a
      * LocalDate.
      *
