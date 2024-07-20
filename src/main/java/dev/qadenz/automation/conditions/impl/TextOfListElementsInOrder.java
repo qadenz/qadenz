@@ -58,6 +58,6 @@ public class TextOfListElementsInOrder implements Condition {
     
     @Override
     public String toString() {
-        return "Text of each instance of element [" + locator.getName() + "] " + expectation + ".";
+        return "Text of each instance of element [" + locator.getName() + "] are listed in order: \n" + expectation;
     }
 }

@@ -42,7 +42,6 @@ public class ListContainsValues implements ListExpectation {
     @Override
     public String toString() {
         StringBuilder values = new StringBuilder();
-        values.append("are listed in order: \n");
         for (String value : expectedValues) {
             values.append(value).append("\n");
         }
