@@ -38,6 +38,10 @@ public abstract class Commands {
         LOG = LoggerFactory.getLogger(logger);
     }
     
+    public Commands(String logger) {
+        LOG = LoggerFactory.getLogger(logger);
+    }
+    
     /**
      * Evaluates each of the given {@link Condition}s as a group. Execution will be allowed to continue after the final
      * Condition is evaluated, even if one or more Conditions results in a failure. A call to {@link Assertions} will
