@@ -11,7 +11,6 @@ package dev.qadenz.automation.config;
 
 import dev.qadenz.automation.logs.Loggers;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,6 +24,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Configures the Browser Options for the session.
@@ -106,17 +107,16 @@ public class CapabilityProvider {
     }
     
     private static List<String> parseArgs(JSONArray jsonArray) {
-        List<String> args = new ArrayList<>();
-        
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            if (((String) jsonObject.get("profile")).equalsIgnoreCase(WebConfig.browserConfigProfile)) {
-                JSONArray jsonArgs = jsonObject.getJSONArray("args");
-                for (int j = 0; j < jsonArgs.length(); j++) {
-                    args.add(jsonArgs.get(j).toString());
-                }
-            }
-        }
+        List<String> args = IntStream.range(0, jsonArray.length())
+                                     .mapToObj(jsonArray::getJSONObject)
+                                     .filter(jsonObject -> jsonObject.get("profile")
+                                                                     .toString()
+                                                                     .equalsIgnoreCase(WebConfig.browserConfigProfile))
+                                     .flatMap(jsonObject -> {
+                                         JSONArray jsonArgs = jsonObject.getJSONArray("args");
+                                         return IntStream.range(0, jsonArgs.length()).mapToObj(jsonArgs::getString);
+                                     })
+                                     .collect(Collectors.toList());
         
         if (args.isEmpty()) {
             LOG.debug("No matching browser configuration profile for [{}].", WebConfig.browserConfigProfile);

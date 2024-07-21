@@ -11,6 +11,8 @@ package dev.qadenz.automation.config;
 
 import org.openqa.selenium.WebDriverException;
 
+import java.util.Arrays;
+
 /**
  * Enumerated browser names for configuring execution sessions.
  *
@@ -34,11 +36,10 @@ public enum Browser {
     }
     
     public static Browser fromString(String name) {
-        for (Browser browser : values()) {
-            if (browser.getName().equalsIgnoreCase(name)) {
-                return browser;
-            }
-        }
+        Arrays.stream(values())
+              .filter(browser -> browser.getName().equalsIgnoreCase(name))
+              .findFirst()
+              .orElseThrow(() -> new WebDriverException("Unrecognized browser: " + name));
         
         throw new WebDriverException("Unrecognized browser: " + name);
     }

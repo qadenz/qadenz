@@ -153,10 +153,7 @@ public class WebCommander extends Commands {
         try {
             Actions actions = new Actions(WebDriverProvider.getWebDriver());
             actions.keyDown(Keys.CONTROL);
-            for (Locator locator : locators) {
-                WebElement element = webFinder.findWhenClickable(locator);
-                actions.click(element);
-            }
+            Arrays.stream(locators).forEach(locator -> actions.click(webFinder.findWhenClickable(locator)));
             actions.keyUp(Keys.CONTROL);
             actions.perform();
         }
@@ -202,9 +199,7 @@ public class WebCommander extends Commands {
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
             Select select = new Select(webElement);
-            for (String option : options) {
-                select.deselectByVisibleText(option);
-            }
+            Arrays.stream(options).forEach(select::deselectByVisibleText);
         }
         catch (Exception exception) {
             LOG.error("Error deselecting options :: {}: {}", exception.getClass().getSimpleName(),
@@ -311,9 +306,7 @@ public class WebCommander extends Commands {
         try {
             WebElement webElement = webFinder.findWhenVisible(locator);
             Select select = new Select(webElement);
-            for (String option : options) {
-                select.selectByVisibleText(option);
-            }
+            Arrays.stream(options).forEach(select::selectByVisibleText);
         }
         catch (Exception exception) {
             LOG.error("Error selecting options :: {}: {}", exception.getClass().getSimpleName(),
@@ -432,8 +425,8 @@ public class WebCommander extends Commands {
     
     private String stringify(CharSequence... input) {
         StringBuilder builder = new StringBuilder();
-        String separator = "";
-        for (CharSequence charSequence : input) {
+        Arrays.stream(input).forEachOrdered(charSequence -> {
+            String separator = "";
             builder.append(separator);
             if (charSequence instanceof String) {
                 builder.append(charSequence);
@@ -443,7 +436,7 @@ public class WebCommander extends Commands {
                        .append("-key");
             }
             separator = ", ";
-        }
+        });
         
         return builder.toString();
     }
