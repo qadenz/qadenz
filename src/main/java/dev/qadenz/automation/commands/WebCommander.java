@@ -58,6 +58,11 @@ public class WebCommander extends Commands {
         LOG = LoggerFactory.getLogger(logger);
     }
     
+    public WebCommander(String logger) {
+        super(logger);
+        LOG = LoggerFactory.getLogger(logger);
+    }
+    
     /**
      * Removes the text from an input field.
      *

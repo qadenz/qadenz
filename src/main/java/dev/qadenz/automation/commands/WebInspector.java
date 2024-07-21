@@ -51,6 +51,10 @@ public class WebInspector {
         LOG = LoggerFactory.getLogger(logger);
     }
     
+    public WebInspector(String logger) {
+        LOG = LoggerFactory.getLogger(logger);
+    }
+    
     /**
      * Retrieves the value of the given attribute on an element.
      *
