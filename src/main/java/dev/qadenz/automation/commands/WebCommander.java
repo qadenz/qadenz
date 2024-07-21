@@ -34,6 +34,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * Common commands related to the WebDriver layer.
@@ -424,20 +425,16 @@ public class WebCommander extends Commands {
     }
     
     private String stringify(CharSequence... input) {
-        StringBuilder builder = new StringBuilder();
-        Arrays.stream(input).forEachOrdered(charSequence -> {
-            String separator = "";
-            builder.append(separator);
+        StringJoiner joiner = new StringJoiner(", ");
+        for (CharSequence charSequence : input) {
             if (charSequence instanceof String) {
-                builder.append(charSequence);
+                joiner.add(charSequence);
             }
             else if (charSequence instanceof Keys) {
-                builder.append(((Keys) charSequence).name())
-                       .append("-key");
+                joiner.add(((Keys) charSequence).name() + "-key");
             }
-            separator = ", ";
-        });
+        }
         
-        return builder.toString();
+        return joiner.toString();
     }
 }
