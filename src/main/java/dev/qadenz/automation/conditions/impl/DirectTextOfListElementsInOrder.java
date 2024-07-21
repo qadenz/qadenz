@@ -38,7 +38,7 @@ public class DirectTextOfListElementsInOrder implements Condition {
     
     @Override
     public Boolean result() {
-        Boolean match = null;
+        Boolean match;
         WebInspector webInspector = new WebInspector(Conditions.class);
         List<String> elementValues = webInspector.getDirectTextOfElements(locator);
         

@@ -12,7 +12,7 @@ package dev.qadenz.automation.util;
 import dev.qadenz.automation.commands.Commands;
 
 /**
- * Required sub-class of the abstract class {@link Commands}.
+ * Required subclass of the abstract class {@link Commands}.
  *
  * @author Tim Slifer
  */

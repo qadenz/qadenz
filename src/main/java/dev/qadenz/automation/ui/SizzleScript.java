@@ -72,8 +72,8 @@ public class SizzleScript {
     
     private String loadSizzle() {
         try {
-            InputStream stream =
-                    getClass().getResourceAsStream("/META-INF/resources/webjars/sizzle/" + VERSION + "/sizzle.js");
+            String path = "/META-INF/resources/webjars/sizzle/" + VERSION + "/sizzle.js";
+            InputStream stream = getClass().getResourceAsStream(path);
             Reader reader = new BufferedReader(new InputStreamReader(stream));
             StringBuilder builder = new StringBuilder();
             char[] buffer = new char[8192];

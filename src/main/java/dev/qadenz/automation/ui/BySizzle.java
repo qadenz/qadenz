@@ -83,7 +83,7 @@ public abstract class BySizzle extends By {
             injectSizzleIfNeeded(driver);
             List elements = runSizzle(driver);
             
-            if (elements.size() > 0) {
+            if (!elements.isEmpty()) {
                 return (WebElement) elements.get(0);
             }
             else {

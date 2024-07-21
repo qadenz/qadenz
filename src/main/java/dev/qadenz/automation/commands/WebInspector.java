@@ -751,7 +751,7 @@ public class WebInspector {
         LOG.info("Retrieving visible state of element [{}].", locator.getName());
         try {
             List<WebElement> webElements = webFinder.findAll(locator);
-            boolean visible = (webElements.size() > 0);
+            boolean visible = (!webElements.isEmpty());
             LOG.debug("Found [{}] instances - Visibility is [{}].", webElements.size(), visible);
             
             try {

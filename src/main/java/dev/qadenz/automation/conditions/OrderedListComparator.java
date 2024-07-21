@@ -39,7 +39,11 @@ public class OrderedListComparator {
             boolean instanceMatch = expectation.matchers().get(i).matches(instanceValue);
             
             if (!instanceMatch) {
-                failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
+                failures.append("--> at index [")
+                        .append(i)
+                        .append("], found [")
+                        .append(instanceValue)
+                        .append("].\n");
             }
             
             if (match == null || match) {
@@ -50,15 +54,22 @@ public class OrderedListComparator {
         if (expectation.getExpectedValues().size() > elementValues.size()) {
             failures.append("--- Expected more list values than were found.\n");
             for (int i = elementValues.size(); i < expectation.matchers().size(); i++) {
-                failures.append(
-                        "--> at index [" + i + "], expected [" + expectation.getExpectedValues().get(i) + "].\n");
+                failures.append("--> at index [")
+                        .append(i)
+                        .append("], expected [")
+                        .append(expectation.getExpectedValues().get(i))
+                        .append("].\n");
             }
             match = false;
         }
         else if (elementValues.size() > expectation.getExpectedValues().size()) {
             failures.append("--- Found more list values than were expected.\n");
             for (int i = expectation.getExpectedValues().size(); i < elementValues.size(); i++) {
-                failures.append("--> at index [" + i + "], found [" + elementValues.get(i) + "].\n");
+                failures.append("--> at index [")
+                        .append(i)
+                        .append("], found [")
+                        .append(elementValues.get(i))
+                        .append("].\n");
             }
             match = false;
         }

@@ -7,7 +7,7 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
  */
-package dev.qadenz.automation.test.expectations;
+package dev.qadenz.automation.test.comparators;
 
 import dev.qadenz.automation.conditions.UnorderedListComparator;
 import dev.qadenz.automation.expectations.Expectations;

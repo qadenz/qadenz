@@ -35,7 +35,7 @@ public class PresenceOfElement implements Condition {
     @Override
     public Boolean result() {
         WebFinder webFinder = new WebFinder();
-        present = webFinder.findAll(locator).size() > 0;
+        present = !webFinder.findAll(locator).isEmpty();
         
         return expectation.matcher().matches(present);
     }

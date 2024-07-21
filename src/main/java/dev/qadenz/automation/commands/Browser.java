@@ -225,13 +225,13 @@ public class Browser {
                 WebDriverProvider.getWebDriver().getWindowHandles().size() - 1 > currentWindowIndex) {
             WebDriverProvider.getWebDriver().switchTo().window(windowHandles.get(currentWindowIndex + 1));
         }
-        else if (window == Window.PREVIOUS && WebDriverProvider.getWebDriver().getWindowHandles().size() >= 1) {
+        else if (window == Window.PREVIOUS && !WebDriverProvider.getWebDriver().getWindowHandles().isEmpty()) {
             WebDriverProvider.getWebDriver().switchTo().window(windowHandles.get(currentWindowIndex - 1));
         }
     }
     
     private enum Window {
         NEXT,
-        PREVIOUS;
+        PREVIOUS
     }
 }

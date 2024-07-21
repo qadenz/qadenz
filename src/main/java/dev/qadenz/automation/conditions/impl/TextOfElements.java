@@ -27,7 +27,6 @@ public class TextOfElements implements Condition {
     private Locator locator;
     private Expectation<String> expectation;
     
-    private List<String> elementValues;
     private StringBuilder failures = new StringBuilder();
     
     public TextOfElements(Locator locator, Expectation<String> expectation) {
@@ -39,14 +38,18 @@ public class TextOfElements implements Condition {
     public Boolean result() {
         Boolean match = null;
         WebInspector webInspector = new WebInspector(Conditions.class);
-        elementValues = webInspector.getTextOfElements(locator);
+        List<String> elementValues = webInspector.getTextOfElements(locator);
         
         for (int i = 0; i < elementValues.size(); i++) {
             String instanceValue = elementValues.get(i);
             boolean instanceMatch = expectation.matcher().matches(instanceValue);
             
             if (!instanceMatch) {
-                failures.append("--> at index [" + i + "], found [" + instanceValue + "].\n");
+                failures.append("--> at index [")
+                        .append(i)
+                        .append("], found [")
+                        .append(instanceValue)
+                        .append("].\n");
             }
             
             if (match == null || match) {

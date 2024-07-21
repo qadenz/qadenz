@@ -129,8 +129,9 @@ public class TestResult {
             List<ITestResult> resultsList = Lists.newArrayList(results);
             resultsList.sort(RESULT_COMPARATOR);
             Iterator<ITestResult> resultsIterator = resultsList.iterator();
-            assert resultsIterator.hasNext();
-            
+            if (!resultsIterator.hasNext()) {
+                throw new IllegalStateException("There should have been at-least 1 result");
+            }
             ITestResult result = resultsIterator.next();
             resultsPerMethod.add(result);
             
@@ -142,11 +143,12 @@ public class TestResult {
                 String className = result.getTestClass().getName();
                 if (!previousClassName.equals(className)) {
                     // Different class implies different method
-                    assert !resultsPerMethod.isEmpty();
+                    if (resultsPerMethod.isEmpty()) {
+                        throw new IllegalStateException("Results per method should NOT have been empty");
+                    }
                     resultsPerClass.add(new MethodResult(resultsPerMethod));
                     resultsPerMethod = Lists.newArrayList();
                     
-                    assert !resultsPerClass.isEmpty();
                     classResults.add(new ClassResult(previousClassName, resultsPerClass));
                     resultsPerClass = Lists.newArrayList();
                     
@@ -156,7 +158,9 @@ public class TestResult {
                 else {
                     String methodName = result.getMethod().getMethodName();
                     if (!previousMethodName.equals(methodName)) {
-                        assert !resultsPerMethod.isEmpty();
+                        if (resultsPerMethod.isEmpty()) {
+                            throw new IllegalStateException("Results per method should NOT have been empty");
+                        }
                         resultsPerClass.add(new MethodResult(resultsPerMethod));
                         resultsPerMethod = Lists.newArrayList();
                         
@@ -165,9 +169,10 @@ public class TestResult {
                 }
                 resultsPerMethod.add(result);
             }
-            assert !resultsPerMethod.isEmpty();
+            if (resultsPerMethod.isEmpty()) {
+                throw new IllegalStateException("Results per method should NOT have been empty");
+            }
             resultsPerClass.add(new MethodResult(resultsPerMethod));
-            assert !resultsPerClass.isEmpty();
             classResults.add(new ClassResult(previousClassName, resultsPerClass));
         }
         return classResults;
