@@ -36,11 +36,9 @@ public enum Browser {
     }
     
     public static Browser fromString(String name) {
-        Arrays.stream(values())
-              .filter(browser -> browser.getName().equalsIgnoreCase(name))
-              .findFirst()
-              .orElseThrow(() -> new WebDriverException("Unrecognized browser: " + name));
-        
-        throw new WebDriverException("Unrecognized browser: " + name);
+        return Arrays.stream(values())
+                     .filter(browser -> browser.getName().equalsIgnoreCase(name))
+                     .findFirst()
+                     .orElseThrow(() -> new WebDriverException("Unrecognized browser: " + name));
     }
 }
