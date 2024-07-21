@@ -17,6 +17,7 @@ import org.testng.Assert;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Common commands for all test types.
@@ -84,7 +85,9 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void check(boolean captureScreen, List<Condition> conditions) {
-        for (Condition condition : conditions) {
+        AtomicBoolean failed = new AtomicBoolean(false);
+        
+        conditions.stream().forEach(condition -> {
             LOG.info("Checking Condition - {}", condition);
             try {
                 boolean result = condition.result();
@@ -93,7 +96,7 @@ public abstract class Commands {
             }
             catch (AssertionError error) {
                 LOG.info("Result - FAIL :: Found [{}].", condition.actual());
-                Assertions.setFailures(true);
+                failed.set(true);
                 if (captureScreen) {
                     screenshot.capture();
                 }
@@ -104,9 +107,9 @@ public abstract class Commands {
                     screenshot.capture();
                 }
                 
-                throw new RuntimeException("Error while verifying condition.");
+                throw new RuntimeException("Error while checking condition.");
             }
-        }
+        });
     }
     
     /**
@@ -150,9 +153,9 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void verify(boolean captureScreen, List<Condition> conditions) {
-        boolean failed = false;
+        AtomicBoolean failed = new AtomicBoolean(false);
         
-        for (Condition condition : conditions) {
+        conditions.stream().forEach(condition -> {
             LOG.info("Verifying Condition - {}", condition);
             try {
                 boolean result = condition.result();
@@ -160,8 +163,8 @@ public abstract class Commands {
                 LOG.info("Result - PASS");
             }
             catch (AssertionError error) {
-                LOG.info("Result - FAIL :: Found [{}]", condition.actual());
-                failed = true;
+                LOG.info("Result - FAIL :: Found [{}].", condition.actual());
+                failed.set(true);
                 if (captureScreen) {
                     screenshot.capture();
                 }
@@ -174,9 +177,9 @@ public abstract class Commands {
                 
                 throw new RuntimeException("Error while verifying condition.");
             }
-        }
+        });
         
-        if (failed) {
+        if (failed.get()) {
             throw new AssertionError("One or more validations failed.");
         }
     }
