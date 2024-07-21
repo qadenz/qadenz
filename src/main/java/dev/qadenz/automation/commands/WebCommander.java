@@ -426,14 +426,14 @@ public class WebCommander extends Commands {
     
     private String stringify(CharSequence... input) {
         StringJoiner joiner = new StringJoiner(", ");
-        for (CharSequence charSequence : input) {
+        Arrays.stream(input).forEach(charSequence -> {
             if (charSequence instanceof String) {
                 joiner.add(charSequence);
             }
             else if (charSequence instanceof Keys) {
                 joiner.add(((Keys) charSequence).name() + "-key");
             }
-        }
+        });
         
         return joiner.toString();
     }
