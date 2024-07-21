@@ -48,8 +48,6 @@ import java.util.stream.IntStream;
 public class JsonReporter {
     
     private ISuite suite;
-    private SuiteResult suiteResult;
-    
     private JsonReport jsonReport;
     
     private static final Pattern UUID_PATTERN =
@@ -57,8 +55,6 @@ public class JsonReporter {
     
     public JsonReporter(ISuite suite) {
         this.suite = suite;
-        this.suiteResult = new SuiteResult(suite);
-        
         this.jsonReport = new JsonReport();
     }
     
@@ -212,24 +208,21 @@ public class JsonReporter {
     
     private List<JsonLogEvent> processLogOutput(List<String> logOutput) {
         List<String> logs = siftAndTrim(logOutput);
-        List<JsonLogEvent> logEvents =
-                IntStream.range(0, logs.size())
-                         // Filter out indices that should be skipped
-                         .filter(i -> i % 2 == 0 || !checkForUuid(logs.get(i)))
-                         .mapToObj(i -> {
-                             String logMessage = logs.get(i);
-                             String screenshot;
-                             if ((i + 1) < logs.size() && checkForUuid(logs.get(i + 1))) {
-                                 screenshot = ScreenshotData.getInstance().get(logs.get(i + 1));
-                                 return new JsonLogEvent(logMessage, screenshot);
-                             }
-                             else {
-                                 return new JsonLogEvent(logMessage, null);
-                             }
-                         })
-                         .collect(Collectors.toList());
-        
-        return logEvents;
+        return IntStream.range(0, logs.size())
+                        // Filter out indices that should be skipped
+                        .filter(i -> i % 2 == 0 || !checkForUuid(logs.get(i)))
+                        .mapToObj(i -> {
+                            String logMessage = logs.get(i);
+                            String screenshot;
+                            if ((i + 1) < logs.size() && checkForUuid(logs.get(i + 1))) {
+                                screenshot = ScreenshotData.getInstance().get(logs.get(i + 1));
+                                return new JsonLogEvent(logMessage, screenshot);
+                            }
+                            else {
+                                return new JsonLogEvent(logMessage, null);
+                            }
+                        })
+                        .collect(Collectors.toList());
     }
     
     private List<String> siftAndTrim(List<String> input) {
