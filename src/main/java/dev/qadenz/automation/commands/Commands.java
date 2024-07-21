@@ -85,9 +85,7 @@ public abstract class Commands {
      * @param conditions The Conditions to be evaluated.
      */
     public void check(boolean captureScreen, List<Condition> conditions) {
-        AtomicBoolean failed = new AtomicBoolean(false);
-        
-        conditions.stream().forEach(condition -> {
+        conditions.forEach(condition -> {
             LOG.info("Checking Condition - {}", condition);
             try {
                 boolean result = condition.result();
@@ -96,7 +94,7 @@ public abstract class Commands {
             }
             catch (AssertionError error) {
                 LOG.info("Result - FAIL :: Found [{}].", condition.actual());
-                failed.set(true);
+                Assertions.setFailures(true);
                 if (captureScreen) {
                     screenshot.capture();
                 }
@@ -155,7 +153,7 @@ public abstract class Commands {
     public void verify(boolean captureScreen, List<Condition> conditions) {
         AtomicBoolean failed = new AtomicBoolean(false);
         
-        conditions.stream().forEach(condition -> {
+        conditions.forEach(condition -> {
             LOG.info("Verifying Condition - {}", condition);
             try {
                 boolean result = condition.result();
