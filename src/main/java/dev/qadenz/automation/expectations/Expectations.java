@@ -722,6 +722,13 @@ public class Expectations {
         return new TextStartsWith(expectedText);
     }
     
+    /**
+     * An expectation for a list of 'actual' values to contain the given 'expected' values.
+     *
+     * @param expectedValues The values for comparison.
+     *
+     * @return The Expectation.
+     */
     public static ListExpectation listContainsValues(List<String> expectedValues) {
         return new ListContainsValues(expectedValues);
     }

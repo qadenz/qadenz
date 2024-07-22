@@ -26,6 +26,7 @@ import dev.qadenz.automation.conditions.impl.PresenceOfAlert;
 import dev.qadenz.automation.conditions.impl.PresenceOfElement;
 import dev.qadenz.automation.conditions.impl.PresenceOfElements;
 import dev.qadenz.automation.conditions.impl.SelectedMenuOption;
+import dev.qadenz.automation.conditions.impl.SelectedMenuOptions;
 import dev.qadenz.automation.conditions.impl.SelectedStateOfElement;
 import dev.qadenz.automation.conditions.impl.TextOfAlert;
 import dev.qadenz.automation.conditions.impl.TextOfElement;
@@ -36,6 +37,9 @@ import dev.qadenz.automation.conditions.impl.TextOfElementAsInteger;
 import dev.qadenz.automation.conditions.impl.TextOfElementAsTime;
 import dev.qadenz.automation.conditions.impl.TextOfElements;
 import dev.qadenz.automation.conditions.impl.TextOfInputElement;
+import dev.qadenz.automation.conditions.impl.TextOfListElementsInOrder;
+import dev.qadenz.automation.conditions.impl.TextOfListElementsUnordered;
+import dev.qadenz.automation.conditions.impl.TextOfSelectMenuOptions;
 import dev.qadenz.automation.conditions.impl.VisibilityOfElement;
 import dev.qadenz.automation.conditions.impl.VisibilityOfElements;
 import dev.qadenz.automation.expectations.Expectation;
@@ -286,6 +290,18 @@ public class Conditions {
     }
     
     /**
+     * A Condition for evaluating each of the currently selected options of a Select menu element.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the text to be shown in each option.
+     *
+     * @return The Condition.
+     */
+    public static Condition selectedMenuOptions(Locator locator, ListExpectation expectation) {
+        return new SelectedMenuOptions(locator, expectation);
+    }
+    
+    /**
      * A Condition for evaluating an element to be selected. This applies only elements such as checkboxes, radio
      * options, and {@code <option>} child of a {@code <select>} elements.
      *
@@ -404,8 +420,7 @@ public class Conditions {
     }
     
     /**
-     * A Condition to evaluate the visible inner text of each instance of an element, excluding the text of any
-     * descendant elements on the DOM, as an ordered list.
+     * A Condition to evaluate the visible inner text of each instance of an element as an ordered list.
      *
      * @param locator The mapped UI element.
      * @param expectation The expectation for the text to be shown in each instance of the element.
@@ -413,12 +428,11 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition textOfListedElementsInOrder(Locator locator, ListExpectation expectation) {
-        return new DirectTextOfListElementsInOrder(locator, expectation);
+        return new TextOfListElementsInOrder(locator, expectation);
     }
     
     /**
-     * A Condition to evaluate the visible inner text of each instance of an element, excluding the text of any
-     * descendant elements on the DOM, as an unordered list.
+     * A Condition to evaluate the visible inner text of each instance of an element as an unordered list.
      *
      * @param locator The mapped UI element.
      * @param expectation The expectation for the text to be shown in each instance of the element.
@@ -426,7 +440,19 @@ public class Conditions {
      * @return The Condition.
      */
     public static Condition textOfListedElementsUnordered(Locator locator, ListExpectation expectation) {
-        return new DirectTextOfListElementsUnordered(locator, expectation);
+        return new TextOfListElementsUnordered(locator, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the values of each {@code <option>} child of a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the text to be shown in each option.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfSelectMenuOptions(Locator locator, ListExpectation expectation) {
+        return new TextOfSelectMenuOptions(locator, expectation);
     }
     
     /**
