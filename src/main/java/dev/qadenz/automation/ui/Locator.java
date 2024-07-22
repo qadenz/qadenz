@@ -32,7 +32,7 @@ public class Locator {
     
     public Locator(String name, Locator parent, String selector) {
         this.name = name;
-        this.selector = parent.getSelector() + " " + selector;
+        this.selector = parent.getSelector() + selector;
     }
     
     public String getName() {

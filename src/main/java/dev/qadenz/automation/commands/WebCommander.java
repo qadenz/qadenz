@@ -34,6 +34,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * Common commands related to the WebDriver layer.
@@ -53,6 +54,11 @@ public class WebCommander extends Commands {
     }
     
     public WebCommander(Class<?> logger) {
+        super(logger);
+        LOG = LoggerFactory.getLogger(logger);
+    }
+    
+    public WebCommander(String logger) {
         super(logger);
         LOG = LoggerFactory.getLogger(logger);
     }
@@ -153,10 +159,7 @@ public class WebCommander extends Commands {
         try {
             Actions actions = new Actions(WebDriverProvider.getWebDriver());
             actions.keyDown(Keys.CONTROL);
-            for (Locator locator : locators) {
-                WebElement element = webFinder.findWhenClickable(locator);
-                actions.click(element);
-            }
+            Arrays.stream(locators).forEach(locator -> actions.click(webFinder.findWhenClickable(locator)));
             actions.keyUp(Keys.CONTROL);
             actions.perform();
         }
@@ -184,6 +187,28 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error deselecting option :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Deselects multiple options from a dropdown menu implemented as a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     * @param options The options to be deselected.
+     */
+    public void deselect(Locator locator, String... options) {
+        LOG.info("Deselecting options [{}] from element [{}].", options, locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            Arrays.stream(options).forEach(select::deselectByVisibleText);
+        }
+        catch (Exception exception) {
+            LOG.error("Error deselecting options :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
             screenshot.capture();
             
@@ -269,6 +294,28 @@ public class WebCommander extends Commands {
         }
         catch (Exception exception) {
             LOG.error("Error selecting option :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Selects multiple options from a dropdown menu implemented as a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     * @param options The options to be selected.
+     */
+    public void select(Locator locator, String... options) {
+        LOG.info("Selecting options [{}] from element [{}].", options, locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            Arrays.stream(options).forEach(select::selectByVisibleText);
+        }
+        catch (Exception exception) {
+            LOG.error("Error selecting options :: {}: {}", exception.getClass().getSimpleName(),
                     exception.getMessage());
             screenshot.capture();
             
@@ -383,19 +430,16 @@ public class WebCommander extends Commands {
     }
     
     private String stringify(CharSequence... input) {
-        StringBuilder builder = new StringBuilder();
-        String separator = "";
-        for (CharSequence charSequence : input) {
-            builder.append(separator);
+        StringJoiner joiner = new StringJoiner(", ");
+        Arrays.stream(input).forEach(charSequence -> {
             if (charSequence instanceof String) {
-                builder.append(charSequence);
+                joiner.add(charSequence);
             }
             else if (charSequence instanceof Keys) {
-                builder.append(((Keys) charSequence).name() + "-key");
+                joiner.add(((Keys) charSequence).name() + "-key");
             }
-            separator = ", ";
-        }
+        });
         
-        return builder.toString();
+        return joiner.toString();
     }
 }

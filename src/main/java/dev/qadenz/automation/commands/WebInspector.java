@@ -51,6 +51,10 @@ public class WebInspector {
         LOG = LoggerFactory.getLogger(logger);
     }
     
+    public WebInspector(String logger) {
+        LOG = LoggerFactory.getLogger(logger);
+    }
+    
     /**
      * Retrieves the value of the given attribute on an element.
      *
@@ -158,6 +162,34 @@ public class WebInspector {
             WebElement webElement = webFinder.findWhenVisible(locator);
             
             return removeChildElementTextValues(webElement);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
+     * Retrieves the visible inner text of each instance of an element, excluding the text of any descendants on the
+     * DOM.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The list of values.
+     */
+    public List<String> getDirectTextOfElements(Locator locator) {
+        LOG.info("Retrieving direct text of elements [{}].", locator.getName());
+        try {
+            List<WebElement> webElements = webFinder.findAllWhenVisible(locator);
+            List<String> elementTexts = new ArrayList<>();
+            
+            for (WebElement webElement : webElements) {
+                elementTexts.add(removeChildElementTextValues(webElement));
+            }
+            
+            return elementTexts;
         }
         catch (Exception exception) {
             LOG.error("Error retrieving text :: {}: {}", exception.getClass().getSimpleName(), exception.getMessage());
@@ -435,6 +467,31 @@ public class WebInspector {
     }
     
     /**
+     * Retrieves the values of the currently selected options on a {@code <select>} element.
+     *
+     * @param locator The mapped UI element.
+     *
+     * @return The list of selected options.
+     */
+    public List<String> getSelectedMenuOptions(Locator locator) {
+        LOG.info("Retrieving the currently selected options of element [{}].", locator.getName());
+        try {
+            WebElement webElement = webFinder.findWhenVisible(locator);
+            Select select = new Select(webElement);
+            List<WebElement> selectedOptions = select.getAllSelectedOptions();
+            
+            return getTextValuesFromElements(selectedOptions);
+        }
+        catch (Exception exception) {
+            LOG.error("Error retrieving options :: {}: {}", exception.getClass().getSimpleName(),
+                    exception.getMessage());
+            screenshot.capture();
+            
+            throw exception;
+        }
+    }
+    
+    /**
      * Determines whether an element is selected. This applies only elements such as checkboxes, radio options, and
      * {@code <option>} child of a {@code <select>} elements.
      *
@@ -698,7 +755,7 @@ public class WebInspector {
         LOG.info("Retrieving visible state of element [{}].", locator.getName());
         try {
             List<WebElement> webElements = webFinder.findAll(locator);
-            boolean visible = (webElements.size() > 0);
+            boolean visible = (!webElements.isEmpty());
             LOG.debug("Found [{}] instances - Visibility is [{}].", webElements.size(), visible);
             
             try {

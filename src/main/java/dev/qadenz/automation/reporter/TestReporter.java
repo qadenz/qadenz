@@ -36,7 +36,7 @@ public class TestReporter implements IReporter {
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
         
         LOG.info("Starting JSON Compilation.");
-        JsonReporter jsonReporter = new JsonReporter(xmlSuites.get(0), suites.get(0));
+        JsonReporter jsonReporter = new JsonReporter(suites.get(0));
         JsonReport jsonReport = jsonReporter.compileJsonReport();
         
         try {

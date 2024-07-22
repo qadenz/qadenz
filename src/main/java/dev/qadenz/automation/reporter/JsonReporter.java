@@ -23,7 +23,6 @@ import org.testng.ISuite;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.internal.Utils;
-import org.testng.xml.XmlSuite;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -33,7 +32,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Combines logging output from Logback, with data elements from this library, along with results data extracted from
@@ -45,20 +47,14 @@ import java.util.regex.Pattern;
  */
 public class JsonReporter {
     
-    private XmlSuite xmlSuite;
     private ISuite suite;
-    private SuiteResult suiteResult;
-    
     private JsonReport jsonReport;
     
     private static final Pattern UUID_PATTERN =
             Pattern.compile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$");
     
-    public JsonReporter(XmlSuite xmlSuite, ISuite suite) {
-        this.xmlSuite = xmlSuite;
+    public JsonReporter(ISuite suite) {
         this.suite = suite;
-        this.suiteResult = new SuiteResult(suite);
-        
         this.jsonReport = new JsonReport();
     }
     
@@ -112,46 +108,34 @@ public class JsonReporter {
         List<JsonClass> skippedTests = processClassResults(testResult.getSkippedTestResults());
         List<JsonClass> passedTests = processClassResults(testResult.getPassedTestResults());
         
-        int totalFailedConfigurations = 0;
-        for (JsonClass jsonClass : failedConfigurations) {
-            totalFailedConfigurations += jsonClass.getMethods().size();
-        }
-        jsonTest.setTotalFailedConfigurations(totalFailedConfigurations);
+        AtomicInteger totalFailedConfigurations = new AtomicInteger();
+        failedConfigurations.forEach(jsonClass -> totalFailedConfigurations.addAndGet(jsonClass.getMethods().size()));
+        jsonTest.setTotalFailedConfigurations(totalFailedConfigurations.get());
         jsonTest.setFailedConfigurations(failedConfigurations);
         
-        int totalFailedTests = 0;
-        for (JsonClass jsonClass : failedTests) {
-            totalFailedTests += jsonClass.getMethods().size();
-        }
-        jsonTest.setTotalFailedTests(totalFailedTests);
+        AtomicInteger totalFailedTests = new AtomicInteger();
+        failedTests.forEach(jsonClass -> totalFailedTests.addAndGet(jsonClass.getMethods().size()));
+        jsonTest.setTotalFailedTests(totalFailedTests.get());
         jsonTest.setFailedTests(failedTests);
         
-        int totalStoppedTests = 0;
-        for (JsonClass jsonClass : stoppedTests) {
-            totalStoppedTests += jsonClass.getMethods().size();
-        }
-        jsonTest.setTotalStoppedTests(totalStoppedTests);
+        AtomicInteger totalStoppedTests = new AtomicInteger();
+        stoppedTests.forEach(jsonClass -> totalStoppedTests.addAndGet(jsonClass.getMethods().size()));
+        jsonTest.setTotalStoppedTests(totalStoppedTests.get());
         jsonTest.setStoppedTests(stoppedTests);
         
-        int totalSkippedConfigurations = 0;
-        for (JsonClass jsonClass : skippedConfigurations) {
-            totalSkippedConfigurations += jsonClass.getMethods().size();
-        }
-        jsonTest.setTotalSkippedConfigurations(totalSkippedConfigurations);
+        AtomicInteger totalSkippedConfigurations = new AtomicInteger();
+        skippedConfigurations.forEach(jsonClass -> totalSkippedConfigurations.addAndGet(jsonClass.getMethods().size()));
+        jsonTest.setTotalSkippedConfigurations(totalSkippedConfigurations.get());
         jsonTest.setSkippedConfigurations(skippedConfigurations);
         
-        int totalSkippedTests = 0;
-        for (JsonClass jsonClass : skippedTests) {
-            totalSkippedTests += jsonClass.getMethods().size();
-        }
-        jsonTest.setTotalSkippedTests(totalSkippedTests);
+        AtomicInteger totalSkippedTests = new AtomicInteger();
+        skippedTests.forEach(jsonClass -> totalSkippedTests.addAndGet(jsonClass.getMethods().size()));
+        jsonTest.setTotalSkippedTests(totalSkippedTests.get());
         jsonTest.setSkippedTests(skippedTests);
         
-        int totalPassedTests = 0;
-        for (JsonClass jsonClass : passedTests) {
-            totalPassedTests += jsonClass.getMethods().size();
-        }
-        jsonTest.setTotalPassedTests(totalPassedTests);
+        AtomicInteger totalPassedTests = new AtomicInteger();
+        passedTests.forEach(jsonClass -> totalPassedTests.addAndGet(jsonClass.getMethods().size()));
+        jsonTest.setTotalPassedTests(totalPassedTests.get());
         jsonTest.setPassedTests(passedTests);
         
         return jsonTest;
@@ -159,23 +143,23 @@ public class JsonReporter {
     
     private List<JsonClass> processClassResults(List<ClassResult> classResults) {
         List<JsonClass> jsonClasses = new ArrayList<>();
-        for (ClassResult classResult : classResults) {
+        classResults.forEach(classResult -> {
             JsonClass jsonClass = new JsonClass();
             jsonClass.setClassName(classResult.getClassName());
             jsonClass.setMethods(processMethodResults(classResult.getMethodResults()));
             
             jsonClasses.add(jsonClass);
-        }
+        });
         
         return jsonClasses;
     }
     
     private List<JsonMethod> processMethodResults(List<MethodResult> methodResults) {
         List<JsonMethod> jsonMethods = new ArrayList<>();
-        for (MethodResult methodResult : methodResults) {
-            
+        
+        methodResults.forEach(methodResult -> {
             List<ITestResult> results = methodResult.getResults();
-            for (ITestResult result : results) {
+            results.forEach(result -> {
                 JsonMethod jsonMethod = new JsonMethod();
                 jsonMethod.setMethodName(result.getName());
                 jsonMethod.setParameters(processParameters(result));
@@ -201,8 +185,8 @@ public class JsonReporter {
                 }
                 
                 jsonMethods.add(jsonMethod);
-            }
-        }
+            });
+        });
         
         return jsonMethods;
     }
@@ -224,34 +208,32 @@ public class JsonReporter {
     
     private List<JsonLogEvent> processLogOutput(List<String> logOutput) {
         List<String> logs = siftAndTrim(logOutput);
-        List<JsonLogEvent> logEvents = new ArrayList<>();
-        
-        for (int i = 0; i < logs.size(); i++) {
-            String logMessage = logs.get(i);
-            String screenshot = null;
-            
-            if ((i + 1) < logs.size()) {
-                if (checkForUuid(logs.get(i + 1))) {
-                    screenshot = ScreenshotData.getInstance().get(logs.get(i + 1));
-                    i++;
-                }
-            }
-            
-            logEvents.add(new JsonLogEvent(logMessage, screenshot));
-        }
-        
-        return logEvents;
+        return IntStream.range(0, logs.size())
+                        // Filter out indices that should be skipped
+                        .filter(i -> i % 2 == 0 || !checkForUuid(logs.get(i)))
+                        .mapToObj(i -> {
+                            String logMessage = logs.get(i);
+                            String screenshot;
+                            if ((i + 1) < logs.size() && checkForUuid(logs.get(i + 1))) {
+                                screenshot = ScreenshotData.getInstance().get(logs.get(i + 1));
+                                return new JsonLogEvent(logMessage, screenshot);
+                            }
+                            else {
+                                return new JsonLogEvent(logMessage, null);
+                            }
+                        })
+                        .collect(Collectors.toList());
     }
     
     private List<String> siftAndTrim(List<String> input) {
         List<String> output = new ArrayList<>();
-        for (int i = 0; i < input.size(); i++) {
-            if (!input.get(i).equals("")) {
-                // Yes, the reporter layout could be changed to accommodate this,
-                // but the console output will not be wrapped.
-                output.add(input.get(i).trim());
+        input.forEach(item -> {
+            // Yes, the reporter layout could be changed to accommodate this,
+            // but the console output will not be wrapped.
+            if (item.isEmpty()) {
+                output.add(item.trim());
             }
-        }
+        });
         
         return output;
     }

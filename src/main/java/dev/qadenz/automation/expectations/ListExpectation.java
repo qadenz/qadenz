@@ -7,18 +7,17 @@ A copy of the License may be obtained at
 
 https://polyformproject.org/licenses/internal-use/1.0.0/
  */
-package dev.qadenz.automation.util;
+package dev.qadenz.automation.expectations;
 
-import dev.qadenz.automation.commands.Commands;
+import org.hamcrest.Matcher;
 
-/**
- * Required subclass of the abstract class {@link Commands}.
- *
- * @author Tim Slifer
- */
-public class TestCommander extends Commands {
+import java.util.List;
+
+public interface ListExpectation {
     
-    public TestCommander() {
-        super();
-    }
+    List<Matcher<String>> matchers();
+    
+    String toString();
+    
+    List<String> getExpectedValues();
 }

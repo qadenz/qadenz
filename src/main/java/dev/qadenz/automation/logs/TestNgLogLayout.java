@@ -25,17 +25,9 @@ public class TestNgLogLayout extends LayoutBase<ILoggingEvent> {
     
     @Override
     public String doLayout(ILoggingEvent event) {
-        StringBuilder buffer = new StringBuilder();
-        
-        buffer.append(new SimpleDateFormat("HH:mm:ss:SSS").format(new Date()));
-        buffer.append(" | ");
-        buffer.append(event.getLevel());
-        buffer.append(" | ");
-        buffer.append(event.getLoggerName().substring(event.getLoggerName().lastIndexOf(".") + 1));
-        buffer.append(" | ");
-        buffer.append(event.getFormattedMessage());
-        buffer.append(CoreConstants.LINE_SEPARATOR);
-        
-        return buffer.toString();
+        return new SimpleDateFormat("HH:mm:ss:SSS").format(new Date()) + " | " +
+                event.getLevel() + " | " +
+                event.getLoggerName().substring(event.getLoggerName().lastIndexOf(".") + 1) + " | " +
+                event.getFormattedMessage() + CoreConstants.LINE_SEPARATOR;
     }
 }

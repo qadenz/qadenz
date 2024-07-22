@@ -18,6 +18,8 @@ import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsDateTime;
 import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsDouble;
 import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsInteger;
 import dev.qadenz.automation.conditions.impl.DirectTextOfElementAsTime;
+import dev.qadenz.automation.conditions.impl.DirectTextOfListElementsInOrder;
+import dev.qadenz.automation.conditions.impl.DirectTextOfListElementsUnordered;
 import dev.qadenz.automation.conditions.impl.EnabledStateOfElement;
 import dev.qadenz.automation.conditions.impl.EnabledStateOfElements;
 import dev.qadenz.automation.conditions.impl.PresenceOfAlert;
@@ -37,6 +39,7 @@ import dev.qadenz.automation.conditions.impl.TextOfInputElement;
 import dev.qadenz.automation.conditions.impl.VisibilityOfElement;
 import dev.qadenz.automation.conditions.impl.VisibilityOfElements;
 import dev.qadenz.automation.expectations.Expectation;
+import dev.qadenz.automation.expectations.ListExpectation;
 import dev.qadenz.automation.expectations.NumericExpectation;
 import dev.qadenz.automation.expectations.TemporalExpectation;
 import dev.qadenz.automation.ui.Locator;
@@ -48,7 +51,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 /**
  * A collection of {@link Condition}s to be used for validation or synchronization operations.
@@ -182,6 +184,32 @@ public class Conditions {
     public static Condition directTextOfElementAsInteger(Locator locator, NumberFormat numberFormat,
             NumericExpectation<Integer> expectation) {
         return new DirectTextOfElementAsInteger(locator, numberFormat, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of each instance of an element, excluding the text of any
+     * descendant elements on the DOM, as an ordered list.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the text to be shown in each instance of the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfListElementsInOrder(Locator locator, ListExpectation expectation) {
+        return new DirectTextOfListElementsInOrder(locator, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of each instance of an element, excluding the text of any
+     * descendant elements on the DOM, as an unordered list.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the text to be shown in each instance of the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition directTextOfListElementsUnordered(Locator locator, ListExpectation expectation) {
+        return new DirectTextOfListElementsUnordered(locator, expectation);
     }
     
     /**
@@ -376,6 +404,32 @@ public class Conditions {
     }
     
     /**
+     * A Condition to evaluate the visible inner text of each instance of an element, excluding the text of any
+     * descendant elements on the DOM, as an ordered list.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the text to be shown in each instance of the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfListedElementsInOrder(Locator locator, ListExpectation expectation) {
+        return new DirectTextOfListElementsInOrder(locator, expectation);
+    }
+    
+    /**
+     * A Condition to evaluate the visible inner text of each instance of an element, excluding the text of any
+     * descendant elements on the DOM, as an unordered list.
+     *
+     * @param locator The mapped UI element.
+     * @param expectation The expectation for the text to be shown in each instance of the element.
+     *
+     * @return The Condition.
+     */
+    public static Condition textOfListedElementsUnordered(Locator locator, ListExpectation expectation) {
+        return new DirectTextOfListElementsUnordered(locator, expectation);
+    }
+    
+    /**
      * A Condition to evaluate the text shown inside an {@code <input>} element.
      *
      * @param locator The mapped UI element.
@@ -411,19 +465,5 @@ public class Conditions {
      */
     public static Condition visibilityOfElements(LocatorGroup locatorGroup, Expectation<Boolean> expectation) {
         return new VisibilityOfElements(locatorGroup, expectation);
-    }
-    
-    /**
-     * Cleanly converts a List of Conditions into an Array, for passing to a verification.
-     *
-     * @param conditions The List of Conditions.
-     *
-     * @return The converted Array.
-     *
-     * @deprecated The {@code check()} and {@code verify()} methods now accept a {@code List<Condition>} directly.
-     */
-    @Deprecated
-    public static Condition[] toArray(List<Condition> conditions) {
-        return conditions.toArray(new Condition[conditions.size()]);
     }
 }
