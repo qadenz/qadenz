@@ -227,8 +227,13 @@ public class JsonReporter {
     
     private List<String> siftAndTrim(List<String> input) {
         List<String> output = new ArrayList<>();
-        input.forEach(s -> output.addAll(Arrays.asList(s.split("\n"))));
-        // Yes, the reporter layout could be changed to accommodate this, but the console output will not be wrapped.
+        input.forEach(item -> {
+            // Yes, the reporter layout could be changed to accommodate this,
+            // but the console output will not be wrapped.
+            if (item.isEmpty()) {
+                output.add(item.trim());
+            }
+        });
         
         return output;
     }
