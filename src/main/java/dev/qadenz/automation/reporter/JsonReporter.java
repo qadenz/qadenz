@@ -230,7 +230,7 @@ public class JsonReporter {
         input.forEach(item -> {
             // Yes, the reporter layout could be changed to accommodate this,
             // but the console output will not be wrapped.
-            if (item.isEmpty()) {
+            if (!item.isEmpty()) {
                 output.add(item.trim());
             }
         });
