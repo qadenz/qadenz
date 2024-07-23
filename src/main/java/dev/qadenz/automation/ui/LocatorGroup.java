@@ -11,6 +11,7 @@ package dev.qadenz.automation.ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Defines a group of mapped UI Elements.
@@ -26,7 +27,16 @@ public class LocatorGroup extends ArrayList<Locator> {
         this.addAll(Arrays.asList(locators));
     }
     
+    public LocatorGroup(String name, List<Locator> locators) {
+        this.name = name;
+        this.addAll(locators);
+    }
+    
     public String getName() {
         return name;
+    }
+    
+    public static void main(String[] args) {
+        LocatorGroup group = new LocatorGroup("name", List.of(new Locator("", ""), new Locator("", "")));
     }
 }
