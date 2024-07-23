@@ -34,8 +34,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Combines logging output from Logback, with data elements from this library, along with results data extracted from
@@ -208,21 +206,23 @@ public class JsonReporter {
     
     private List<JsonLogEvent> processLogOutput(List<String> logOutput) {
         List<String> logs = siftAndTrim(logOutput);
-        return IntStream.range(0, logs.size())
-                        // Filter out indices that should be skipped
-                        .filter(i -> i % 2 == 0 || !checkForUuid(logs.get(i)))
-                        .mapToObj(i -> {
-                            String logMessage = logs.get(i);
-                            String screenshot;
-                            if ((i + 1) < logs.size() && checkForUuid(logs.get(i + 1))) {
-                                screenshot = ScreenshotData.getInstance().get(logs.get(i + 1));
-                                return new JsonLogEvent(logMessage, screenshot);
-                            }
-                            else {
-                                return new JsonLogEvent(logMessage, null);
-                            }
-                        })
-                        .collect(Collectors.toList());
+        List<JsonLogEvent> logEvents = new ArrayList<>();
+        
+        for (int i = 0; i < logs.size(); i++) {
+            String logMessage = logs.get(i);
+            String screenshot = null;
+            
+            if ((i + 1) < logs.size()) {
+                if (checkForUuid(logs.get(i + 1))) {
+                    screenshot = ScreenshotData.getInstance().get(logs.get(i + 1));
+                    i++;
+                }
+            }
+            
+            logEvents.add(new JsonLogEvent(logMessage, screenshot));
+        }
+        
+        return logEvents;
     }
     
     private List<String> siftAndTrim(List<String> input) {
@@ -230,7 +230,7 @@ public class JsonReporter {
         input.forEach(item -> {
             // Yes, the reporter layout could be changed to accommodate this,
             // but the console output will not be wrapped.
-            if (item.isEmpty()) {
+            if (!item.isEmpty()) {
                 output.add(item.trim());
             }
         });
